@@ -1,0 +1,45 @@
+﻿@model Antinori.Models.AspNetUsers
+
+<!-- Create a form  -->
+@using (Html.BeginForm("Save", "Account", FormMethod.Post, new { id = "CONTENT_Profile_Form" })) {
+    <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(p => p.Id)
+
+    <!-- FIELD TO EDIT -->
+    <div>
+        <div class="row">
+
+            <!-- edit case. -->
+            <div class="col-md-4">
+                <small class="required">Username</small><br />
+                <input type="text" id="Username" name="Username" value="@Model.UserName" disabled class="form-control" />
+            </div>         
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <small class="required">Nome</small><br />
+                <!-- try update binds with the name attribute. -->
+                <input type="text" id="Incaricato_Nome" name="Incaricato_Nome" value="@Model.Name" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <small class="required">Cognome</small><br />
+                <input type="text" id="Incaricato_Cognome" name="Incaricato_Cognome" value="@Model.Surname" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <small class="required">Email</small><br />
+                <input type="email" id="Email" name="Email" value="@Model.Email" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <small class="required"> Cellulare</small><br />
+                <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" class="form-control" />
+            </div>
+        </div>
+    </div>
+}
+

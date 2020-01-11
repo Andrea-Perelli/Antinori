@@ -1,0 +1,31 @@
+﻿@using (Html.BeginForm("Import", "Iscritti", FormMethod.Post, new { id = "CONTENT_Iscritti_Import_Form", enctype = "multipart/form-data" }))
+{
+    if (User.IsInRole("Amministrazione"))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <small>Assegna iscritto all'incaricato</small><br />
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.DropDownList("Incaricato_Id", new SelectList(ViewBag.Utenti, "Id", "UserName"), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <small>Clicca su Scegli File per selezionare il modulo PDF di adesione da importare</small><br />
+            <input type="file" id="F_PS" name="F_PS" placeholder="Clicca su Sfoglia per cercare il modulo di adesione" class="form-control" required />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 style="color:red">ATTENZIONE: ricordati di cancellare il file PDF dopo averlo importato!</h4><br />
+        </div>
+    </div>
+}
+
+
+
+

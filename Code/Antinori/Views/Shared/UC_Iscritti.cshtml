@@ -1,0 +1,379 @@
+﻿@model Antinori.Models.Iscritti
+@{
+    Antinori.Models.Iscrizioni ultimaIscrizione = ViewBag.UltimaIscrizione;
+    string pagamento_data = "";
+    string documento_data_emissione = "";
+    string documento_data_scadenza = "";
+    if (ultimaIscrizione == null)
+    {
+        ultimaIscrizione = new Sinafi.Models.Iscrizioni();
+    }
+    if (ultimaIscrizione.Pagamento_Data.HasValue)
+    {
+        pagamento_data = ultimaIscrizione.Pagamento_Data.Value.ToString("yyyy-MM-dd");
+    }
+    if (ultimaIscrizione.Documento_Data_Emessione.HasValue)
+    {
+        documento_data_emissione = ultimaIscrizione.Documento_Data_Emessione.Value.ToString("yyyy-MM-dd");
+    }
+    if (ultimaIscrizione.Documento_Data_Scadenza.HasValue)
+    {
+        documento_data_scadenza = ultimaIscrizione.Documento_Data_Scadenza.Value.ToString("yyyy-MM-dd");
+    }
+
+}
+<style>
+    .modal-body {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+</style>
+@using (Html.BeginForm("Save", "Iscritti", FormMethod.Post, new { id = "CONTENT_Iscritti_Form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(p => p.Id)
+
+    <div>
+        @if (User.IsInRole("Amministrazione"))
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <small>Assegna iscritto all'incaricato</small><br />
+                    <div class="row">
+                        <div class="col-md-12">                          
+                            @Html.DropDownListFor(p => p.Incaricato_Id, new SelectList(ViewBag.Utenti, "Id", "UserName"), new { @class = "form-control" })
+                            @*<input type="text" id="Incaricato_Cognome" name="Incaricato_Cognome" value="@Model.Incaricato_Cognome" placeholder="Cognome" class="form-control" required />*@
+                        </div>
+                        @*<div class="col-md-6">
+                        <input type="text" id="Incaricato_Nome" name="Incaricato_Nome" value="@Model.Incaricato_Nome" placeholder="Nome" class="form-control" required />
+                    </div>*@
+                    </div>
+                </div>
+                @*<div class="col-md-3">
+                <small class="required">Provincia</small><br />
+                <select class="form-control" id="ddl_prov_incaricato" name="Incaricato_Provincia" required></select>
+
+            </div>
+            <div class="col-md-3">
+                <small class="required">Recapito</small><br />
+                <input type="text" id="Incaricato_Recapito" name="Incaricato_Recapito" value="@Model.Incaricato_Recapito" class="form-control" required />
+            </div>*@
+            </div>
+        }
+        else
+        { 
+                <span>@Html.HiddenFor(p=>p.Incaricato_Id)</span>
+        }
+
+
+        <div class="row">
+            <div class="col-md-2">
+                <small>Numero</small><br />
+                <input type="number" id="Numero" name="Numero" value="@Model.IdNumerico" readonly="readonly" class="form-control" />
+            </div>
+            <div class="col-md-5">
+                <small class="required">Nome</small><br />
+                <input type="text" id="Nome" name="Nome" value="@Model.Nome" class="form-control" required />
+            </div>
+            <div class="col-md-5">
+                <small class="required">Cognome</small><br />
+                <input type="text" id="Cognome" name="Cognome" value="@Model.Cognome" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <small class="required">Nato a</small><br />
+                <input type="text" id="LuogoNascita" name="LuogoNascita" value="@Model.LuogoNascita" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <small class="required">il</small><br />
+                <input type="date" id="DataNascita" name="DataNascita" value="@Model.DataNascita" class="form-control" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <small class="required">Residente a</small><br />
+                <select class="form-control" id="ddl_prov" name="Provincia" required></select>
+                @*<input type="text" id="Comune" name="Comune" value="@Model.Comune" class="form-control" />*@
+            </div>
+            <div class="col-md-5">
+                <small class="required">Comune</small>
+                <select class="form-control" id="ddl_comuni" name="Comune" required></select>
+            </div>
+            <div class="col-md-3">
+                <small class="required">CAP</small>
+                <input type="text" id="CAP" name="CAP" value="@Model.CAP" class="form-control" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <small class="required">in via</small><br />
+                <input type="text" id="Indirizzo" name="Indirizzo" value="@Model.Indirizzo" class="form-control" required />
+            </div>
+            <div class="col-md-3">
+                <small class="required">n. civico</small><br />
+                <input type="text" id="NCivico" name="NCivico" value="@Model.NCivico" class="form-control" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <small class="required">cell.</small><br />
+                <input type="text" id="Tel1" name="Tel1" value="@Model.Tel1" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <small class="required">email istituzionale</small><br />
+                <input type="email" id="Email" name="Email" value="@Model.Email" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <small class="required">email privata</small><br />
+                <input type="email" id="Email2" name="Email2" value="@Model.Email2" class="form-control"  />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <small class="required">in servizio presso</small><br />
+                <input type="text" id="Servizio_Luogo" name="Servizio_Luogo" value="@Model.Servizio_Luogo" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <small class="required">con il grado di</small><br />
+                @Html.DropDownListFor(m => m.Servizio_Grado, new SelectList(Sinafi.Static.BL_Utility.Instance.tipi_grado), new { @class = "form-control", id = "Servizio_Grado" })
+            </div>
+            <div class="col-md-2">
+                <small class="required">mat. mecc.</small><br />
+                <input type="text" id="Mat_Mec" name="Mat_Mec" value="@Model.Mat_Mec" class="form-control" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <small class="required">dichiaro di essere</small><br />
+                @Html.DropDownListFor(m => m.TipoServizio, new SelectList(Sinafi.Static.BL_Utility.Instance.tipi_servizio), new { @class = "form-control", id = "TipoServizio" })
+            </div>
+            <div class="col-md-6">
+                <small class="required">tessera</small><br />
+                <input type="text" id="Tessera" name="Tessera" value="@Model.Tessera" class="form-control"  />
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="box-title"><i class="fa fa-calendar margin-r-5"></i>Ultima Iscrizione</span>
+                </div>
+                <div class="col-md-6">
+                    @Html.DropDownList("I_Stato", new SelectList(Sinafi.Static.BL_Utility.Instance.tipi_iscrizione_stati, ultimaIscrizione.Stato), new { @class = "form-control", id = "I_Stato" })
+                </div>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <input type="hidden" id="I_Id" name="I_Id" value="@ultimaIscrizione.Id" />
+        <input type="hidden" id="I_Attivo" name="I_Attivo" value="@ultimaIscrizione.Attivo" />
+        <input type="hidden" id="I_Cancellato" name="I_Cancellato" value="@ultimaIscrizione.Cancellato" />
+        <input type="hidden" id="I_Iscritto_Id" name="I_Iscritto_Id" value="@ultimaIscrizione.Iscritto_Id" />
+        @if (Model.Id != null && Model.Id.Length > 0)
+        {
+            <div style="visibility:collapse; height:0px">
+                <div id="BTN_Plus">
+                    <button type="button" onclick='add_iscrizione()' class="btn btn-primary">Aggiungi iscrizione</button>
+                </div>
+            </div>
+        }
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <small>da</small><br />
+                    <input type="date" id="I_Data_Inizio" name="I_Data_Inizio" value="@ultimaIscrizione.Data_Inizio.Value.ToString("yyyy-MM-dd")" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <small>a</small><br />
+                    <input type="date" id="I_Data_Fine" name="I_Data_Fine" value="@ultimaIscrizione.Data_Fine.Value.ToString("yyyy-MM-dd")" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <small>Importo</small><br />
+                    <div class="input-group">
+                        <span class="input-group-addon" onclick="pagamento_default()"><i class="fa fa-refresh"></i></span>
+                        <input type="text" class="form-control" id="I_Pagamento_Importo" name="I_Pagamento_Importo" value="@ultimaIscrizione.Pagamento_Importo">
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <small>Data di pagamento</small><br />
+                    <input type="date" id="I_Pagamento_Data" name="I_Pagamento_Data" value="@pagamento_data" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <small>Modalità di pagamento</small><br />
+                    @Html.DropDownList("I_Pagamento_Modo", new SelectList(Sinafi.Static.BL_Utility.Instance.tipi_pagamento, ultimaIscrizione.Pagamento_Modo), new { @class = "form-control", id = "I_Pagamento_Modo" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <small>Tipo di documento</small><br />
+                    @Html.DropDownList("I_Documento_Tipo", new SelectList(Sinafi.Static.BL_Utility.Instance.tipi_documento, ultimaIscrizione.Documento_Tipo), new { @class = "form-control", id = "I_Documento_Tipo" })
+                </div>
+                <div class="col-md-4">
+                    <small>Numero di documento</small><br />
+                    <input type="text" id="I_Documento_Numero" name="I_Documento_Numero" value="@ultimaIscrizione.Documento_Numero" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <small>Emesso da</small><br />
+                    <input type="text" id="I_Documento_Ente_Emissione" name="I_Documento_Ente_Emissione" value="@ultimaIscrizione.Documento_Ente_Emissione" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <small>Data di emissione</small><br />
+                    <input type="date" id="I_Documento_Data_Emissione" name="I_Documento_Data_Emissione" value="@documento_data_emissione" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <small>Data di scandeza</small><br />
+                    <input type="date" id="I_Documento_Data_Scadenza" name="I_Documento_Data_Scadenza" value="@documento_data_scadenza" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <small>Note</small><br />
+                    <textarea id="I_Note" name="I_Note" class="form-control">@ultimaIscrizione.Note</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- /.box-body -->
+    </div>
+
+}
+
+
+    <script>
+        function pagamento_default() {
+    $("#I_Pagamento_Importo").val('@ViewBag.PagamentoDefault');
+    $("#I_Pagamento_Data").val('@DateTime.Now.ToString("yyyy-MM-dd")');
+}
+
+function add_iscrizione() {
+
+    $("#I_Id").val("");
+    $("#I_Data_Inizio").val('@DateTime.Now.ToString("yyyy-MM-dd")');
+    $("#I_Data_Fine").val('@DateTime.Now.AddYears(Convert.ToInt16(System.Configuration.ConfigurationManager.AppSettings["Iscrizioni_DurataYY"])).ToString("yyyy-MM-dd")');
+
+    $("#I_Pagamento_Importo").val("");
+    $("#I_Pagamento_Data").val("");
+    $("#I_Pagamento_Modo").val($("#I_Pagamento_Modo option:first").val());
+    //$("#I_Documento_Tipo").val($("#I_Documento_Tipo option:first").val());
+    //$("#I_Documento_Numero").val("");
+    //$("#I_Documento_Ente_Emissione").val("");
+    //$("#I_Documento_Data_Emissione").val("");
+    //$("#I_Documento_Data_Scadenza").val("");
+    $("#I_Note").val("");
+
+}
+
+var capArray = [];
+var regioneArray = [];
+    
+function preparaArrayComuni_Province() {
+    let ddlProv = $('#ddl_prov');
+    let ddlComuni = $('#ddl_comuni');
+    ////let ddlProvIncaricato = $('#ddl_prov_incaricato');
+    ddlProv.empty();
+    ddlComuni.empty();
+    ////ddlProvIncaricato.empty();
+
+    ddlProv.append('<option selected="true" disabled>Provincia</option>');
+    ddlComuni.append('<option selected="true" disabled>Comune</option>');
+    ////ddlProvIncaricato.append('<option selected="true" disabled>Provincia</option>');
+    ddlProv.prop('selectedIndex', 0);
+    ddlComuni.prop('selectedIndex', 0);
+    ////ddlProvIncaricato.prop('selectedIndex', 0);
+    const url = '/Appoggio/comuni.json';
+
+    $.getJSON(url, function (data) {
+        comuni = data;
+        var cArray = [];
+        regioneArray = new Array();
+        //    var groupedData = _.groupBy(data, function (d) { return d.provincia.nome });
+
+        $.each(comuni, function (key, v) {
+            if (!cArray.includes(v.sigla)) {
+                cArray.push(v.sigla);
+                regioneArray[v.sigla] = v.regione.nome;
+
+            }
+        })
+
+
+        cArray.sort();
+        $.each(cArray, function (i) {
+            ddlProv.append($('<option></option>').attr('value', cArray[i]).text(cArray[i]));
+            ////ddlProvIncaricato.append($('<option></option>').attr('value', cArray[i]).text(cArray[i]));
+        });
+        var com = '@Model.Provincia';
+        com = com.replace("&#39;", "\'");
+        if (com != "") {
+            $('#ddl_prov').val(com);
+        }
+
+        @*var com1 = '@Model.Incaricato_Provincia';
+        com1 = com1.replace("&#39;", "\'");
+        if (com1 != "") {
+            $('#ddl_prov_incaricato').val(com1);
+        }*@
+
+        caricaComuni();
+    });
+    $('#ddl_prov').on('change', function () {
+        caricaComuni();
+        $('#CAP').val("");
+    });
+
+    $('#ddl_comuni').on('change', function () {    
+        var caps = capArray[$('#ddl_comuni').prop('selectedIndex')];
+               
+        if (caps.length>6) {
+            $('#CAP').val("");
+        }
+        else {            
+            $('#CAP').val(capArray[$('#ddl_comuni').prop('selectedIndex')]);
+        }
+    });
+
+    //$('#ddl_prov_incaricato').on('change', function () {
+    //    $('#Incaricato_Regione').val(regioneArray[$('#ddl_prov_incaricato').val()]);
+    //});
+}
+
+function caricaComuni() {
+    $('#ddl_comuni').empty();
+    capArray = [];
+    $.each(comuni, function (i, v) {
+        if (v.sigla == $('#ddl_prov option:selected').text()) {
+            capArray.push(v.cap);
+            $('#ddl_comuni').append($('<option></option>').attr('value', v.nome).text(v.nome));
+        }
+    });
+    var com = '@Model.Comune';
+    com = com.replace("&#39;", "\'");
+    if (com != "") {
+        $('#ddl_comuni').val(com);
+    }
+
+}
+    
+
+    $(document).ready(function () {
+              preparaArrayComuni_Province();
+         }) 
+    </script>
+
+
+
+
+
+

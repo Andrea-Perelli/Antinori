@@ -1,0 +1,69 @@
+﻿@model Antinori.Models.LoginViewModel
+@{
+    ViewBag.Title = "Accedi";
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+
+    <div class="login-box">
+        <div class="login-logo">
+            <img src="~/Content/img/logo.png" style="width:360px" />
+          
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+
+            <p class="login-box-msg">Inserisci i tuoi dati per entrare</p>
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+                @Html.AntiForgeryToken()
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Username", type = "email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <div style="margin-left: 5px!important; margin-top: 10px!important;">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                @Html.CheckBoxFor(m => m.RememberMe) Ricordati di me
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Entra</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <div class="row" style="margin-top:20px">
+                    <div class="col-xs-12 pull-right">
+                        <a href="@Url.Action("P_ForgotPassword","Account")" class="pull-right">Ho dimenticato la password</a><br>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+
+
+@section scripts{
+    
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+    </script>
+}
+
+

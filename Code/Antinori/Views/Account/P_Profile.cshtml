@@ -1,0 +1,77 @@
+﻿@model Antinori.Models.AspNetUsers
+@{
+    ViewBag.Title = "Il tuo Profilo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section header_page{
+    <h2><span class="fa fa-users"></span> @ViewBag.Title</h2>
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <!-- rendering to this partial view. -->
+        @Html.Partial("UC_Profile", Model)
+    </div>
+    <div class="box-footer">
+        <div class="pull-right">
+            <button class="btn btn-primary" onclick="save()">Salva</button>
+            &nbsp;&nbsp;
+            <a class="btn btn-primary" href="@Url.Action("Index","Home")">Vai alla dashboard</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script>
+
+        function list() {
+            vai('@Url.Action("Index","Account")');
+        }
+
+      function save() {
+
+              $('#CONTENT_Profile_Form').validate({
+                  lang: 'it'
+              });
+
+              if ($('#CONTENT_Profile_Form').valid()) {
+                   REFRESH_show("MODAL_Refresh");
+                    var url = '@Url.Action("Save", "Account")';
+                    var data = new FormData($('#CONTENT_Profile_Form').get(0));
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        success: function (risultato) {
+                            SUCCESS_function("Utente salvato ", "Complimenti!  L'operazione di inserimento si è conclusa con successo!","vai('@Url.Action("Index","Home")')","OK");
+
+                        },
+                        error: function () {
+                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare");
+                        }
+                    });
+              }
+
+
+        }
+
+         $(document).ready(function () {
+
+         })
+    </script>
+}
+
+
+
+

@@ -1,0 +1,72 @@
+﻿@model Antinori.Models.AspNetUsers
+@{
+    ViewBag.Title = "Nuovo utente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section header_page{
+    <h2><span class="fa fa-users"></span> @ViewBag.Title</h2>
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @Html.Partial("UC_AspNetUsers", Model)
+    </div>
+    <div class="box-footer">
+        <div class="pull-right">
+            <button class="btn btn-primary" onclick="save()">Salva</button>
+            &nbsp;&nbsp;
+            <a class="btn btn-primary" href="@Url.Action("Index","Account")">Vai agli utenti</a>
+            &nbsp;&nbsp;
+            <a class="btn btn-primary" href="@Url.Action("Index","Home")">Vai alla dashboard</a>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    
+    <script>
+
+        function list() {
+            vai('@Url.Action("Index","Account")');
+        }
+
+      function save(id) {
+
+              $('#CONTENT_Account_Form').validate({
+                  lang: 'it'
+              });
+
+              if ($('#CONTENT_Account_Form').valid()) {
+                   REFRESH_show("MODAL_Refresh");
+                    var url = '@Url.Action("Save", "Account")';
+                    var data = new FormData($('#CONTENT_Account_Form').get(0));
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        success: function (risultato) {
+                            SUCCESS_function("Inserito nuovo utente", "Complimenti!  L'operazione di inserimento si è conclusa con successo!","vai('@Url.Action("Index","Account")')","OK");
+
+                        },
+                        error: function () {
+                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare");
+                        }
+                    });
+              }
+
+
+        }
+    </script>
+}
+
+
+
