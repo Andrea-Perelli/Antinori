@@ -1,0 +1,1656 @@
+<?xml-model href="../../Sch%C3%A9mas/ampere.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Archives André-Marie Ampère - Chemise 1</title>
+            <author xml:id="AMA" key="Ampère, André-Marie (1775-1836)" ref="http://www.idref.fr/028694171">
+               <forename>André-Marie</forename>
+               <surname>Ampère</surname>
+            </author>
+            <editor xml:id="CB">Christine Blondel</editor>
+            <editor>Marco Segala</editor>
+            <funder>ANR Corpus 2012</funder>
+            <respStmt>
+               <name>Christine Blondel, <affiliation>Centre Alexandre Koyré</affiliation>
+               </name>
+               <resp>Responsable du projet, édition</resp>
+            </respStmt>
+            <respStmt>
+               <name>Marco Segala, <affiliation>Centre Alexandre Koyré</affiliation>
+                  <affiliation>Università L'Aquila</affiliation>
+               </name>
+               <resp>Responsable du projet, édition</resp>
+            </respStmt>
+            <respStmt>
+               <name>Delphine Usal, <affiliation>Centre Alexandre Koyré</affiliation>
+               </name>
+               <resp>Gestion de bases de données</resp>
+            </respStmt>
+            <respStmt>
+               <name>Aude Coustumer, <affiliation>Centre Alexandre Koyré</affiliation>
+               </name>
+               <resp>Relecture et encodage en XML/TEI P5</resp>
+            </respStmt>
+            <respStmt>
+               <name>Philippe Pons, <affiliation>Centre Alexandre Koyré</affiliation>
+               </name>
+               <resp>Responsable informatique, relecture et encodage en XML/TEI P5</resp>
+            </respStmt>
+            <respStmt>
+               <name>Marie-Hélène Wronecki, <affiliation>CRHST</affiliation>
+               </name>
+               <resp>Édition web</resp>
+            </respStmt>
+            <respStmt>
+               <name>Florence Greffe, <affiliation>Archives de l'Académie des sciences</affiliation>
+               </name>
+               <resp>Mise en place de la numérisation</resp>
+            </respStmt>
+
+         </titleStmt>
+         <extent/>
+         <publicationStmt>
+            <authority>Centre National de la Recherche Scientifique (CNRS)</authority>
+            <publisher>Centre Alexandre Koyré - CNRS (UMR 8560)</publisher>
+            <address>
+               <addrLine>27 rue Damesme</addrLine>
+               <addrLine>75013 Paris</addrLine>
+            </address>
+            <distributor>
+               <name>Centre de calcul de l'IN2P3</name>
+               <address>
+                  <addrLine>Domaine scientifique de la Doua</addrLine>
+                  <addrLine>43 boulevard du 11 Novembre 1918</addrLine>
+                  <addrLine>69622 Villeurbanne Cedex</addrLine>
+               </address>
+            </distributor>
+            <availability status="restricted">
+               <p>Ce texte est protégé par la licence <ref target="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons</ref> dont le contenu est disponible sous Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International (CC BY-NC-SA 4.0)</p>
+            </availability>
+            <date/>
+            <idno/>
+         </publicationStmt>
+         <sourceDesc>
+            <msDesc>
+               <msIdentifier xml:id="ampere_arch_chem1">
+                  <country>France</country>
+                  <settlement>Paris</settlement>
+                  <institution>Archives de l'Académie des sciences</institution>
+                  <repository>Fonds André-Marie Ampère</repository>
+                  <idno>Chemise 1</idno>
+               </msIdentifier>
+               <msContents>
+                  <summary>Documents sur le fonds lui-même - Lettres</summary>
+                  <msItem xml:id="ampere_arch_chem1_2">
+                     <docDate>
+                        <date when="1846-07-20">20 juillet 1846</date>
+                     </docDate>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_3">
+                     <title>
+                        <ref target="#ampere_corr_L1824-10-00-a">Lettre de Ampère, André-Marie à
+                           Frayssinous, Denis Mgr</ref>
+                     </title>
+                     <docDate>
+                        <date when="1824-10-09">09 octobre 1824</date>
+                     </docDate>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_4">
+                     <title>Lettre de J. G. Lacuée à M. Delambre</title>
+                     <docDate>
+                        <date when="1804-10-20">20 octobre 1804</date>
+                     </docDate>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_5">
+                     <title>
+                        <ref target="#ampere_corr_L1803-01-19-a">Lettre de Lacroix, Sylvestre et
+                           Laplace, Pierre-Simon à Ampère, André-Marie</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_7">
+                     <title>
+                        <ref target="#ampere_corr_L1824-09-15-a">Lettre de Ampère, André-Marie à
+                           Péligot</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_8">
+                     <title>
+                        <ref target="#ampere_corr_L1806-08-01-a">Lettre de Ampère, André-Marie à
+                           Hubert de Saint-Didier, Balthazar</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_9">
+                     <title>
+                        <ref target="#ampere_corr_L1802-12-28-a">Lettre de Ampère, André-Marie à
+                           Jussieu, Antoine-Laurent de</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_10">
+                     <title>Lettre de Degérando</title>
+                     <docDate>
+                        <date when="1807-12-02">02 décembre 1807</date>
+                     </docDate>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_11">
+                     <title>
+                        <ref target="#ampere_corr_L1811-04-11-a">Lettre de Ampère, André-Marie à
+                           Jussieu, Antoine-Laurent de</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_12">
+                     <title>Lettre de Degérando</title>
+                     <docDate>
+                        <date when="1807-07-09">9 juillet 1807</date>
+                     </docDate>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_14">
+                     <title>
+                        <ref target="#ampere_corr_L1834-10-26-a">Lettre de Ampère, André-Marie à
+                           Jussieu, Adrien de</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_15">
+                     <title>
+                        <ref target="#ampere_corr_L1804-10-30-a">Lettre de Ampère, André-Marie à
+                           Jussieu, Antoine-Laurent de</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_16">
+                     <title>Lettre de Périsse, Jean-Marie (dit Marsil) à Jussieu, Adrien de</title>
+                     <docDate>
+                        <date when="1803-07-15">15 juillet 1803</date>
+                     </docDate>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_17">
+                     <title>
+                        <ref target="#ampere_corr_L1803-05-27-a">Lettre de Ampère, André-Marie à
+                           Jussieu, Antoine-Laurent de</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_18">
+                     <title>
+                        <ref target="#ampere_corr_L1803-04-03-c">Lettre de Ampère, André-Marie à
+                           Jussieu, Antoine-Laurent de</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_19">
+                     <title>
+                        <ref target="#ampere_corr_L1803-05-09-a">Lettre de Ampère, André-Marie à
+                           Jussieu, Antoine-Laurent de</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_21">
+                     <title>
+                        <ref target="#ampere_corr_L1817-09-28-a">Copie d'une lettre d'Ampère à Maine
+                           de Biran</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_22">
+                     <title>
+                        <ref target="#ampere_corr_L1807-02-21-a">Lettre de Ampère, André-Marie à
+                           Roux-Bordier, Jacques</ref>
+                     </title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_23">
+                     <title>Lettre (Ampère au Grand Maître de l'Université)</title>
+                  </msItem>
+                  <msItem xml:id="ampere_arch_chem1_24">
+                     <title>
+                        <ref target="#ampere_corr_L1808-05-23-a">Lettre de Lacuée, Jean-Girard,
+                           comte de Cessac à Ampère, André-Marie</ref>
+                     </title>
+                  </msItem>
+               </msContents>
+               <physDesc>
+                  <handDesc>
+                     <handNote corresp="#AMA">
+                        <name type="person" key="Ampère, André-Marie (1775-1836)">
+                           <forename>André-Marie</forename>
+                           <surname>Ampère</surname>
+                        </name>
+                     </handNote>
+                     <handNote xml:id="MM">
+                        <name type="person" key="Mathieu, Marcel">
+                           <forename>Marcel</forename>
+                           <surname>Mathieu</surname>
+                        </name>
+                     </handNote>
+                     <handNote xml:id="bredin">
+                        <name type="person" ref="#pers_B94">
+                           <forename>Claude-Julien</forename>
+                           <surname>Bredin</surname>
+                        </name>
+                     </handNote>
+                     <handNote xml:id="duclaux">
+                        <name type="person" ref="#pers_D691">
+                           <surname>Duclaux</surname>
+                           <forename>Jacques</forename>
+                        </name>
+                     </handNote>
+                     <handNote xml:id="lacuée">
+                        <name type="person" ref="#pers_L336">
+                           <surname>Lacuée</surname>
+                           <forename>Jean-Girard, comte de Cessac</forename>
+                        </name>
+                     </handNote>
+                     <handNote xml:id="main_inconnue">
+                        <name type="person">scribe inconnu</name>
+                     </handNote>
+                  </handDesc>
+               </physDesc>
+               <additional>
+                  <listBibl>
+                     <bibl>
+                        <title>Catalogue du Fonds André-Marie Ampère, Électricité et magnétisme,
+                              <idno>Carton I, Chemise 1</idno>
+                        </title>
+                        <biblScope type="pp">p. 4</biblScope>
+                        <publisher>éd. Archives de l'Académie des Sciences</publisher>, <date when-iso="1937">1937</date>.
+                           <idno>http://www.ampere.cnrs.fr/manuscrits/catalogueAS.pdf</idno>
+                     </bibl>
+                  </listBibl>
+               </additional>
+            </msDesc>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <projectDesc>
+            <p/>
+         </projectDesc>
+         <editorialDecl>
+            <correction>
+               <p>Les erreurs flagrantes de fond ou de forme ont été corrigées.</p>
+            </correction>
+            <hyphenation>
+               <p>Les retours à la ligne des documents originaux sont respectés.</p>
+            </hyphenation>
+            <normalization>
+               <p>L'orthographe et la ponctuation ont été normalisées.</p>
+               <p>Les noms propres avec des graphies différentes ont été normalisés.</p>
+            </normalization>
+         </editorialDecl>
+      </encodingDesc>
+      <profileDesc>
+         <creation>
+            <date when="2014-08">août 2014</date>
+            <name>Philippe Pons</name>
+         </creation>
+         <langUsage>
+            <language ident="fra">Français</language>
+         </langUsage>
+      </profileDesc>
+      <revisionDesc>
+         <change>
+            <name>Philippe Pons</name>
+            <date when="2014-09">septembre 2014</date>
+         </change>
+      </revisionDesc>
+   </teiHeader>
+   <facsimile xml:id="images_ch1_1" corresp="#ch1_1">
+      <graphic url="ACAS_CRHST_AMP_01_001_0001_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0002_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0003_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0004_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0011_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0012_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_2" corresp="#ch1_2">
+      <graphic url="ACAS_CRHST_AMP_01_001_0005_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0006_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_3" corresp="#ch1_3">
+      <graphic url="ACAS_CRHST_AMP_01_001_0007_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0008_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0009_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0010_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_4" corresp="#ch1_4">
+      <graphic url="ACAS_CRHST_AMP_01_001_0013_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_5" corresp="#ch1_5">
+      <graphic url="ACAS_CRHST_AMP_01_001_0014_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0015_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_6" corresp="#ch1_6">
+      <graphic url="ACAS_CRHST_AMP_01_001_0016_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_7" corresp="#ch1_7">
+      <graphic url="ACAS_CRHST_AMP_01_001_0017_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_8" corresp="#ch1_8">
+      <graphic url="ACAS_CRHST_AMP_01_001_0018_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0019_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0020_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0021_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_9" corresp="#ch1_9">
+      <graphic url="ACAS_CRHST_AMP_01_001_0022_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0023_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0024_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0025_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_10" corresp="#ch1_10">
+      <graphic url="ACAS_CRHST_AMP_01_001_0026_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_11" corresp="#ch1_11">
+      <graphic url="ACAS_CRHST_AMP_01_001_0027_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0028_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0029_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_12" corresp="#ch1_12">
+      <graphic url="ACAS_CRHST_AMP_01_001_0030_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0031_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0032_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0033_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0034_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_13" corresp="#ch1_13">
+      <graphic url="ACAS_CRHST_AMP_01_001_0035_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0036_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_14" corresp="#ch1_14">
+      <graphic url="ACAS_CRHST_AMP_01_001_0037_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0038_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0039_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_15" corresp="#ch1_15">
+      <graphic url="ACAS_CRHST_AMP_01_001_0040_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0041_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0042_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_16" corresp="#ch1_16">
+      <graphic url="ACAS_CRHST_AMP_01_001_0043_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0044_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0045_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_17" corresp="#ch1_17">
+      <graphic url="ACAS_CRHST_AMP_01_001_0046_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0047_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0048_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0049_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_18" corresp="#ch1_18">
+      <graphic url="ACAS_CRHST_AMP_01_001_0050_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0051_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0052_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_19" corresp="#ch1_19">
+      <graphic url="ACAS_CRHST_AMP_01_001_0053_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0054_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0055_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_20" corresp="#ch1_20">
+      <graphic url="ACAS_CRHST_AMP_01_001_0056_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0057_v.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_21" corresp="#ch1_21">
+      <graphic url="ACAS_CRHST_AMP_01_001_0058_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0059_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0060_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0061_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0062_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_22" corresp="#ch1_22">
+      <graphic url="ACAS_CRHST_AMP_01_001_0063_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0064_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0065_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0066_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_23" corresp="#ch1_23">
+      <graphic url="ACAS_CRHST_AMP_01_001_0067_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0068_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0069_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0070_r.jpg"/>
+   </facsimile>
+   <facsimile xml:id="images_ch1_24" corresp="#ch1_24">
+      <graphic url="ACAS_CRHST_AMP_01_001_0071_r.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0072_v.jpg"/>
+      <graphic url="ACAS_CRHST_AMP_01_001_0073_v.jpg"/>
+   </facsimile>
+   <text decls="#ampere_arch_chem1" type="archives">
+      <group>
+         <text n="1" xml:id="ampere_arch_chem1_1">
+            <body>
+               <head>
+                  <pb n="7" facs="#ACAS_CRHST_AMP_01_001_0007_r.jpg" type="deplacement"/>
+                  <handShift new="#MM"/> Papiers d'<persName ref="#pers_A366">Ampère</persName>
+                  <lb/> Carton général. Chemise <persName ref="#pers_A366">Ampère</persName>
+               </head>
+               <div xml:id="chem1-div1">
+                  <div xml:id="chem1-div2">
+                     <opener>
+                        <pb n="8" facs="#ACAS_CRHST_AMP_01_001_0008_r.jpg" type="deplacement"/>
+                        <date when="1957-04-10">10 avril 1957</date>
+                     </opener>
+                     <opener>Les Secrétaires perpétuels de l'<orgName ref="#org_A15">A<lb rend="hyphen"/>cadémie des sciences</orgName> à Monsieur <persName ref="#pers_D691">Jacques<lb/> Duclaux</persName>, membre de l'<orgName ref="#org_A15">Académie</orgName>.</opener>
+                     <opener>Cher Confrère,</opener>
+                     <p xml:id="chem1-p1">Nous venons vous remercier de l'in<lb rend="hyphen"/>téressant document concernant <persName ref="#pers_A366">André-<lb/>Marie
+                           Ampère</persName> que vous nous avez fait<lb/> remettre avant hier pour
+                        les archives<lb/> de l'<orgName ref="#org_A15">Académie</orgName>.</p>
+                  </div>
+                  <div xml:id="chem1-div3">
+                     <p xml:id="chem1-p2">Il est écrit quelque part qu'au<lb/> moment où ce document
+                        fut établi, c'est-<lb/>à-dire le <date when="1846-07-02">2 juillet
+                           1846</date>, son auteur<lb/> avait 70 ans. On doit en conclure qu'il<lb/>
+                        était né aux environs de <date when="1776">1776</date> et ceci a<lb/> porté
+                        l'un de nous à supposer qu'il pou<lb rend="hyphen"/>vait s'agir de <persName ref="#pers_B33">Ballanche</persName> ou de <persName ref="#pers_B94">Bredin</persName>,<lb/> nés à <placeName ref="#pl_L2">Lyon</placeName>
+                        en <date when="1776">1776</date>, et amis d'<persName ref="#pers_A366">Ampère</persName>.</p>
+                  </div>
+                  <div xml:id="chem1-div4">
+                     <p xml:id="chem1-p3">
+                        <persName ref="#pers_B33">Ballanche</persName> fut, vous le savez, mem<lb rend="hyphen"/>bre de <orgName ref="#org_A15">Académie
+                           française</orgName>. Nous avons,<lb/> dans les Archives, plusieurs
+                        lettres de<lb/> lui. Malheureusement, les écritures sont<lb/> peu
+                        semblables, mais il est nécessaire<lb/> de remarquer que la dizaine de
+                        lettres <pb n="9" facs="#ACAS_CRHST_AMP_01_001_0009_v.jpg" type="deplacement"/> que nous possédons présentent des écri<lb rend="hyphen"/>tures toutes différentes.</p>
+                  </div>
+                  <div xml:id="chem1-div5">
+                     <p xml:id="chem1-p4">En revanche, on voit de nombreuses<lb/> similitudes entre
+                        la graphie et les si<lb rend="hyphen"/>gnes des lettres de <persName ref="#pers_B94">Bredin</persName> et ceux du<lb/> document que vous nous
+                        donnez. On pourra<lb/> les mettre sous vos yeux un prochain<lb/> lundi. Nous
+                        sommes donc portés à croire<lb/> que la note est de <persName ref="#pers_B94">Bredin</persName>.</p>
+                  </div>
+                  <div xml:id="chem1-div6">
+                     <p xml:id="chem1-p5">De l'origine du papier que vous<lb/> nous donnez, ne
+                        pouvez-vous déduire<lb/> aucune confirmation de cette hypothèse ?</p>
+                  </div>
+                  <closer>Veuillez agréer, cher Confrère,<lb/> l'assurance de notre haute
+                        considéra<lb rend="hyphen"/>tion et de nos sentiments cordialement<lb/>
+                     dévoués.</closer>
+               </div>
+               <div xml:id="chem1-div7">
+                  <div xml:id="chem1-div8">
+                     <p xml:id="chem1-p6">
+                        <handShift new="#duclaux"/>
+                        <pb n="10" facs="#ACAS_CRHST_AMP_01_001_0010_r.jpg" type="deplacement"/>
+                        <persName ref="#pers_D691">J. Duclaux</persName> Manuscrit de <date when="1846">1846</date>
+                        <lb/> concernant <persName ref="#pers_A366">Ampère</persName>.<lb/> Origine
+                        inconnue.<lb/> Trouvé dans de vieux papiers en mars <date when="1957">1957</date>. </p>
+                     <signed>J. Duclaux</signed>
+                  </div>
+                  <div xml:id="chem1-div9">
+                     <p xml:id="chem1-p7">
+                        <handShift new="#main_inconnue"/> peut-être <persName ref="#pers_B33">Ballanche</persName>
+                        <lb/> né en <date when="1776">1776</date>, ami<lb/> d'<persName ref="#pers_A366">Ampère</persName> et lyonnais.</p>
+                     <p xml:id="chem1-p8">l'auteur est né en <formula>
+                           <math xmlns="http://www.w3.org/1998/Math/MathML">
+                              <mrow>
+                                 <mn>1</mn>
+                                 <mn>8</mn>
+                                 <mn>4</mn>
+                                 <mn>6</mn>
+                              </mrow>
+                              <mo>-</mo>
+                              <mrow>
+                                 <mn>7</mn>
+                                 <mn>0</mn>
+                              </mrow>
+                              <mo>=</mo>
+                              <mrow>
+                                 <mn>1</mn>
+                                 <mn>7</mn>
+                                 <mn>7</mn>
+                                 <mn>6</mn>
+                              </mrow>
+                           </math>
+                        </formula>
+                     </p>
+                  </div>
+               </div>
+            </body>
+         </text>
+
+         <text n="2" decls="#ampere_arch_chem1_2">
+            <body>
+               <opener>
+                  <handShift new="#bredin"/>
+                  <ref target="#ch1_CB1">1</ref>
+                  <date when="1846-07-20">Jeudi, 20 juillet 1846</date>
+               </opener>
+               <div xml:id="chem1-div10">
+                  <p xml:id="chem1-p9">
+                     <pb n="1" facs="#ACAS_CRHST_AMP_01_001_0001_r.jpg" type="deplacement"/>
+                     <persName ref="#pers_A366">André Marie Ampère</persName>, de l'<orgName ref="#org_I1">Institut de<lb/> France</orgName>, de l'<orgName ref="#org_A6">Académie royale des sciences, belles lettres et<lb/> arts de
+                     Lyon</orgName>, professeur d'analyse à l'<orgName ref="#org_E4">École<lb/>
+                        polytechnique</orgName>, professeur de physique expérimentale<lb/> au
+                        <orgName ref="#org_C3">Collège de France</orgName>, chevalier de la
+                     Légion<lb/> d'honneur, inspecteur de l'<orgName ref="#org_U8">Université
+                        impériale</orgName>,<lb/> (<del>il étai</del> je ne retrouve pas
+                     l'indication<lb/> des Acad<ex>émies</ex> étrangères dont il était <gap reason="lacune"/>).</p>
+               </div>
+               <div xml:id="chem1-div11">
+                  <p xml:id="chem1-p10">
+                     <persName ref="#pers_A366">Ampère</persName> est né à <placeName ref="#pl_L2">Lyon</placeName> (paroisse de <placeName ref="#pl_S3">S<ex>ain</ex>t-Nizier</placeName>)<lb/> le <date when="1775-01-20">20
+                        janvier 1775</date>.</p>
+                  <p xml:id="chem1-p11">Ses grands pères furent architectes de la ville.<lb/> On
+                     leur doit plusieurs grands travaux tels que<lb/> les réparations <add>ou
+                        reconstructions</add> du pont du change, la<lb/> construction du <placeName ref="#pl_V4">quai Villeroy</placeName>.</p>
+                  <p xml:id="chem1-p12">Son père était <del type="illisible"/> négociant en
+                     soieries.<lb/> Il se retira 8 ou 10 ans avant la révolution<lb/> dans une belle
+                     maison à <placeName ref="#pl_P5">Poleymieux-au-Mont-<lb/>d'Or</placeName> à 2
+                     lieues de <placeName ref="#pl_L2">Lyon</placeName>.</p>
+                  <p xml:id="chem1-p13">Il fut nommé juge de paix à <placeName ref="#pl_L2">Lyon</placeName>
+                     <lb/> au commencement de la Révolution de <date when="1789">1789</date>.<lb/>
+                     Il resta juge de paix pendant le<lb/> siège que <placeName ref="#pl_L2">Lyon</placeName> soutint en faveur des<lb/> républicains girondins.</p>
+                  <p xml:id="chem1-p14">Il fut arrêté et incarcéré 11 jours après<lb/> l'entrée des
+                     montagnards à <placeName ref="#pl_L2">Lyon</placeName>.<lb/> Il a été condamné
+                     à mort le <date when="1793-11-22">22 novembre<lb/> 1793</date> (<date calendar="revolutionary" when="1793-11-22">2 frimaire an 2</date>).</p>
+               </div>
+               <div xml:id="chem1-div12">
+                  <p xml:id="chem1-p15">C'est à <placeName ref="#pl_P5">Poleymieux</placeName> que,
+                     sous les<lb/> salutaires directions d'un père instruit et qui<lb/> aimait les
+                     sciences, la littérature et les<lb/> arts, et d'une tendre et noble mère,<lb/>
+                     se développa librement la vaste<lb/> intelligence d'<persName ref="#pers_A366">Ampère</persName>. Cette immense capacité<lb/> où toute la science était
+                     contenue à l'aise.<lb/> C'est à <placeName ref="#pl_P5">Poleymieux</placeName>
+                     que se forma en<lb/> même temps son cœur non moins<lb/> grand que sa tête, ce
+                     cœur si tendre,<lb/> si aimant, qui sympathisait avec le<lb/> genre humain tout
+                     entier, qui ressentait<lb/> les douleurs de tout être sensible.</p>
+                  <p xml:id="chem1-p16">
+                     <persName ref="#pers_A366">Ampère</persName> était un enfant très
+                     impressionnable,<lb/> d'une grande irritabilité, plein d'ardeur et<lb/>
+                     d'impétuosité, qui eût été indomptable<lb/> si on eût voulu agir de rigueur
+                     envers lui,<lb/> mais la douceur...</p>
+                  <p xml:id="chem1-p17">Apprendre à lire et à écrire<lb/> fut un amusement pour
+                     lui.</p>
+                  <p xml:id="chem1-p18">
+                     <del type="illisible"/> Il lisait beaucoup,<lb/> il lisait avec passion ; que
+                     ne lisait-il<lb/> pas ? De <persName ref="#pers_F684">Florian</persName> à
+                        <persName ref="#pers_P555">Pascal</persName>, il lisait tout,<lb/> histoire,
+                     poésie, science, tout lui allait<lb/> et de ces innombrables lectures, il
+                     n'avait<lb/> rien oublié 15 jours avant sa mort.<lb/> Il m'a souvent répété que
+                     de toutes les<lb/> lectures de son enfance, aucune n'a fait<lb/> autant
+                     d'impression sur lui que l'<title type="ouvrages_mentionnes" ref="#ampere_ref_P206">Éloge de<lb/>
+                        <persName ref="#pers_D594">Descartes</persName>
+                     </title> par <persName ref="#pers_T598">Thomas</persName>.</p>
+                  <p xml:id="chem1-p19">Il n'avait pas 8 ans quand il entreprit<lb/> de lire
+                        l'<title type="ouvrages_mentionnes" ref="#ampere_ref_P360">Encyclopédie</title> d'un bout à l'autre<lb/> et il a accompli cette
+                     œuvre.</p>
+                  <p xml:id="chem1-p20">Si j'avais le temps, vous verriez que la<lb/> précocité d'un
+                        <persName ref="#pers_H610">Haller</persName>, celle d'un <persName ref="#pers_P555">Pascal</persName> ne sont<lb/> rien auprès de celle
+                        d'<persName ref="#pers_A366">Ampère</persName>.</p>
+                  <p xml:id="chem1-p21">Il faisait des vers latins et français.<lb/> De 8 à 10 ans,
+                     il avait composé une<lb/> langue qui avait sa grammaire et dans<lb/> laquelle
+                     il faisait des vers.</p>
+                  <p xml:id="chem1-p22">
+                     <persName ref="#pers_A366">Ampère</persName> avait reçu une organisation<lb/> à
+                     la fois mobile, délicate, forte et solide.</p>
+                  <p xml:id="chem1-p23">Et lorsqu'à la fin de sa vie, usé par les excès de
+                     discussion aux<pb n="2" facs="#ACAS_CRHST_AMP_01_001_0002_v.jpg" rend="hyphen" type="deplacement"/>quels nulle organisation n’eût pu résister,<lb/> son
+                     corps s’affaissa et tomba dans une vieillesse<lb/> anticipée. Les systèmes
+                     compromis par les<lb/> discussions furent seuls atteints, chose<lb/>
+                     singulière, les autres systèmes de l’organisme<lb/> conservèrent leur forme,
+                     leur activité et leur<lb/> agilité.</p>
+                  <p xml:id="chem1-p24">
+                     <hi rend="center">Pardon, mais le temps me presse.</hi>
+                  </p>
+                  <p xml:id="chem1-p25">Et ce qui fut plus marqué encore, c’est<lb/> l’indépendance,
+                     où restèrent les facultés<lb/> intellectuelles et morales d’<persName ref="#pers_A366">Ampère</persName>. Elles<lb/> ne partagèrent point la
+                     vieillesse qu’il<lb/> nous était si douloureux de voir accabler<lb/> le corps
+                     de notre ami. Il a<lb/> conservé jusqu’à la fin de sa vie les<lb/> goûts, les
+                     tendances, et les affections de son<lb/> enfance. Il a traversé <del type="illisible"/>
+                     <lb/> les dernières périodes de la vie sans<lb/> éprouver d’autres changements
+                     que des<lb/> changements purement physiologiques.<lb/> Son imagination n’a rien
+                     perdu<lb/> de son ardeur. Son jugement est resté<lb/> tout aussi fort, tout
+                     aussi puissant.<lb/> Sa conception aussi vaste, aussi étendue.<lb/> Son cœur a
+                     conservé toutes ses<lb/> sympathies, toutes ses tendances.</p>
+                  <p xml:id="chem1-p26">La dernière fois que je l’ai vu, 15 jours<lb/> avant sa fin,
+                     il était dans le plus<lb/> déplorable état. Je n’oublierai jamais<lb/>
+                     l’impression que j’éprouvai en voyant<lb/> le pauvre ami aussi mal ! Eh
+                     bien !<lb/> Son esprit avait encore toute sa vigueur,<lb/> ses idées toute leur
+                     netteté, ses<lb/> sentiments, toute leur fraîcheur.</p>
+                  <p xml:id="chem1-p27">
+                     <hi rend="center">mais le temps fuit !<lb/> excusez-moi, je vous prie</hi>
+                  </p>
+               </div>
+               <div xml:id="chem1-div13">
+                  <p xml:id="chem1-p28">
+                     <persName ref="#pers_A366">Ampère</persName> a été nommé en <gap reason="lacune"/>
+                     <lb/> professeur à l’<orgName ref="#org_L9">École centrale de
+                     l’Ain</orgName>,<lb/> il y était en <date when="1802">1802</date>.</p>
+                  <p xml:id="chem1-p29">Il fut nommé professeur de mathématiques<lb/> au <orgName ref="#org_L10">Lycée de Lyon</orgName> le 23 floréal an XI.</p>
+                  <p xml:id="chem1-p30">Il a été appelé à <placeName ref="#pl_P6">Paris</placeName>
+                     par M. <persName ref="#pers_F247">Fontanes</persName>
+                     <lb/> et nommé répétiteur à l’<orgName ref="#org_E4">École
+                        polytechnique</orgName>
+                     <lb/> en octobre <date when="1804">1804</date>.</p>
+                  <p xml:id="chem1-p31">Nommé membre du <orgName ref="#org_B11">Bureau consultatif
+                        des arts<lb/> et manufactures</orgName> le <date when="1806-03-24">24 mars
+                        1806</date>.</p>
+                  <p xml:id="chem1-p32">Nommé <del>de l'<orgName ref="#org_I1">Institut</orgName>
+                     </del> inspecteur général de<lb/> l’<orgName ref="#org_U8">Université
+                        impériale</orgName> le <date when="1808-09-21">21 septembre 1808</date>.</p>
+                  <p xml:id="chem1-p33">Nommé professeur à l’<orgName ref="#org_E4">École
+                        polytechnique</orgName>
+                     <lb/> le <date when="1809-12-09">28 décembre 1809</date>.</p>
+                  <p xml:id="chem1-p34">
+                     <del type="illisible"/> Légion d’honneur le <date when="1814-11-28">28 <choice>
+                           <abbr>9bre</abbr>
+                           <expan>novembre</expan>
+                        </choice> 1814</date>
+                     <lb/> Nommé de l’<orgName ref="#org_I1">Institut</orgName> le <date when="1814-11-28">28 <choice>
+                           <abbr>9bre</abbr>
+                           <expan>novembre</expan>
+                        </choice> 1814</date>
+                  </p>
+                  <p xml:id="chem1-p35">Nommé de la Légion d’honneur le <date when="1814-12-24">24 <choice>
+                           <abbr>Xbre</abbr>
+                           <expan>décembre</expan>
+                        </choice> 1814</date>.</p>
+               </div>
+               <div xml:id="chem1-div14">
+                  <p xml:id="chem1-p36">
+                     <persName ref="#pers_A366">Ampère</persName> publia son premier ouvrage<lb/> à
+                     l’âge de 27 ans, en <date when="1802">1802</date>, étant alors<lb/> professeur
+                     à <placeName ref="#pl_B7">Bourg</placeName>, sous ce titre : <title type="publication" ref="#ampere_publi_P1802-a">Considérations<lb/> sur la
+                        théorie mathématiques du jeu</title>. Ce livre<lb/> lui valut les éloges de
+                        l’<orgName ref="#org_I1">Institut</orgName>
+                     <del type="illisible"/> et<lb/> le secrétaire perpétuel dit que ce travail
+                     serait<lb/> capable de guérir les joueurs s’ils étaient un<lb/> peu plus
+                     géomètres.</p>
+               </div>
+               <div xml:id="chem1-div15">
+                  <p xml:id="chem1-p37">Dans la même année <date when="1802">1802</date>, il
+                     fit<lb/> imprimer un autre volume qui eût<lb/> produit une grande sensation
+                     s’il eût été<lb/> livré au public. C’était un rapide<lb/> coup d’œil <choice>
+                        <sic>jetté</sic>
+                        <corr>jeté</corr>
+                     </choice> sur l’état actuel des<lb/> sciences, <del type="illisible"/> il
+                     assignait à chacune d’elle<supplied>s</supplied>
+                     <lb/> les progrès qu’elle était appelée à faire<lb/> dans notre siècle. Mais
+                        <del type="illisible"/>
+                     <lb/> au moment fixé pour la publication <pb n="3" facs="#ACAS_CRHST_AMP_01_001_0003_r.jpg" type="deplacement"/> de ce curieux
+                     travail, l’imagination d’<persName ref="#pers_A366">Ampère</persName>
+                     <lb/> s’exalte, il se persuade que si le<lb/> livre paraît, l’auteur sera
+                     couvert<lb/> de ridicule et accusé de présomption.<lb/> Il court chez
+                     l’imprimeur, fait<lb/> détruire tous les exemplaires, si bien,<lb/> si
+                     soigneusement, qu’il n’en reste pas<lb/> la moindre trace, le manuscrit même a
+                     été brûlé.</p>
+               </div>
+               <div xml:id="chem1-div16">
+                  <p xml:id="chem1-p38">Dans les Annales de chimie d’<date when="1814-04">avril
+                        1814</date>,<lb/> se trouve une lettre d’<persName ref="#pers_A366">Ampère</persName> à M.<lb/> le Comte <persName ref="#pers_B52">Bertholet</persName> sur la détermination<lb/> des proportions dans
+                     lesquelles les corps se<lb/> combinent d’après le nombre et la disposition<lb/>
+                     respective des molécules <choice>
+                        <sic>
+                           <unclear>font</unclear> leur</sic>
+                        <corr>dont les</corr>
+                     </choice> particules<lb/> intégrantes sont composées.</p>
+               </div>
+               <div xml:id="chem1-div17">
+                  <p xml:id="chem1-p39">À la fin de <date when="1819">1819</date>, <persName ref="#pers_O423">Oersted</persName> fit une grande<lb/> découverte. C’est un
+                     fait d’électricité qu’il<lb/> ne parvient pas à expliquer et qui par<lb/>
+                     conséquent n’entre point dans la science<lb/> et demeure une simple
+                     expérience.</p>
+                  <p xml:id="chem1-p40">Mais que ce fait, cette expérience, soit
+                        co<supplied>n</supplied>nus<lb/> d’<persName ref="#pers_A366">Ampère</persName>, la vue à la fois synthé<supplied>ti</supplied>que<lb/>
+                     et analytique de ce <persName ref="#pers_N22">Newton</persName> aura
+                     bientôt<lb/> trouvé sa loi et créé une nouvelle<lb/> branche de la
+                     physique !!</p>
+                  <p xml:id="chem1-p41">Dans la séance <del>du 18 septembre</del> de l’<orgName ref="#org_I1">Institut</orgName>
+                     <lb/> du <date when="1820-09-18">18 septembre 1820</date>, <persName ref="#pers_A366">Ampère</persName> dit à ses<lb/> confrères étonnés : <cit>
+                        <quote>je fais construire<lb/> un appareil au moyen duquel je prouverai<lb/>
+                           que j’ai découvert la loi du phénomène<lb/> d’<persName ref="#pers_O423">Oersted</persName>
+                        </quote>
+                     </cit>. <persName ref="#pers_F250">Fourier</persName> et de <persName ref="#pers_L343">Laplace</persName>
+                     <lb/> seuls crurent en lui, mais dans la<lb/> séance suivante les autres
+                     savants<lb/> virent les expériences et furent<lb/> forcés de le croire.</p>
+                  <p xml:id="chem1-p42">Quant à <persName ref="#pers_A366">Ampère</persName>, il
+                     n’avait<lb/> pas plus besoin d’expériences en <date when="1820">1820</date>
+                     qu’il<lb/> n’en avait besoin en <date when="1802">1802</date> lorsqu’il
+                     écrivait<lb/> à sa chère <persName ref="#pers_C129">Julie</persName> : <cit>
+                        <quote>il ne s’agit plus que<lb/> de confirmer ma théorie par des
+                           expériences</quote>
+                     </cit>.</p>
+                  <p xml:id="chem1-p43">Les expériences n’étaient pas nécessaires pour<lb/> lui,
+                     mais elles l’étaient pour le public.</p>
+               </div>
+               <div xml:id="chem1-div18">
+                  <p xml:id="chem1-p44">J’oubliais de dire qu’en <date when="1816">1816</date>,
+                        <persName ref="#pers_A366">Ampère</persName>
+                     <lb/> a publié une petite brochure sous ce titre :<lb/>
+                     <title type="publication" ref="#ampere_publi_P1816-a">Essai de classification
+                        naturelle des<lb/> corps simples</title>. Personne jusque là<lb/> n’avait
+                     encore tenté d’appliquer à la<lb/> chimie la méthode naturelle qui a<lb/> rendu
+                     de si grands services à la botanique.<lb/>
+                     <persName ref="#pers_A366">Ampère</persName> l’a osé. Il s’est senti la<lb/>
+                     puissance de le faire. Sa classification<lb/> a été <del>apparemm</del>
+                     adoptée, elle est<lb/> acquise à la science.</p>
+               </div>
+               <div xml:id="chem1-div19">
+                  <p xml:id="chem1-p45">
+                     <persName ref="#pers_A366">Ampère</persName>, dans une lettre du <date when="1824-08-13">13 août 1824</date>,<lb/> m’engageait à lire dans les
+                     Annales des Sciences<lb/> Naturelles de juillet une théorie de
+                     l’organisation<lb/> des animaux vertébrés. Il ne<lb/> me fut pas difficile de
+                     deviner que cette<lb/> théorie était d’<persName ref="#pers_A366">Ampère</persName>, car dès <date when="1803">1803</date>,<lb/> il m’en
+                     avait laissé voir les germes, et<lb/> voici à quelle occasion : en décembre<lb/>
+                     <date when="1803">1803</date>, je <del>lui <del>disséquais</del>
+                     </del> faisais à sa<lb/> prière la dissection d’un cerveau de<lb/> cheval. <del type="bloc">Il était en extase,<lb/> c’était la première dissection
+                        qu’il<lb/> voyait, il voulait tout <gap reason="lacune"/>
+                     </del>
+                  </p>
+                  <p xml:id="chem1-p46">Lorsque <persName ref="#pers_C164">Cuvier</persName> attaqua
+                     dans son<lb/> cours la théorie d’<persName ref="#pers_A366">Ampère</persName>
+                     qui dans<lb/> les <choice>
+                        <sic>siennes</sic>
+                        <corr>siens</corr>
+                     </choice> repoussa les agressions de<lb/> son savant ami, cette petite
+                     guerre<lb/> ne troubla pas le moins du monde<lb/> la bonne harmonie.</p>
+               </div>
+               <div xml:id="chem1-div20">
+                  <p xml:id="chem1-p47">
+                     <pb n="4" facs="#ACAS_CRHST_AMP_01_001_0004_v.jpg" type="deplacement"/> Lors de
+                     la terrible invasion du choléra à<lb/>
+                     <placeName ref="#pl_P6">Paris</placeName> en <date when="1832">1832</date>,
+                        <persName ref="#pers_A366">Ampère</persName> voulait que pour<lb/> le faire
+                     cesser de suite et complètement, on<lb/> laissa le gaz destiné à l’éclairage
+                     se<lb/> répandre dans la ville pendant 7 à 8 jours.</p>
+                  <p xml:id="chem1-p48">Quelle que fut sa conviction et quelque ardeur<lb/> qu’il
+                     mit à persuader, on ne l’écouta pas.</p>
+                  <p xml:id="chem1-p49">Alors il proposa l’emploi de l’acide<lb/>
+                        hydrop<supplied>h</supplied>torique sur la peau pour<lb/> exciter un
+                     mouvement fébrile assez<lb/> prompt et assez intense pour contrebalancer<lb/>
+                     les accidents du choléra. MM. les d<ex>octeu</ex>rs<lb/>
+                     <persName ref="#pers_S703">Martin Saint-Ange</persName> et <persName ref="#pers_M371">Magendie</persName>
+                     <del>le</del>
+                     <lb/>
+                     <del type="illisible"/> ont <del>assez</del> sauvé par ce<lb/> moyen des
+                     malades et espéraient<lb/> sauver bien d’autres, mais heureusement,<lb/>
+                     l’épidémie s’est arrêtée.</p>
+               </div>
+               <div xml:id="chem1-div21">
+                  <p xml:id="chem1-p50">Dans son cours de <date when="1833">1833</date> au <orgName ref="#org_C3">Collège<lb/> de France</orgName>, <persName ref="#pers_A366">Ampère</persName> développa la théorie<lb/> de la Terre et indiqua la cause
+                     de la<lb/> grande révolution de ces cataclysmes terribles<lb/> dont notre
+                     planète offre des traces<lb/> évidentes et nombreuses.</p>
+                  <p xml:id="chem1-p51">Son génie prend un effort audacieux.<lb/> Pour étudier la
+                     Terre, Il <del type="illisible"/>
+                     <lb/> s’élance dans les temps qui précèdent de<lb/> plusieurs milliards de
+                     siècles l’époque actuelle<lb/> et s’élève jusqu’à ces globes immenses qui<lb/>
+                     peuplent les espaces incommensurables.</p>
+               </div>
+               <div xml:id="chem1-div22">
+                  <p xml:id="chem1-p52">
+                     <persName ref="#pers_A366">Ampère</persName> a encore publié un<lb/> volume et
+                     plusieurs brochures relatives<lb/> à sa découverte électrodynamique.</p>
+               </div>
+               <div xml:id="chem1-div23">
+                  <p xml:id="chem1-p53">Les Annales de Chimie de <date when="1828">1828</date>
+                     renferment<lb/> un mémoire d’<persName ref="#pers_A366">Ampère</persName> sur
+                     la détermination<lb/> de la surface courbe des ondes lumineuses dans<lb/> un
+                     milieu dont l’élasticité est différente suivant<lb/> les trois directions
+                        p<ex>rinci</ex>pales, c'<ex>est</ex>-à-d<ex>ire</ex> celles où la force<lb/>
+                     produite par l’élasticité a lieu dans la direction<lb/> même du déplacement des
+                     molécules de ce milieu.</p>
+               </div>
+               <div xml:id="chem1-div24">
+                  <p xml:id="chem1-p54">En <date when="1829-12">décembre 1829</date>, <persName ref="#pers_A366">Ampère</persName> était<lb/> très gravement malade à
+                        <placeName ref="#pl_H8">Hyères</placeName>, il lui<lb/>
+                     <supplied>était</supplied> expressément défendu de lire et d’écrire ; mais<lb/>
+                     <supplied>ni</supplied> la médecine, ni aucune puissance au monde,<lb/> ne
+                     pouvait lui interdire la méditation (qui,<lb/> au reste, n’avait pour lui rien
+                     de pénible).<lb/> Il essaya donc, par manière<lb/> d’amusement, de soumettre
+                     toutes les sciences<lb/> aux 4 points de vue qui, quelques mois<lb/>
+                     auparavant, dans son cours au <orgName ref="#org_C3">Collège de<lb/>
+                        France</orgName>, lui avaient fait trouver (appliqués<lb/> à la physique)
+                     une classification naturelle<lb/> de la physique et une définition neuve<lb/>
+                     et exacte de cette science ; il eut la<lb/> satisfaction de voir que, comme il
+                     l’avait<lb/> espéré, ses 4 points de vue s’appliquaient<lb/> à toutes les
+                     sciences. Dès lors, il sentit<lb/> que le temps était venu de faire ce
+                     qu’il<lb/> projetait depuis l’âge de dix ans : une<lb/> classification
+                     naturelle de toutes<lb/> les branches de la science.<lb/> Du <date from="1830-05-24" to="1830-06-01">24 mai au 1er juin 1830</date>,
+                     j’assistai<lb/> à la création de sa mathésiologie<lb/> ou science universelle,
+                     création<lb/> prodigieusement facile qui se faisait<lb/> dans nos promenades
+                        <del type="illisible"/> à <placeName ref="#pl_A9">Arles</placeName>,<lb/> à
+                        <placeName ref="#pl_S22">Saint-Rémy</placeName>, au <placeName ref="#pl_P10">Pont du Gard</placeName>
+                     <lb/> ou en chaise de poste.</p>
+                  <p xml:id="chem1-p55">
+                     <pb n="11" facs="#ACAS_CRHST_AMP_01_001_0011_r.jpg" type="deplacement"/> Ce que
+                     faisait <persName ref="#pers_A366">Ampère</persName> n’était<lb/> rien moins
+                     qu’une encyclopédie<lb/> et cet homme prodigieux n’avait<lb/> pas un seul
+                     volume à consulter.<lb/> Un savant n’eût entrepris un<lb/> tel ouvrage <del>que
+                        de</del> qu’entouré de<lb/> livres et de notes, mais <persName ref="#pers_A366">Ampère</persName>
+                     <lb/> ne pouvait consulter que sa propre<lb/> science. En faisant des<lb/>
+                     calembours, en inventant <del type="illisible"/>
+                     <lb/> des jeux de cartes, en récitant des vers<lb/> de <persName ref="#pers_C713">Corneille</persName> ou de <persName ref="#pers_L714">Lucain</persName> etc. etc.,<lb/> il composait les mots grecs de<lb/> son
+                     tableau synoptique (sans dictionnaire),<lb/> il faisait des vers latins,
+                     etc.</p>
+                  <p xml:id="chem1-p56">
+                     <hi rend="center">(O, si j’avais le temps !)</hi>
+                  </p>
+                  <p xml:id="chem1-p57">
+                     <del>le 1er volume de ce <del type="illisible"/>
+                     </del>
+                  </p>
+                  <p xml:id="chem1-p58">Le 1er volume a été publié en<lb/>
+                     <date when="1834">1834</date>, etc.</p>
+               </div>
+               <div xml:id="chem1-div25">
+                  <p xml:id="chem1-p59">Quoique le mérite des écrits d’<persName ref="#pers_A366">Ampère</persName>
+                     <lb/> soit <del type="illisible"/> bien apprécié par tous les<lb/> savants du
+                     monde civilisé et qu’il soit<lb/> très réel et très grand, néanmoins<lb/> il
+                     faut le dire, ceux qui ne connaissent<lb/>
+                     <persName ref="#pers_A366">Ampère</persName> que comme écrivain sont<lb/> loin
+                     d’avoir une idée exacte de cet<lb/> homme prodigieux. Ceux-là seuls<lb/>
+                     peuvent savoir combien était vaste<lb/> l’intelligence d’<persName ref="#pers_A366">Ampère</persName>, combien riche<lb/> son imagination,
+                     combien était solide<lb/> son jugement, qui ont assisté à<lb/> ses
+                     conversations familières, à ses<lb/> discussions si animées (souvent trop<lb/>
+                     animées) discussions qu’il<lb/> envers et contre tous au grand<lb/> détriment
+                     de sa santé, discussions<lb/> qu’il recherchait avec une ardeur
+                     passionnée,<lb/> que j’ai le regret de lui avoir souvent<lb/> reprochée avec
+                     trop peu de ménagement.<lb/> On était émerveillé de voir<lb/> qu’il était
+                     également fort sur toutes<lb/> les sciences, sur tous les arts, et<lb/> qu’il
+                     n’avait rien oublié.</p>
+                  <p xml:id="chem1-p60">
+                     <persName ref="#pers_A366">Ampère</persName> n’était pas appelé à<lb/> être un
+                     écrivain, il avait trop d’idées<lb/> pour cela, trop d’ardeur,
+                     d’imagination,<lb/> une trop grande activité, trop<lb/> d’embrasement. Sa
+                     vocation à lui<lb/> n’était pas d’écrire, mais de créer<lb/> la science et de
+                     semer des idées, des<lb/> pensées, des sentiments. Le monde<lb/> est plein de
+                     pensées d’<persName ref="#pers_A366">Ampère</persName>, j’en<lb/> retrouve
+                     partout, personne ne dit<lb/> d’où elles viennent.</p>
+               </div>
+               <div xml:id="chem1-div26">
+                  <p xml:id="chem1-p61">Le véritable caractère pathognomien<ref target="#ch1_CB2">2</ref>
+                     <lb/> d’<persName ref="#pers_A366">Ampère</persName> considéré comme
+                     savant,<lb/> c’était l’universalité.</p>
+                  <p xml:id="chem1-p62">Lorsqu’en <date when="1804">1804</date>, M. <persName ref="#pers_D177">Delambre</persName> me<lb/> parla du projet d’appeler
+                        <persName ref="#pers_A366">Ampère</persName> à<lb/>
+                     <placeName ref="#pl_P6">Paris</placeName>, c’était en qualité de géomètre.<lb/>
+                     L’illustre <persName ref="#pers_L343">Laplace</persName> l’a présenté à<lb/>
+                     <persName ref="#pers_B73">Napoléon</persName> comme l’espoir des
+                     mathématiques<lb/> en <placeName ref="#pl_F11">France</placeName>.</p>
+                  <p xml:id="chem1-p63">En <date when="1806">1806</date>, M. <persName ref="#pers_D272">Degérando</persName> me dit : <cit>
+                        <quote>Si<lb/> j’avais plus tôt connu votre ami, je<lb/> me serais bien
+                           gardé d’écrire sur<lb/> la psychologie</quote>
+                     </cit>.</p>
+                  <p xml:id="chem1-p64">Le grand <persName ref="#pers_D174">Davy</persName> dit en
+                     passant <pb n="12" facs="#ACAS_CRHST_AMP_01_001_0012_v.jpg" type="deplacement"/> à <placeName ref="#pl_L2">Lyon</placeName> : Votre <persName ref="#pers_A366">Ampère</persName> est le premier chimiste<lb/> de
+                        <placeName ref="#pl_F11">France</placeName>.</p>
+                  <p xml:id="chem1-p65">
+                     <del>M. <persName ref="#pers_M1173">Maine de Byran</persName> me disait<lb/>
+                        en</del>
+                  </p>
+                  <p xml:id="chem1-p66">Mais il faut que je songe<lb/> à clore ces notes
+                     informes.</p>
+                  <p xml:id="chem1-p67">Une des grandes merveilles de ce<lb/> monde, c’était le
+                     regard d’<persName ref="#pers_A366">Ampère</persName>
+                     <lb/> qui embrassait la plus grande masse<lb/> et saisissait les plus minutieux
+                     détails<lb/> (voir <persName ref="#pers_A366">Ampère</persName> disséquer
+                     pendant plus d’une<lb/>
+                     <supplied>heure</supplied>, planté comme une statue, disséquer, dis-je,<lb/>
+                     une petite fleur des champs, il avait<lb/> fait une découverte).</p>
+                  <p xml:id="chem1-p68">C’était le regard de <persName ref="#pers_N22">Newton</persName>, de<lb/>
+                     <persName ref="#pers_P555">Pascal</persName>, mieux encore évidemment.</p>
+               </div>
+               <div xml:id="chem1-div27">
+                  <p xml:id="chem1-p69">Les qualités morales d’<persName ref="#pers_A366">Ampère</persName>
+                     <lb/> bien supérieures encore à ses prodigieuses<lb/> facultés
+                     intellectuelles.</p>
+                  <p xml:id="chem1-p70">Quel cœur tendre affectueux,<lb/> quelle générosité, quel
+                     dévouement,<lb/> quelle énergique sympathie pour<lb/> tous les maux de
+                     l’humanité.<lb/> C’était un homme de douleur. Tout<lb/> ce qui se passait au
+                        <placeName ref="#pl_P12">Pérou</placeName>, en <placeName ref="#pl_E13">Espagne</placeName>,<lb/> en <placeName ref="#pl_P14">Pologne</placeName>
+                     le faisait tressaillir, etc.</p>
+                  <p xml:id="chem1-p71">Il avait de grandes consolations :<lb/>
+                     <list>
+                        <item n="1">de belles et nobles illusions<lb/> sur un avenir prochain</item>
+                        <item n="2">les douces affections de la<lb/> religion.</item>
+                     </list>Depuis 70 ans que je vis parmi<lb/> les hommes, je n’en ai pas vu un
+                     seul<lb/> qui fut aussi bon, aussi aimant, aussi<lb/> généreux, aussi dévoué
+                     que l’ami <del type="illisible"/>
+                     <lb/> dont le souvenir m’est tous les jours<lb/> plus précieux.</p>
+                  <p xml:id="chem1-p72">Tout aimant qu’il fut, <persName ref="#pers_A366">Ampère</persName>
+                     <lb/> avait trois grandes antipathies :<lb/>
+                     <list>
+                        <item>le scepticisme,</item>
+                        <item>la doctrine de l’utile</item>
+                        <item>la théorie de <persName ref="#pers_M726">Malthus</persName>
+                        </item>
+                        <item>
+                           <del>le despotisme de toute <del type="illisible"/>
+                           </del> (il était<lb/> républicain)</item>
+                     </list>
+                  </p>
+                  <p xml:id="chem1-p73">
+                     <persName ref="#pers_A366">Ampère</persName> est mort à <placeName ref="#pl_M15">Marseille</placeName>
+                     <lb/> le vendredi <date when="1836-06-10">10 juin 1836</date> au <orgName ref="#org_L7">Collège<lb/> royal</orgName>, où il faisait une inspection
+                     en<lb/> la qualité d’inspecteur général avec<lb/> M. <persName ref="#pers_M381">Matter</persName> qui a prononcé sur sa<lb/> tombe quelques paroles bien
+                     senties</p>
+                  <p xml:id="chem1-p74">
+                     <cit>
+                        <quote>Quelle perte pour la science !<lb/> Quelle perte pour
+                           l'amitié !</quote>
+                     </cit>
+                  </p>
+                  <p xml:id="chem1-p75">Pardon, je <del type="illisible"/>
+                  </p>
+               </div>
+            </body>
+            <back>
+               <div xml:id="chem1-div28">
+                  <note n="1" resp="CB" xml:id="ch1_CB1">Ce document de la main de Claude-Julien
+                     Bredin, ami très proche d'Ampère, a servi de base pour les premières
+                     biographies d'Ampère.</note>
+                  <note n="2" resp="CB" xml:id="ch1_CB2">Sans doute pour "pathognomonique",
+                     c'est-à-dire spécifique.</note>
+                  <note n="3" resp="CB" xml:id="ch1_CB3">Titre d'un célèbre recueil de poèmes
+                     amoureux du lyonnais Maurice Scève, publié en 1544.</note>
+                  <note n="4" resp="CB" xml:id="ch1_CB4">Dans la mythologie grecque, le Permesse est
+                     une rivière consacrée aux Muses dont elle arrose la demeure et au bord de
+                     laquelle les poètes allaient chercher l'inspiration. </note>
+               </div>
+            </back>
+         </text>
+
+         <text n="3" decls="#ampere_arch_chem1_3" corresp="#ampere_corr_L1824-10-00-a" type="correspondance">
+            <body>
+               <div xml:id="chem1-div29">
+                  <opener>
+                     <pb n="5" facs="#ACAS_CRHST_AMP_01_001_0005_r.jpg" type="deplacement"/>
+                     <handShift new="#AMA"/> À son excellence,<lb/> Monseigneur l'évêque
+                     d'<!--<placeName ref="#pl_H16">-->Hermopolis<!--</placeName>-->, pair de
+                        <placeName ref="#pl_F11">France</placeName>,<lb/> ministre et secrétaire
+                     d'état au <orgName ref="#org_D12">Département des<lb/> affaires ecclésiastiques
+                        et de l'instruction publique</orgName>.</opener>
+                  <note>
+                     <gap reason="illisible"/>
+                  </note>
+                  <opener>Monseigneur, <note>
+                        <add hand="#main_inconnue">M. <gap reason="illisible"/>
+                           <lb/> à classer</add>
+                     </note>
+                  </opener>
+                  <p xml:id="chem1-p76">Si, comme j'ose m'en flatter d'après les bontés dont<lb/>
+                     votre Excellence m'a honoré, ce n'est pas<lb/> parce que j'ai mérité sa
+                     disgrâce que je n'ai pu<lb/> conserver la place d'inspecteur général des
+                     études,<lb/> me permettra-t-elle de lui exposer un moyen<lb/> de me rendre, de
+                     rendre à mes <choice>
+                        <sic>enfans</sic>
+                        <corr>enfants</corr>
+                     </choice>, ce que nous<lb/> venons de perdre ?</p>
+                  <p xml:id="chem1-p77">J'apprends que Mr. <persName ref="#pers_C132">Cauchy</persName>, qui remplissait avec<lb/> tant d'éclat la chaire de
+                     mécanique à la <orgName ref="#org_F14">Faculté<lb/> des sciences</orgName>, a
+                     préféré celle d'astronomie vacante<lb/> par la promotion de Mr. <persName ref="#pers_D738">Dinet</persName> à la place<lb/> que j'ai perdue, cette
+                     chaire de mécanique<lb/> vacante comblerait mes vœux, et peut-être,<lb/>
+                     Monseigneur, suis-je parmi ceux qui peuvent<lb/> la remplir dans ce moment,
+                     celui qui serait<lb/> plus propre à ce genre d'enseignement. Depuis<lb/> sept
+                     ans je professe à l'<orgName ref="#org_E4">École royale polytechnique</orgName>
+                     <lb/> précisément les mêmes choses que Mr. <persName ref="#pers_C132">Cauchy</persName>
+                     <lb/> donnait dans son cours de mécanique à<lb/> la <orgName ref="#org_F14">Faculté</orgName>, et j'ai publié, à diverses époques, des<lb/> mémoires
+                     sur cette branche des sciences<lb/> mathématiques qui n'ont peut-être pas
+                     été<lb/> inutiles à ses progrès. C'est sur le rapport,<lb/> infiniment flatteur
+                     pour moi, que fit le<lb/> célèbre <persName ref="#pers_L338">Lagrange</persName> du premier de ces mémoires<lb/> que je fus appelé il y
+                     a vingt ans à <placeName ref="#pl_P6">Paris</placeName> pour<lb/> y remplir les
+                     fonctions de répétiteur. J'ai<lb/> composé les autres depuis que j'y suis
+                     fixé.</p>
+                  <p xml:id="chem1-p78">
+                     <pb n="6" facs="#ACAS_CRHST_AMP_01_001_0006_v.jpg" type="deplacement"/> Si le
+                     choix de votre Excellence est déjà fait<lb/> relativement au professeur qui
+                     doit remplacer<lb/> Mr. <persName ref="#pers_C132">Cauchy</persName> à la
+                        <orgName ref="#org_F14">Faculté des sciences</orgName>, il me<lb/> restera
+                     du moins la consolation, dans le malheur<lb/> que je viens d'éprouver, d'avoir
+                     agi, lorsque<lb/> j'ai renoncé à la place que j'aurais surtout<lb/> désiré de
+                     conserver, uniquement dans la vue<lb/> de prouver à votre Excellence, dès qu'on
+                     m'eut<lb/> fait connaître ses intentions, qu'elle était<lb/> mon entière
+                     soumission à tout ce qu'elle<lb/> pouvait désirer de moi, et jusqu'où
+                     allait<lb/> mon profond respect et l'éternelle reconnaissance<lb/> dont
+                     m'avaient pénétré les marques de<lb/> bienveillance que je venais de
+                     recevoir<lb/> de votre Excellence.</p>
+                  <closer>J'ai l'honneur d'être, avec le plus profond<lb/> respect,<lb/>
+                     Monseigneur,<lb/> de votre Excellence,<lb/>
+                     <placeName ref="#pl_P6">Paris</placeName>
+                     <date when="1824-10-09">9 <choice>
+                           <abbr>8bre</abbr>
+                           <expan>octobre</expan>
+                        </choice> 1824</date>.</closer>
+                  <signed>le très humble et très<lb/> obéissant serviteur.<lb/>
+                     <persName ref="#pers_A366">A. Ampère</persName>
+                  </signed>
+               </div>
+            </body>
+         </text>
+
+         <text n="4" decls="#ampere_arch_chem1_4" type="correspondance">
+            <body>
+               <div xml:id="chem1-div30">
+                  <opener>
+                     <pb n="13" facs="#ACAS_CRHST_AMP_01_001_0013_r.jpg"/>
+                     <handShift new="#lacuée"/>
+                     <placeName ref="#pl_P6">Paris</placeName>, le <date calendar="revolutionary" when="1804-10-20">28 vendémiaire an 13</date>
+                     <add>
+                        <date when="1804-10-20">20 octobre 1804</date>
+                     </add>
+                     <lb/>
+                     <persName ref="#pers_L336">J. G. Lacuée</persName>, Conseiller d’Etat,
+                     Président<lb/> de la section de la guerre<lb/>
+                     <handShift new="#main_inconnue"/> à Monsieur <persName ref="#pers_D177">Delambre</persName>
+                  </opener>
+                  <p xml:id="chem1-p79">D’après votre désir et votre suffrage,<lb/> j’ai nommé hier,
+                     mon cher confrère,<lb/> M. <persName ref="#pers_A366">Ampère</persName>
+                     répétiteur à l’<orgName ref="#org_E4">École<lb/> polytechnique</orgName>. Je me
+                     suis estimé<lb/> heureux de trouver cette occasion<lb/> de vous prouver mon
+                     désir de<lb/> vous être agréable, et la confiance<lb/> légitimement due à vos <choice>
+                        <sic>talens</sic>
+                        <corr>talents</corr>
+                     </choice>
+                     <lb/> et à vos vertus.</p>
+                  <p xml:id="chem1-p80">Agréez, mon cher confrère cette expression<lb/> de mes
+                     véritables <choice>
+                        <sic>sentimens</sic>
+                        <corr>sentiments</corr>
+                     </choice> et celle<lb/> de mon inviolable attachement.</p>
+                  <closer>Mes respects, je vous prie, à Mme <persName ref="#pers_D177">Delambre</persName>
+                  </closer>
+                  <signed>
+                     <persName ref="#pers_L336">J. G. Lacuée</persName>
+                  </signed>
+               </div>
+            </body>
+         </text>
+
+         <text n="5" decls="#ampere_arch_chem1_5" type="correspondance">
+            <body>
+               <div xml:id="chem1-div31">
+                  <p xml:id="chem1-p81">
+                     <pb n="14" facs="#ACAS_CRHST_AMP_01_001_0014_r.jpg"/>[Lettre 200 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1803-01-19-a">la
+                        Correspondance</ref>]<pb n="15" facs="#ACAS_CRHST_AMP_01_001_0015_v.jpg"/>[Lettre 200 éditée dans <ref type="correspondance" target="#ampere_corr_L1803-01-19-a">la Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="6" xml:id="ampere_arch_chem1_6">
+            <body>
+               <div xml:id="chem1-div32">
+                  <head>
+                     <pb n="16" facs="#ACAS_CRHST_AMP_01_001_0016_r.jpg"/>
+                     <handShift new="#AMA"/> Le malheur imprévu<lb/> Chanson<lb/> pour la petite
+                        <persName ref="no-index">Sophie</persName>
+                  </head>
+                  <lg>
+                     <l>Je voulais faire un couplet,</l>
+                     <l>Mais je rêvais à <persName ref="no-index">Délie</persName>
+                        <ref target="#ch1_CB3">3</ref>
+                     </l>
+                     <l>Et le couplet fut mal fait.</l>
+                     <l>Le jeune dieu qui m’inspire,</l>
+                     <l>Souriait de mes efforts,</l>
+                     <l>Et des cordes de ma lyre</l>
+                     <l>Étouffait tous les accords.</l>
+                     <l>Sa sœur, des bords du <placeName ref="#pl_P17">Permesse</placeName>
+                        <ref target="#ch1_CB4">4</ref>,</l>
+                     <l>Vint m’inspirer à son tour,</l>
+                     <l>
+                        <subst>
+                           <del>j’allais</del>
+                           <add>Je crus</add>
+                        </subst> remplir ma promesse,</l>
+                     <l>En dépit du dieu d’amour ;</l>
+                     <l>Et ma muse enorgueillie,</l>
+                     <l>Des secours de l’amitié,</l>
+                     <l>
+                        <subst>
+                           <del>Des vers tracés pour</del>
+                           <add>De son hommage à</add>
+                        </subst>
+                        <persName ref="no-index">Sophie</persName>,</l>
+                     <l>
+                        <del>Couvrait déjà le papier</del>
+                     </l>
+                     <l>
+                        <del>Avait fini la moitié</del>
+                     </l>
+                     <l>
+                        <add>Eut bientôt fait la moitié.</add>
+                     </l>
+                     <l>Je lui promettais d’<choice>
+                           <sic>aimée</sic>
+                           <corr>aimer</corr>
+                        </choice>,</l>
+                     <l>Les vertus et les attraits,…</l>
+                     <l>
+                        <add>J’achevais, </add>quand <del>tout à coup</del> en fumée,</l>
+                     <l>J’ai vu voler mes couplets.</l>
+                     <l>Le traître amour en cachette,</l>
+                     <l>S’approchant de mon bureau,</l>
+                     <l>De dépit, sous la tablette</l>
+                     <l>Avait glissé son flambeau.</l>
+                  </lg>
+               </div>
+            </body>
+         </text>
+
+         <text n="7" decls="#ampere_arch_chem1_7" type="correspondance">
+            <body>
+               <div xml:id="chem1-div33">
+                  <p xml:id="chem1-p82">
+                     <pb n="17" facs="#ACAS_CRHST_AMP_01_001_0017_r.jpg"/>[Lettre 862 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1824-09-15-a">la
+                        Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="8" decls="#ampere_arch_chem1_8" type="correspondance">
+            <body>
+               <div xml:id="chem1-div34">
+                  <p xml:id="chem1-p83">
+                     <pb n="18" facs="#ACAS_CRHST_AMP_01_001_0018_r.jpg"/>[Lettre 844 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1806-08-01-a">la
+                        Correspondance</ref>] <pb n="19" facs="#ACAS_CRHST_AMP_01_001_0019_v.jpg"/>[Lettre 844 éditée dans <ref type="correspondance" target="#ampere_corr_L1806-08-01-a">la Correspondance</ref>] <pb n="20" facs="#ACAS_CRHST_AMP_01_001_0020_r.jpg"/>[Lettre 844 éditée dans <ref type="correspondance" target="#ampere_corr_L1806-08-01-a">la
+                        Correspondance</ref>] <pb n="21" facs="#ACAS_CRHST_AMP_01_001_0021_v.jpg"/>[Lettre 844 éditée dans <ref type="correspondance" target="#ampere_corr_L1806-08-01-a">la Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="9" decls="#ampere_arch_chem1_9" type="correspondance">
+            <body>
+               <div xml:id="chem1-div35">
+                  <p xml:id="chem1-p84">
+                     <pb n="22" facs="#ACAS_CRHST_AMP_01_001_0022_r.jpg"/>[Lettre 836 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1802-12-28-a">la
+                        Correspondance</ref>] <pb n="23" facs="#ACAS_CRHST_AMP_01_001_0023_v.jpg"/>[Lettre 836 éditée dans <ref type="correspondance" target="#ampere_corr_L1802-12-28-a">la Correspondance</ref>] <pb n="24" facs="#ACAS_CRHST_AMP_01_001_0024_r.jpg"/>[Lettre 836 éditée dans <ref type="correspondance" target="#ampere_corr_L1802-12-28-a">la
+                        Correspondance</ref>] <pb n="25" facs="#ACAS_CRHST_AMP_01_001_0025_v.jpg"/>[Lettre 836 éditée dans <ref type="correspondance" target="#ampere_corr_L1802-12-28-a">la Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="10" decls="#ampere_arch_chem1_10" type="correspondance">
+            <body>
+               <div xml:id="chem1-div36">
+                  <opener>
+                     <handShift new="#main_inconnue"/>
+                     <pb n="26" facs="#ACAS_CRHST_AMP_01_001_0026_r.jpg"/>
+                     <placeName ref="#pl_P6">Paris</placeName>, le <date when="1807-12-02">2 <choice>
+                           <abbr>
+                              <unclear>Xbre</unclear>
+                           </abbr>
+                           <expan>
+                              <unclear>décembre</unclear>
+                           </expan>
+                        </choice> 1807</date>
+                     <lb/> Le secrétaire général du <orgName ref="#org_M13">Ministère<lb/> de
+                        l'Intérieur</orgName>, membre de l'<orgName ref="#org_I1">Institut<lb/>
+                        national</orgName>.</opener>
+                  <p xml:id="chem1-p85">Mon cher et respectable confrère,<lb/> j'ai vu M. <persName ref="#pers_A366">Ampère</persName>, je lui ai rendu<lb/> compte de notre
+                     conversation. Il m'a dit<lb/> qu'il autorisait M. <persName ref="#pers_R791">Rendu</persName>, notaire, rue S<ex>ain</ex>t-<lb/>
+                     <add>Honoré en haut de<lb/>
+                     </add> celle de la Sourdière, à recevoir les communications<lb/> qu'on servit
+                        <gap reason="illisible"/> de lui faire en<lb/> réparation, et en
+                     satisfaction des droits<lb/>
+                     <gap reason="illisible"/>
+                     <lb/> droits trop longtemps méconnu par le<lb/>
+                     <gap reason="illisible"/> d'où vous m'avez fait l'honneur<lb/> de me
+                     parler.</p>
+                  <p xml:id="chem1-p86">Veuillez me prévenir lorsque vous<lb/> aurez parlé à M.
+                        <persName ref="#pers_F249">Fourcroy</persName>
+                     <gap reason="illisible"/>
+                  </p>
+                  <signed>Votre dévoué<lb/>
+                     <persName ref="#pers_D272">J. M. Degérando</persName>
+                  </signed>
+               </div>
+            </body>
+         </text>
+
+         <text n="11" decls="#ampere_arch_chem1_11" type="correspondance">
+            <body>
+               <div xml:id="chem1-div37">
+                  <p xml:id="chem1-p87">
+                     <pb n="27" facs="#ACAS_CRHST_AMP_01_001_0027_r.jpg"/>[Lettre 847 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1811-04-11-a">la
+                        Correspondance</ref>] <pb n="28" facs="#ACAS_CRHST_AMP_01_001_0028_v.jpg"/>[Lettre 847 éditée dans <ref type="correspondance" target="#ampere_corr_L1811-04-11-a">la Correspondance</ref>] <pb n="29" facs="#ACAS_CRHST_AMP_01_001_0029_r.jpg"/>[Lettre 847 éditée dans <ref type="correspondance" target="#ampere_corr_L1811-04-11-a">la
+                        Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="12" decls="#ampere_arch_chem1_12" type="correspondance">
+            <body>
+               <div xml:id="chem1-div38">
+                  <opener>
+                     <pb n="30" facs="#ACAS_CRHST_AMP_01_001_0030_r.jpg"/>
+                     <handShift new="#main_inconnue"/>
+                     <placeName ref="#pl_P6">Paris</placeName>, le <date when="1807-07-09">9 juillet
+                        1807</date>.<lb/> Le secrétaire général du <orgName ref="#org_M13">Ministère<lb/> de l'intérieur</orgName>, membre de l'<orgName ref="#org_I1">Institut<lb/> national</orgName>.</opener>
+                  <p xml:id="chem1-p88">Mon très cher et très honoré confrère,<lb/> je regrette
+                     vivement que la maladie dont<lb/> je relève m'ait privé de l'honneur de
+                     vous<lb/> voir. Vous savez combien j'honore vos<lb/> vertus, et quelle est la
+                     profondeur des<lb/> sentiments qui m'attachent à vous. Je<lb/> vous aurais
+                     appris en effet sur les<lb/> malheurs dont vous m'entretenez, des<lb/>
+                     circonstances essentielles que vous paraissez<lb/> ignorer. La délicatesse de
+                     M. <persName ref="#pers_A366">Ampère</persName>,<lb/> même au milieu de tout ce
+                     qu'il souffrait,<lb/> me les aurait peut-être laissé ignorer aussi,<lb/> mais
+                     j'étais trop intéressé au bonheur<lb/> de ce vertueux jeune homme pour ne
+                     pas<lb/> prendre les moyens de m'éclairer, dès que<lb/> j'ai eu quelque
+                     inquiétude sur la manière<lb/> dont il était traité. J'ai tout su, je <pb n="31" facs="#ACAS_CRHST_AMP_01_001_0031_v.jpg"/> l'ai su d'une manière
+                     sûre. J'ai su que sa<lb/> belle mère et sa femme se sont rendues<lb/> coupables
+                     envers lui de tous les torts<lb/> que des âmes sans délicatesse peuvent<lb/>
+                     commettre envers un cœur tendre et généreux<lb/> dont le seul défaut est
+                     l'excès de la bonté !<lb/> J'ai su que l'honnête M. <persName ref="#pers_P463">Potot</persName> après<lb/> avoir longtemps blâmé et cherché à arrêter<lb/>
+                     ces violences, s'est enfin laissé entraîné<lb/> par sa faiblesse à les
+                     partager. Alors,<lb/> et quoique offensé, outragé moi-même<lb/> dans la
+                     personne de mon ami de la<lb/> manière la plus sensible, quoique indigné<lb/>
+                     de voir traité ainsi dans une maison<lb/> où il était entré en effet, comme
+                     vous le<lb/> dites, un peu sous mes auspices, un<lb/> homme estimable auquel
+                     comme vous<lb/> dites encore, j'étais censé tenir lieu de<lb/> père, tout cela
+                     sans aucun égard pour<lb/> moi-même, sans me mettre à portée des<lb/> remèdes
+                     aux maux qui auraient pu<lb/> naître, j'ai contenu le juste sentiment <pb n="32" facs="#ACAS_CRHST_AMP_01_001_0032_r.jpg"/> que de tels procédés
+                     pouvaient inspirer,<lb/> j'ai fait faire moi-même des ouvertures<lb/> à M.
+                        <persName ref="#pers_P463">Potot</persName> en lui offrant mes bons<lb/>
+                     offices pour une réconciliation tant qu'elle<lb/> m'a paru possible. M.
+                        <persName ref="#pers_P463">Potot</persName> n'a pas<lb/> plus daigné y
+                     répondre qu'il ne daigne<lb/> répondre à mes lettres. Car <del type="illisible"/>
+                     <gap reason="illisible"/>
+                     <lb/> au contraire redoublé d'outrager, ils se<lb/> flattaient de pouvoir
+                     librement et à leur<lb/> aise accabler cet intéressant et malheureux<lb/> jeune
+                     homme. Ils se sont trompés. Je<lb/> suis non le père mais l'ami d'<persName ref="#pers_A366">Ampère</persName>,<lb/> et un ami capable de toute la
+                     condescendance, de tous les égards, quand il<lb/> en <gap reason="illisible"/>,
+                     mais capable aussi de<lb/> toute l'énergie, de toute la fermeté, de<lb/> tout
+                     le dévouement de l'amitié lorsque<lb/> les circonstances l'exigent. <persName ref="#pers_A366">Ampère</persName> a<lb/> été admis à se réfugier, en
+                     quittant ses<lb/> persécuteurs, sous la protection la plus<lb/> honorable et la
+                     bienveillance particulière<lb/> que lui porte mon respectable ministre,<lb/>
+                     <gap reason="illisible"/> encore par ses malheurs,<lb/>
+                     <gap reason="illisible"/> dédommagera amplement.</p>
+                  <p xml:id="chem1-p89">
+                     <pb n="33" facs="#ACAS_CRHST_AMP_01_001_0033_v.jpg"/> Je vous le dirai sans
+                     détour. J'ai<lb/> désiré ardemment une réconciliation.<lb/> Maintenant, après
+                     la connaissance que j'ai<lb/> acquise du caractère de cette famille, je<lb/>
+                     désire presqu'aussi vivement que M. <persName ref="#pers_A366">Ampère</persName>
+                     <lb/> ne se trouve plus <choice>
+                        <sic>jetté</sic>
+                        <corr>jeté</corr>
+                     </choice> de nouveau auprès<lb/> de gens si peu dignes de lui, et si peu<lb/>
+                     capables de l'apprécier. Je ne me<lb/> refuserai point sans doute à voir
+                        Mad<ex>am</ex>e<lb/>
+                     <persName ref="#pers_P464">Ampère</persName>, surtout si le sentiment d'un
+                     juste<lb/> repentir lui inspire ce mouvement. Mais<lb/> croyez-le, mon cher
+                     confrère, elle s'y prend<lb/> un peu tard si elle veut conserver quelque<lb/>
+                     droit à mon estime. Je comprends peu<lb/> comment <gap reason="illisible"/> à
+                     mon opinion, quand<lb/> elle a si peu tenu au sentiment de ses devoirs.<lb/> Je
+                     regretterais pour elle qu'elle tint à<lb/> l'opinion publique. Car, au point où
+                     cette<lb/> famille pousse les choses, avec la réputation<lb/> dont M. <persName ref="#pers_A366">Ampère</persName> jouit, les suites de cette<lb/> affaire
+                     ne peuvent être que très funestes<lb/> à la jeune personne et à sa
+                     famille,<lb/> et s'ils ont été bien durs, ils n'ont pas été<lb/> moins
+                     inconsidérés et moins aveugles.</p>
+                  <p xml:id="chem1-p90">
+                     <pb n="34" facs="#ACAS_CRHST_AMP_01_001_0034_r.jpg"/> Je vous ai répondu, mon
+                     cher et très<lb/> honoré confrère, avec toute l'ouverture<lb/> qu'un galant
+                     homme doit à un galant<lb/> homme. J'irai vous voir un jour au<lb/>
+                     <placeName ref="#pl_J18">Jardin des plantes</placeName> si vous n'avez pas<lb/>
+                     occasion de passer dans ce quartier. Croyez<lb/> que je suis aussi éloigné que
+                     vous de<lb/> soupçonner le mal, que je désire la<lb/> paix autant que vous ;
+                     croyez que je<lb/> ne suis point aveuglé par l'amitié.<lb/>
+                     <persName ref="#pers_A366">Ampère</persName> vous dira avec quelle
+                     sévérité<lb/> je lui ai montré ses fautes. Mais<lb/> si j'avais été instruit
+                     plus tôt, il y a<lb/> 3 mois que M<ex>a</ex>d<ex>am</ex>e <persName ref="#pers_P464">Ampère</persName> lui aurait<lb/> fait les solennelles
+                     excuses et réparations<lb/> qu'elle lui doit, ou qu'il aurait quitté<lb/> cette
+                     maison.</p>
+                  <closer>Je vous embrasse de tout<lb/> mon cœur.</closer>
+                  <signed>
+                     <gap reason="illisible"/> M. <persName ref="#pers_D272">J. M.
+                        Degérando</persName>
+                  </signed>
+               </div>
+            </body>
+         </text>
+
+         <text n="13" xml:id="ampere_arch_chem1_13" type="correspondance">
+            <body>
+               <div xml:id="chem1-div39">
+                  <p xml:id="chem1-p91">
+                     <pb n="35" facs="#ACAS_CRHST_AMP_01_001_0035_r.jpg"/> J'ai passé deux fois chez
+                     vous, M. et c<ex>her</ex> c<ex>onfrère</ex>, pour vous voir et<lb/> vous parler
+                     d'une affaire qui m'afflige et <subst>
+                        <del>sur</del>
+                        <add>à</add>
+                     </subst> laquelle vous<lb/> n'êtes probablement pas indifférent. Un jeune
+                     ménage fait pour<lb/> être uni, ne l'est pas et je <del>crois que</del> doute
+                     malheureusement qu'il<lb/> puisse le devenir. Cependant, nous devons conserver
+                     quelque espoir<lb/> et faire nos efforts pour opérer un raccommodement.
+                     Vous<lb/> savez que les partis intéressées m'ont invité à remplir l'office<lb/>
+                     de médiateur, office bien délicat et difficile, surtout pour moi<lb/> qui ai
+                     peu vu le jeune ménage depuis le jour de la célé<lb rend="hyphen"/>bration et
+                     qui <del>ne suis que depuis quelques jours <del type="illisible"/>
+                     </del>
+                     <lb/> ne suis instruit que très récemment des faits passés et<lb/> des griefs
+                     mutuels déjà anciens. Quoiqu'il en soit, la jeune<lb/> dame parait attacher
+                     beaucoup de prix à votre opinion.<lb/> Elle a désiré fortement que je vous prie
+                     de suspendre tout<lb/> jugement à son égard, jusqu'à ce qu'elle vous ait
+                     parlé !<lb/> Elle souhaite avoir avec vous un entretien lorsqu'elle<lb/> sera
+                     relevée de couche. Quoique je n'aime pas beaucoup<lb/> à me mêler d'affaires de
+                     ce genre, je n'ai pu refuser de<lb/> me charger de cette mission, et je m'en
+                     acquitte même<lb/> d'autant plus volontiers que cette conférence pourrait
+                        tour<lb rend="hyphen"/>ner à l'avantage des deux époux et devenir un
+                        achemi<lb rend="hyphen"/>nement à une réconciliation. Vous avez fait dans
+                     cette<lb/> union l'office de père. Personne mieux qu'un père ne<lb/> peut
+                     plaider la cause de son fils et <del type="illisible"/> atténuer ses torts<lb/>
+                     s'il en a. Je vois ici deux personnes honnêtes qui ne<lb/> s'entendent, qui ont
+                     chacune des principes <choice>
+                        <sic>différens</sic>
+                        <corr>différents</corr>
+                     </choice>.</p>
+                  <p xml:id="chem1-p92">Cette discordance n'est pas un motif de séparation<lb/> si
+                     celui qui pense autrement que la pluralité, consent<lb/> à garder pour lui ses
+                     idées sans se tourmenter pour<lb/> faire un <gap reason="illisible"/>
+                  </p>
+                  <p xml:id="chem1-p93">
+                     <pb n="36" facs="#ACAS_CRHST_AMP_01_001_0036_v.jpg"/> Je n'ai appris, M., que
+                     ce matin l'heureux accouchement<lb/> de M<ex>a</ex>d<ex>am</ex>e votre fille.
+                     Permettez que je vous en fasse mon<lb/> compliment ainsi qu'à l'accouchée et à
+                     sa maman. J'aurais<lb/> souhaité pouvoir vous porté moi-même mes
+                     félicitations<lb/> mais après avoir été retenu hier et avant hier par des
+                     fonctions<lb/> publiques et des jouissances ordinaires, je suis obligé
+                     aujourd'hui<lb/> de travailler sans relâche pour me remettre au courant<lb/>
+                     d'un travail qui ne peut-être ajourné. Votre domestique<lb/>
+                     <add>
+                        <gap reason="illisible"/>
+                     </add> aurait pu vous dire que lundi ma fille aînée arrivait de sa<lb/>
+                     <add>campagne<lb/>
+                     </add>
+                     <gap reason="illisible"/> pour prendre gîte chez moi. J'ai dû dîner avec elle
+                     et<lb/> lui donner un service. Hier j'ai rassemblé chez moi frère et<lb/> sœur
+                     avec leurs enfants pour <gap reason="illisible"/>
+                     <lb/> aux uns et autres le plaisir<lb/> de se revoir. C'est probablement
+                     pendant cette réunion à<lb/> table que votre nouveau message me sera parvenu et
+                     les<lb/> domestiques occupés auront <gap reason="lacune"/>.</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="14" decls="#ampere_arch_chem1_14" type="correspondance">
+            <body>
+               <div xml:id="chem1-div40">
+                  <p xml:id="chem1-p94">
+                     <pb n="37" facs="#ACAS_CRHST_AMP_01_001_0037_r.jpg"/>[Lettre 875 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1834-10-26-a">la
+                        Correspondance</ref>] <pb n="38" facs="#ACAS_CRHST_AMP_01_001_0038_v.jpg"/>[Lettre 875 éditée dans <ref type="correspondance" target="#ampere_corr_L1834-10-26-a">la Correspondance</ref>] <pb n="39" facs="#ACAS_CRHST_AMP_01_001_0039_v.jpg"/>[Lettre 875 éditée dans <ref type="correspondance" target="#ampere_corr_L1834-10-26-a">la
+                        Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="15" decls="#ampere_arch_chem1_15" type="correspondance">
+            <body>
+               <div xml:id="chem1-div41">
+                  <p xml:id="chem1-p95">
+                     <pb n="40" facs="#ACAS_CRHST_AMP_01_001_0040_r.jpg"/>[Lettre 842 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1804-10-30-a">la
+                        Correspondance</ref>] <pb n="41" facs="#ACAS_CRHST_AMP_01_001_0041_v.jpg"/>[Lettre 842 éditée dans <ref type="correspondance" target="#ampere_corr_L1804-10-30-a">la Correspondance</ref>] <pb n="42" facs="#ACAS_CRHST_AMP_01_001_0042_v.jpg"/>[Lettre 842 éditée dans <ref type="correspondance" target="#ampere_corr_L1804-10-30-a">la
+                        Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="16" decls="#ampere_arch_chem1_16" type="correspondance">
+            <body>
+               <div xml:id="chem1-div42">
+                  <opener>
+                     <pb n="43" facs="#ACAS_CRHST_AMP_01_001_0043_r.jpg"/>
+                     <handShift new="#main_inconnue"/>
+                     <placeName ref="#pl_L2">Lyon</placeName> le <date calendar="revolutionary" when="1803-07-15">26 messidor an XI</date>
+                     <lb/> Monsieur et cher parent,</opener>
+                  <p xml:id="chem1-p96">J’ai la douleur de vous annoncer que la mort vient de nous
+                     enlever<lb/> ma belle-sœur, Mad<ex>a</ex>m<ex>e</ex>
+                     <persName ref="#pers_P464">Ampère</persName>. C’était le moment où elle<lb/>
+                     commençait à jouir du plaisir que vous lui avez procuré en<lb/> faisant nommer
+                     son mari professeur du <orgName ref="#org_L10">Lycée de Lyon</orgName>.<lb/> Je
+                     connaissais la reconnaissance qu’elle vous conservait.<lb/> Elle laisse un fils
+                     âgé de trois ans ; l’état de maladie où<lb/> vous l’aviez laissée à votre
+                     départ de <placeName ref="#pl_L2">Lyon</placeName> n’avait fait<lb/> que
+                     s’accroître et avait dégénéré en une hydropisie<lb/> complète qui a terminé ses
+                     jours. Je vous peindrais<lb/> difficilement la désolation de son mari et de
+                     nous tous qui lui<lb/> étions attachés autant qu’il est possible. En effet,
+                     elle le méritait,<lb/> elle avait toutes les qualités morales et agréables qui
+                     peuvent<lb/> faire chérir</p>
+                  <p xml:id="chem1-p97">Mme <persName ref="#pers_B69">Carron</persName>, sa mère et
+                     Mlle <persName ref="#pers_C125">Elise</persName> sont à la maison<lb/>
+                     <del>pour qu</del> où nous espérons les retenir quelque temps. Nous <pb n="44" facs="#ACAS_CRHST_AMP_01_001_0044_v.jpg"/> faisons nos efforts pour calmer
+                     leur douleur, ce qui n’est pas aisé,<lb/> mais nous espérons du temps et de
+                     leur séjour auprès de mon<lb/> épouse avec qui elles se consoleront
+                     mutuellement.</p>
+                  <p xml:id="chem1-p98">Ces dames me chargent de vous présenter leurs devoirs<lb/>
+                     et sincères amitiés ainsi qu’à Madame votre épouse.</p>
+                  <closer>J‘ai l’honneur de vous saluer<lb/>
+                     <signed>
+                        <persName ref="#pers_P443">Périsse Marsil</persName>
+                     </signed>
+                  </closer>
+                  <closer>
+                     <pb n="45" facs="#ACAS_CRHST_AMP_01_001_0045_v.jpg"/> À Monsieur,<lb/> Monsieur
+                        <persName ref="#pers_J324">De Jussieu</persName> de<lb/> l'<orgName ref="#org_I1">Institut national</orgName> au <placeName ref="#pl_J18">Jardin
+                        des<lb/> plantes</placeName>.<lb/> À <placeName ref="#pl_P6">Paris</placeName>.</closer>
+               </div>
+            </body>
+         </text>
+
+         <text n="17" decls="#ampere_arch_chem1_17" type="correspondance">
+            <body>
+               <div xml:id="chem1-div43">
+                  <p xml:id="chem1-p99">
+                     <pb n="46" facs="#ACAS_CRHST_AMP_01_001_0046_r.jpg"/>[Lettre 840 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1803-05-27-a">la
+                        Correspondance</ref>] <pb n="47" facs="#ACAS_CRHST_AMP_01_001_0047_v.jpg"/>[Lettre 840 éditée dans <ref type="correspondance" target="#ampere_corr_L1803-05-27-a">la Correspondance</ref>] <pb n="48" facs="#ACAS_CRHST_AMP_01_001_0048_r.jpg"/>[Lettre 840 éditée dans <ref type="correspondance" target="#ampere_corr_L1803-05-27-a">la
+                        Correspondance</ref>] <pb n="49" facs="#ACAS_CRHST_AMP_01_001_0049_v.jpg"/>[Lettre 840 éditée dans <ref type="correspondance" target="#ampere_corr_L1803-05-27-a">la Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="18" decls="#ampere_arch_chem1_18" type="correspondance">
+            <body>
+               <div xml:id="chem1-div44">
+                  <p xml:id="chem1-p100">
+                     <pb n="50" facs="#ACAS_CRHST_AMP_01_001_0050_r.jpg"/>[Lettre 838 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1803-04-03-c">la
+                        Correspondance</ref>]<pb n="51" facs="#ACAS_CRHST_AMP_01_001_0051_v.jpg"/>[Lettre 838 éditée dans <ref type="correspondance" target="#ampere_corr_L1803-04-03-c">la Correspondance</ref>]<pb n="52" facs="#ACAS_CRHST_AMP_01_001_0052_r.jpg"/>[Lettre 838 éditée dans <ref type="correspondance" target="#ampere_corr_L1803-04-03-c">la
+                        Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="19" decls="#ampere_arch_chem1_19" type="correspondance">
+            <body>
+               <div xml:id="chem1-div45">
+                  <p xml:id="chem1-p101">
+                     <pb n="53" facs="#ACAS_CRHST_AMP_01_001_0053_r.jpg"/>[Lettre 839 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1803-05-09-a">la
+                        Correspondance</ref>]<pb n="54" facs="#ACAS_CRHST_AMP_01_001_0054_v.jpg"/>[Lettre 839 éditée dans <ref type="correspondance" target="#ampere_corr_L1803-05-09-a">la Correspondance</ref>]<pb n="55" facs="#ACAS_CRHST_AMP_01_001_0055_r.jpg"/>[Lettre 839 éditée dans <ref type="correspondance" target="#ampere_corr_L1803-05-09-a">la
+                        Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="20" xml:id="ampere_arch_chem1_20" type="fragment">
+            <body>
+               <div xml:id="chem1-div46">
+                  <p xml:id="chem1-p102">
+                     <pb n="56" facs="#ACAS_CRHST_AMP_01_001_0056_r.jpg"/>
+                     <handShift new="#AMA"/>
+                     <ref target="#ch1_CB5">5</ref>
+                     <gap reason="illisible"/>
+                     <supplied>dans</supplied> la liberté que je prends<lb/> de vous écrire un
+                     sentiment qui m’y<lb/>
+                     <gap reason="illisible"/>, et à l’impossibilité où je me<lb/> trouve de rompre
+                     autrement un<lb/> silence que je ne peux plus supporter<lb/> pendant que votre <subst>
+                        <del>votre</del>
+                        <add>absence</add>
+                     </subst> me<lb/> privait du bonheur de vous voir et de<lb/> vous entendre, <subst>
+                        <del>quelque fois</del>
+                        <add>le seul qu'à présent je puisse goûter</add>
+                     </subst>. J’ouvris mon<lb/> cœur à Madame votre mère et il<lb/> me sembla
+                     qu’elle ne s’opposerait<lb/>
+                     <supplied>pas</supplied> à mon bonheur si vous pouviez y<lb/> consentir. <subst>
+                        <del>et depuis ce moment</del>
+                        <add>Je sais combien je suis</add>
+                     </subst>
+                     <lb/> loin de mériter une telle félicité,<lb/> les <choice>
+                        <sic>sentimens</sic>
+                        <corr>sentiments</corr>
+                     </choice> dont mon âme est<lb/> remplie, l’amour le plus tendre et le<lb/> plus
+                     soumis, <del>ma vie entière consacrée<lb/> à chercher à vous rendre
+                        heureuse<lb/> où à pleurer le <choice>
+                           <sic>tems</sic>
+                           <corr>temps</corr>
+                        </choice> où je pouvais<lb/> du moins me permettre une si douce<lb/>
+                        espérance</del> pourraient seuls vous attendrir<lb/> sur mon sort et vous
+                     engager à<lb/> répondre aux <gap reason="lacune"/>
+                     <add hand="#main_inconnue">lettre à Mme <persName ref="#pers_B69">Carron</persName>
+                     </add>
+                     <gap reason="lacune"/>
+                     <pb n="57" facs="#ACAS_CRHST_AMP_01_001_0057_v.jpg"/>
+                     <gap reason="lacune"/> pardon<supplied>n</supplied>erez vous la liberté que je
+                        pr<gap reason="lacune"/>
+                     <lb/> de vous écrire au sentiment qui m'y<lb/> force, ou vous offenserez vous
+                     des vœux<lb/> d'un amour si pur et si soumis. Ah !<lb/> Si une passion
+                     véritable peut faire excuser<lb/> une pareille démarche, personne n'a
+                     jamais<lb/> mieux que moi mérité son pardon.<lb/> J'avais d'abord formé le
+                     projet d'attendre<lb/> que le <choice>
+                        <sic>hazard</sic>
+                        <corr>hasard</corr>
+                     </choice> m'offrit une occasion<lb/> favorable pour vous parler en<lb/>
+                     particulier, mais je ne puis rester<lb/>
+                     <gap reason="lacune"/>
+                     <choice>
+                        <sic>longtems</sic>
+                        <corr>longtemps</corr>
+                     </choice> dans un état d'incertitude<lb/>
+                     <gap reason="lacune"/>olent sans rien faire pour en<lb/> sortir.</p>
+                  <p xml:id="chem1-p103">J'avais aussi tenté de m'ouvrir à Madame<lb/> votre mère,
+                     et <subst>
+                        <del type="illisible"/>
+                        <add>je suis</add>
+                     </subst> même <add>allé</add> jusqu'à lui<lb/> avouer <subst>
+                        <del>les projets</del>
+                        <add>l'amour que vous m'inspiriez</add>
+                     </subst>.<lb/> Je n'en reçus que des réponses vagues<lb/> qui ne détruisirent
+                     pourtant pas<lb/> entièrement des espérances que la<lb/> manière dont elle a
+                     daigné me<lb/> recevoir depuis a paru confirmer.</p>
+               </div>
+            </body>
+            <back>
+               <div xml:id="chem1-div47">
+                  <note n="5" resp="#CB" xml:id="ch1_CB5">Brouillons pour sa déclaration à
+                     Julie</note>
+               </div>
+            </back>
+         </text>
+
+         <text n="21" decls="#ampere_arch_chem1_21" type="correspondance">
+            <body>
+               <div xml:id="chem1-div48">
+                  <head>
+                     <pb n="58" facs="#ACAS_CRHST_AMP_01_001_0058_r.jpg"/>
+                     <handShift new="#main_inconnue"/> Copie d'une lettre d'<persName ref="#pers_A366">Ampère</persName>
+                  </head>
+                  <p xml:id="chem1-p104">(<add>acheté par</add> M. <persName ref="#pers_W792">Williams</persName>
+                     <add>en <date when="1965-08">août 1965</date>
+                     </add>)</p>
+                  <p xml:id="chem1-p105">Copie d'une lettre d'<persName ref="#pers_A366">Ampère</persName> à <persName ref="#pers_M1173">Maine de
+                     Biran</persName>.</p>
+                  <p xml:id="chem1-p106">(Vente <persName ref="no-index">Schumann</persName>, <date when="1965">1965</date>)</p>
+               </div>
+               <div xml:id="chem1-div49">
+                  <p xml:id="chem1-p107">
+                     <pb n="63" facs="#ACAS_CRHST_AMP_01_001_0063_r.jpg" type="deplacement"/>
+                     [Lettre 1161 éditée dans <ref type="correspondance" target="#ampere_corr_L1817-09-28-a">la Correspondance</ref>] <pb n="64" facs="#ACAS_CRHST_AMP_01_001_0064_r.jpg" type="deplacement"/> [Lettre 1161
+                     éditée dans <ref type="correspondance" target="#ampere_corr_L1817-09-28-a">la
+                        Correspondance</ref>] <pb n="65" facs="#ACAS_CRHST_AMP_01_001_0065_r.jpg" type="deplacement"/> [Lettre 1161 éditée dans <ref type="correspondance" target="#ampere_corr_L1817-09-28-a">la Correspondance</ref>] <pb n="66" facs="#ACAS_CRHST_AMP_01_001_0066_r.jpg" type="deplacement"/> [Lettre 1161
+                     éditée dans <ref type="correspondance" target="#ampere_corr_L1817-09-28-a">la
+                        Correspondance</ref>]</p>
+               </div>
+
+            </body>
+         </text>
+
+         <text n="22" decls="#ampere_arch_chem1_22" type="correspondance">
+            <body>
+               <div xml:id="chem1-div50">
+                  <p xml:id="chem1-p108">
+                     <pb n="59" facs="#ACAS_CRHST_AMP_01_001_0059_r.jpg" type="deplacement"/>[Lettre
+                     573 éditée dans <ref type="correspondance" target="#ampere_corr_L1807-02-21-a">la Correspondance</ref>] <pb n="60" facs="#ACAS_CRHST_AMP_01_001_0060_r.jpg" type="deplacement"/>[Lettre 573
+                     éditée dans <ref type="correspondance" target="#ampere_corr_L1807-02-21-a">la
+                        Correspondance</ref>] <pb n="61" facs="#ACAS_CRHST_AMP_01_001_0061_r.jpg" type="deplacement"/>[Lettre 573 éditée dans <ref type="correspondance" target="#ampere_corr_L1807-02-21-a">la Correspondance</ref>] <pb n="62" facs="#ACAS_CRHST_AMP_01_001_0062_r.jpg" type="deplacement"/>[Lettre 573
+                     éditée dans <ref type="correspondance" target="#ampere_corr_L1807-02-21-a">la
+                        Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+         <text n="23" decls="#ampere_arch_chem1_23" type="correspondance">
+            <body>
+               <div xml:id="chem1-div51">
+                  <head>
+                     <pb n="67" facs="#ACAS_CRHST_AMP_01_001_0067_r.jpg"/>
+                     <handShift new="#MM"/> Papiers d'<persName ref="#pers_A366">Ampère</persName>
+                  </head>
+                  <p xml:id="chem1-p109">Carton général. Chemise <persName ref="#pers_A366">Ampère</persName>
+                  </p>
+                  <p xml:id="chem1-p110">Lettres le concernant.</p>
+               </div>
+               <div xml:id="chem1-div52">
+                  <opener>
+                     <pb n="68" facs="#ACAS_CRHST_AMP_01_001_0068_r.jpg"/>
+                     <handShift new="#main_inconnue"/> À son Excellence , Monsieur le<lb/> Grand
+                     Maître de l’<orgName ref="#org_U8">Université Impériale</orgName>,<lb/>
+                     Monsieur le Grand Maître,</opener>
+                  <p xml:id="chem1-p111">Je suis âgé de 33 ans et j’en ai déjà employé<lb/> 10 à
+                     l’instruction publique ou particulière.</p>
+                  <p xml:id="chem1-p112">À la fin de l’année <date when="1801">1801</date>, je fus
+                     nommé professeur<lb/> de physique et de chimie à l’<orgName ref="#org_L9">École
+                        centrale du département<lb/> de l’Ain</orgName>.</p>
+                  <p xml:id="chem1-p113">Après la suppression de cette école, je professai<lb/> les
+                     mathématiques et l’astronomie au <orgName ref="#org_L10">lycée de
+                        Lyon</orgName>.</p>
+                  <p xml:id="chem1-p114">
+                     <pb n="69" facs="#ACAS_CRHST_AMP_01_001_0069_v.jpg"/>Au mois de <date when="1805-11">novembre de 1804 <add>1805</add>
+                     </date>, je quittai cette place pour<lb/> celle de répétiteur d’analyse à
+                        l’<orgName ref="#org_E4">École polytechnique</orgName>.</p>
+                  <p xml:id="chem1-p115">J’en ai rempli la fonction jusqu’au mois d’<date when="1807-10">octobre 1807</date> que<lb/> je fus choisi pour remplacer
+                     temporairement M. <persName ref="#pers_L331">Labbey</persName>, professeur<lb/>
+                     d’analyse mathématique dans la même <orgName ref="#org_E4">École</orgName>.</p>
+                  <p xml:id="chem1-p116">Enfin, au mois de juillet dernier, j’ai été nommé exa<lb rend="hyphen"/>minateur des candidats qui se présenteraient à <placeName ref="#pl_P6">Paris</placeName> pour<lb/> l’<orgName ref="#org_E4">École
+                        polytechnique</orgName> et je suis actuellement occupé de cet<lb/>
+                     examen.</p>
+                  <p xml:id="chem1-p117">Je suis auteur de plusieurs mémoires sur différents<lb/>
+                     sujets de mathématiques. La plupart des mémoires ont<lb/> été imprimés, soit
+                     dans le <title>Recueil des mémoires présentés<lb/> à l’Institut par des savants
+                        étrangers</title>, soit dans le <title type="ouvrages_mentionnes" ref="#ampere_publi_P1811-b">Journal de<lb/> l’École
+                     polytechnique</title>.</p>
+                  <p xml:id="chem1-p118">Je prépare <choice>
+                        <sic>différens</sic>
+                        <corr>différents</corr>
+                     </choice> ouvrages tant sur l’analyse<lb/> proprement dite que sur la mécanique
+                     et l’hydrodynamique.<lb/> Ces ouvrages paraîtront successivement et j’ose
+                     espérer <pb n="70" facs="#ACAS_CRHST_AMP_01_001_0070_r.jpg"/> qu’ils pourront
+                     contribuer aux progrès de la science.</p>
+                  <p xml:id="chem1-p119">Je désire, Monsieur le Grand Maître que<lb/> ces titres
+                     vous paraissent <choice>
+                        <sic>suffisans</sic>
+                        <corr>suffisants</corr>
+                     </choice> et que vous daigniez vous<lb/> souvenir de moi lorsqu’on s’occupera
+                     de l’organisation<lb/> de l’<orgName ref="#org_U8">Université
+                        impériale</orgName>.</p>
+                  <closer>Je suis avec respect, Monsieur le Grand Maître,<lb/> de votre Excellence,<lb/>
+                     <signed>le très humble et très<lb/> obéissant serviteur,<lb/>
+                        <persName ref="#pers_A366">A. Ampère</persName>
+                     </signed>
+                  </closer>
+               </div>
+            </body>
+         </text>
+
+         <text n="24" decls="#ampere_arch_chem1_24" type="correspondance">
+            <body>
+               <div xml:id="chem1-div53">
+                  <p xml:id="chem1-p120">
+                     <pb n="71" facs="#ACAS_CRHST_AMP_01_001_0071_r.jpg"/>[Lettre 845 éditée dans
+                        <ref type="correspondance" target="#ampere_corr_L1808-05-23-a"> la
+                        Correspondance</ref>] <pb n="72" facs="#ACAS_CRHST_AMP_01_001_0072_v.jpg"/>[Lettre 845 éditée dans <ref type="correspondance" target="#ampere_corr_L1808-05-23-a">la Correspondance</ref>] <pb n="73" facs="#ACAS_CRHST_AMP_01_001_0073_v.jpg"/>[Lettre 845 éditée dans <ref type="correspondance" target="#ampere_corr_L1808-05-23-a">la
+                        Correspondance</ref>]</p>
+               </div>
+            </body>
+         </text>
+
+      </group>
+   </text>
+</TEI>

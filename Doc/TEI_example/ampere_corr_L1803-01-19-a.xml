@@ -1,0 +1,245 @@
+<?xml-model href="../../Documents/Sch%C3%A9mas/ampere.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Correspondance d'André-Marie Ampère - Lettre 200</title>
+                <author>Lacroix, Sylvestre et Laplace, Pierre-Simon</author>
+                <editor>Christine Blondel</editor>
+                <editor>Marco Segala</editor>
+                <funder>ANR Corpus 2012</funder>
+                <respStmt>
+                    <name>Christine Blondel, <affiliation>Centre Alexandre
+                        Koyré</affiliation>
+          </name>
+                    <resp>Responsable du projet, édition</resp>
+                </respStmt>
+                <respStmt>
+                    <name>Marco Segala, <affiliation>Centre Alexandre Koyré</affiliation>
+          <affiliation>Università L'Aquila</affiliation>
+          </name>
+                    <resp>Responsable du projet, édition</resp>
+                </respStmt>
+                <respStmt>
+                    <name>Delphine Usal, <affiliation>Centre Alexandre Koyré</affiliation>
+          </name>
+                    <resp>Gestion de bases de données</resp>
+                </respStmt>
+                <respStmt>
+                    <name>Aude Coustumer, <affiliation>Centre Alexandre Koyré</affiliation>
+          </name>
+                    <resp>Relecture et encodage en XML/TEI P5</resp>
+                </respStmt>
+                <respStmt>
+                    <name>Philippe Pons, <affiliation>Centre Alexandre Koyré</affiliation>
+          </name>
+                    <resp>Responsable informatique, relecture et encodage en XML/TEI P5</resp>
+                </respStmt>
+                <respStmt>
+                    <name>Marie-Hélène Wronecki, <affiliation>CRHST</affiliation>
+          </name>
+                    <resp>Édition web</resp>
+                </respStmt>
+                <respStmt>
+                    <name>Florence Greffe, <affiliation>Archives de l'Académie des
+                            sciences</affiliation>
+          </name>
+                    <resp>Mise en place de la numérisation</resp>
+                </respStmt>
+                <respStmt>
+          <name>Mathilde Dutertre, </name>
+          <resp>Stagiaire ENC (École nationale des chartes) au Centre Alexandre Koyré : élaboration du schéma XML TEI et encodage</resp>
+        </respStmt>
+            </titleStmt>
+            <extent/>
+            <publicationStmt>
+                <authority>Centre National de la Recherche Scientifique (CNRS)</authority>
+                <publisher>Centre Alexandre Koyré - CNRS (UMR 8560)</publisher>
+                <address>
+          <addrLine>27 rue Damesme</addrLine>
+          <addrLine>75013 Paris</addrLine>
+        </address>
+                <distributor>
+          <name>Centre de calcul de
+                    l'IN2P3</name>
+          <address>
+            <addrLine>Domaine scientifique de la Doua</addrLine>
+            <addrLine>43 boulevard du 11 Novembre 1918</addrLine>
+            <addrLine>69622 Villeurbanne Cedex</addrLine>
+          </address>
+        </distributor>
+                <availability>
+          <p>Ce texte est protégé par la licence <ref target="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons</ref> dont le contenu est disponible sous Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International (CC BY-NC-SA 4.0)</p>
+        </availability>
+                <date/>
+                <idno/>
+            </publicationStmt>
+            <sourceDesc>
+                <msDesc type="original_manuscrit">
+                    <msIdentifier xml:id="ampere_corr_L1803-01-19-a">
+                        <country>France</country>
+                        <settlement>Paris</settlement>
+                        <institution>Archives de l'Académie des
+                            sciences</institution>
+                        <repository>Fonds André-Marie Ampère</repository>
+                        <idno>chemise 1</idno>
+                    <altIdentifier>
+              <idno type="old">L200</idno>
+              <note>Numéro de la lettre sur le premier site Ampère (2008)</note>
+            </altIdentifier>
+          </msIdentifier>
+          
+                    <physDesc>
+                        <p>D'après Louis DE LAUNAY, tout le début de cette lettre est d'un
+                            scribe. La fin (i.e. le post-sriptum de Laplace) est
+                            autographe.</p>
+                    </physDesc>
+                </msDesc>
+                <listWit>
+                    <witness xml:id="L200CGA">
+                        <biblStruct>
+                            <monogr>
+                                <author>
+                                    <surname>De Launay</surname>
+                                    <forename>Louis</forename>
+                </author>
+                                <title>Correspondance du Grand Ampère</title>
+                                <imprint>
+                                    <pubPlace>Paris</pubPlace>
+                                    <publisher>Gauthier-Villars</publisher>
+                                    <date when="1936">1936</date>
+                                    <biblScope type="tome">I.</biblScope>
+                                    <biblScope type="pp">p. 223-224</biblScope>
+                                </imprint>
+                            </monogr>
+                            
+                        </biblStruct>
+                       </witness>
+                </listWit>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <projectDesc>
+                <p/>
+            </projectDesc>
+            <editorialDecl>
+                <correction>
+                    <p>Les erreurs flagrantes de fond ou de forme ont été corrigées.</p>
+                </correction>
+                <hyphenation>
+                    <p>Les retours à la ligne des documents originaux sont respectés.</p>
+                </hyphenation>
+                <normalization>
+                    <p>L'orthographe et la ponctuation ont été normalisées.</p>
+                    <p>Les noms propres avec des graphies différentes ont été normalisés.</p>
+                </normalization>
+            </editorialDecl>
+        </encodingDesc>
+        <profileDesc>
+      <correspDesc>
+        <correspAction type="sent">
+          <persName type="sender" ref="#pers_L335">Lacroix, Sylvestre</persName>
+          <persName type="sender" ref="#pers_L343">Laplace,
+                                Pierre-Simon</persName>
+          <date when-iso="1803-01-19">19 janvier 1803</date>
+        </correspAction>
+        <correspAction type="received">
+          <persName type="adressee" ref="#pers_A366">Ampère,
+                                    André-Marie</persName>
+        </correspAction>
+        <note type="CGA">
+          <ref target="#corresp1">(1)</ref>
+        </note>
+      </correspDesc>
+            <creation>
+        <date when="2014-07">juillet 2014</date>
+        <name>Philippe Pons</name>
+        <name>Aude
+                    Coustumer</name>
+      </creation>
+            <langUsage>
+                <language ident="fra">Français</language>
+            </langUsage>
+        </profileDesc>
+        <revisionDesc>
+            <change/>
+        </revisionDesc>
+    </teiHeader>
+    <text type="correspondance" decls="#ampere_corr_L1803-01-19-a">
+        <body>
+            <div xml:id="L1803-01-19-a-div1">
+                <opener>
+          <pb n="14" facs="#ACAS_CRHST_AMP_01_001_0014_r.jpg"/> Paris le <date when="1803-01-19">29 nivôse, l'an II de la République française [19 janvier 1803]</date>
+        </opener>
+                <p xml:id="L1803-01-19-a-p1">L'un des secrétaires de la Classe des Sciences mathématiques<lb/>
+                    et physiques,<lb/>
+                    au Citoyen <persName ref="#pers_A366">Ampère</persName> :<lb/>
+                    La Classe a reçu, Citoyen, l'ouvrage que vous avez<lb/>
+                    bien voulu
+                    lui adresser sous ce titre : <hi rend="underline">
+            <title>Considérations sur la<lb/>
+                        théorie mathématique du jeu</title>
+          </hi>
+                        <ref type="ouvrages_mentionnes" target="#ampere_ref_P378.xml">*</ref>. Elle me charge de vous<lb/>
+                    remercier de l'envoi de cet ouvrage, qu'elle a fait déposer<lb/>
+                    dans la Bibliothèque de l'<orgName>Institut</orgName>.<lb/>
+                    Je vous salue,<lb/>
+                    <persName ref="#pers_L335">LACROIX</persName>.
+                    La Classe m'ayant chargé d'examiner
+                    l'ouvrage dont il s'agit, j'ai reconnu<lb/>
+                    de l'élégance dans plusieurs des
+                    résultats. Mais il m'a paru que l'<choice>
+            <sic>autheur</sic> <corr>auteur</corr>
+          </choice> <choice>
+            <sic>se<lb/>
+                    se</sic> <corr>se<lb/>
+            </corr>
+          </choice> trompe dans la limite qu'il assigne
+                    à la somme de la série qui donne<lb/>
+                    la solution du premier problème et que
+                    l'<choice>
+            <sic>autheur</sic> <corr>auteur</corr>
+          </choice> trouve égale à l'unité. Cela<lb/>
+                    n'a lieu que dans le cas où q est moindre
+                    que I ; s'il est plus grand que l'unité,<lb/>
+                    cette limite est <formula>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <mfrac>
+                <mrow>
+                  <mi>I</mi>
+                </mrow>
+                <mrow>
+                  <mi>q</mi>
+                  <mi>m</mi>
+                </mrow>
+              </mfrac>
+            </math>
+                    </formula>. <persName ref="#pers_L343">LAPLACE</persName>.</p>
+                <closer>
+          <pb n="15" facs="#ACAS_CRHST_AMP_01_001_0015_v.jpg"/>Au Citoyen<lb/>
+                    Ampère<lb/>
+                    professeur de physique à l'<orgName>École<lb/>
+                        centrale du département de l'<placeName>Ain</placeName>
+          </orgName>
+          <lb/>
+                   à <placeName>Bourg</placeName>.</closer>
+            </div>
+        </body>
+        <back>
+            <div xml:id="L1803-01-19-a-div2">
+                <note resp="#CGA" xml:id="corresp1">(1) Tout le début de cette lettre est d'un scribe. La fin
+                    est autographe. Dans la séance du <date when="1803-01-12">22 nivôse (mercredi 12 janvier)</date>, le
+                    procès-verbal de l'<orgName>Institut</orgName> dit : <cit>
+            <quote>La Classe reçoit de la part de l'auteur :
+                    <title>Considérations sur la théorie mathématique du jeu</title>, par le C<ex>itoy</ex>en <persName ref="#pers_A366">Ampère</persName>. Le C<ex>itoy</ex>en
+                        <persName ref="#pers_L343">Laplace</persName> est chargé d'en faire un rapport verbal » et, à la séance suivante du <date when="1803-01-19">19
+                        janvier</date> : « Le C<ex>itoy</ex>en <persName ref="#pers_L343">Laplace</persName> rend un compte verbal de l'ouvrage intitulé...</quote>
+          </cit> Il
+                    est à remarquer qu'à la séance précédente du <date when="1803-01-05">5 janvier</date>, il y a un long rapport
+                    de <persName ref="#pers_D208">Duhamel</persName> sur un mémoire du C<ex>itoy</ex>en <persName ref="#pers_R488">Riboud</persName> (correspondant de la 3e classe)
+                    concernant des matières bitumineuses et charbonneuses (gisement de lignite)
+                    trouvées dans le département de l'<placeName>Ain</placeName>.</note>
+            </div>
+        </back>
+    </text>
+</TEI>
