@@ -91,7 +91,9 @@ namespace Antinori.Controllers {
             }
         }
 
-        [Authorize(Roles = "Admin, Editor, User")]
+        [Authorize(Roles = "Admin,Editor,User")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult ChangePassword(AspNetUsers aspNetUsers) {
             // change the user password.
 
@@ -99,21 +101,21 @@ namespace Antinori.Controllers {
 
             // retrieving user id from session.
             string id = this.User.Identity.GetUserId();
-
+            // retrieve user.
+            AspNetUsers user = this.Dc.AspNetUsers_Get(id);
             // change password.
             var changePasswordEsito = this.UserManager.ChangePassword(id, aspNetUsers.Password, aspNetUsers.NewPassword);
             if(changePasswordEsito.Succeeded) {
                 var u = Dc.AspNetUsers_Get(id);
                 Dc.AspNetUsers_Save();
 
-                string corpo = "Gentile <b>utente</b>," 
+                string corpo = "Gentile <b>" + user.Name + " " + user.Surname + "</b>," 
                            + "<br><br>la tua password è stata modificata: la tua nuova password è: <b>" + aspNetUsers.NewPassword + "</b>.<br>"
                            + "Ti consigliamo di proteggere questi dati. <br><br><br><br>Saluti,<br> il team Antinori.";
 
                 // send mail.
                 string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];
                 this.mailController.SendEmail("Cambio Password", corpo,u.Email);
-
 
                 // set log.
                 this.Log_Insert(id, "AspNetUsers", "CHANGE PASSWORD", true, "Operazione conclusa con successo", "", "", "", "");
@@ -124,6 +126,62 @@ namespace Antinori.Controllers {
                 op = new OpEsitoModel() { idReturn = id, riuscita = false, msg = changePasswordEsito.Errors.ToString() };
             }
             return Json(op, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult ForgotPassword(string Username) {
+            // reset the user password.
+
+            // set default value for esito.
+            bool esito = false;
+
+            // retrieve user.
+            var User = this.Dc.AspNetUsers_Get_ByUsername(Username);
+            if(User != null) {
+                // retrieve configuration file email.
+                string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];
+
+                // reset password
+                string password = this.CreatePassword(Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["minPasswordLenght"]));
+
+                var removePasswordEsito = this.UserManager.RemovePassword(User.Id);
+                if(removePasswordEsito.Succeeded) {
+                    var addPasswordEsito = this.UserManager.AddPassword(User.Id, password);
+                    if(addPasswordEsito.Succeeded) {
+                        // set corpo.
+                        string corpo = "Gentile <b>" + User.Name + " " + User.Surname
+                            + "</b>,<br><br>La tua password è stata resettata: la tua nuova password è: <b>" + password + "</b>.<br>"
+                            + "Ti consigliamo di cambiare la password al più presto. <br><br><br><br>Saluti,<br> il team Antinori.";
+
+                        // send mail.
+                        this.mailController.SendEmail("Reset Password", corpo, User.Email);
+
+                        //the esito value.
+                        esito = true;
+                        Log_Insert(User.UserName, "AspNetUsers", "UPDATE", true, "Operazione di reset password conclusa con successo");
+                    }
+                    else { //could not change password.
+                        Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: non è stato possibile cambiare la password.");
+                    }
+                }
+                else { //could not change password.
+                    Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: non è stato possibile cambiare la password.");
+                }
+            }
+            else { //user == null
+                Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: utente non trovato.");
+            }
+            // return the partial view .
+            return Json(esito, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult P_ChangePassword() {
+            // set the change password view. own password.
+
+            // retrieve the user.
+            var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
+
+            return View(user);
         }
 
         [Authorize(Roles = "Admin, Editor")]
@@ -196,10 +254,6 @@ namespace Antinori.Controllers {
             return Json(esito,JsonRequestBehavior.AllowGet);
         }
 
-
-        
-
-
         [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
         public JsonResult Delete(string id){
             // delete an account by id.
@@ -243,63 +297,8 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_AspNetUsers_List", null), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ForgotPassword(string Username) {
-            // reset the user password.
 
-            // set default value for esito.
-            bool esito = false;
-
-            // retrieve user.
-            var User = this.Dc.AspNetUsers_Get_ByUsername(Username);
-            if (User != null) {
-                // retrieve configuration file email.
-                string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];
-
-                // reset password
-                string password = this.CreatePassword(Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["minPasswordLenght"]));
-
-                var removePasswordEsito = this.UserManager.RemovePassword(User.Id);
-                if (removePasswordEsito.Succeeded) {
-                    var addPasswordEsito = this.UserManager.AddPassword(User.Id, password);
-                    if (addPasswordEsito.Succeeded) {
-                        // set corpo.
-                        string corpo = "Gentile <b>" +  " " 
-                            + "</b>,<br><br>La tua password è stata resettata: la tua nuova password è: <b>" + password + "</b>.<br>"
-                            + "Ti consigliamo di cambiare la password al più presto. <br><br><br><br>Saluti,<br> il team Sinafi.";
-
-                        // send mail.
-                        //this.sendMail(email, User.Email, null, null, null, null, "SINAFIBook - Reset Password", corpo);
-
-                        //the esito value.
-                        esito = true;
-                        Log_Insert(User.UserName, "AspNetUsers", "UPDATE", true, "Operazione di reset password conclusa con successo");
-                    }
-                    else { //could not change password.
-                        Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: non è stato possibile cambiare la password.");
-                    }
-                }
-                else { //could not change password.
-                    Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: non è stato possibile cambiare la password.");
-                }
-            }
-            else { //user == null
-                Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: utente non trovato.");
-            }
-
-
-
-            // return the partial view .
-            return Json(esito, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult P_ChangePassword() {
-            // set the change password view. own password.
-
-            // retrieve the user.
-            var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
-
-            return View(user);
-        }
+        
 
         
         public ActionResult P_Create(){
