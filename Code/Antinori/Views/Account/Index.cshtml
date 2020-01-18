@@ -19,8 +19,7 @@
             <div class="box">
                 <div class="box-header">
                     <ul class="nav nav-tabs" id="ADD_USER">
-                        @*DECOMMENTARE APPENA INSERITI GLI UTENTI*@
-                     @if (User.IsInRole("Amministrazione") || User.IsInRole("Gestione_Iscritti"))
+                     @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
                         {
                         <li class="pull-right"><a href="#" onclick="add()" class="text-muted"><i class="fa fa-plus"></i></a></li>
                         }
@@ -57,20 +56,6 @@
             list();
         });
 
-        function attivo(id) {
-            // change the attivo status calling the controller method.
-            var url = '@Url.Action("Attivo_Toggle", "Account")' + "?id=" + id;
-            REFRESH_show("CONTENT_Refresh");
-            $.getJSON(url,
-                function (data) {
-                    // hide refresher.
-                    REFRESH_hide("CONTENT_Refresh");
-                    if (Boolean(data)) {
-                        list();
-                    }                         
-                }
-                )
-        }
 
         function list() {
             // set the list on the view.
@@ -84,15 +69,7 @@
                     $("#CONTENT").html(data);
                     // set the table name as parameter: DataTables_Table_0.
                     $("#DataTables_Table_0").DataTable({
-                         dom: 'Bfrtip',
-                        buttons: [
-                            'copy', 'csv', 'excel',  {
-                                extend: 'pdfHtml5',
-                                orientation: 'landscape',
-                                pageSize: 'LEGAL'
-                            },'print',
-                           
-                        ],
+                         dom: 'Bfrtip',                        
                         language: DataTablesLanguage,
                         responsive: true,
                         columnDefs: [

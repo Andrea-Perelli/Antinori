@@ -175,6 +175,28 @@ namespace Antinori.Controllers {
             return Json(esito, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin, Editor")]
+        public ActionResult Index() {
+            // return the account list view.           
+
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult List() {
+            // return the list of the users.
+
+            List<AspNetUsers> users = this.Dc.AspNetUsers_Gets();
+            // return the partial view containing all the users.
+            return Json(GetRenderPartialView(this, "UC_AspNetUsers_List", users), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult LogOff() {
+            // logout.
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult P_ChangePassword() {
             // set the change password view. own password.
 
@@ -182,6 +204,12 @@ namespace Antinori.Controllers {
             var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
 
             return View(user);
+        }
+
+        public ActionResult P_ForgotPassword() {
+            // return the forgot password user.
+
+            return View();
         }
 
         [Authorize(Roles = "Admin, Editor")]
@@ -200,18 +228,7 @@ namespace Antinori.Controllers {
 
         // ************************ NOT CHECKED ************************
 
-        [Authorize(Roles = "Amministrazione, Gestione_Utenti, Visualizzazione_Utenti")]
-        public ActionResult Index(){
-            // return the account list view with a list of users.
-
-            // retrieve user and its visibility.
-            AspNetUsers user = this.Dc.AspNetUsers_Get_ByUsername(User.Identity.Name);
-            AspNetRoles visibility = user.AspNetRoles.Where(r => r.Name.StartsWith("V_") || r.Name.StartsWith("Amm")).FirstOrDefault();
-
-            //var users = this.Dc.AspNetUsers_Gets(visibility, user);
-
-            return View();
-        }
+        
 
         [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
         public JsonResult Add() {
@@ -221,38 +238,7 @@ namespace Antinori.Controllers {
             ViewBag.RuoliList = this.Dc.Ruoli_Nome_Gets();
 
             return Json(GetRenderPartialView(this, "UC_AspNetUsers", s), JsonRequestBehavior.AllowGet);
-        }
-
-
-        [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
-        public JsonResult Attivo_Toggle(string id){
-            // basing on the user id we change its status.
-
-            // set default value for esito.
-            bool esito = false;
-
-            // retrieve user.
-            var user = this.Dc.AspNetUsers_Get(id);
-            try
-            {
-                if (!user.Attivo)
-                {
-                    UserManager.SetLockoutEnabled(id, false);
-                    UserManager.SetLockoutEndDate(id, DateTimeOffset.Now);
-                }
-                else
-                {
-                    UserManager.SetLockoutEnabled(id, true);
-                    UserManager.SetLockoutEndDate(id, DateTimeOffset.MaxValue);
-                }
-                esito = true;
-            }
-            catch(Exception ex)
-            {
-
-            }      
-            return Json(esito,JsonRequestBehavior.AllowGet);
-        }
+        }       
 
         [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
         public JsonResult Delete(string id){
@@ -286,18 +272,6 @@ namespace Antinori.Controllers {
         }
 
        
-        [Authorize(Roles = "Amministrazione, Gestione_Utenti, Visualizzazione_Utenti")]
-        public JsonResult List() {
-            // return the list of the users.
-            // retrieve user and its visibility.
-            AspNetUsers user = this.Dc.AspNetUsers_Get_ByUsername(User.Identity.Name);
-            AspNetRoles visibility = user.AspNetRoles.Where(r => r.Name.StartsWith("V_") || r.Name.StartsWith("Amm")).FirstOrDefault();
-            //var users = this.Dc.AspNetUsers_Gets(visibility, user);
-            // return the partial view containing all the users.
-            return Json(GetRenderPartialView(this, "UC_AspNetUsers_List", null), JsonRequestBehavior.AllowGet);
-        }
-
-
         
 
         
@@ -309,14 +283,6 @@ namespace Antinori.Controllers {
 
             return View(s);
         }
-
-        public ActionResult P_ForgotPassword() {
-            // return the forgot password user.
-
-            return View();
-        }
-
-        
 
 
 
@@ -434,57 +400,7 @@ namespace Antinori.Controllers {
             }
         }
 
-
-        [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
-        public JsonResult Reset_Password(string Id) {
-            // reset the password
-
-            // set default value for esito.
-            bool esito = false;
-
-            // retrieve user.
-            var newUser = this.Dc.AspNetUsers_Get(Id);
-
-            // retrieve configuration file email.
-            string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];
-
-            // reset password
-            string password = this.CreatePassword(Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["minPasswordLenght"]));
-
-            var removePasswordEsito = this.UserManager.RemovePassword(Id);
-            if (removePasswordEsito.Succeeded) {
-                var addPasswordEsito = this.UserManager.AddPassword(Id, password);
-                if (addPasswordEsito.Succeeded) {
-
-                    // update value.
-                    this.Dc.AspNetUsers_Save();
-
-                    // set corpo.
-                    string corpo = "Gentile <b>" +  " "
-                        + "</b>,<br><br>La tua password è stata resettata: la tua nuova password è: <b>" + password + "</b>.<br>"
-                        + "Ti consigliamo di modificare la password al più presto. <br><br><br><br>Saluti,<br> il team Sinafi.";
-
-                    // send mail.
-                    //this.sendMail(email, newUser.Email, null, null, null, null, "SINAFIBook - Reset Password", corpo);
-
-                    //the esito value.
-                    esito = true;
-                }
-            }            
-            
-            // return the partial view containing all the users.
-            return Json(esito, JsonRequestBehavior.AllowGet);
-        }
-
-
         
-        
-
-        public ActionResult LogOff() {
-            // logout.
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
-        }
 
 
         // GET: /Account/VerifyCode

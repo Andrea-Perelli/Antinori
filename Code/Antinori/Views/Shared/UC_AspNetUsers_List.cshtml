@@ -1,18 +1,14 @@
-﻿@model List<Sinafi.Models.AspNetUsers>
+﻿@model List<Antinori.Models.AspNetUsers>
 
 <!-- TABLE -->
     <table id="DataTables_Table_0" class="table dataTable table-hover">
         <thead>
             <tr>
-                <th style="width: 10px">Attivo</th>
                 <th style="width: 100px">Username</th>
                 <th style="width: 100px">Cognome</th>
                 <th style="width: 100px">Nome</th>
-                <th style="width: 100px">Regione</th>
-                <th style="width: 100px">Provincia</th>
-
-                <th style="width: 100px">Email</th>
                 <th style="width: 70px">Cellulare</th>
+                <th style="width: 100px">Email</th>
                 <th style="width: 100px">Ruoli</th>
                 <th style="width: 180px"> </th>
             </tr>
@@ -22,36 +18,23 @@
             <!-- Loop on the model.-->
             @foreach (var item in Model) {
             <tr>
-                <!-- LockoutEnabled enables or disables the user. -->
-                <td>
-                    <a href="#" onclick="attivo('@item.Id')">
-                        @if (item.Attivo) {
-                            <i class="fa fa-circle" title="Disattiva Utente" style="color: green"></i>
-                        }
-                        else {
-                            <i class="fa fa-circle" title="Attiva Utente" style="color: red"></i>
-                        }
-                    </a>
-
-                </td>
-                <td>@item.UserName</td>
-                <td>@item.Incaricato_Cognome</td>
-                <td>@item.Incaricato_Nome</td>
-                <td>@item.Incaricato_Regione</td>
-                <td>@item.Incaricato_Provincia</td>
-                <td>@item.Email</td>
+                <td>@item.Surname</td>
+                <td>@item.Name</td>
                 <td>@item.PhoneNumber</td>
-                <td>
-                        @foreach (var role in item.AspNetRoles) {
-                            <div class="checkbox" style="margin-top: 0px; padding-top: 0px;">
-                                <label>
-                                    <!-- readonly radio button-->
-                                    <input type="checkbox" checked disabled>
-                                    @Html.DisplayFor(modelItem => role.Name)
-                                </label>
-                            </div>
 
-                        }
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td>
+                    @foreach(var role in item.AspNetRoles) {
+                        <div class="checkbox" style="margin-top: 0px; padding-top: 0px;">
+                            <label>
+                                <!-- readonly radio button-->
+                                <input type="checkbox" checked disabled>
+                                @Html.DisplayFor(modelItem => role.Name)
+                            </label>
+                        </div>
+
+                    }
 
                 </td>
                 <td>

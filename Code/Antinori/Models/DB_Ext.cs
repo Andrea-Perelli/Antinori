@@ -21,7 +21,12 @@ namespace Antinori.Models {
         }
 
         #region AspNetUsers
-        
+
+        public List<AspNetUsers> AspNetUsers_Gets() {
+            // return the list of all users.
+            return AspNetUsers.Where(u => !u.Cancellato).ToList();
+        }
+
         public AspNetUsers AspNetUsers_Get(string id) {
             // return a AspNet User by Id.
             return AspNetUsers.FirstOrDefault(it => it.Id == id);
@@ -44,8 +49,7 @@ namespace Antinori.Models {
                 // esito is the number of modifications.
                 esito = SaveChanges();
             }
-            catch
-            {
+            catch (Exception e){
 
             }
             return esito;

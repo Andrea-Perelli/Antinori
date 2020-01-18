@@ -35,24 +35,7 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <style>
-        .inscadenza {
-            border-left: solid 3px #ffa401
-        }
-
-        .scaduto {
-            border-left: solid 3px #ff0000
-        }
-        .pagata {
-            border-left: solid 3px #00ff21
-        }
-        .inscadenzaFG {
-            color: #ffa401
-        }
-
-        .scadutoFG {
-            color: #ff0000
-        }
+    <style>        
         .nonOk {
             border-left: solid 3px #7eb0ff
         }
@@ -88,9 +71,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.6/b-html5-1.5.6/b-print-1.5.6/r-2.2.2/sl-1.3.0/datatables.min.js"></script>
-
-    @*<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="~/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>*@
 
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
@@ -354,11 +334,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        }
-                        <!-- Control Sidebar Toggle Button -->
-                        @*<li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>*@
+                        }                       
                     </ul>
                 </div>
             </nav>
@@ -368,20 +344,16 @@
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- Sidebar user panel -->
-                @*<div class="user-panel">
+                <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="~/Content/img/Logo-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="~/Content/img/logo160x160.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>
-                            Sindacato
-                            <br />
-                            Nazionale
-                            <br />
-                            Finanzieri
+                            Antinori                            
                         </p>          
                     </div>
-                </div>*@
+                </div>
                 <!-- search form -->
                 <form action="#" method="get" class="sidebar-form">
                     <div class="input-group">
@@ -399,47 +371,29 @@
                     <li class="header">MENU</li>
                     <li>
                         <a href="@Url.Action("Index","Home")">
-                            <i class="fa fa-home"></i> <span>Dashboard</span>
+                            <i class="fa fa-home-o"></i> <span>Dashboard</span>
                             @*<span class="pull-right-container">
                     <small class="label pull-right bg-green">new2222</small>
                 </span>*@
                         </a>
                     </li>
-                    @if(User.IsInRole("Amministrazione") || User.IsInRole("Gestione_Iscritti") || User.IsInRole("Visualizzazione_Iscritti")) {
+                    @if(User.IsInRole("Admin")) {
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-files-o"></i>
-                                <span>Anagrafe</span>
-                                @*<span class="pull-right-container">
-                        <span class="label label-primary pull-right">4</span>
-                    </span>*@
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="@Url.Action("Index","Iscritti")"><i class="fa fa-search"></i> Cerca</a></li>
-                                @if(User.IsInRole("Amministrazione") || User.IsInRole("Gestione_Iscritti")) {
-                                    <li><a href="@Url.Action("P_Create","Iscritti")"><i class="fa fa-plus"></i> Nuovo</a></li>
-                                    <li><a href="@Url.Action("P_Import","Iscritti")"><i class="fa fa-upload"></i> Importa</a></li>
-                                    <li><a href="@Url.Action("P_Import_Massive","Iscritti")"><i class="fa fa-upload"></i> Importazione Massiva</a></li>
-                                }
-                            </ul>
-                        </li>
-                    }
-
-                    @if(User.IsInRole("Amministrazione") || User.IsInRole("Gestione_Utenti") || User.IsInRole("Visualizzazione_Utenti")) {
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-users"></i>
-                                <span>Utenti</span>
+                                <i class="fa fa-user-o"></i>
+                                <span>Utenti</span>                                
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("Index","Account")"><i class="fa fa-search"></i> Cerca</a></li>
-                                @if(User.IsInRole("Amministrazione") || User.IsInRole("Gestione_Utenti")) {
+                                @if(User.IsInRole("Admin")) {
                                     <li><a href="@Url.Action("P_Create","Account")"><i class="fa fa-plus"></i> Nuovo</a></li>
                                 }
 
                             </ul>
                         </li>
                     }
+
+                    
                     @if(User.IsInRole("Amministrazione")) {
                         <li class="treeview">
                             <a href="#">
@@ -499,7 +453,7 @@
             <div class="pull-right hidden-xs">
                 <b>Version</b> 1.0.0
             </div>
-            <strong>Copyright &copy; 2019 <a href="http://www.capoweb.it">CapoWeb.it</a>.</strong> All rights
+            <strong>Copyright &copy; 2019 <a href="http://www.univaq.it">Univaq.it</a>.</strong> All rights
             reserved.
         </footer>
 
