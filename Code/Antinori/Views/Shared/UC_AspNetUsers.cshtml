@@ -9,11 +9,10 @@
     <!-- FIELD TO EDIT -->
     <div>
         <div class="row">
-            @if (Model.Id == null || Model.Id.Length == 0) {
+            @if(Model.Id == null || Model.Id.Length == 0) {
 
             }
-            else
-            {
+            else {
                 // edit case.
                 <div class="col-md-4">
                     <small class="required">Username</small><br />
@@ -24,11 +23,11 @@
             <div class="col-md-4">
                 <small class="required">Nome</small><br />
                 <!-- try update binds with the name attribute. -->
-                <input type="text" id="Incaricato_Nome" name="Incaricato_Nome" value="@Model.Incaricato_Nome" class="form-control" required />
+                <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control" required />
             </div>
             <div class="col-md-4">
                 <small class="required">Cognome</small><br />
-                <input type="text" id="Incaricato_Cognome" name="Incaricato_Cognome" value="@Model.Incaricato_Cognome" class="form-control" required />
+                <input type="text" id="Surname" name="Surname" value="@Model.Surname" class="form-control" required />
             </div>
         </div>
 
@@ -43,96 +42,38 @@
             </div>
 
 
-            <div class="col-md-4">
-                <small class="required">Regione</small><br />
-                <select class="form-control" id="ddl_regioni" name="Incaricato_Regione"></select>
-            </div>
+
+            @*create case*@
+            @if(Model.Id == null || Model.Id.Length == 0) {
+                <div class="col-md-6">
+                    <small class="required">Password</small><br />
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required", id = "pass1" })
+
+                </div>
+                <div class="col-md-6">
+                    <small class="required">Conferma Password</small><br />
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required", id = "pass2" })
+                </div>
+            }
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <small class="required">Provincia</small><br />
-                <select class="form-control" id="ddl_prov" name="Incaricato_Provincia"></select>
-            </div>
-            <div class="col-md-4">
-                <small>Sezione</small><br />
-                @Html.DropDownList("Incaricato_Sezione", new SelectList(ViewBag.SezioniList, Model.Incaricato_Sezione), new { @class = "form-control", id = "Incaricato_Sezione", name = "Incaricato_Sezione" })
-            </div>
-        </div>
 
-        <!-- <div class="row">
-        create case
-        @if (Model.Id == null || Model.Id.Length == 0)
-        {
-            <div class="col-md-6">
-                <small class="required">Password</small><br />
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required", id = "pass1" })
-
-            </div>
-            <div class="col-md-6">
-                <small class="required">Conferma Password</small><br />
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required", id = "pass2" })
-            </div>
-        }
-        <div class="nosamepass" hidden style="color: red!important; font-weight: bold; margin-left: 15px">Le password non corrispondono!</div>
-        <div class="smallpass" hidden style="color: red!important; font-weight: bold; margin-left: 15px">Password troppo corta!</div>
-
-    </div>-->
 
         <div class="row">
-            <div class="col-md-4">
-                <small class="required">Stato Utente</small><br />
-                <label>
-                    <!-- the first parameter is the name of the radio button. -->
-                    @Html.RadioButtonFor(p => p.Attivo, true)
-                    Attivato
-                </label>
-                <label>
-                    <!-- the first parameter is the name of the radio button. -->
-
-                    @Html.RadioButtonFor(p => p.Attivo, false)
-                    Disattivato
-                </label>
-            </div>
             <div class="col-md-4">
                 <small class="required"> Ruoli</small><br />
-                @foreach (string role in ViewBag.RuoliList)
-                {
+                @foreach(string role in ViewBag.RuoliList) {
                     <!-- if it doesn't start with  V_ and contains the role.-->
-                    if (!role.StartsWith("V_"))
-                    {
-                        if (Model.AspNetRoles.Where(it => it.Name.Equals(role)).ToList().Count > 0)
-                        {
-                            <input type="checkbox" id="@role" name="R_@role" value="R_@role" checked /> @role
-                        }
-                        else
-                        {
-                            <input type="checkbox" id="@role" name="R_@role" value="R_@role" /> @role
-                        }
-                        <br />
+                    if(Model.AspNetRoles.Where(it => it.Name.Equals(role)).ToList().Count > 0) {
+                        <input type="checkbox" id="@role" name="R_@role" value="R_@role" checked /> @role
                     }
+                    else {
+                        <input type="checkbox" id="@role" name="R_@role" value="R_@role" /> @role
+                    }
+                    <br />
+
                 }
             </div>
 
-
-            <div class="col-md-4">
-                <small class="required">Visibilità</small><br />
-                @foreach (string role in ViewBag.RuoliList)
-                {
-                    if (role.StartsWith("V_"))
-                    {
-
-                        if (Model.AspNetRoles.Where(it => it.Name.Equals(role)).ToList().Count > 0)
-                        {
-                            <input type="radio" name="R_Visibilita" id="R_Visibilita" value="@role" checked required /> @role
-                        }
-                        else
-                        {
-                            <input type="radio" name="R_Visibilita" id="R_Visibilita" value="@role" onchange="update('@role')" required /> @role
-                        }
-                        <br />
-                    }
-                }
-            </div>
         </div>
 
     </div>
@@ -140,48 +81,6 @@
 
 
 <script>
-
-    $(document).ready(function () {
-         // set regioni arrays.
-        preparaArrayRegioni_Province();     
-        
-        if ($("#Id").val() == "") {         
-            $('input:radio[name=R_Visibilita]').val(['V_Totale']);
-            update("V_Totale");
-        }
-    })
-
-
-    @*function edit_ok() {
-        // edit the fields.
-
-        // hide the modal view.
-        $("#MODAL_ID").hide()
-
-        var url = '@Url.Action("Edit", "Account")' + "?id=" + id;
-        var data = new FormData($('#CONTENT_Account_Form').get(0));
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: data,
-                        contentType: false,
-                        processData: false,
-                        success: function (risultato) {
-                            SUCCESS_function("Utente modificato", "Complimenti! L'operazione di modifica si è conclusa con successo!","vai('@Url.Action("List","Utenti")')","OK");
-                        },
-                        error: function () {
-                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare");
-                        }
-                    });
-
-    }
-
-    function edit_get(id) {
-            // set a dangerous alert.
-            WARNING_function("ATTENZIONE", "Questa operazione modificherà l'utente selezionato: sei sicuro di voler procedere?", "edit_ok('" + id + "')","Modifica","","Annulla")
-        }*@
-
-
 
     function update(visibility) {
         // if we are giving a visibiluty to the user we set also the visualizzazione iscritti role.
@@ -209,98 +108,4 @@
 
 
     }
-
-    var regioneArray = [];
-
-    function preparaArrayRegioni_Province() {
-        // load array and province.
-
-        // return jquery arrays: let is global.
-        let ddlRegioni = $('#ddl_regioni');
-        let ddlProv = $('#ddl_prov');
-
-        // set to empty.
-        ddlRegioni.empty();
-
-        // append default value.
-        ddlRegioni.append('<option selected="true" disabled>Regione</option>');
-
-        // append default value.
-        ddlProv.append('<option selected="true" disabled>Provincia</option>');
-
-        // select first value.
-        ddlRegioni.prop('selectedIndex', 0);
-        // here we have the data.
-        const url = '/Appoggio/comuni.json';
-
-        $.getJSON(url, function (data) {
-            comuni = data;
-            // pippo array.
-            var pArray = [];
-
-            // set dict (provincia - regione).
-            $.each(comuni, function (key, v) {
-                if (!pArray.includes(v.regione.nome)) {
-                    // add region name.
-                    pArray.push(v.regione.nome);
-                }
-            })
-
-        // sort it.
-        pArray.sort();
-            $.each(pArray, function (i) {
-
-            ddlRegioni.append($('<option></option>').attr('value', pArray[i]).text(pArray[i]));
-        });
-        // update region.
-        var com = '@Model.Incaricato_Regione';
-        com = com.replace("&#39;", "\'");
-            if (com != "") {
-                // set data to the view.
-                ddlRegioni.val(com);
-                caricaProvince();
-        }
-
-        });
-        ddlRegioni.on('change', function () {
-            // when ddl regioni change, we load province.
-            caricaProvince();
-        });
-
-    }
-
-    function caricaProvince() {
-        let ddlProv = $('#ddl_prov');
-        var tempArray = [];
-
-        // empty array.
-        ddlProv.empty();
-
-        $.each(comuni, function (i, v) {
-            // if the value is equal to the selected region.
-            if (v.regione.nome == $('#ddl_regioni option:selected').text()) {
-
-                // check if not exists the region name.
-                if (!tempArray.includes(v.sigla)) {
-                    // add region name.
-                    tempArray.push(v.sigla);
-                }
-            }
-        });
-
-        // sort it.
-        tempArray.sort();
-        // loop and  append the provincia names.
-        $.each(tempArray, function (i) {
-             ddlProv.append($('<option></option>').attr('value', tempArray[i]).text(tempArray[i]));
-        });
-
-        var com = '@Model.Incaricato_Provincia';
-        com = com.replace("&#39;", "\'");
-        if (com != "") {
-            // set chosen element to the view.
-            ddlProv.val(com);
-        }
-    }
-
 </script>

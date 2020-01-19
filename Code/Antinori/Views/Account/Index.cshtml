@@ -19,8 +19,7 @@
             <div class="box">
                 <div class="box-header">
                     <ul class="nav nav-tabs" id="ADD_USER">
-                     @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-                        {
+                     @if (User.IsInRole("Admin")) {
                         <li class="pull-right"><a href="#" onclick="add()" class="text-muted"><i class="fa fa-plus"></i></a></li>
                         }
                     </ul>
@@ -74,7 +73,7 @@
                         responsive: true,
                         columnDefs: [
                             { className: "desktop", targets: [4,5] },  // x > 1024
-                            { className: "all", targets: [0,1,2,3,9] } // for each width                        
+                            { className: "all", targets: [0,1,2,3] } // for each width                        
                         ]
                     });
                     // hide the refresher.

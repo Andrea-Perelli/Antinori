@@ -52,44 +52,16 @@ namespace Antinori.Controllers {
             }
         }
 
+        [Authorize(Roles = "Admin")]
+        public JsonResult Add() {
+            AspNetUsers s = new AspNetUsers();
 
-        // GET: /Account/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl) {
+            // set the sezioni list.
+            ViewBag.RuoliList = this.Dc.Ruoli_Nome_Gets();
 
-            // open login page.
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return Json(GetRenderPartialView(this, "UC_AspNetUsers", s), JsonRequestBehavior.AllowGet);
         }
 
-        // POST: /Account/Login
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl) {
-            //login response.
-
-            if(!ModelState.IsValid) {
-                return View(model);
-            }
-
-            // Questa opzione non calcola il numero di tentativi di accesso non riusciti per il blocco dell'account
-            // Per abilitare il conteggio degli errori di password per attivare il blocco, impostare shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch(result) {
-                case SignInStatus.Success:
-                    var u = Dc.AspNetUsers_Get_ByUsername(model.Email);
-
-                    return RedirectToLocal(returnUrl);
-
-                case SignInStatus.LockedOut:
-                    ModelState.AddModelError("", "Account disattivato, contattare l'amministratore.");
-                    return View(model);
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Username o Password errata.");
-                    return View(model);
-            }
-        }
 
         [Authorize(Roles = "Admin,Editor,User")]
         [HttpPost]
@@ -109,13 +81,13 @@ namespace Antinori.Controllers {
                 var u = Dc.AspNetUsers_Get(id);
                 Dc.AspNetUsers_Save();
 
-                string corpo = "Gentile <b>" + user.Name + " " + user.Surname + "</b>," 
+                string corpo = "Gentile <b>" + user.Name + " " + user.Surname + "</b>,"
                            + "<br><br>la tua password è stata modificata: la tua nuova password è: <b>" + aspNetUsers.NewPassword + "</b>.<br>"
                            + "Ti consigliamo di proteggere questi dati. <br><br><br><br>Saluti,<br> il team Antinori.";
 
                 // send mail.
                 string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];
-                this.mailController.SendEmail("Cambio Password", corpo,u.Email);
+                this.mailController.SendEmail("Cambio Password", corpo, u.Email);
 
                 // set log.
                 this.Log_Insert(id, "AspNetUsers", "CHANGE PASSWORD", true, "Operazione conclusa con successo", "", "", "", "");
@@ -127,6 +99,7 @@ namespace Antinori.Controllers {
             }
             return Json(op, JsonRequestBehavior.AllowGet);
         }
+
 
 
         public JsonResult ForgotPassword(string Username) {
@@ -175,6 +148,44 @@ namespace Antinori.Controllers {
             return Json(esito, JsonRequestBehavior.AllowGet);
         }
 
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl) {
+
+            // open login page.
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        // POST: /Account/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl) {
+            //login response.
+
+            if(!ModelState.IsValid) {
+                return View(model);
+            }
+
+            // Questa opzione non calcola il numero di tentativi di accesso non riusciti per il blocco dell'account
+            // Per abilitare il conteggio degli errori di password per attivare il blocco, impostare shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch(result) {
+                case SignInStatus.Success:
+                    var u = Dc.AspNetUsers_Get_ByUsername(model.Email);
+
+                    return RedirectToLocal(returnUrl);
+
+                case SignInStatus.LockedOut:
+                    ModelState.AddModelError("", "Account disattivato, contattare l'amministratore.");
+                    return View(model);
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Username o Password errata.");
+                    return View(model);
+            }
+        }
+
         [Authorize(Roles = "Admin, Editor")]
         public ActionResult Index() {
             // return the account list view.           
@@ -206,6 +217,16 @@ namespace Antinori.Controllers {
             return View(user);
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult P_Create() {
+            AspNetUsers s = new AspNetUsers();
+
+            // set the sezioni list.
+            ViewBag.RuoliList = this.Dc.Ruoli_Nome_Gets();
+
+            return View(s);
+        }
+
         public ActionResult P_ForgotPassword() {
             // return the forgot password user.
 
@@ -227,18 +248,6 @@ namespace Antinori.Controllers {
 
 
         // ************************ NOT CHECKED ************************
-
-        
-
-        [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
-        public JsonResult Add() {
-            AspNetUsers s = new AspNetUsers();
-
-            // set the sezioni list.
-            ViewBag.RuoliList = this.Dc.Ruoli_Nome_Gets();
-
-            return Json(GetRenderPartialView(this, "UC_AspNetUsers", s), JsonRequestBehavior.AllowGet);
-        }       
 
         [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
         public JsonResult Delete(string id){
@@ -270,21 +279,6 @@ namespace Antinori.Controllers {
             // return the partial view containing the user.
             return Json(GetRenderPartialView(this, "UC_AspNetUsers", user), JsonRequestBehavior.AllowGet);
         }
-
-       
-        
-
-        
-        public ActionResult P_Create(){
-            AspNetUsers s = new AspNetUsers();
-            
-            // set the sezioni list.
-            ViewBag.RuoliList = this.Dc.Ruoli_Nome_Gets();
-
-            return View(s);
-        }
-
-
 
         [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
         [HttpPost]

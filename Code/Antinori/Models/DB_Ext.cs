@@ -101,8 +101,7 @@ namespace Antinori.Models {
         }
 
 
-        public List<string> Ruoli_Nome_Gets()
-        {
+        public List<string> Ruoli_Nome_Gets() {
             // return the list of the asp net roles names.
 
             var query = this.AspNetRoles.Select(it => it.Name).OrderBy(it => it).ToList();

@@ -18,11 +18,11 @@
             <!-- Loop on the model.-->
             @foreach (var item in Model) {
             <tr>
+                <td>@item.UserName</td>
                 <td>@item.Surname</td>
                 <td>@item.Name</td>
                 <td>@item.PhoneNumber</td>
 
-                <td>@item.UserName</td>
                 <td>@item.Email</td>
                 <td>
                     @foreach(var role in item.AspNetRoles) {
@@ -59,7 +59,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="10"></th>
+                <th colspan="7"></th>
             </tr>
         </tfoot>
     </table>
