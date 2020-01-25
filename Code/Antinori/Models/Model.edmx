@@ -12,8 +12,6 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <!--Errori trovati durante la generazione:
-avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Antinori.dbo.AspNetUserRoles'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
         <EntityType Name="AspNetUserRoles">
           <Key>
             <PropertyRef Name="UserId" />
@@ -112,8 +110,10 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'An
           <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="ProposedDate" Type="datetime" />
         </EntityType>
-        <Association Name="FK_AspNetUserRoles_AspNetRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetRoles">
@@ -124,8 +124,10 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'An
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AspNetUserRoles_AspnetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -186,6 +188,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'An
         </Association>
         <EntityContainer Name="AntinoriModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
@@ -193,17 +196,11 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'An
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubSections" EntityType="Self.SubSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transcriptions" EntityType="Self.Transcriptions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AspNetUserRoles].[UserId] AS [UserId], 
-    [AspNetUserRoles].[RoleId] AS [RoleId]
-    FROM [dbo].[AspNetUserRoles] AS [AspNetUserRoles]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_AspNetUserRoles_AspnetUsers" Association="Self.FK_AspNetUserRoles_AspnetUsers">
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>

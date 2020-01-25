@@ -136,33 +136,7 @@
             DANGER_function("ATTENZIONE", "Questa operazione cancellerà l'utente selezionato: sei sicuro di voler procedere?", "delete_ok('" + id + "')","Procedi","","Annulla")
         }
 
-        function reset_password_get(id) {
-            // set a dangerous alert.
-            ALERT_function("ATTENZIONE", "Questa operazione resetterà la password dell'utente selezionato: sei sicuro di voler procedere?", "reset_password_ok('" + id + "')","Resetta","","Annulla")
-        }
-
-    function reset_password_ok(id) {
-        // reset the password
-
-        // hide the modal view.
-        $("#MODAL_ID").hide();
-
-        var url = '@Url.Action("Reset_Password", "Account")' + "?id=" + id;
-        // show refresher.
-        REFRESH_show("CONTENT_Refresh");
-        $.getJSON(url,
-            function (data) {
-                // hide the refresher.
-                $("#MODAL_ID").modal('toggle');
-                    if(Boolean(data)) {
-                        list();
-                    } else {
-                        DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare","","","","OK");
-                    }        
-                })
-    }
-
-        function save() {   
+       function save() {   
               // validate form.
               $('#CONTENT_Account_Form').validate({
                   lang: 'it'

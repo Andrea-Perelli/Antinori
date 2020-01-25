@@ -100,7 +100,36 @@ namespace Antinori.Controllers {
             return Json(op, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin")]
+        public JsonResult Delete(string id) {
+            // delete an account by id.
 
+            // set default value for esito.
+            bool esito = false;
+
+            // retrieve user.
+            var user = this.Dc.AspNetUsers_Get(id);
+
+            // "delete" user.
+            user.Cancellato = true;
+            user.LockoutEnabled = true;
+            user.LockoutEndDateUtc = DateTime.MaxValue;
+            //save and update the esito value.
+            esito = this.Dc.AspNetUsers_Save() > -1;
+            return Json(esito, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult Edit(string id) {
+            // retrieve the user with name mobile phone etc...
+            var user = this.Dc.AspNetUsers_Get(id);
+
+            // set the sezioni list.
+            ViewBag.RuoliList = this.Dc.Ruoli_Nome_Gets();
+
+            // return the partial view containing the user.
+            return Json(GetRenderPartialView(this, "UC_AspNetUsers", user), JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult ForgotPassword(string Username) {
             // reset the user password.
@@ -243,82 +272,41 @@ namespace Antinori.Controllers {
             return View(user);
         }
 
-
-
-
-
-        // ************************ NOT CHECKED ************************
-
-        [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
-        public JsonResult Delete(string id){
-            // delete an account by id.
-
-            // set default value for esito.
-            bool esito = false;
-
-            // retrieve user.
-            var user = this.Dc.AspNetUsers_Get(id);
-
-            // "delete" user.
-            user.Cancellato = true;
-            user.LockoutEnabled = true;
-            user.LockoutEndDateUtc = DateTime.MaxValue;
-            //save and update the esito value.
-            esito = this.Dc.AspNetUsers_Save() > -1;
-            return Json(esito, JsonRequestBehavior.AllowGet);
-        }
-
-        [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
-        public JsonResult Edit(string id) {
-            // retrieve the user with name mobile phone etc...
-            var user = this.Dc.AspNetUsers_Get(id);
-
-            // set the sezioni list.
-            ViewBag.RuoliList = this.Dc.Ruoli_Nome_Gets();
-
-            // return the partial view containing the user.
-            return Json(GetRenderPartialView(this, "UC_AspNetUsers", user), JsonRequestBehavior.AllowGet);
-        }
-
-        [Authorize(Roles = "Amministrazione, Gestione_Utenti")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult Save(AspNetUsers user, FormCollection forms, string username) {
             // save. 
             OpEsitoModel op;
-            
-            if (user.Id != null) {
+
+            if(user.Id != null) {
                 // we are editing user.
                 AspNetUsers daDb = this.Dc.AspNetUsers_Get(user.Id);
 
                 //map the two objects: it updates the DB object.
-                if (TryUpdateModel(daDb)) {
+                if(TryUpdateModel(daDb)) {
                     try {
                         // set again attivo field (for some reason is set always to to true).
-                        daDb.LockoutEnabled = !forms["Attivo"].ToString().ToLower().Equals("true");
-                        daDb.LockoutEndDateUtc = DateTime.MaxValue;
+                        //daDb.LockoutEnabled = !forms["Attivo"].ToString().ToLower().Equals("true");
+                        //daDb.LockoutEndDateUtc = DateTime.MaxValue;
 
                         // delete roles
                         daDb.AspNetRoles.Clear();
                         this.Dc.AspNetUsers_Save();
                         //update (add) roles.
-                        foreach (var key in forms) {
-                            if (key.ToString().StartsWith("R_")) {
-                                if (key.Equals("R_Visibilita")) {
-                                    // add role: the entity framework will create the relationship.
-                                    daDb.AspNetRoles.Add(this.Dc.Ruoli_Get(forms[key.ToString()]));
-                                }
-                                // add role: the entity framework will create the relationship.
-                                daDb.AspNetRoles.Add(this.Dc.Ruoli_Get(key.ToString().Replace("R_", "")));
+                        foreach(var key in forms) {
+                            if(key.ToString().Equals("Role")) {
+                                // add roles: the entity framework will create the relationship.
+                                daDb.AspNetRoles.Add(this.Dc.Ruoli_Get(forms[key.ToString()].Replace("R_", "")));
                             }
                         }
                         this.Dc.AspNetUsers_Save();
-                      
+
                         // set log.
                         Log_Insert(user.Id, "AspNetUsers", "UPDATE", true, "Operazione conclusa con successo", "", "", "", "");
                         op = new OpEsitoModel() { idReturn = user.Id, riuscita = true };
                         return Json(op, JsonRequestBehavior.AllowGet);
                     }
-                    catch (Exception ex) {
+                    catch(Exception ex) {
                         Log_Insert(user.Id, "AspNetUsers", "UPDATE", false, "Errore:" + ex.Message);
                         op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = ex.Message };
                         return Json(op, JsonRequestBehavior.AllowGet);
@@ -333,50 +321,43 @@ namespace Antinori.Controllers {
             else {
                 // generate new password.
                 string password = this.CreatePassword(Convert.ToInt16(ConfigurationManager.AppSettings["minPasswordLenght"]));
-                
+
                 // create new user.
                 var newUser = new ApplicationUser { Email = user.Email, PhoneNumber = user.PhoneNumber, Cancellato = false, LockoutEnabled = user.Attivo };
-                if (username != null && username.Length > 0)
-                {
+                if(username != null && username.Length > 0) {
                     newUser.UserName = username;
                 }
-                else
-                {
+                else {
                     newUser.UserName = newUser.Email;
                 }
 
                 var result = UserManager.CreateAsync(newUser, password);
                 // OK.
-                if (result.Result.Succeeded) {
+                if(result.Result.Succeeded) {
 
                     // retrieve user.
                     AspNetUsers u = this.Dc.AspNetUsers_Get(newUser.Id);
 
                     // set again attivo field (for some reason is set always to to true).
-                    u.LockoutEnabled = !forms["Attivo"].ToString().ToLower().Equals("true");
+                    u.LockoutEnabled = false;
                     u.LockoutEndDateUtc = DateTime.MaxValue;
+                    u.Name = user.Name;
+                    u.Surname = user.Surname;
                     // set roles
-                    foreach (var key in forms) {
-                        if (key.ToString().StartsWith("R_")) {
-                            if (key.Equals("R_Visibilita")) {
-                                // add role: the entity framework will create the relationship.
-                                u.AspNetRoles.Add(this.Dc.Ruoli_Get(forms[key.ToString()]));
-                            }
-                            else {
-                                // add role: the entity framework will create the relationship.
-                                u.AspNetRoles.Add(this.Dc.Ruoli_Get(key.ToString().Replace("R_", "")));
-                            }
+                    foreach(var key in forms) {
+                        if(key.ToString().Equals("Role")) {
+                            // add role: the entity framework will create the relationship.
+                            u.AspNetRoles.Add(this.Dc.Ruoli_Get(forms[key.ToString()].Replace("R_", "")));
                         }
                     }
                     // save context (roles).
                     this.Dc.AspNetUsers_Save();
 
-                    string corpo = "Gentile <b>" + newUser + " " + newUser
-                       + "</b>,<br><br>Benvenuto nel nostro Team! <br/><br/>I dati per accedere a SinafiBook sono i seguenti:<br>Username: <b>" + newUser.UserName + "</b><br>Password: " + password + "<br/><br/>"
-                       + "Ti consigliamo di modificare la password al più presto. <br><br><br><br>Saluti,<br> il team Sinafi.";
+                    string msg = "Gentile <b>" + newUser.UserName + ", "
+                       + "</b>,<br><br>Benvenuto nel nostro Team! <br/><br/>I dati per accedere ad Antinori sono i seguenti:<br>Username: <b>" + newUser.UserName + "</b><br>Password: " + password + "<br/><br/>"
+                       + "Ti consigliamo di modificare la password al più presto. <br><br><br><br>Saluti,<br> il team Antinori.";
 
-                    string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];                    
-                    //this.sendMail(email, newUser.Email, null, null, null, null, "SINAFIBook - Abilitazione Piattaforma Web", corpo);
+                    this.mailController.SendEmail("Benvenuto su Antinori", msg, user.Email);
 
                     Log_Insert(newUser.Id, "Account", "INSERT", true, "Operazione conclusa con successo", "", "", "", "");
                     op = new OpEsitoModel() { idReturn = newUser.Id, riuscita = true };
@@ -384,7 +365,7 @@ namespace Antinori.Controllers {
                 }
                 else { // PROBLEMS.
                     string error_msg = "";
-                    foreach (var er in result.Result.Errors) {
+                    foreach(var er in result.Result.Errors) {
                         error_msg += er + ";";
                     }
                     Log_Insert(newUser.Email, "Account", "INSERT", false, "Errore:" + error_msg);
@@ -394,7 +375,10 @@ namespace Antinori.Controllers {
             }
         }
 
-        
+
+
+
+        // ************************ NOT CHECKED ************************
 
 
         // GET: /Account/VerifyCode
@@ -446,58 +430,12 @@ namespace Antinori.Controllers {
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        
-        
-
-      
-        
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation(){
             return View();
         }
-
         
-        // GET: /Account/ResetPassword
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code){
-            return code == null ? View("Error") : View();
-        }
-
-        
-        // POST: /Account/ResetPassword
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var user = await UserManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                // Non rivelare che l'utente non esiste
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-            AddErrors(result);
-            return View();
-        }
-
-        
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
-
         
         // POST: /Account/ExternalLogin
         [HttpPost]
@@ -612,11 +550,7 @@ namespace Antinori.Controllers {
             return View(model);
         }
 
-        
-        
-        
 
-        //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()

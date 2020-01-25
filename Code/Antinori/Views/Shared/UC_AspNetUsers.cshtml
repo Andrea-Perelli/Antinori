@@ -42,9 +42,8 @@
             </div>
 
 
-
             @*create case*@
-            @if(Model.Id == null || Model.Id.Length == 0) {
+            @*@if(Model.Id == null || Model.Id.Length == 0) {
                 <div class="col-md-6">
                     <small class="required">Password</small><br />
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required", id = "pass1" })
@@ -54,7 +53,7 @@
                     <small class="required">Conferma Password</small><br />
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required", id = "pass2" })
                 </div>
-            }
+            }*@
         </div>
 
 
@@ -62,12 +61,11 @@
             <div class="col-md-4">
                 <small class="required"> Ruoli</small><br />
                 @foreach(string role in ViewBag.RuoliList) {
-                    <!-- if it doesn't start with  V_ and contains the role.-->
                     if(Model.AspNetRoles.Where(it => it.Name.Equals(role)).ToList().Count > 0) {
-                        <input type="checkbox" id="@role" name="R_@role" value="R_@role" checked /> @role
+                        <input type="radio" id="@role" name="Role" value="R_@role" checked /> @role
                     }
                     else {
-                        <input type="checkbox" id="@role" name="R_@role" value="R_@role" /> @role
+                        <input type="radio" id="@role" name="Role" value="R_@role" /> @role
                     }
                     <br />
 
