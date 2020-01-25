@@ -21,16 +21,16 @@ namespace Antinori.Controllers {
         private ApplicationUserManager _userManager;
         private MailController mailController;
 
-        public AccountController(){
+        public AccountController() {
             this.mailController = new MailController();
 
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager){
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) {
             UserManager = userManager;
             SignInManager = signInManager;
             this.mailController = new MailController();
-                
+
         }
 
         public ApplicationSignInManager SignInManager {
@@ -176,6 +176,18 @@ namespace Antinori.Controllers {
             // return the partial view .
             return Json(esito, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetUsersInfo(){
+
+            // set default value for esito.
+            bool esito = false;
+
+            // create a model. return the model.
+
+            // return the partial view .
+            return Json(esito, JsonRequestBehavior.AllowGet);
+        }
+
 
         // GET: /Account/Login
         [AllowAnonymous]

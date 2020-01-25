@@ -14,20 +14,55 @@
     <!-- Small boxes (Stat box) -->
     <div class="row">
         <div class="col-lg-3 col-xs-6">
-            
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-            
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3 id="UtentiTot">&nbsp;</h3>
+                    <p>Utenti totali</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+            </div>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3 id="ISCRITTI_Pertinenza">&nbsp;</h3>
+                    <p>Trascrittori</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+            </div>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
-            
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3 id="ISCRITTI_UltimoMese">&nbsp;</h3>
+                    <p>Iscritti nell'ultimo mese</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3 id="ISCRITTI_UltimoAnno">&nbsp;</h3>
+                    <p>Iscritti nell'ultimo anno</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+            </div>
         </div>
         <!-- ./col -->
     </div>
@@ -36,41 +71,39 @@
     <div class="row">
         <!-- Left col -->
         <section class="col-lg-7 connectedSortable">
-            <!-- Custom tabs (Charts with tabs)-->
-            <div class="nav-tabs-custom">
-                
-            </div>
-            <!-- /.nav-tabs-custom -->
         </section>
         <!-- /.Left col -->
         <!-- right col (We are only adding the ID to make the widgets sortable)-->
-        @if(User.IsInRole("Amministrazione")){
-
-            
-        <section class="col-lg-5 connectedSortable">
-        <!-- In Evidenza List -->
-        <div class="box box-primary">
-            <div class="overlay text-center" id="INEVIDENZA_Refresh" style="z-index:300; background-color:rgba(255, 255, 255, 0.60); vertical-align:middle">
-                <i class="fa fa-refresh fa-spin"></i>
-            </div>
-            <div class="box-header">
-                <i class="ion ion-clipboard"></i>
-                <h3 class="box-title">Ultimi 10 iscritti in evidenza</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body" id="INEVIDENZA">
+        @if(User.IsInRole("Amministrazione")) {
 
 
-            </div>
-            <!-- /.box-body -->
+            <section class="col-lg-5 connectedSortable">
+                <!-- In Evidenza List -->
+                <div class="box box-primary">
+                    <div class="overlay text-center" id="INEVIDENZA_Refresh" style="z-index:300; background-color:rgba(255, 255, 255, 0.60); vertical-align:middle">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                    <div class="box-header">
+                        <i class="ion ion-clipboard"></i>
+                        <h3 class="box-title">Ultimi 10 iscritti in evidenza</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" id="INEVIDENZA">
 
-        </div>
-        <!-- /.box -->
-        </section>
+
+                    </div>
+                    <!-- /.box-body -->
+
+                </div>
+                <!-- /.box -->
+
+
+
+            </section>
         }
-    <!-- right col -->
-</div>
-<!-- /.row(main row) -->
+        <!-- right col -->
+    </div>
+    <!-- /.row(main row) -->
 
 </section>
 <!-- /.content -->
@@ -88,10 +121,35 @@
 <!-- jQuery Knob Chart -->
 <script src="~/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 
-        <script>
+<script>
         
+    $(document).ready(function () {
+        LoadUserData();
+        LoadTranscrpitiondata();
+    });
 
-        $(document).ready(function () {
-         })
-        </script>
+    function LoadUserData() {
+        // load data.
+
+        // show refresher.
+        REFRESH_show("INEVIDENZA_Refresh");
+
+        $.getJSON('@Url.Action("GetUsersInfo","Account")',
+            function (data) {
+                $("#UtentiTot").html(data.Iscritti_Tot);
+                REFRESH_hide("INEVIDENZA_Refresh");
+
+                //$("#ISCRITTI_Pertinenza").html(data.Iscritti_DiPertinenza);
+                //$("#ISCRITTI_UltimoMese").html(data.Iscritti_UltimoMese);
+                //$("#ISCRITTI_UltimoAnno").html(data.Iscritti_UltimoAnno);
+            });
+        }
+
+    function LoadTranscrpitiondata() {
+        // load data.
+        // todo.
+    }
+
+        
+</script>
         }
