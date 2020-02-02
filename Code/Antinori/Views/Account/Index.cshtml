@@ -68,17 +68,17 @@
                     $("#CONTENT").html(data);
                     // set the table name as parameter: DataTables_Table_0.
                     $("#DataTables_Table_0").DataTable({
-                         dom: 'Bfrtip',                        
+                        dom: 'Bfrtip',
                         language: DataTablesLanguage,
                         responsive: true,
                         columnDefs: [
-                            { className: "desktop", targets: [4,5] },  // x > 1024
-                            { className: "all", targets: [0,1,2,3] } // for each width                        
+                            { className: "desktop", targets: [4, 5] },  // x > 1024
+                            { className: "all", targets: [0, 1, 2, 3] } // for each width                        
                         ]
                     });
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
-                })
+                });
         }
 
     function add() {
@@ -126,10 +126,9 @@
                     $("#MODAL_ID").modal('toggle');
                     if (Boolean(data)) {
                         list();
-                    }                         
-                }
-                )
-            }
+                    }
+        });
+        }
 
         function delete_get(id) {
             // set a dangerous alert.

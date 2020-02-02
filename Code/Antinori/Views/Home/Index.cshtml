@@ -17,11 +17,11 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3 id="UtentiTot">&nbsp;</h3>
+                    <h3 id="numberOfUsers">&nbsp;</h3>
                     <p>Utenti totali</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="ion ion ion-person-stalker"></i>
                 </div>
             </div>
         </div>
@@ -30,11 +30,11 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3 id="ISCRITTI_Pertinenza">&nbsp;</h3>
+                    <h3 id="numberOfNormalUsers">&nbsp;</h3>
                     <p>Trascrittori</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="ion ion-ios-person"></i>
                 </div>
             </div>
         </div>
@@ -43,11 +43,11 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3 id="ISCRITTI_UltimoMese">&nbsp;</h3>
-                    <p>Iscritti nell'ultimo mese</p>
+                    <h3 id="numberOfBooks">&nbsp;</h3>
+                    <p>Opere</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-person-add"></i>
+                    <i class="ion ion-ios-book"></i>
                 </div>
             </div>
         </div>
@@ -57,10 +57,10 @@
             <div class="small-box bg-red">
                 <div class="inner">
                     <h3 id="ISCRITTI_UltimoAnno">&nbsp;</h3>
-                    <p>Iscritti nell'ultimo anno</p>
+                    <p>Trascrizioni da valutare</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="ion ion-ios-list-outline"></i>
                 </div>
             </div>
         </div>
@@ -135,13 +135,12 @@
         REFRESH_show("INEVIDENZA_Refresh");
 
         $.getJSON('@Url.Action("GetUsersInfo","Account")',
-            function (data) {
-                $("#UtentiTot").html(data.Iscritti_Tot);
+            function (model) {
+                $("#numberOfUsers").html(model.numberOfUsers);
+                $("#numberOfNormalUsers").html(model.numberOfNormalUsers);
+
                 REFRESH_hide("INEVIDENZA_Refresh");
 
-                //$("#ISCRITTI_Pertinenza").html(data.Iscritti_DiPertinenza);
-                //$("#ISCRITTI_UltimoMese").html(data.Iscritti_UltimoMese);
-                //$("#ISCRITTI_UltimoAnno").html(data.Iscritti_UltimoAnno);
             });
         }
 

@@ -32,10 +32,14 @@ namespace Antinori.Models {
             return AspNetUsers.FirstOrDefault(it => it.Id == id);
         }
 
-        public AspNetUsers AspNetUsers_Get_ByName(string username)
-        {
+        public AspNetUsers AspNetUsers_Get_ByName(string username) {
             // return a AspNet User by Name.
             return AspNetUsers.FirstOrDefault(it => it.UserName == username);
+        }
+
+        public List<AspNetUsers> AspNetUsers_Get_ByRole(string roleName) {
+            // return a AspNet User by Name.
+            return AspNetUsers.Where(it => it.AspNetRoles.FirstOrDefault().Name == roleName).ToList();
         }
 
         public AspNetUsers AspNetUsers_Get_ByUsername(string username) {
@@ -108,6 +112,46 @@ namespace Antinori.Models {
             return query;
         }
 
+        #endregion
+
+        #region Books
+
+        public int Books_Delete(Books b) {
+            // delete a book.
+            int esito = -1;
+            try {
+                Books.Remove(b);
+                // Entity framework stores its current status on the db (we don't pass any object to store).
+                esito = SaveChanges();
+            }
+            catch {
+
+            }
+            return esito;
+        }
+
+
+        public List<Books> Books_Gets() {
+            // return the list of all books.
+            return Books.ToList();
+        }
+
+        public Books Books_Get(string id) {
+            // return a Books by Id.
+            return Books.FirstOrDefault(it => it.Id == id);
+        }
+
+        public int Books_Save() {
+            int esito = -1;
+            try {
+                // esito is the number of modifications.
+                esito = SaveChanges();
+            }
+            catch(Exception e) {
+
+            }
+            return esito;
+        }
         #endregion
 
         #region "Logs"

@@ -1,0 +1,70 @@
+﻿@model Antinori.Models.Books
+@{
+    ViewBag.Title = "Nuova Opera";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section header_page{
+    <h2><span class="fa fa-book"></span> @ViewBag.Title</h2>
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border">
+        @Html.Partial("UC_Book", Model)
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        
+    </div>
+    <div class="box-footer">
+        <div class="pull-right">
+            <button class="btn btn-primary" onclick="Save()">Aggiungi</button>
+            &nbsp;&nbsp;
+            <a class="btn btn-primary" href="@Url.Action("Index","Home")">Vai alla dashboard</a>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    
+    <script>
+      function Save(id) {
+
+              $('#CONTENT_Book_Form').validate({
+                  lang: 'it'
+              });
+
+              if ($('#CONTENT_Book_Form').valid()) {
+                   REFRESH_show("MODAL_Refresh");
+                    var url = '@Url.Action("Save", "Book")';
+                    var data = new FormData($('#CONTENT_Book_Form').get(0));
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        success: function (risultato) {
+                            if (risultato.riuscita) {
+                                SUCCESS_function("Inserito nuovo utente", "Complimenti!  L'operazione di inserimento si è conclusa con successo!", "vai('@Url.Action("Index","Account")')", "OK");
+                            }
+                            else {
+                                DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare", "", "OK");
+                            }
+
+                        },
+                        error: function () {
+                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare");
+                        }
+                    });
+              }
+
+
+        }
+    </script>
+}
+
+
+

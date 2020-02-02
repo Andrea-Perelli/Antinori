@@ -178,14 +178,14 @@ namespace Antinori.Controllers {
         }
 
         public JsonResult GetUsersInfo(){
-
-            // set default value for esito.
-            bool esito = false;
+            // return user info.
 
             // create a model. return the model.
-
+            DashboardModel model = new DashboardModel();
+            model.numberOfUsers = this.Dc.AspNetUsers_Gets().Count;
+            model.numberOfNormalUsers = this.Dc.AspNetUsers_Get_ByRole("User").Count;
             // return the partial view .
-            return Json(esito, JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
 
