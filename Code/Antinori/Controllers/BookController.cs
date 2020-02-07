@@ -15,8 +15,18 @@ namespace Antinori.Controllers {
             return View();
         }
 
+        [Authorize(Roles = "Admin, Editor")]
+        public JsonResult List() {
+            // return the list of the users.
+
+            List<Books> books = this.Dc.Books_Gets();
+            // return the partial view containing all the users.
+            return Json(GetRenderPartialView(this, "UC_Books_List", books), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult P_Create() {
+            // open p create page.
             Books s = new Books();
 
             return View(s);
@@ -68,11 +78,33 @@ namespace Antinori.Controllers {
                 return Json(op, JsonRequestBehavior.AllowGet);
             }
             // if we are creating a new object.
-            else {              
-                 // create Book.
+            else {
+                // create Book.
+                Books newBook = new Books {
+                    Id = Guid.NewGuid().ToString(),
+                    Author = book.Author,
+                    Description = book.Description,
+                    EndDate = book.EndDate,
+                    Title = book.Title
+                };
+
+                // add the sezione to the context.
+                this.Dc.Books_Insert(newBook);
+                // save context (roles).
+                int esito = this.Dc.Books_Save();
+                // check if all is ok.
+                if(esito > -1) {
+                    Log_Insert(newBook.Id, "BOOKS", "INSERT", true, "Operazione conclusa con successo", "", "", "", "");
+                    op = new OpEsitoModel() { idReturn = newBook.Id, riuscita = true };
+                    return Json(op, JsonRequestBehavior.AllowGet);
+                }
+                else {
+                    Log_Insert(newBook.Id, "BOOKS", "INSERT", false, "Operazione conclusa con successo", "", "", "", "");
+                    op = new OpEsitoModel() { idReturn = newBook.Id, riuscita = false };
+                    return Json(op, JsonRequestBehavior.AllowGet);
+                }
                 
             }
-            return null;
         }
 
     }

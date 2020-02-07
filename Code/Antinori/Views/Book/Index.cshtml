@@ -1,34 +1,34 @@
 ﻿@model List<Antinori.Models.Books>
 
-@{
+    @{
     ViewBag.Title = "Opere";
-}
+    }
 
-<!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
     <section class="content-header">
         <!-- PAGE TITLE -->
         <h2><span class="fa fa-users"></span> @ViewBag.Title</h2>
     </section>
 
-<!-- Main content -->
-<section class="content">
-    <div class="row">
-        <div class="col-xs-12">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
 
-            <!-- TABLE -->
-            <div class="box">
-                <div class="box-header">
-                    <ul class="nav nav-tabs" id="ADD_USER">
-                     @if (User.IsInRole("Admin")) {
-                        <li class="pull-right"><a href="#" onclick="add()" class="text-muted"><i class="fa fa-plus"></i></a></li>
-                        }
-                    </ul>
-                </div>
-                <!-- /.box-header -->
+                <!-- TABLE -->
+                <div class="box">
+                    <div class="box-header">
+                        <ul class="nav nav-tabs" id="ADD_OPERA">
+                            @if(User.IsInRole("Admin")) {
+                            <li class="pull-right"><a href="#" onclick="add()" class="text-muted"><i class="fa fa-plus"></i></a></li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- /.box-header -->
                     <div class="overlay text-center" id="CONTENT_Refresh" style="z-index:300; background-color:rgba(255, 255, 255, 0.60); vertical-align:middle">
                         <i class="fa fa-refresh fa-spin"></i>
                     </div>
-                    
+
                     <!-- /.box-header -->
                     <div class="box-body">
                         <!-- here will be inserted the html code. -->
@@ -41,24 +41,23 @@
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
-        
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-</section>
-<!-- /.content -->
-
-@section scripts {
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+    @section scripts {
     <script>
         // funzione jquery che richiama la funzione DataTable() per caricare i plugin relativi.
-        $(document).ready(function () {     
+        $(document).ready(function () {
+            
             list();
         });
 
 
         function list() {
             // set the list on the view.
-            var url = '@Url.Action("List", "Account")';
+            var url = '@Url.Action("List", "Book")';
 
             // show the refresher.
             REFRESH_show("CONTENT_Refresh");
@@ -73,7 +72,7 @@
                         responsive: true,
                         columnDefs: [
                             { className: "desktop", targets: [4, 5] },  // x > 1024
-                            { className: "all", targets: [0, 1, 2, 3] } // for each width                        
+                            { className: "all", targets: [0, 1, 2, 3] } // for each width
                         ]
                     });
                     // hide the refresher.
@@ -81,7 +80,7 @@
                 });
         }
 
-    function add() {
+        function add() {
             // set url.
             var url = '@Url.Action("Add", "Account")';
             // show refresher.
@@ -89,10 +88,10 @@
             $.getJSON(url,
                 function (data) {
                     // hide refresher.
-                    REFRESH_hide("CONTENT_Refresh"); 
+                    REFRESH_hide("CONTENT_Refresh");
                     // set a modal view.
-                    MODAL_function("Nuovo Utente", data,"save()","Crea","","Annulla","");                 
-                })
+                    MODAL_function("Nuovo Utente", data, "save()", "Crea", "", "Annulla", "");
+                });
         }
 
         function edit(id) {
@@ -105,9 +104,9 @@
             $.getJSON(url,
                 function (data) {
                     // hide the refresher.
-                    REFRESH_hide("CONTENT_Refresh");  
+                    REFRESH_hide("CONTENT_Refresh");
                     // set a modal view.
-                    MODAL_function("Modifica Utente", data,"save()","Salva","","Annulla","");                  
+                    MODAL_function("Modifica Utente", data, "save()", "Salva", "", "Annulla", "");
                 })
         }
 
@@ -127,48 +126,48 @@
                     if (Boolean(data)) {
                         list();
                     }
-        });
+                });
         }
 
         function delete_get(id) {
             // set a dangerous alert.
-            DANGER_function("ATTENZIONE", "Questa operazione cancellerà l'utente selezionato: sei sicuro di voler procedere?", "delete_ok('" + id + "')","Procedi","","Annulla")
+            DANGER_function("ATTENZIONE", "Questa operazione cancellerà l'utente selezionato: sei sicuro di voler procedere?", "delete_ok('" + id + "')", "Procedi", "", "Annulla")
         }
 
-       function save() {   
-              // validate form.
-              $('#CONTENT_Account_Form').validate({
-                  lang: 'it'
-              });
-             
-              if ($('#CONTENT_Account_Form').valid()) {
+        function save() {
+            // validate form.
+            $('#CONTENT_Account_Form').validate({
+                lang: 'it'
+            });
 
-                
-                   REFRESH_show("MODAL_Refresh");
-                   var url = '@Url.Action("Save", "Account")';
-                   // take the form content by id.
-                   var data = new FormData($('#CONTENT_Account_Form').get(0));
-                 
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: data,
-                        contentType: false,
-                        processData: false,
-                        success: function (risultato) {
-                            
-                            $("#MODAL_ID").modal('toggle');
-                            list();
-                        },
-                        error: function () {
-                            // set error.
-                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare","","","","OK");
-                        }
-                    });
-              }
+            if ($('#CONTENT_Account_Form').valid()) {
+
+
+                REFRESH_show("MODAL_Refresh");
+                var url = '@Url.Action("Save", "Account")';
+                // take the form content by id.
+                var data = new FormData($('#CONTENT_Account_Form').get(0));
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (risultato) {
+
+                        $("#MODAL_ID").modal('toggle');
+                        list();
+                    },
+                    error: function () {
+                        // set error.
+                        DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare", "", "", "", "OK");
+                    }
+                });
+            }
         }
 
     </script>
 
-    
-}
+
+    }

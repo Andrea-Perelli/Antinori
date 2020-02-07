@@ -141,6 +141,19 @@ namespace Antinori.Models {
             return Books.FirstOrDefault(it => it.Id == id);
         }
 
+        public int Books_Insert(Books c) {
+            // insert a book.
+            int esito = -1;
+            try {
+                Books.Add(c);
+                esito = SaveChanges();
+            }
+            catch(DbEntityValidationException ex) {
+                validaProprieta(ex);
+            }
+            return esito;
+        }
+
         public int Books_Save() {
             int esito = -1;
             try {

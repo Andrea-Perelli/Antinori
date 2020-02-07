@@ -1,0 +1,50 @@
+﻿@model List<Antinori.Models.Books>
+
+<!-- TABLE -->
+    <table id="DataTables_Table_0" class="table dataTable table-hover">
+        <thead>
+            <tr>
+                <th style="width: 100px">Titolo</th>
+                <th style="width: 100px">Autore</th>
+                <th style="width: 100px">Descrizione</th>
+                <th style="width: 100px">Pubblicato</th>
+                <th style="width: 100px">Num. Sezioni</th>
+                <th style="width: 180px"> </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- Loop on the model.-->
+            @foreach (var item in Model) {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Author</td>
+                <td>@item.Description</td>
+                <td>@item.EndDate</td>
+
+                <td>
+                    @item.Sections.Count
+                </td>
+
+                <td>
+                    <button class="btn btn-default btn-sm" onclick="edit('@item.Id')" title="Modifica">
+                        <i class="fa fa-edit">
+                        </i>
+                    </button>
+
+                    <button class="btn btn-default btn-sm" onclick="delete_get('@item.Id')" title="Cancella">
+                        <i class="fa fa-trash-o">
+                        </i>
+                    </button>                
+                </td>
+            </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="6"></th>
+            </tr>
+        </tfoot>
+    </table>
+
