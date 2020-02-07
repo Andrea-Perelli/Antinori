@@ -30,6 +30,7 @@ namespace Antinori.Models
         public string BookTitle { get; set; }
         public string SectionName { get; set; }
         public string SubSection { get; set; }
+        public string Editor { get; set; }
     
         public virtual SubSections SubSections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

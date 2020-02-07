@@ -46,7 +46,9 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Logs">
           <Key>
@@ -79,6 +81,7 @@
           <Property Name="BookTitle" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="SectionName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="SubSection" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Editor" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -260,8 +263,10 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sections" Relationship="Self.FK_Sections_Sections" FromRole="Books" ToRole="Sections" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Pages">
           <Key>
@@ -279,6 +284,7 @@
           <Property Name="SubSection" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="SubSections" Relationship="Self.FK_Pages_SubSections" FromRole="Pages" ToRole="SubSections" />
           <NavigationProperty Name="Transcriptions" Relationship="Self.FK_Transcriptions_Pages" FromRole="Pages" ToRole="Transcriptions" />
+          <Property Name="Editor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -452,6 +458,8 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="AntinoriModel.Books">
               <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -461,6 +469,7 @@
           <EntitySetMapping Name="Pages">
             <EntityTypeMapping TypeName="AntinoriModel.Pages">
               <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
