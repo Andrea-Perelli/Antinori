@@ -8,6 +8,17 @@ using System.Web.Mvc;
 namespace Antinori.Controllers {
     public class BookController : ApplicationController {
 
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult Add() {
+            // return the add book page.
+
+            Books book = new Books();
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "UC_Book", book), JsonRequestBehavior.AllowGet);
+        }
+
+
         [Authorize(Roles = "Admin, Editor")]
         public ActionResult Index() {
             // return the opere list view.           
@@ -30,6 +41,19 @@ namespace Antinori.Controllers {
             Books s = new Books();
 
             return View(s);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult P_Sections(int numberOfSections) {
+            // return the section page.
+
+            List<Sections> Sections = new List<Sections>(numberOfSections);
+            for(int i = 0; i < numberOfSections; i++) {
+                Sections.Add(new Sections() { Id = Guid.NewGuid().ToString() });
+            }
+
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "UC_Section", Sections), JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Admin, Editor")]

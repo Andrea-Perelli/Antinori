@@ -7,7 +7,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <!-- PAGE TITLE -->
-        <h2><span class="fa fa-users"></span> @ViewBag.Title</h2>
+        <h2><span class="fa fa-book"></span> @ViewBag.Title</h2>
     </section>
 
     <!-- Main content -->
@@ -82,7 +82,7 @@
 
         function add() {
             // set url.
-            var url = '@Url.Action("Add", "Account")';
+            var url = '@Url.Action("Add", "Book")';
             // show refresher.
             REFRESH_show("CONTENT_Refresh");
             $.getJSON(url,
@@ -166,6 +166,8 @@
                 });
             }
         }
+
+        
 
     </script>
 
