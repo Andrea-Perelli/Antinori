@@ -137,9 +137,21 @@ namespace Antinori.Controllers {
                             Id = Guid.NewGuid().ToString(),
                             Name = forms["name" + index],
                             Description = forms["description" + index],
-                            Book = newBook.Id,
-                            Books = newBook
+                            Book = newBook.Id
                         };
+                        int numberOfSubSection = Convert.ToInt16(forms["numberOfSubSection" + index]);
+                        while(numberOfSubSection > 0) {
+                            SubSections sub = new SubSections {
+                                Id = Guid.NewGuid().ToString(),
+                                Name = forms["subName" + index],
+                                Description = forms["subDescription" + index],
+                                Section = sec.Id,                                
+                            };
+                            // add to the section.
+                            sec.SubSections.Add(sub);
+                            numberOfSubSection--;
+                        }                        
+
                         // add to the book.
                         newBook.Sections.Add(sec);
                         index += 1;

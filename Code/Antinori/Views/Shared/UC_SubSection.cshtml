@@ -11,12 +11,12 @@
         <div class="row">
             <div class="col-md-4">
                 <small class="required">Nome</small><br />
-                @{var name = "name" + i.ToString();}
+                @{var name = "subName" + i.ToString();}
                 <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
             </div>
             <div class="col-md-6">
                 <small>Descrizione</small><br>
-                @{var name2 = "description" + i.ToString();}
+                @{var name2 = "subDescription" + i.ToString();}
                 <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px"></textarea>
             </div>           
         </div>
