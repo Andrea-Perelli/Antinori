@@ -27,11 +27,11 @@ namespace Antinori.Models
     
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Logs> Logs { get; set; }
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<Pages> Pages { get; set; }
         public virtual DbSet<Sections> Sections { get; set; }
         public virtual DbSet<SubSections> SubSections { get; set; }
         public virtual DbSet<Transcriptions> Transcriptions { get; set; }
-        public virtual DbSet<Logs> Logs { get; set; }
     }
 }

@@ -77,11 +77,6 @@
     <script src="~/Scripts/my.js"></script>
 
     <script>
-        function cercaIscritto() {
-            var url = '@Url.Action("Index", "Iscritti")' + "?ricerca=" + $("#SEARCH_Text").val();           
-            vai(url);
-        }
-
         function UpdateSections() {
             // update section view.
 
@@ -95,6 +90,25 @@
                 function (data) {
                     // set data.
                     $("#sectionBody").html(data);
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                });                      
+        }
+        function UpdateSubSections(id,idBody) {
+            // update section view.
+
+            // retrieve number of sections.
+            var numberOfSubSections = $("#" + id).val();
+            var url = '@Url.Action("P_SubSections", "Book")' + "?numberOfSubSections=" + numberOfSubSections;
+
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // set data.
+                    $("#" + idBody).css('visibility','visible');
+
+                    $("#" + idBody).html(data);
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
                 });                      

@@ -20,6 +20,39 @@
                 @{var name2 = "description" + i.ToString();}
                 <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px"></textarea>
             </div>
+
+            @{var name4 = "subSectionBody" + i.ToString();}
+
+            <!-- CREATE CASE -->
+            @if(Model[i].Id == null || Model[i].Id.Length == 0) {
+                <div class="col-md-2">
+                    <small>Numero di sottosezioni</small>
+                </div>
+                <div class="col-md-2">
+                    @{var name3 = "numberOfSubSection" + i.ToString();}
+
+                    <input type="number" id="@name3" name="@name3" value="" min="0" class="form-control" required />
+                </div>
+                <div class="col-md-2">
+                    <ul class="nav nav-tabs">
+                        <li class="pull-right">
+                            <a href="#" onclick="UpdateSubSections('@name3' , '@name4')" class="text-muted">
+                                <i class="fa fa-check"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else {
+
+            }
+
+        </div>
+        <div class="row">
+
+            <div class="box-body" id="@name4" style="border-left: solid 3px #ffa401; visibility: hidden;">
+
+            </div>
         </div>
         <br />
     </div>

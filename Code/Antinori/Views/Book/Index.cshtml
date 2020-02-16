@@ -95,9 +95,9 @@
         }
 
         function edit(id) {
-            // edit a user.
+            // edit a book.
             // set url.
-            var url = '@Url.Action("Edit", "Account")' + "?id=" + id;
+            var url = '@Url.Action("Edit", "Book")' + "?id=" + id;
 
             // show refresher.
             REFRESH_show("CONTENT_Refresh");
@@ -106,7 +106,7 @@
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
                     // set a modal view.
-                    MODAL_function("Modifica Utente", data, "save()", "Salva", "", "Annulla", "");
+                    MODAL_function("Modifica Opera", data, "save()", "Salva", "", "Annulla", "");
                 })
         }
 
@@ -116,7 +116,7 @@
             // hide the modal view.
             $("#MODAL_ID").hide();
 
-            var url = '@Url.Action("Delete", "Account")' + "?id=" + id;
+            var url = '@Url.Action("Delete", "Book")' + "?id=" + id;
             // show the refresher.
             REFRESH_show("CONTENT_Refresh");
             $.getJSON(url,
@@ -136,17 +136,17 @@
 
         function save() {
             // validate form.
-            $('#CONTENT_Account_Form').validate({
+            $('#CONTENT_Book_Form').validate({
                 lang: 'it'
             });
 
-            if ($('#CONTENT_Account_Form').valid()) {
+            if ($('#CONTENT_Book_Form').valid()) {
 
 
                 REFRESH_show("MODAL_Refresh");
-                var url = '@Url.Action("Save", "Account")';
+                var url = '@Url.Action("Save", "Book")';
                 // take the form content by id.
-                var data = new FormData($('#CONTENT_Account_Form').get(0));
+                var data = new FormData($('#CONTENT_Book_Form').get(0));
 
                 $.ajax({
                     type: "POST",

@@ -18,6 +18,25 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_Book", book), JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult Edit(string id) {
+            // retrieve the book.
+            var book = this.Dc.Books_Get(id);
+
+            // return the partial view containing the user.
+            return Json(GetRenderPartialView(this, "UC_Book", book), JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult GetBooksInfo() {
+            // return user info.
+
+            // create a model. return the model.
+            DashboardModelBooks model = new DashboardModelBooks();
+            model.numberOfBooks = this.Dc.Books_Gets().Count;
+            // return the partial view .
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
 
         [Authorize(Roles = "Admin, Editor")]
         public ActionResult Index() {
@@ -43,17 +62,31 @@ namespace Antinori.Controllers {
             return View(s);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Editor")]
         public JsonResult P_Sections(int numberOfSections) {
             // return the section page.
 
             List<Sections> Sections = new List<Sections>(numberOfSections);
             for(int i = 0; i < numberOfSections; i++) {
-                Sections.Add(new Sections() { Id = Guid.NewGuid().ToString() });
+                Sections.Add(new Sections());
             }
 
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "UC_Section", Sections), JsonRequestBehavior.AllowGet);
+        }
+
+
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult P_SubSections(int numberOfSubSections) {
+            // return the section page.
+
+            List<SubSections> subSections = new List<SubSections>(numberOfSubSections);
+            for(int i = 0; i < numberOfSubSections; i++) {
+                subSections.Add(new SubSections());
+            }
+
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "UC_SubSection", subSections), JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Admin, Editor")]
@@ -69,22 +102,6 @@ namespace Antinori.Controllers {
                 //map the two objects: it updates the DB object.
                 if(TryUpdateModel(daDb)) {
                     try {
-                        // set again attivo field (for some reason is set always to to true).
-                        //daDb.LockoutEnabled = !forms["Attivo"].ToString().ToLower().Equals("true");
-                        //daDb.LockoutEndDateUtc = DateTime.MaxValue;
-
-                        // delete roles
-                        //daDb.AspNetRoles.Clear();
-                        //this.Dc.AspNetUsers_Save();
-                        ////update (add) roles.
-                        //foreach(var key in forms) {
-                        //    if(key.ToString().Equals("Role")) {
-                        //        // add roles: the entity framework will create the relationship.
-                        //        daDb.AspNetRoles.Add(this.Dc.Ruoli_Get(forms[key.ToString()].Replace("R_", "")));
-                        //    }
-                        //}
-                        //this.Dc.AspNetUsers_Save();
-
                         // set log.
                         Log_Insert(book.Id, "Books", "UPDATE", true, "Operazione conclusa con successo", "", "", "", "");
                         op = new OpEsitoModel() { idReturn = book.Id, riuscita = true };
@@ -111,10 +128,28 @@ namespace Antinori.Controllers {
                     EndDate = book.EndDate,
                     Title = book.Title
                 };
-
+                int numberOfSection = Convert.ToInt16(forms["numberOfSection"]);
+                if(numberOfSection > 0) {
+                    // create sections.
+                    int index = 0;
+                    while(index < numberOfSection) {
+                        Sections sec = new Sections {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = forms["name" + index],
+                            Description = forms["description" + index],
+                            Book = newBook.Id,
+                            Books = newBook
+                        };
+                        // add to the book.
+                        newBook.Sections.Add(sec);
+                        index += 1;
+                    }
+                }
                 // add the sezione to the context.
                 this.Dc.Books_Insert(newBook);
-                // save context (roles).
+
+
+                // save context.
                 int esito = this.Dc.Books_Save();
                 // check if all is ok.
                 if(esito > -1) {

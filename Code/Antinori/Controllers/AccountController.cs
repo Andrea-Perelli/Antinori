@@ -177,17 +177,17 @@ namespace Antinori.Controllers {
             return Json(esito, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin,Editor")]
         public JsonResult GetUsersInfo(){
             // return user info.
 
             // create a model. return the model.
-            DashboardModel model = new DashboardModel();
+            DashboardModelUsers model = new DashboardModelUsers();
             model.numberOfUsers = this.Dc.AspNetUsers_Gets().Count;
             model.numberOfNormalUsers = this.Dc.AspNetUsers_Get_ByRole("User").Count;
             // return the partial view .
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
 
         // GET: /Account/Login
         [AllowAnonymous]

@@ -22,9 +22,9 @@ namespace Antinori.Models
     
         public string Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
         public string Author { get; set; }
-        public System.DateTime EndDate { get; set; }
+        public string Description { get; set; }
+        public string EndDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sections> Sections { get; set; }

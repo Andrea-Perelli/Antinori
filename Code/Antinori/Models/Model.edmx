@@ -48,7 +48,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Logs">
           <Key>
@@ -257,118 +257,6 @@
           <Property Name="Cancellato" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="Books">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
-          <NavigationProperty Name="Sections" Relationship="Self.FK_Sections_Sections" FromRole="Books" ToRole="Sections" />
-          <Property Name="Author" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="Pages">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NumericOrder" Type="Int32" Nullable="false" />
-          <Property Name="CompleteOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BigPhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BookTitle" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SectionName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SubSection" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="SubSections" Relationship="Self.FK_Pages_SubSections" FromRole="Pages" ToRole="SubSections" />
-          <NavigationProperty Name="Transcriptions" Relationship="Self.FK_Transcriptions_Pages" FromRole="Pages" ToRole="Transcriptions" />
-          <Property Name="Editor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Sections">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Book" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Books" Relationship="Self.FK_Sections_Sections" FromRole="Sections" ToRole="Books" />
-          <NavigationProperty Name="SubSections" Relationship="Self.FK_SubSections_Sections" FromRole="Sections" ToRole="SubSections" />
-        </EntityType>
-        <EntityType Name="SubSections">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Section" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Pages" Relationship="Self.FK_Pages_SubSections" FromRole="SubSections" ToRole="Pages" />
-          <NavigationProperty Name="Sections" Relationship="Self.FK_SubSections_Sections" FromRole="SubSections" ToRole="Sections" />
-        </EntityType>
-        <EntityType Name="Transcriptions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TEI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Page" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
-          <Property Name="ProposedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProposedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Pages" Relationship="Self.FK_Transcriptions_Pages" FromRole="Transcriptions" ToRole="Pages" />
-        </EntityType>
-        <Association Name="FK_Sections_Sections">
-          <End Role="Books" Type="Self.Books" Multiplicity="1" />
-          <End Role="Sections" Type="Self.Sections" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Books">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Sections">
-              <PropertyRef Name="Book" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pages_SubSections">
-          <End Role="SubSections" Type="Self.SubSections" Multiplicity="1" />
-          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SubSections">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pages">
-              <PropertyRef Name="SubSection" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transcriptions_Pages">
-          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
-          <End Role="Transcriptions" Type="Self.Transcriptions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transcriptions">
-              <PropertyRef Name="Page" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SubSections_Sections">
-          <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
-          <End Role="SubSections" Type="Self.SubSections" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sections">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SubSections">
-              <PropertyRef Name="Section" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
@@ -376,33 +264,33 @@
         <EntityContainer Name="AntinoriEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="Books" EntityType="Self.Books" />
-          <EntitySet Name="Pages" EntityType="Self.Pages" />
-          <EntitySet Name="Sections" EntityType="Self.Sections" />
-          <EntitySet Name="SubSections" EntityType="Self.SubSections" />
-          <EntitySet Name="Transcriptions" EntityType="Self.Transcriptions" />
-          <AssociationSet Name="FK_Sections_Sections" Association="Self.FK_Sections_Sections">
-            <End Role="Books" EntitySet="Books" />
-            <End Role="Sections" EntitySet="Sections" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pages_SubSections" Association="Self.FK_Pages_SubSections">
-            <End Role="SubSections" EntitySet="SubSections" />
-            <End Role="Pages" EntitySet="Pages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transcriptions_Pages" Association="Self.FK_Transcriptions_Pages">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="Transcriptions" EntitySet="Transcriptions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SubSections_Sections" Association="Self.FK_SubSections_Sections">
-            <End Role="Sections" EntitySet="Sections" />
-            <End Role="SubSections" EntitySet="SubSections" />
-          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Logs" EntityType="AntinoriModel.Logs" />
-        </EntityContainer>
+          <EntitySet Name="Books" EntityType="AntinoriModel.Books" />
+          <EntitySet Name="Pages" EntityType="AntinoriModel.Pages" />
+          <EntitySet Name="Sections" EntityType="AntinoriModel.Sections" />
+          <EntitySet Name="SubSections" EntityType="AntinoriModel.SubSections" />
+          <EntitySet Name="Transcriptions" EntityType="AntinoriModel.Transcriptions" />
+          <AssociationSet Name="FK_Sections_Sections" Association="AntinoriModel.FK_Sections_Sections">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Sections" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pages_SubSections" Association="AntinoriModel.FK_Pages_SubSections">
+            <End Role="SubSections" EntitySet="SubSections" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transcriptions_Pages" Association="AntinoriModel.FK_Transcriptions_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Transcriptions" EntitySet="Transcriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubSections_Sections" Association="AntinoriModel.FK_SubSections_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="SubSections" EntitySet="SubSections" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Logs">
           <Key>
             <PropertyRef Name="Id" />
@@ -420,7 +308,119 @@
           <Property Name="Operazione_Data" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Operazione_Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EndDate" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sections" Relationship="AntinoriModel.FK_Sections_Sections" FromRole="Books" ToRole="Sections" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumericOrder" Type="Int32" Nullable="false" />
+          <Property Name="CompleteOrder" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BigPhotoPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BookTitle" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SectionName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SubSection" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Editor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SubSections" Relationship="AntinoriModel.FK_Pages_SubSections" FromRole="Pages" ToRole="SubSections" />
+          <NavigationProperty Name="Transcriptions" Relationship="AntinoriModel.FK_Transcriptions_Pages" FromRole="Pages" ToRole="Transcriptions" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Book" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="AntinoriModel.FK_Sections_Sections" FromRole="Sections" ToRole="Books" />
+          <NavigationProperty Name="SubSections" Relationship="AntinoriModel.FK_SubSections_Sections" FromRole="Sections" ToRole="SubSections" />
+        </EntityType>
+        <EntityType Name="SubSections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Section" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pages" Relationship="AntinoriModel.FK_Pages_SubSections" FromRole="SubSections" ToRole="Pages" />
+          <NavigationProperty Name="Sections" Relationship="AntinoriModel.FK_SubSections_Sections" FromRole="SubSections" ToRole="Sections" />
+        </EntityType>
+        <EntityType Name="Transcriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TEI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Page" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="ProposedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProposedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pages" Relationship="AntinoriModel.FK_Transcriptions_Pages" FromRole="Transcriptions" ToRole="Pages" />
+        </EntityType>
+        <Association Name="FK_Sections_Sections">
+          <End Type="AntinoriModel.Books" Role="Books" Multiplicity="1" />
+          <End Type="AntinoriModel.Sections" Role="Sections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sections">
+              <PropertyRef Name="Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pages_SubSections">
+          <End Type="AntinoriModel.SubSections" Role="SubSections" Multiplicity="1" />
+          <End Type="AntinoriModel.Pages" Role="Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubSections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="SubSection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transcriptions_Pages">
+          <End Type="AntinoriModel.Pages" Role="Pages" Multiplicity="1" />
+          <End Type="AntinoriModel.Transcriptions" Role="Transcriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transcriptions">
+              <PropertyRef Name="Page" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubSections_Sections">
+          <End Type="AntinoriModel.Sections" Role="Sections" Multiplicity="1" />
+          <End Type="AntinoriModel.SubSections" Role="SubSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubSections">
+              <PropertyRef Name="Section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -455,67 +455,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Books">
-            <EntityTypeMapping TypeName="AntinoriModel.Books">
-              <MappingFragment StoreEntitySet="Books">
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pages">
-            <EntityTypeMapping TypeName="AntinoriModel.Pages">
-              <MappingFragment StoreEntitySet="Pages">
-                <ScalarProperty Name="Editor" ColumnName="Editor" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="NumericOrder" ColumnName="NumericOrder" />
-                <ScalarProperty Name="CompleteOrder" ColumnName="CompleteOrder" />
-                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
-                <ScalarProperty Name="BigPhotoPath" ColumnName="BigPhotoPath" />
-                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
-                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
-                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sections">
-            <EntityTypeMapping TypeName="AntinoriModel.Sections">
-              <MappingFragment StoreEntitySet="Sections">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Book" ColumnName="Book" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SubSections">
-            <EntityTypeMapping TypeName="AntinoriModel.SubSections">
-              <MappingFragment StoreEntitySet="SubSections">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Section" ColumnName="Section" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Transcriptions">
-            <EntityTypeMapping TypeName="AntinoriModel.Transcriptions">
-              <MappingFragment StoreEntitySet="Transcriptions">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TEI" ColumnName="TEI" />
-                <ScalarProperty Name="Page" ColumnName="Page" />
-                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
-                <ScalarProperty Name="ProposedBy" ColumnName="ProposedBy" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-                <ScalarProperty Name="ProposedDate" ColumnName="ProposedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="AntinoriModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -542,7 +481,68 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="AntinoriModel.Books">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="AntinoriModel.Pages">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="BigPhotoPath" ColumnName="BigPhotoPath" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="CompleteOrder" ColumnName="CompleteOrder" />
+                <ScalarProperty Name="NumericOrder" ColumnName="NumericOrder" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="AntinoriModel.Sections">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="Book" ColumnName="Book" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubSections">
+            <EntityTypeMapping TypeName="AntinoriModel.SubSections">
+              <MappingFragment StoreEntitySet="SubSections">
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transcriptions">
+            <EntityTypeMapping TypeName="AntinoriModel.Transcriptions">
+              <MappingFragment StoreEntitySet="Transcriptions">
+                <ScalarProperty Name="ProposedDate" ColumnName="ProposedDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ProposedBy" ColumnName="ProposedBy" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="TEI" ColumnName="TEI" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

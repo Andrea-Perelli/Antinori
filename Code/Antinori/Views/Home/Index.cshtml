@@ -137,8 +137,7 @@
         $.getJSON('@Url.Action("GetUsersInfo","Account")',
             function (model) {
                 $("#numberOfUsers").html(model.numberOfUsers);
-                $("#numberOfNormalUsers").html(model.numberOfNormalUsers);
-
+                $("#numberOfNormalUsers").html(model.numberOfNormalUsers);   
                 REFRESH_hide("INEVIDENZA_Refresh");
 
             });
@@ -146,7 +145,15 @@
 
     function LoadTranscrpitiondata() {
         // load data.
-        // todo.
+        // show refresher.
+        REFRESH_show("INEVIDENZA_Refresh");
+
+        $.getJSON('@Url.Action("GetBooksInfo","Book")',
+            function (model) {
+                $("#numberOfBooks").html(model.numberOfBooks); 
+                REFRESH_hide("INEVIDENZA_Refresh");
+
+            });        
     }
 
         

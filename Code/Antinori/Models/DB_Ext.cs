@@ -138,7 +138,8 @@ namespace Antinori.Models {
 
         public Books Books_Get(string id) {
             // return a Books by Id.
-            return Books.FirstOrDefault(it => it.Id == id);
+            Books book = Books.FirstOrDefault(it => it.Id == id);
+            return book;
         }
 
         public int Books_Insert(Books c) {

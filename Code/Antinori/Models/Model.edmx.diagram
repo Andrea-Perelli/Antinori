@@ -7,18 +7,18 @@
       <Diagram DiagramId="295510b56b0b46b0998987294b1ae08e" Name="Diagram1">
         <EntityTypeShape EntityType="AntinoriModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AntinoriModel.AspNetUsers" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AntinoriModel.Books" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AntinoriModel.Pages" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="AntinoriModel.Sections" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AntinoriModel.SubSections" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AntinoriModel.Transcriptions" Width="1.5" PointX="9.75" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="AntinoriModel.FK_Sections_Sections" ManuallyRouted="false" />
-        <AssociationConnector Association="AntinoriModel.FK_Pages_SubSections" ManuallyRouted="false" />
-        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_Pages" ManuallyRouted="false" />
-        <AssociationConnector Association="AntinoriModel.FK_SubSections_Sections" ManuallyRouted="false" />
         <AssociationConnector Association="AntinoriModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="AntinoriModel.Logs" Width="1.5" PointX="5.375" PointY="5.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="AntinoriModel.Books" Width="1.5" PointX="5.375" PointY="1.625" />
+        <EntityTypeShape EntityType="AntinoriModel.Pages" Width="1.5" PointX="12.125" PointY="1" />
+        <EntityTypeShape EntityType="AntinoriModel.Sections" Width="1.5" PointX="7.625" PointY="1.625" />
+        <EntityTypeShape EntityType="AntinoriModel.SubSections" Width="1.5" PointX="9.875" PointY="1.625" />
+        <EntityTypeShape EntityType="AntinoriModel.Transcriptions" Width="1.5" PointX="14.375" PointY="1.5" />
+        <AssociationConnector Association="AntinoriModel.FK_Sections_Sections" />
+        <AssociationConnector Association="AntinoriModel.FK_Pages_SubSections" />
+        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_Pages" />
+        <AssociationConnector Association="AntinoriModel.FK_SubSections_Sections" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

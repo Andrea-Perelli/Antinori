@@ -1,0 +1,25 @@
+﻿@model List<Antinori.Models.SubSections>
+@using Antinori.Models;
+
+
+@for(int i = 0; i < Model.Count; i++) {
+
+    <div style="margin-left: 20px;">
+        @{var index = i + 1;}
+
+        <p style="font-weight: bold">Sottosezione @index </p>
+        <div class="row">
+            <div class="col-md-4">
+                <small class="required">Nome</small><br />
+                @{var name = "name" + i.ToString();}
+                <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+                <small>Descrizione</small><br>
+                @{var name2 = "description" + i.ToString();}
+                <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px"></textarea>
+            </div>           
+        </div>
+        <br />
+    </div>
+}
