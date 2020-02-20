@@ -124,7 +124,7 @@ namespace Antinori.Models {
                 // Entity framework stores its current status on the db (we don't pass any object to store).
                 esito = SaveChanges();
             }
-            catch {
+            catch (Exception e){
 
             }
             return esito;

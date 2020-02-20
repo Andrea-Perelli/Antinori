@@ -8,7 +8,6 @@ using System.Web.Mvc;
 namespace Antinori.Controllers {
     public class BookController : ApplicationController {
 
-
         [Authorize(Roles = "Admin")]
         public JsonResult Add() {
             // return the add book page.
@@ -16,6 +15,20 @@ namespace Antinori.Controllers {
             Books book = new Books();
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "UC_Book", book), JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult Delete(string id) {
+            // delete a book by id.
+
+            // set default value for esito.
+            bool esito = false;
+
+            // delete book.
+            esito = this.Dc.Books_Delete(this.Dc.Books_Get(id)) > -1;
+           
+            //save and update the esito value.
+            return Json(esito, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Admin,Editor")]

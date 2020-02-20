@@ -142,7 +142,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pages_SubSections">
-          <End Role="SubSections" Type="Self.SubSections" Multiplicity="1" />
+          <End Role="SubSections" Type="Self.SubSections" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SubSections">
@@ -154,7 +156,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sections_Sections">
-          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Sections" Type="Self.Sections" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Books">
@@ -166,7 +170,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubSections_Sections">
-          <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
+          <End Role="Sections" Type="Self.Sections" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="SubSections" Type="Self.SubSections" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sections">
@@ -178,7 +184,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Transcriptions_Pages">
-          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Transcriptions" Type="Self.Transcriptions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pages">
@@ -374,7 +382,8 @@
         </EntityType>
         <Association Name="FK_Sections_Sections">
           <End Type="AntinoriModel.Books" Role="Books" Multiplicity="1" />
-          <End Type="AntinoriModel.Sections" Role="Sections" Multiplicity="*" />
+          <End Type="AntinoriModel.Sections" Role="Sections" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Books">
               <PropertyRef Name="Id" />
