@@ -99,7 +99,7 @@
 
             // retrieve number of sections.
             var numberOfSubSections = $("#" + id).val();
-            var url = '@Url.Action("P_SubSections", "Book")' + "?numberOfSubSections=" + numberOfSubSections;
+            var url = '@Url.Action("P_SubSections", "Book")' + "?numberOfSubSections=" + numberOfSubSections + "&parent=" + idBody;
 
             // show the refresher.
             REFRESH_show("CONTENT_Refresh");
@@ -107,7 +107,6 @@
                 function (data) {
                     // set data.
                     $("#" + idBody).css('visibility','visible');
-
                     $("#" + idBody).html(data);
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
@@ -210,7 +209,7 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-user"></i>
-                                <span>Utenti</span>                                
+                                <span>Utenti</span>
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("Index","Account")"><i class="fa fa-search"></i> Cerca</a></li>
@@ -221,7 +220,7 @@
                             </ul>
                         </li>
                     }
-                    
+
                     @if(User.IsInRole("Admin") || User.IsInRole("Editor")) {
                         <li class="treeview">
                             <a href="#">
@@ -238,17 +237,22 @@
                     }
 
 
-
-
-                    @if(User.IsInRole("Amministrazione")) {
+                    @if(User.IsInRole("Admin") || User.IsInRole("Editor")) {
                         <li>
-                            <a href="@Url.Action("P_Newsletter","Iscritti")">
-                                <i class="fa fa-newspaper-o"></i>
-                                <span>Newsletter</span>
+                            <a href="@Url.Action("P_SubSectionsList","Book")">
+                                <i class="fa fa-th"></i>
+                                <span>Sottosezioni</span>
                             </a>
                         </li>
-                     }
-
+                    }
+                    @if(User.IsInRole("Admin") || User.IsInRole("Editor")) {
+                        <li>
+                            <a href="@Url.Action("P_TrascrizioniList","Book")">
+                                <i class="fa fa-file-text"></i>
+                                <span>Trascrizioni</span>
+                            </a>
+                        </li>
+                    }
 
 
                     @*

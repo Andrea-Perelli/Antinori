@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Sottosezioni";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section header_page{
+    <h2><span class="fa fa-book"></span> @ViewBag.Title</h2>
+}
+
+<div class="box box-solid">
+    <div class="box-header with-border" id="CONTENT_SUBSECTIONS">
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" id="CONTENT_SUBSECTIONS">
+    </div>
+    <div class="box-footer">
+        <div class="pull-right">
+            <a class="btn btn-primary" href="@Url.Action("Index","Home")">Vai alla dashboard</a>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script>
+      $(document).ready(function () {
+
+            list();
+        });
+
+
+        function list() {
+            // set the list on the view.
+            var url = '@Url.Action("P_SubSectionsListContent", "Book")';
+
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // set data.
+                    $("#CONTENT_SUBSECTIONS").html(data);
+                    // set the table name as parameter: DataTables_Table_0.
+                    $("#DataTables_Table_0").DataTable({
+                        dom: 'Bfrtip',
+                        language: DataTablesLanguage,
+                        responsive: true,
+                        columnDefs: [
+                            { className: "desktop", targets: [4, 5] },  // x > 1024
+                            { className: "all", targets: [0, 1, 2, 3] } // for each width
+                        ]
+                    });
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                });
+        }
+    </script>
+}
+
+
+
+

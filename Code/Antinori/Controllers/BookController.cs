@@ -90,16 +90,36 @@ namespace Antinori.Controllers {
 
 
         [Authorize(Roles = "Admin,Editor")]
-        public JsonResult P_SubSections(int numberOfSubSections) {
+        public JsonResult P_SubSections(int numberOfSubSections, string parent) {
             // return the section page.
 
             List<SubSections> subSections = new List<SubSections>(numberOfSubSections);
             for(int i = 0; i < numberOfSubSections; i++) {
                 subSections.Add(new SubSections());
             }
+            ViewBag.Parent = parent.Substring("subSectionBody".Length);
 
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "UC_SubSection", subSections), JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        public ActionResult P_SubSectionsList() {
+            // return the subsection section page.
+
+            // return the view.
+            return View();
+        }
+
+
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult P_SubSectionsListContent() {
+            // return the Subsection list page.
+
+            List<SubSections> subSections = this.Dc.SubSections_Gets();
+
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "UC_SubSectionListContent", subSections), JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Admin, Editor")]
@@ -153,16 +173,17 @@ namespace Antinori.Controllers {
                             Book = newBook.Id
                         };
                         int numberOfSubSection = Convert.ToInt16(forms["numberOfSubSection" + index]);
-                        while(numberOfSubSection > 0) {
+                        int index2 = 0;
+                        while(index2 < numberOfSubSection) {
                             SubSections sub = new SubSections {
                                 Id = Guid.NewGuid().ToString(),
-                                Name = forms["subName" + index],
-                                Description = forms["subDescription" + index],
+                                Name = forms[index + "subName" + index2],
+                                Description = forms[index + "subDescription" + index2],
                                 Section = sec.Id,                                
                             };
                             // add to the section.
                             sec.SubSections.Add(sub);
-                            numberOfSubSection--;
+                            index2++;
                         }                        
 
                         // add to the book.

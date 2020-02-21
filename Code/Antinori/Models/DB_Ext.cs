@@ -168,6 +168,20 @@ namespace Antinori.Models {
         }
         #endregion
 
+        #region SubSections
+
+        public List<SubSections> SubSections_Gets() {
+            // return the list of all SubSections.
+            return SubSections.ToList();
+        }
+
+        public SubSections SubSectionss_Get(string id) {
+            // return a SubSectionsr by Id.
+            return SubSections.FirstOrDefault(it => it.Id == id);
+        }
+
+        #endregion
+
         #region "Logs"
 
         public int Logs_Count(){

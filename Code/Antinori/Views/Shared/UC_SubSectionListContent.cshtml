@@ -1,0 +1,44 @@
+﻿@model List<Antinori.Models.SubSections>
+
+<!-- TABLE -->
+<table id="DataTables_Table_0" class="table dataTable table-hover">
+    <thead>
+        <tr>
+            <th style="width: 100px">Nome</th>
+            <th style="width: 100px">Descrizione</th>
+            <th style="width: 100px">Opera</th>
+            <th style="width: 70px">Sezione</th>
+            <th style="width: 100px"># Pagine</th>
+            <th style="width: 180px"> </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <!-- Loop on the model.-->
+        @foreach(var subsection in Model) {
+            <tr>
+                <td>@subsection.Name</td>
+                <td>@subsection.Description</td>
+                <td>@subsection.Sections.Books.Title</td>
+                <td>@subsection.Sections.Name</td>
+
+                <td>@subsection.Pages.Count</td>
+
+                <td>
+                    <button class="btn btn-default btn-sm" onclick="edit('@subsection.Id')" title="Modifica">
+                        <i class="fa fa-edit">
+                        </i>
+                    </button>
+                    
+                </td>
+            </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="6"></th>
+        </tr>
+    </tfoot>
+</table>
+
