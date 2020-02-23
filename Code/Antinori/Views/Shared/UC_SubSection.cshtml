@@ -7,19 +7,43 @@
     <div style="margin-left: 20px;">
         @{var index = i + 1;}
 
-        <p style="font-weight: bold">Sottosezione @index</p>
-        <div class="row">
-            <div class="col-md-4">
-                <small class="required">Nome</small><br />
-                @{var name = ViewBag.Parent + "subName" + i.ToString();}
-                <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
+        <!-- EDIT CASE -->
+        @if(Model[i].Id != null && Model[i].Id.Length > 0) {
+            var parent = Model[i].Sections.Id;
+            @Html.Hidden(parent + "id" + i.ToString(), Model[i].Id)
+            <p style="font-weight: bold">Sottosezione @index</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Nome</small><br />
+                    @{var name = parent + "subName" + i.ToString();}
+                    <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                    <small>Descrizione</small><br>
+                    @{var name2 = parent + "subDescription" + i.ToString();}
+                <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px">@Model[i].Description</textarea>
+                </div>
             </div>
-            <div class="col-md-6">
-                <small>Descrizione</small><br>
-                @{var name2 = ViewBag.Parent + "subDescription" + i.ToString();}
-                <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px"></textarea>
+            <br />
+        }
+        else {
+
+            <p style="font-weight: bold">Sottosezione @index</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Nome</small><br />
+                    @{var name = ViewBag.Parent + "subName" + i.ToString();}
+                    <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                    <small>Descrizione</small><br>
+                    @{var name2 = ViewBag.Parent + "subDescription" + i.ToString();}
+                    <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px"></textarea>
+                </div>
             </div>
-        </div>
-        <br />
+            <br />
+        }
+
+
     </div>
 }

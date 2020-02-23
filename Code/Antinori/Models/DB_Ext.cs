@@ -130,7 +130,6 @@ namespace Antinori.Models {
             return esito;
         }
 
-
         public List<Books> Books_Gets() {
             // return the list of all books.
             return Books.ToList();
@@ -166,6 +165,22 @@ namespace Antinori.Models {
             }
             return esito;
         }
+        #endregion
+
+        #region Sections
+
+        public int Sections_Save() {
+            int esito = -1;
+            try {
+                // esito is the number of modifications.
+                esito = SaveChanges();
+            }
+            catch(Exception e) {
+
+            }
+            return esito;
+        }
+
         #endregion
 
         #region SubSections

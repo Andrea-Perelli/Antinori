@@ -3,10 +3,14 @@
 
 @for(int i=0; i <Model.Count; i++) {
 
-    @*@Html.HiddenFor(section => section.Id)*@
 
     <div>
-        @{var index = i +1;}
+        @{var index = i + 1;}
+
+        <!-- EDIT CASE -->
+        @if(Model[i].Id != null && Model[i].Id.Length > 0) {
+            @Html.Hidden("id" + i.ToString(), Model[i].Id)
+        }
 
         <p style="font-weight: bold">Sezione @index </p>
         <div class="row">
@@ -18,10 +22,11 @@
             <div class="col-md-6">
                 <small>Descrizione</small><br>
                 @{var name2 = "description" + i.ToString();}
-                <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px"></textarea>
+                <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px">@Model[i].Description</textarea>
             </div>
 
             @{var name4 = "subSectionBody" + i.ToString();}
+            @{var name5 = "numberOfSubSection" + i.ToString();}
 
             <!-- CREATE CASE -->
             @if(Model[i].Id == null || Model[i].Id.Length == 0) {
@@ -44,7 +49,9 @@
                 </div>
             }
             else {
+                <input style="visibility:hidden;" type="number" id="@name5" name="@name5" value="@Model[i].SubSections.Count" min="@Model[i].SubSections.Count" class="form-control" required />
 
+                @Html.Partial("UC_SubSection", Model[i].SubSections.OrderBy(p => p.Name).ToList())
             }
 
         </div>

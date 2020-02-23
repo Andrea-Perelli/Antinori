@@ -90,24 +90,24 @@
                     <div class="col-md-6">
                     </div>
                     <div class="col-md-2  text-right">
-                        <small style="text-align: right;">Numero di sezioni</small>
+                        @*<small style="text-align: right;">Numero di sezioni</small>*@
                     </div>
                     <div class="col-md-2">
-                        <input type="number" id="numberOfSection" name="numberOfSection" value="@Model.Sections.Count" min="@Model.Sections.Count" class="form-control" required />
+                        <input style="visibility:hidden;" type="number" id="numberOfSection" name="numberOfSection" value="@Model.Sections.Count" min="@Model.Sections.Count" class="form-control" required />
                     </div>
                     <div class="col-md-2">
                         <ul class="nav nav-tabs">
                             <li class="pull-right">
-                                <a href="#" onclick="ShowSections()" class="text-muted">
+                                @*<a href="#" onclick="ShowSections()" class="text-muted">
                                     <i class="fa fa-plus"></i>
-                                </a>
+                                </a>*@
                             </li>
                         </ul>
                     </div>
 
                 </div>
-                <div class="box-body" id="sectionBody">
-
+                <div class="box-body" id="sectionBodyEdit">
+                    @Html.Partial("UC_Section", Model.Sections.ToList())
                 </div>
                 <!-- /.box-body -->
             </div>

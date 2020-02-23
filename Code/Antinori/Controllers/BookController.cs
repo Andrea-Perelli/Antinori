@@ -135,6 +135,50 @@ namespace Antinori.Controllers {
                 //map the two objects: it updates the DB object.
                 if(TryUpdateModel(daDb)) {
                     try {
+
+                        int numberOfSection = Convert.ToInt16(forms["numberOfSection"]);
+                        if(numberOfSection > 0) {
+                            // create sections.
+                            int index = 0;
+                            while(index < numberOfSection) {
+
+                                // retrive section.
+                                Sections temp = daDb.Sections.FirstOrDefault(s => s.Id == forms["id" + index].ToString());
+                                
+                                if(temp!= null) {
+                                    temp.Name = forms["name" + index];
+                                    temp.Description = forms["description" + index];
+                                }
+
+                                // retrieve number of sub sections.
+                                int numberOfSubSection = Convert.ToInt16(forms["numberOfSubSection" + index]);
+
+                                int index2 = 0;
+                                while(index2 < numberOfSubSection) {
+
+                                    SubSections temp2 = temp.SubSections.FirstOrDefault(s => s.Id == forms[temp.Id + "id" + index2].ToString());
+                                    if(temp2 != null) {
+                                        temp2.Name = forms[temp.Id + "subName" + index2];
+                                        temp2.Description = forms[temp.Id + "subDescription" + index2];
+                                    }
+                                    
+                                    index2++;
+                                }
+                                index += 1;
+                            }
+                            this.Dc.Sections_Save();
+
+                        }
+                        // save.
+                        int esito = this.Dc.Books_Save();
+
+                        // is we couldn't save.
+                        if(esito == -1) {                            
+
+                            Log_Insert(book.Id, "Books", "UPDATE", false, "Errore nel salvataggio");
+                            op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore nel salvataggio" };
+                            return Json(op, JsonRequestBehavior.AllowGet);
+                        }
                         // set log.
                         Log_Insert(book.Id, "Books", "UPDATE", true, "Operazione conclusa con successo", "", "", "", "");
                         op = new OpEsitoModel() { idReturn = book.Id, riuscita = true };
