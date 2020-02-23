@@ -51,7 +51,14 @@
             else {
                 <input style="visibility:hidden;" type="number" id="@name5" name="@name5" value="@Model[i].SubSections.Count" min="@Model[i].SubSections.Count" class="form-control" required />
 
-                @Html.Partial("UC_SubSection", Model[i].SubSections.OrderBy(p => p.Name).ToList())
+                 var css = "hidden";
+                 if(Model[i].SubSections.Count > 0) {
+                    css = "visible";
+                 }
+                <div class="box-body" style="border-left: solid 3px #ffa401; visibility: @css;">
+                    @Html.Partial("UC_SubSection", Model[i].SubSections.OrderBy(p => p.Name).ToList())
+
+                </div>
             }
 
         </div>

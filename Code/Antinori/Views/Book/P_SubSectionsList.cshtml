@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Sottosezioni";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -16,7 +15,6 @@
     </div>
     <div class="box-footer">
         <div class="pull-right">
-            <a class="btn btn-primary" href="@Url.Action("Index","Home")">Vai alla dashboard</a>
         </div>
     </div>
 </div>
@@ -28,7 +26,45 @@
       $(document).ready(function () {
 
             list();
-        });
+      });
+
+        function AddPage() {
+            // add a page. 
+
+            // validate form.
+            $('#CONTENT_Page_Form').validate({
+                lang: 'it'
+            });
+
+            if ($('#CONTENT_Page_Form').valid()) {
+
+                REFRESH_show("MODAL_Refresh");
+                var url = '@Url.Action("AddPage", "Book")';
+                // take the form content by id.
+                var data = new FormData($('#CONTENT_Page_Form').get(0));
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (risultato) {
+                        REFRESH_hide("CONTENT_Refresh");
+
+                        if (risultato) {
+                            $("#MODAL_ID").modal('toggle');
+                            list();
+                        }
+                        
+                    },
+                    error: function () {
+                        // set error.
+                        DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare", "", "", "", "OK");
+                    }
+                });
+            }
+        }
 
 
         function list() {
@@ -53,6 +89,20 @@
                     });
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
+                });
+        }
+
+        function P_AddPage(subSectionId) {
+
+            var url = '@Url.Action("P_AddPage", "Book")' + "?subSectionId=" + subSectionId;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+
+            $.getJSON(url,
+                function (data) {
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                    MODAL_function("Nuova Pagina", data, "AddPage()", "Aggiungi", "", "Annulla", "");
                 });
         }
     </script>

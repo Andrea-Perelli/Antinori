@@ -1,0 +1,56 @@
+﻿@model Antinori.Models.Pages
+
+
+<!-- Create a form  -->
+@using(Html.BeginForm("AddPage", "Book", FormMethod.Post, new { id = "CONTENT_Page_Form" })) {
+    <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(p => p.SubSection)
+    <!-- FIELD TO EDIT -->
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <small class="required">Titolo</small><br />
+                <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <small class="required">Numero di pagina</small><br />
+                <input type="number" id="NumericOrder" name="NumericOrder" value="@Model.NumericOrder" class="form-control" required />
+            </div>
+
+            <div class="col-md-4">
+                <small class="required">Numero di pagina completo</small><br />
+                <input type="text" id="CompleteOrder" name="CompleteOrder" value="@Model.CompleteOrder" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <small>Descrizione</small><br>
+                <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
+            </div>
+
+            <div class="col-md-6">
+                <small class="required">Editor</small><br />
+                <input type="text" id="Title" name="Title" value="@Model.Editor" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <small class="required">Foto </small><br />
+                <input type="file" id="PhotoPath" name="PhotoPath" value="@Model.PhotoPath" class="form-control" required>
+            </div>
+
+            <div class="col-md-4">
+                <small class="required">Foto Tiff</small><br />
+                <input type="file" id="BigPhotoPath" name="BigPhotoPath" value="@Model.BigPhotoPath" class="form-control" required>
+            </div>
+        </div>
+        <br />
+    </div>
+}

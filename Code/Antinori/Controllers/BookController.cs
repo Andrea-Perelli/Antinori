@@ -17,6 +17,49 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_Book", book), JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult AddPage(Pages page, HttpPostedFileBase PhotoPath, HttpPostedFileBase BigPhotoPath) {
+            // add a page to a section.
+
+            // set default value for esito.
+            bool result = false;
+
+            string relativePathJpeg = "~/Pics/JPEG/";
+            string relativePathTiff = "~/Pics/Tiff/";
+
+            string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + PhotoPath.FileName;
+            string diskPathTiff = ControllerContext.HttpContext.Server.MapPath(relativePathTiff) + BigPhotoPath.FileName;
+
+            try {
+                // upload photos.
+                PhotoPath.SaveAs(diskPathJpeg);
+                BigPhotoPath.SaveAs(diskPathTiff);
+
+                SubSections sec = this.Dc.SubSectionss_Get(page.SubSection);
+
+                // set data
+                page.SectionName = sec.Sections.Name;
+                page.BookTitle = sec.Sections.Books.Title;
+                page.Id = Guid.NewGuid().ToString();
+                page.PhotoPath = diskPathJpeg;
+                page.BigPhotoPath = diskPathTiff;
+
+                // insert page.
+                result = this.Dc.Pages_Insert(page) > -1;
+
+                // all ok.
+                if(result) {
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }                
+            }
+            catch(Exception e) {
+
+            }
+            Log_Insert(page.SectionName, "Books", "UPDATE", false, "Errore nel salvataggio");
+            OpEsitoModel op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore nell'inserimento di una pagina." };
+            return Json(op, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin")]
         public JsonResult Delete(string id) {
             // delete a book by id.
@@ -67,6 +110,17 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_Books_List", books), JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult P_AddPage(string subSectionId) {
+            // return the add page view.
+
+            Pages page = new Pages();
+            page.SubSection = subSectionId;
+
+            // return the partial view containing the P_AddPage page.
+            return Json(GetRenderPartialView(this, "P_AddPage", page), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult P_Create() {
             // open p create page.
@@ -87,7 +141,6 @@ namespace Antinori.Controllers {
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "UC_Section", Sections), JsonRequestBehavior.AllowGet);
         }
-
 
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult P_SubSections(int numberOfSubSections, string parent) {
@@ -110,7 +163,6 @@ namespace Antinori.Controllers {
             // return the view.
             return View();
         }
-
 
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult P_SubSectionsListContent() {

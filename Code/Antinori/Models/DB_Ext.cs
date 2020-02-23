@@ -167,6 +167,84 @@ namespace Antinori.Models {
         }
         #endregion
 
+        #region Pages
+
+        public Pages Pages_Get(string id) {
+            // return a Page by Id.
+            Pages page = Pages.FirstOrDefault(it => it.Id == id);
+            return page;
+        }
+
+        public int Pages_Insert(Pages c) {
+            // insert a book.
+            int esito = -1;
+            try {
+                Pages.Add(c);
+                esito = SaveChanges();
+            }
+            catch(Exception ex) {
+               
+            }
+            return esito;
+        }
+
+        #endregion
+
+        #region "Logs"
+
+        public int Logs_Count() {
+            var query = Logs.Count();
+            return query;
+        }
+
+        public List<Logs> Logs_Gets() {
+
+            return Logs.OrderByDescending(l => l.Operazione_Data).ToList();
+        }
+
+
+        public Logs Logs_Get(int id) {
+            var query = Logs.FirstOrDefault(c => c.Id == id);
+            return query;
+        }
+
+        public int Logs_Insert(Logs c) {
+            int esito = -1;
+            try {
+                Logs.Add(c);
+                esito = SaveChanges();
+            }
+            catch(DbEntityValidationException ex) {
+                validaProprieta(ex);
+            }
+            return esito;
+        }
+
+        public int Logs_Save() {
+            int esito = -1;
+            try {
+                esito = SaveChanges();
+            }
+            catch {
+
+            }
+            return esito;
+        }
+
+        public int Logs_Delete(Logs c) {
+            int esito = -1;
+            try {
+                Logs.Remove(c);
+                esito = SaveChanges();
+            }
+            catch {
+
+            }
+            return esito;
+        }
+
+        #endregion
+
         #region Sections
 
         public int Sections_Save() {
@@ -197,64 +275,7 @@ namespace Antinori.Models {
 
         #endregion
 
-        #region "Logs"
-
-        public int Logs_Count(){
-            var query = Logs.Count();
-            return query;
-        }
-
-        public List<Logs> Logs_Gets() {
-
-            return Logs.OrderByDescending(l => l.Operazione_Data).ToList();
-        }
-
-
-        public Logs Logs_Get(int id) {
-            var query = Logs.FirstOrDefault(c => c.Id == id);
-            return query;
-        }
-
-        public int Logs_Insert(Logs c) {
-            int esito = -1;
-            try {
-                Logs.Add(c);
-                esito = SaveChanges();
-            }
-            catch (DbEntityValidationException ex) {
-                validaProprieta(ex);
-            }
-            return esito;
-        }
-
-        public int Logs_Save(){
-            int esito = -1;
-            try
-            {
-                esito = SaveChanges();
-            }
-            catch
-            {
-
-            }
-            return esito;
-        }
-
-        public int Logs_Delete(Logs c){
-            int esito = -1;
-            try
-            {
-                Logs.Remove(c);
-                esito = SaveChanges();
-            }
-            catch
-            {
-
-            }
-            return esito;
-        }
-
-        #endregion
+        
 
         
     }
