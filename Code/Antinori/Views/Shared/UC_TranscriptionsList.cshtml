@@ -1,0 +1,44 @@
+﻿@model List<Antinori.Models.Transcriptions>
+
+<!-- TABLE -->
+<table id="DataTables_Table_0" class="table dataTable table-hover">
+    <thead>
+        <tr>
+            <th style="width: 100px">Titolo</th>
+            <th style="width: 50px">Numero Pagina</th>
+            <th style="width: 50px">Numero Completo</th>
+            <th style="width: 100px">Opera</th>
+            <th style="width: 70px">Sezione</th>
+            <th style="width: 150px">Descrizione Pagina</th>
+            <th style="width: 50px"> </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <!-- Loop on the model.-->
+        @foreach(var t in Model) {
+        <tr style="border-left: solid 3px #ffa401">
+            <td>@t.Pages.Title</td>
+            <td>@t.Pages.NumericOrder</td>
+            <td>@t.Pages.CompleteOrder</td>
+            <td>@t.Pages.BookTitle</td>
+            <td>@t.Pages.SectionName</td>
+            <td>@t.Pages.Description</td>
+
+            <td>
+                <button class="btn btn-default btn-sm" onclick="P_AddPage('@t.Id')" title="Aggiungi Pagine">
+                    <i class="fa fa-edit">
+                    </i>
+                </button>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="7"></th>
+        </tr>
+    </tfoot>
+</table>
+

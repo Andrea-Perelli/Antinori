@@ -247,12 +247,13 @@
                     }
                     @if(User.IsInRole("Admin") || User.IsInRole("Editor")) {
                         <li>
-                            <a href="@Url.Action("P_TrascrizioniList","Book")">
+                            <a href="@Url.Action("P_TranscriptionsList","Book")">
                                 <i class="fa fa-file-text"></i>
                                 <span>Trascrizioni</span>
                             </a>
                         </li>
                     }
+
 
 
                     @*
@@ -491,60 +492,6 @@
     </div>
     <!-- ./wrapper -->
     <!-- FINESTRE D'USO COMUNE -->
-    @*<button id="DANGER_BTN" type="button" style="visibility:hidden" class="btn btn-default mb-control" data-box="#DANGER_ID">Default</button>
-        <button id="SUCCESS_BTN" type="button" style="visibility:hidden" class="btn btn-default mb-control" data-box="#SUCCESS_ID">Default</button>
-        <button id="ALERT_BTN" type="button" style="visibility:hidden" class="btn btn-default mb-control" data-box="#ALERT_ID">Default</button>
-        <button id="POPUP_BTN" type="button" style="visibility:hidden" class="btn btn-default mb-control" data-box="#POPUP_ID">Default</button>*@
-
-    @*<div class="message-box message-box-warning animated fadeIn" id="ALERT_ID" data-sound="alert">
-            <div class="mb-container">
-                <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-warning"></span><span id="ALERT_titolo"></span></div>
-                    <div class="mb-content">
-                        <p id="ALERT_testo"></p>
-                    </div>
-                    <div class="mb-footer">
-                        <button class="btn btn-default btn-lg pull-right mb-control-close">Chiudi</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="message-box message-box-danger animated fadeIn" id="DANGER_ID" data-sound="fail">
-            <div class="mb-container">
-                <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-times"></span><span id="DANGER_titolo"></span></div>
-                    <div class="mb-content">
-                        <p id="DANGER_testo"></p>
-                    </div>
-                    <div class="mb-footer">
-
-                        <div class="pull-right">
-                            <button id="DANGER_BTN_ok" class="btn btn-default btn-lg">OK</button>
-                            &nbsp;&nbsp;
-                            <button id="DANGER_BTN_close" class="btn btn-default btn-lg pull-right mb-control-close">Chiudi</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="message-box message-box-success animated fadeIn" id="SUCCESS_ID">
-            <div class="mb-container">
-                <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-check"></span><span id="SUCCESS_titolo"></span></div>
-                    <div class="mb-content">
-                        <p id="SUCCESS_testo"></p>
-                    </div>
-                    <div class="mb-footer">
-                        <button class="btn btn-default btn-lg pull-right mb-control-close">Chiudi</button>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-
     <div class="modal fade in" id="MODAL_ID">
 
         <div class="modal-dialog">
@@ -578,24 +525,7 @@
         </div>
     </div>
 
-    @*<div class="message-box message-box-warning animated fadeIn" id="POPUP_ID">
-            <div class="mb-container">
-                <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-check"></span><span id="POPUP_titolo"></span></div>
-                    <div class="mb-content">
-                        <div class="panel panel-default">
-                            <a href="#" class="panel-refresh" style="visibility:collapse" id="POPUP_Refresh"></a>
-                            <div id="POPUP_testo" style="min-height:300px;">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-footer">
-                        <button class="btn btn-default btn-lg pull-right mb-control-close">Chiudi</button>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+    
     <!-- FINE FINESTRE D'USO COMUNE -->
 </body>
 </html>

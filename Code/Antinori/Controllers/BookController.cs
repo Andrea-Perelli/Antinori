@@ -173,6 +173,25 @@ namespace Antinori.Controllers {
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "UC_SubSectionListContent", subSections), JsonRequestBehavior.AllowGet);
         }
+        
+        [Authorize(Roles = "Admin,Editor")]
+        public ActionResult P_TranscriptionsList() {
+            // return the Transcriptions page.
+
+            // return the view.
+            return View();
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult P_TranscriptionsListContent() {
+            // return the Subsection list page.
+
+            List<Transcriptions> transcriptions = this.Dc.Transcriptions_Gets();
+
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "UC_TranscriptionsList", transcriptions), JsonRequestBehavior.AllowGet);
+        }
+
 
         [Authorize(Roles = "Admin, Editor")]
         [HttpPost]

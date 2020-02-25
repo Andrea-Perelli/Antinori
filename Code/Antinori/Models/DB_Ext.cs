@@ -275,8 +275,18 @@ namespace Antinori.Models {
 
         #endregion
 
-        
+        #region Transcriptions
 
-        
+        public List<Transcriptions> Transcriptions_Gets() {
+            // return the list of all Transcriptions.
+            return Transcriptions.ToList();
+        }
+
+        public Transcriptions Transcriptions_Get(string id) {
+            // return a Transcriptions by Id.
+            return Transcriptions.FirstOrDefault(it => it.Id == id);
+        }
+
+        #endregion
     }
 }
