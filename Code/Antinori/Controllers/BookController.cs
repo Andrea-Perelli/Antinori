@@ -192,7 +192,6 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_TranscriptionsList", transcriptions), JsonRequestBehavior.AllowGet);
         }
 
-
         [Authorize(Roles = "Admin, Editor")]
         [HttpPost]
         public JsonResult Save(Books book, FormCollection forms) {
