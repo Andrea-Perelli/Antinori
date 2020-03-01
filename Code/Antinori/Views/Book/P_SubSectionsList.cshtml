@@ -13,6 +13,9 @@
     <!-- /.box-header -->
     <div class="box-body" id="CONTENT_SUBSECTIONS">
     </div>
+    <div class="box-body" id="CONTENT_PAGES">
+
+    </div>
     <div class="box-footer">
         <div class="pull-right">
         </div>
@@ -66,6 +69,21 @@
             }
         }
 
+        function DeletePage(pageId) {
+            // delete page.
+            var url = '@Url.Action("DeletePage", "Book")' + "?id=" + pageId;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+
+            $.getJSON(url,
+                function (data) {
+                    if (Boolean(data)) {
+                        list();
+                    }
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                });
+        }
 
         function list() {
             // set the list on the view.
@@ -103,6 +121,77 @@
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
                     MODAL_function("Nuova Pagina", data, "AddPage()", "Aggiungi", "", "Annulla", "");
+                });
+        }        
+
+        function P_EditPage(pageId) {
+            // show edit page.
+            var url = '@Url.Action("P_EditPage", "Book")' + "?id=" + pageId;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+
+            $.getJSON(url,
+                function (data) {
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+
+                    MODAL_function("Modifica Pagina", data, "SavePage()", "Salva", "", "Annulla", "");
+                });
+        }
+
+        function SavePage() {
+            // save a page.
+
+            // validate form.
+            $('#CONTENT_Page_Form').validate({
+                lang: 'it'
+            });
+
+            if ($('#CONTENT_Page_Form').valid()) {
+
+                REFRESH_show("MODAL_Refresh");
+                var url = '@Url.Action("SavePage", "Book")';
+                // take the form content by id.
+                var data = new FormData($('#CONTENT_Page_Form').get(0));
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (risultato) {
+                        $("#MODAL_ID").modal('toggle');
+                        list();
+                    },
+                    error: function () {
+                        // set error.
+                        DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare", "", "", "", "OK");
+                    }
+                });
+            }
+        }
+
+        function ShowPages(subSectionId) {
+            var url = '@Url.Action("ShowPages", "Book")' + "?subSectionId=" + subSectionId;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                     // set data.
+                    $("#CONTENT_PAGES").html(data);
+                    // set the table name as parameter: DataTables_Table_0.
+                    $("#DataTables_Table_1").DataTable({
+                        dom: 'Bfrtip',
+                        language: DataTablesLanguage,
+                        responsive: true,
+                        columnDefs: [
+                            { className: "desktop", targets: [4, 5] },  // x > 1024
+                            { className: "all", targets: [0, 1, 2, 3] } // for each width
+                        ]
+                    });
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
                 });
         }
     </script>

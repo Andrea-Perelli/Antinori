@@ -1,56 +1,135 @@
 ﻿@model Antinori.Models.Pages
 
-
-<!-- Create a form  -->
-@using(Html.BeginForm("AddPage", "Book", FormMethod.Post, new { id = "CONTENT_Page_Form" })) {
-    <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(p => p.SubSection)
-    <!-- FIELD TO EDIT -->
-    <div>
-        <div class="row">
-            <div class="col-md-6">
-                <small class="required">Titolo</small><br />
-                <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" required />
+@if(Model.Id == null || Model.Id == "") {
+    <!-- Create a form  -->
+    using(Html.BeginForm("AddPage", "Book", FormMethod.Post, new { id = "CONTENT_Page_Form" })) {
+        <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(p => p.SubSection)
+        <!-- FIELD TO EDIT -->
+        <div>
+            <div class="row">
+                <div class="col-md-6">
+                    <small class="required">Titolo</small><br />
+                    <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" required />
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Numero di pagina</small><br />
+                    <input type="number" id="NumericOrder" name="NumericOrder" value="@Model.NumericOrder" class="form-control" required />
+                </div>
+
+                <div class="col-md-4">
+                    <small class="required">Numero di pagina completo</small><br />
+                    <input type="text" id="CompleteOrder" name="CompleteOrder" value="@Model.CompleteOrder" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <small>Descrizione</small><br>
+                    <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <small class="required">Editor</small><br />
+                    <input type="text" id="Editor" name="Editor" value="@Model.Editor" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Foto </small><br />
+                    <input type="file" id="PhotoPath" name="PhotoPath" value="@Model.PhotoPath" class="form-control" required>
+                </div>
+
+                <div class="col-md-4">
+                    <small class="required">Foto Tiff</small><br />
+                    <input type="file" id="BigPhotoPath" name="BigPhotoPath" value="@Model.BigPhotoPath" class="form-control" required>
+                </div>
+            </div>
+            <br />
         </div>
+    }
+}
+else {
+    using(Html.BeginForm("SavePage", "Book", FormMethod.Post, new { id = "CONTENT_Page_Form" })) {
+        <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(p => p.Id)
+        @Html.HiddenFor(p => p.BigPhotoPath)
+        @Html.HiddenFor(p => p.PhotoPath)
+        @Html.HiddenFor(p => p.SectionName)
+        @Html.HiddenFor(p => p.SubSection)
 
-        <div class="row">
-            <div class="col-md-4">
-                <small class="required">Numero di pagina</small><br />
-                <input type="number" id="NumericOrder" name="NumericOrder" value="@Model.NumericOrder" class="form-control" required />
+        <div>
+            <div class="row">
+                <div class="col-md-6">
+                    <small class="required">Titolo</small><br />
+                    <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" required />
+                </div>
             </div>
 
-            <div class="col-md-4">
-                <small class="required">Numero di pagina completo</small><br />
-                <input type="text" id="CompleteOrder" name="CompleteOrder" value="@Model.CompleteOrder" class="form-control" required />
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Numero di pagina</small><br />
+                    <input type="number" id="NumericOrder" name="NumericOrder" value="@Model.NumericOrder" class="form-control" required />
+                </div>
+
+                <div class="col-md-4">
+                    <small class="required">Numero di pagina completo</small><br />
+                    <input type="text" id="CompleteOrder" name="CompleteOrder" value="@Model.CompleteOrder" class="form-control" required />
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <small>Descrizione</small><br>
+                    <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <small class="required">Editor</small><br />
+                    <input type="text" id="Editor" name="Editor" value="@Model.Editor" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                <div class="col-md-4" style=" margin-right:10px!important;">
+                    <small>JPEG</small><br />
+                    @{var path = Model.PhotoPath.Split('\\').Last();
+                        path = "/Pics/JPEG/" + path;
+                    }
+                    <img src="@path" alt="JPEG" style="max-height: 400px!important;">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                <div class="col-md-4">
+                    <small>Tiff</small><br />
+
+                    @{var path2 = Model.BigPhotoPath.Split('\\').Last();
+                        path2 = "/Pics/Tiff/" + path2;
+                    }
+                    <img src="@path2" alt="Tiff" style="max-height: 400px!important;">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <small>Foto </small><br />
+                    <input type="file" id="PhotoPath1" name="PhotoPath1" value="" class="form-control">
+                </div>
+
+                <div class="col-md-4">
+                    <small>Foto Tiff</small><br />
+                    <input type="file" id="BigPhotoPath1" name="BigPhotoPath1" value="" class="form-control">
+                </div>
+            </div>
+            <br />
         </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <small>Descrizione</small><br>
-                <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
-            </div>
-
-            <div class="col-md-6">
-                <small class="required">Editor</small><br />
-                <input type="text" id="Title" name="Title" value="@Model.Editor" class="form-control" required />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <small class="required">Foto </small><br />
-                <input type="file" id="PhotoPath" name="PhotoPath" value="@Model.PhotoPath" class="form-control" required>
-            </div>
-
-            <div class="col-md-4">
-                <small class="required">Foto Tiff</small><br />
-                <input type="file" id="BigPhotoPath" name="BigPhotoPath" value="@Model.BigPhotoPath" class="form-control" required>
-            </div>
-        </div>
-        <br />
-    </div>
+    }
 }

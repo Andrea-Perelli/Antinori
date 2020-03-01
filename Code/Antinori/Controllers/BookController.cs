@@ -1,5 +1,6 @@
 ﻿using Antinori.Models;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -68,8 +69,60 @@ namespace Antinori.Controllers {
             bool esito = false;
 
             // delete book.
-            esito = this.Dc.Books_Delete(this.Dc.Books_Get(id)) > -1;
+            Books book = this.Dc.Books_Get(id);
+            esito = this.Dc.Books_Delete(book) > -1;
            
+            // Delete all photos of a book.
+            foreach(Sections s in book.Sections) {
+                foreach(SubSections ss in s.SubSections) {
+                    foreach(Pages p in ss.Pages) {
+                        // delete photo.
+                        try {
+                            // small photo.
+                            if(System.IO.File.Exists(p.PhotoPath)) {
+                                System.IO.File.Delete(p.PhotoPath);
+                            }
+                            // big photo.
+                            if(System.IO.File.Exists(p.BigPhotoPath)) {
+                                System.IO.File.Delete(p.BigPhotoPath);
+                            }
+                        }
+                        catch(Exception e) {
+                            Log_Insert(p.Id, "BOOK", "DELETE FILE", false, "Errore nella cancellazione del file: " + e.Message);
+                        }
+                    }
+                }
+            }
+
+            //save and update the esito value.
+            return Json(esito, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult DeletePage(string id) {
+            // delete a page     by id.
+
+            // set default value for esito.
+            bool esito = false;
+
+            // page book.
+            Pages p = this.Dc.Pages_Get(id);
+            esito = this.Dc.Pages_Delete(p) > -1;
+
+            try {
+                // small photo.
+                if(System.IO.File.Exists(p.PhotoPath)) {
+                    System.IO.File.Delete(p.PhotoPath);
+                }
+                // big photo.
+                if(System.IO.File.Exists(p.BigPhotoPath)) {
+                    System.IO.File.Delete(p.BigPhotoPath);
+                }
+            }
+            catch (Exception e) {
+                Log_Insert(p.Id, "Pages", "DELETE FILE", false, "Errore nella cancellazione del file: " + e.Message );
+            }
+
             //save and update the esito value.
             return Json(esito, JsonRequestBehavior.AllowGet);
         }
@@ -127,6 +180,17 @@ namespace Antinori.Controllers {
             Books s = new Books();
 
             return View(s);
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult P_EditPage(string id) {
+            // return the edit page.
+
+            // retrieve page
+            Pages p = this.Dc.Pages_Get(id);
+
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "P_AddPage", p), JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Admin,Editor")]
@@ -326,5 +390,90 @@ namespace Antinori.Controllers {
             }
         }
 
+        [Authorize(Roles = "Admin, Editor")]
+        [HttpPost]
+        public JsonResult SavePage(Pages page, FormCollection forms, HttpPostedFileBase PhotoPath1, HttpPostedFileBase BigPhotoPath1) {
+            // save. 
+            OpEsitoModel op;
+
+            Pages fromDb = this.Dc.Pages_Get(page.Id);
+
+            //map the two objects: it updates the DB object.
+            if(TryUpdateModel(fromDb)) {
+                try {
+                    if(PhotoPath1 != null) {
+                        string relativePathJpeg = "~/Pics/JPEG/";
+                        string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + PhotoPath1.FileName;
+                        // if is different.
+                        if(diskPathJpeg != page.BigPhotoPath) {
+                            // delete small photo.
+                            if(System.IO.File.Exists(page.PhotoPath)) {
+                                System.IO.File.Delete(page.PhotoPath);
+                            }
+                            // save.
+                            PhotoPath1.SaveAs(diskPathJpeg);
+                            fromDb.PhotoPath = diskPathJpeg;
+                            this.Dc.Pages_Save();
+                        }
+                    }
+                    if(BigPhotoPath1 != null) {
+                        string relativePathTiff = "~/Pics/Tiff/";
+                        string diskPathTiff = ControllerContext.HttpContext.Server.MapPath(relativePathTiff) + BigPhotoPath1.FileName;
+                        // if is different.
+                        if(diskPathTiff != page.BigPhotoPath) {
+                            // delete old one.
+                            if(System.IO.File.Exists(page.BigPhotoPath)) {
+                                System.IO.File.Delete(page.BigPhotoPath);
+                            }
+                            // save.
+                            BigPhotoPath1.SaveAs(diskPathTiff);
+                            fromDb.BigPhotoPath = diskPathTiff;
+                            this.Dc.Pages_Save();
+
+                        }
+                    }
+
+                    // save.
+                    int esito = this.Dc.Pages_Save();
+
+                    // is we couldn't save.
+                    if(esito == -1) {
+
+                        Log_Insert(page.Id, "Pages", "UPDATE", false, "Errore nel salvataggio");
+                        op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore nel salvataggio" };
+                        return Json(op, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                catch(Exception ex) {
+                        Log_Insert(page.Id, "Pages", "UPDATE", false, "Errore:" + ex.Message);
+                        op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = ex.Message };
+                        return Json(op, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            // set log.
+            Log_Insert(page.Id, "Pages", "UPDATE", true, "Operazione conclusa con successo", "", "", "", "");
+            op = new OpEsitoModel() { idReturn = page.Id, riuscita = true };
+            return Json(op, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult ShowPages(string subSectionId) {
+            // return the Subsection list page.
+
+            List<Pages> pages = this.Dc.Pages_GetBySubSection(subSectionId);
+
+            // set viewbag.
+            if(pages.Count > 0) {
+                Pages p = pages.First();
+                if(p.SubSections != null) {
+                    ViewBag.SubTitle = p.SubSections.Name;
+                }
+            }
+            
+            
+
+            // return the partial view containing the pages.
+            return Json(GetRenderPartialView(this, "UC_PageListContent", pages), JsonRequestBehavior.AllowGet);
+        }
     }
 }

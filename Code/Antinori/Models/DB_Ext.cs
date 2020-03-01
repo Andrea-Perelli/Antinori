@@ -10,16 +10,6 @@ namespace Antinori.Models {
 
     public partial class AntinoriEntities {
 
-        public string validaProprieta(DbEntityValidationException ex) {
-            string validationErrors = "";
-            foreach (var failure in ex.EntityValidationErrors) {
-                foreach (var error in failure.ValidationErrors)  {
-                    validationErrors += error.PropertyName + "  " + error.ErrorMessage;
-                }
-            }
-            return validationErrors;
-        }
-
         #region AspNetUsers
 
         public List<AspNetUsers> AspNetUsers_Gets() {
@@ -148,8 +138,7 @@ namespace Antinori.Models {
                 Books.Add(c);
                 esito = SaveChanges();
             }
-            catch(DbEntityValidationException ex) {
-                validaProprieta(ex);
+            catch(Exception ex) {
             }
             return esito;
         }
@@ -169,10 +158,30 @@ namespace Antinori.Models {
 
         #region Pages
 
+        public int Pages_Delete(Pages p) {
+            // delete a Page.
+            int esito = -1;
+            try {
+                Pages.Remove(p);
+                // Entity framework stores its current status on the db (we don't pass any object to store).
+                esito = SaveChanges();
+            }
+            catch(Exception e) {
+
+            }
+            return esito;
+        }
+
         public Pages Pages_Get(string id) {
             // return a Page by Id.
             Pages page = Pages.FirstOrDefault(it => it.Id == id);
             return page;
+        }
+
+        public List<Pages> Pages_GetBySubSection(string subSectionId) {
+            // return all Pages of a subsection.
+            List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).ToList();
+            return pages;
         }
 
         public int Pages_Insert(Pages c) {
@@ -184,6 +193,17 @@ namespace Antinori.Models {
             }
             catch(Exception ex) {
                
+            }
+            return esito;
+        }
+
+        public int Pages_Save() {
+            int esito = -1;
+            try {
+                esito = SaveChanges();
+            }
+            catch (Exception e) {
+
             }
             return esito;
         }
@@ -214,8 +234,7 @@ namespace Antinori.Models {
                 Logs.Add(c);
                 esito = SaveChanges();
             }
-            catch(DbEntityValidationException ex) {
-                validaProprieta(ex);
+            catch(Exception ex) {
             }
             return esito;
         }

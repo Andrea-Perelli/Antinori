@@ -1,0 +1,67 @@
+﻿@model List<Antinori.Models.Pages>
+
+<h3><span class="fa fa-files-o"></span> Pagine Sottosezione @ViewBag.SubTitle</h3>
+<!-- TABLE -->
+<table id="DataTables_Table_0" class="table dataTable table-hover">
+    <thead>
+        <tr>
+            <th style="width: 100px">Titolo</th>
+            <th style="width: 150px">Descrizione</th>
+            <th style="width: 150px">Numero Pagina</th>
+            <th style="width: 150px">Numero Completo</th>
+            <th style="width: 100px">Editor</th>
+            <th style="width: 100px">Opera</th>
+            <th style="width: 70px">Sezione</th>
+            <th style="width: 70px">Sottosezione</th>
+            <th style="width: 70px">Trascrizione</th>
+
+            <th style="width: 50px"> </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <!-- Loop on the model.-->
+        @foreach(var page in Model) {
+        <tr>
+            <td>@page.Title</td>
+            <td>@page.Description</td>
+            <td>@page.NumericOrder</td>
+            <td>@page.CompleteOrder</td>
+            <td>@page.Editor</td>
+            <td>@page.BookTitle</td>
+            <td>@page.SubSections.Sections.Name</td>
+            <td>@page.SubSections.Name</td>
+            @if(@page.Transcriptions.Count > 0) {
+                if(page.Transcriptions.First().IsApproved) {
+                    <td>@page.Transcriptions.First().TEI</td>
+                }
+                else {
+                    <td>Da approvare</td>
+                }
+            }
+            else {
+                <td>Mancante</td>
+            }
+
+            <td>
+                <button class="btn btn-default btn-sm" onclick="P_EditPage('@page.Id')" title="Aggiungi Pagine">
+                    <i class="fa fa-edit">
+                    </i>
+                </button>
+                <button class="btn btn-default btn-sm" onclick="DeletePage('@page.Id')" title="Aggiungi Pagine">
+                    <i class="fa fa-trash-o">
+                    </i>
+                </button>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="10"></th>
+        </tr>
+    </tfoot>
+</table>
+
+
