@@ -194,6 +194,17 @@ namespace Antinori.Controllers {
         }
 
         [Authorize(Roles = "Admin,Editor")]
+        public JsonResult P_EditTranscription(string id) {
+            // return the edit page.
+
+            // retrieve transcription
+            Transcriptions t = this.Dc.Transcriptions_Get(id);
+
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "UC_Transcription", t), JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
         public JsonResult P_Sections(int numberOfSections) {
             // return the section page.
 
@@ -456,6 +467,40 @@ namespace Antinori.Controllers {
             return Json(op, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin, Editor")]
+        [HttpPost]
+        public JsonResult SaveTranscription(Transcriptions transcription, FormCollection forms) {
+            // save. 
+            OpEsitoModel op;
+
+            Transcriptions fromDb = this.Dc.Transcriptions_Get(transcription.Id);
+
+            //map the two objects: it updates the DB object.
+            if(TryUpdateModel(fromDb)) {
+                try {
+                    // save.
+                    int esito = this.Dc.Transcriptions_Save();
+
+                    // is we couldn't save.
+                    if(esito == -1) {
+
+                        Log_Insert(transcription.Id, "Transcriptions", "UPDATE", false, "Errore nel salvataggio");
+                        op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore nel salvataggio" };
+                        return Json(op, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                catch(Exception ex) {
+                    Log_Insert(transcription.Id, "Transcriptions", "UPDATE", false, "Errore:" + ex.Message);
+                    op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = ex.Message };
+                    return Json(op, JsonRequestBehavior.AllowGet);
+                }
+            }
+            // set log.
+            Log_Insert(transcription.Id, "Transcriptions", "UPDATE", true, "Operazione conclusa con successo", "", "", "", "");
+            op = new OpEsitoModel() { idReturn = transcription.Id, riuscita = true };
+            return Json(op, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult ShowPages(string subSectionId) {
             // return the Subsection list page.
@@ -470,8 +515,6 @@ namespace Antinori.Controllers {
                 }
             }
             
-            
-
             // return the partial view containing the pages.
             return Json(GetRenderPartialView(this, "UC_PageListContent", pages), JsonRequestBehavior.AllowGet);
         }

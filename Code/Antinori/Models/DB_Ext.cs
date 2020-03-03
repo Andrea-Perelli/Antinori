@@ -306,6 +306,18 @@ namespace Antinori.Models {
             return Transcriptions.FirstOrDefault(it => it.Id == id);
         }
 
+        public int Transcriptions_Save() {
+            int esito = -1;
+            try {
+                esito = SaveChanges();
+            }
+            catch(Exception e) {
+
+            }
+            return esito;
+        }
+
+
         #endregion
     }
 }

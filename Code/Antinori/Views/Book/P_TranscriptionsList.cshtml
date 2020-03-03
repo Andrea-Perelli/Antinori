@@ -53,6 +53,54 @@
                 });
         }
 
+        function P_EditTranscription(id) {
+            var url = '@Url.Action("P_EditTranscription", "Book")' + "?id=" + id;
+
+            // show refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                    // set a modal view.
+                    MODAL_function("Modifica Trascrizione", data, "SaveTranscription()", "Salva", "", "Annulla", "");
+                });
+        }
+
+        function SaveTranscription() {
+
+            // validate form.
+            $('#CONTENT_Transcription_Form').validate({
+                lang: 'it'
+            });
+
+            if ($('#CONTENT_Transcription_Form').valid()) {
+
+                REFRESH_show("MODAL_Refresh");
+                var url = '@Url.Action("SaveTranscription", "Book")';
+                // take the form content by id.
+                var data = new FormData($('#CONTENT_Transcription_Form').get(0));
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (risultato) {
+
+                        $("#MODAL_ID").modal('toggle');
+                        list();
+                    },
+                    error: function () {
+                        // set error.
+                        DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare", "", "", "", "OK");
+                    }
+                });
+            }
+        }
+
+        
     </script>
 }
 

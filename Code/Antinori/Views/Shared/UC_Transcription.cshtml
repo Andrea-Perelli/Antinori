@@ -1,0 +1,58 @@
+﻿@model Antinori.Models.Transcriptions
+
+<!-- Create a form  -->
+@using(Html.BeginForm("SaveTranscription", "Book", FormMethod.Post, new { id = "CONTENT_Transcription_Form" })) {
+    <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(p => p.Id, new { id = "Id" })
+    <!-- FIELD TO EDIT -->
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <small class="required">Titolo</small><br />
+                <input type="text" id="Title" name="Title" value="@Model.Pages.Title" class="form-control" readonly />
+            </div>
+            <div class="col-md-3">
+                <small class="required">Proposta da</small><br />
+                <input type="text" id="ProposedBy" name="ProposedBy" value="@Model.ProposedBy" class="form-control" readonly />
+            </div>
+            <div class="col-md-3">
+                <small class="required">In data</small><br />
+                <input type="date" id="ProposedDate" name="ProposedDate" value="@Model.ProposedDate" class="form-control" readonly />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <small class="required">Approvato</small><br />
+                @Html.RadioButtonFor(m => m.IsApproved, true,Model.IsApproved==true ? new {Checked = "checked"} : null) Si
+                @Html.RadioButtonFor(m => m.IsApproved, false,Model.IsApproved==false ? new {Checked = "checked"} : null) No
+            </div>
+
+            <div class="col-md-4">
+                @if(Model.IsApproved) {
+                    <small class="required">Da</small><br />
+                    <input type="text" id="ApprovedBy" name="ApprovedBy" value="@Model.ApprovedBy" class="form-control" readonly />
+                }
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style=" margin-right:5px!important;">
+                    <small>JPEG</small><br />
+                    @{var path = Model.Pages.PhotoPath.Split('\\').Last();
+                        path = "/Pics/JPEG/" + path;
+                    }
+                    <img src="@path" alt="JPEG" style="max-height: 400px!important;">
+            </div>
+            <div class="col-md-6">
+                <small class="required">TEI</small><br />
+                <textarea id="TEI" name="TEI" value="@Model.TEI" class="form-control" style="min-height: 150px">@Model.TEI</textarea>
+            </div>
+        </div>
+        <br />
+    </div>
+}
+

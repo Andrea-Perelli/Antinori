@@ -19,10 +19,10 @@
         @foreach(var t in Model) {
         <tr style="border-left: solid 3px #ffa401">
             @if(t.IsApproved) {
-                <td style="border-left: solid 3px #f20000">@t.Pages.Title</td>
+                <td style="border-left: solid 3px #02ff00">@t.Pages.Title</td>
             }
             else {
-                <td style="border-left: solid 3px #02ff00">@t.Pages.Title</td>
+            <td style="border-left: solid 3px #f20000">@t.Pages.Title</td>
             }
             <td>@t.Pages.NumericOrder</td>
             <td>@t.Pages.CompleteOrder</td>
@@ -31,7 +31,11 @@
             <td>@t.Pages.Description</td>
 
             <td>
-                <button class="btn btn-default btn-sm" onclick="P_AddPage('@t.Id')" title="Aggiungi Pagine">
+                <button class="btn btn-default btn-sm" onclick="P_EditTranscription('@t.Id')" title="Modifica Trascrizione">
+                    <i class="fa fa-edit">
+                    </i>
+                </button>
+                <button class="btn btn-default btn-sm" onclick="ToogleTranscription('@t.Id')" title="Aggiungi Pagine">
                     <i class="fa fa-edit">
                     </i>
                 </button>
