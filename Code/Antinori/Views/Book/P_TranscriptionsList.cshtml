@@ -62,6 +62,8 @@
                 function (data) {
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
+                    $("#CONTENT_ID").css({ width: "150%" });
+
                     // set a modal view.
                     MODAL_function("Modifica Trascrizione", data, "SaveTranscription()", "Salva", "", "Annulla", "");
                 });
@@ -99,7 +101,6 @@
                 });
             }
         }
-
         
     </script>
 }

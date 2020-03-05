@@ -40,16 +40,16 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6" style=" margin-right:5px!important;">
+            <div class="col-md-6" style=" margin-right:2px!important;">
                     <small>JPEG</small><br />
                     @{var path = Model.Pages.PhotoPath.Split('\\').Last();
                         path = "/Pics/JPEG/" + path;
                     }
                     <img src="@path" alt="JPEG" style="max-height: 400px!important;">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <small class="required">TEI</small><br />
-                <textarea id="TEI" name="TEI" value="@Model.TEI" class="form-control" style="min-height: 150px">@Model.TEI</textarea>
+                <textarea id="TEI" name="TEI" value="@Model.TEI" class="form-control" style="min-height: 300px">@Model.TEI</textarea>
             </div>
         </div>
         <br />

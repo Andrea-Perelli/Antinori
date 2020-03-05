@@ -99,23 +99,20 @@ else {
             </div>
 
             <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                <div class="col-md-4" style=" margin-right:10px!important;">
+                <div class="col-md-5" style=" margin-right:10px!important;">
                     <small>JPEG</small><br />
                     @{var path = Model.PhotoPath.Split('\\').Last();
                         path = "/Pics/JPEG/" + path;
                     }
                     <img src="@path" alt="JPEG" style="max-height: 400px!important;">
                 </div>
-            </div>
-            <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <small>Tiff</small><br />
 
                     @{var path2 = Model.BigPhotoPath.Split('\\').Last();
                         path2 = "/Pics/Tiff/" + path2;
                     }
                     <img src="@path2" alt="Tiff" style="max-height: 400px!important;">
-
                 </div>
             </div>
             <div class="row">

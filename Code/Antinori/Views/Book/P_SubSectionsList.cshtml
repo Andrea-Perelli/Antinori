@@ -134,6 +134,7 @@
                 function (data) {
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
+                    $("#CONTENT_ID").css({ width: "150%" });
 
                     MODAL_function("Modifica Pagina", data, "SavePage()", "Salva", "", "Annulla", "");
                 });
