@@ -143,6 +143,7 @@ namespace Antinori.Controllers {
             // create a model. return the model.
             DashboardModelBooks model = new DashboardModelBooks();
             model.numberOfBooks = this.Dc.Books_Gets().Count;
+            model.numberOfTranscriptionsToCheck = this.Dc.Transcriptions_GetAllNotApproved().Count;
             // return the partial view .
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -188,6 +189,8 @@ namespace Antinori.Controllers {
 
             // retrieve page
             Pages p = this.Dc.Pages_Get(id);
+            ViewBag.Filters = this.Dc.Filters_GetByPageId(id);
+
 
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "P_AddPage", p), JsonRequestBehavior.AllowGet);

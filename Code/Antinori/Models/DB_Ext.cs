@@ -156,6 +156,56 @@ namespace Antinori.Models {
         }
         #endregion
 
+        #region Filters
+
+        public int Filters_Delete(Filters f) {
+            // delete a Filters.
+            int esito = -1;
+            try {
+                Filters.Remove(f);
+                // Entity framework stores its current status on the db (we don't pass any object to store).
+                esito = SaveChanges();
+            }
+            catch(Exception e) {
+
+            }
+            return esito;
+        }
+
+        public Filters Filters_Get(string id) {
+            // return a filter by Id.
+            Filters filter = Filters.FirstOrDefault(it => it.Id == id);
+            return filter;
+        }
+
+        public List<Filters> Filters_GetByPageId(string pageId) {
+            // return all the page filter.
+            List<Filters> filters = Filters.Where(f => f.Page.Equals(pageId)).ToList();
+            return filters;
+        }
+
+        public List<Filters> Filters_Gets() {
+            // return all the filter by Id.
+            List<Filters> filters = Filters.ToList();
+            return filters;
+        }
+
+
+        public int Filters_Insert(Filters f) {
+            // insert a Filter.
+            int esito = -1;
+            try {
+                Filters.Add(f);
+                esito = SaveChanges();
+            }
+            catch(Exception ex) {
+
+            }
+            return esito;
+        }
+
+        #endregion
+
         #region Pages
 
         public int Pages_Delete(Pages p) {
@@ -296,14 +346,19 @@ namespace Antinori.Models {
 
         #region Transcriptions
 
+        public Transcriptions Transcriptions_Get(string id) {
+            // return a Transcriptions by Id.
+            return Transcriptions.FirstOrDefault(it => it.Id == id);
+        }
+
         public List<Transcriptions> Transcriptions_Gets() {
             // return the list of all Transcriptions.
             return Transcriptions.ToList();
         }
 
-        public Transcriptions Transcriptions_Get(string id) {
-            // return a Transcriptions by Id.
-            return Transcriptions.FirstOrDefault(it => it.Id == id);
+        public List<Transcriptions> Transcriptions_GetAllNotApproved() {
+            // return the list of all not approved Transcriptions.
+            return Transcriptions.Where(t => t.IsApproved == false).ToList();
         }
 
         public int Transcriptions_Save() {

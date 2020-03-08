@@ -14,6 +14,17 @@
                     <small class="required">Titolo</small><br />
                     <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" required />
                 </div>
+                <div class="col-md-4">
+                    <small class="required">Filtri</small><br />
+                    @{var filters = "";
+                        foreach(var f in ViewBag.Filters) {
+                            filters = filters + ";" + f.Name;
+                        }
+                        filters = filters.TrimEnd(';');
+                        filters = filters.TrimStart(';');
+                    }
+                    <input type="text" id="Filters" name="Filters" value="@filters" class="form-control" placeholder="Inserisci i filtri fra ;" />
+                </div>
             </div>
 
             <div class="row">
@@ -71,6 +82,11 @@ else {
                 <div class="col-md-6">
                     <small class="required">Titolo</small><br />
                     <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" required />
+                </div>
+                <div class="col-md-4">
+                    <small class="required">Filtri</small><br />
+                    @{var filters = ""; }
+                    <input type="text" id="Filters" name="Filters" value="@filters" class="form-control" placeholder="Inserisci i filtri fra ;" />
                 </div>
             </div>
 

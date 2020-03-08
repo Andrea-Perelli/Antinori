@@ -50,6 +50,14 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="EndDate" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="Filters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Nome" Type="int" Nullable="false" />
+          <Property Name="Page" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Logs">
           <Key>
             <PropertyRef Name="Id" />
@@ -141,6 +149,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Filter_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="Filters" Type="Self.Filters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Filters">
+              <PropertyRef Name="Page" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pages_SubSections">
           <End Role="SubSections" Type="Self.SubSections" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -202,6 +222,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Filters" EntityType="Self.Filters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
@@ -214,6 +235,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Filter_Pages" Association="Self.FK_Filter_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Filters" EntitySet="Filters" />
           </AssociationSet>
           <AssociationSet Name="FK_Pages_SubSections" Association="Self.FK_Pages_SubSections">
             <End Role="SubSections" EntitySet="SubSections" />
@@ -298,6 +323,11 @@
             <End Role="Sections" EntitySet="Sections" />
             <End Role="SubSections" EntitySet="SubSections" />
           </AssociationSet>
+          <EntitySet Name="Filters" EntityType="AntinoriModel.Filters" />
+          <AssociationSet Name="FK_Filter_Pages" Association="AntinoriModel.FK_Filter_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Filters" EntitySet="Filters" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Logs">
           <Key>
@@ -344,6 +374,7 @@
           <Property Name="Editor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SubSections" Relationship="AntinoriModel.FK_Pages_SubSections" FromRole="Pages" ToRole="SubSections" />
           <NavigationProperty Name="Transcriptions" Relationship="AntinoriModel.FK_Transcriptions_Pages" FromRole="Pages" ToRole="Transcriptions" />
+          <NavigationProperty Name="Filters" Relationship="AntinoriModel.FK_Filter_Pages" FromRole="Pages" ToRole="Filters" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -426,6 +457,27 @@
             </Principal>
             <Dependent Role="SubSections">
               <PropertyRef Name="Section" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Filters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nome" Type="Int32" Nullable="false" />
+          <Property Name="Page" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pages" Relationship="AntinoriModel.FK_Filter_Pages" FromRole="Filters" ToRole="Pages" />
+        </EntityType>
+        <Association Name="FK_Filter_Pages">
+          <End Type="AntinoriModel.Pages" Role="Pages" Multiplicity="1" />
+          <End Type="AntinoriModel.Filters" Role="Filters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Filters">
+              <PropertyRef Name="Page" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -551,6 +603,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Filters">
+            <EntityTypeMapping TypeName="AntinoriModel.Filters">
+              <MappingFragment StoreEntitySet="Filters">
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -565,7 +626,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Nessuno" />

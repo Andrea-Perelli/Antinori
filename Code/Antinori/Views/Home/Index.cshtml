@@ -56,7 +56,7 @@
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3 id="ISCRITTI_UltimoAnno">&nbsp;</h3>
+                    <h3 id="numberOfTranscriptionsToCheck">&nbsp;</h3>
                     <p>Trascrizioni da valutare</p>
                 </div>
                 <div class="icon">
@@ -151,6 +151,7 @@
         $.getJSON('@Url.Action("GetBooksInfo","Book")',
             function (model) {
                 $("#numberOfBooks").html(model.numberOfBooks); 
+                $("#numberOfTranscriptionsToCheck").html(model.numberOfTranscriptionsToCheck); 
                 REFRESH_hide("INEVIDENZA_Refresh");
 
             });        
