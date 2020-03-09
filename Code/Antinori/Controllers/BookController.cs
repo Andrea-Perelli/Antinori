@@ -19,7 +19,7 @@ namespace Antinori.Controllers {
         }
 
         [Authorize(Roles = "Admin,Editor")]
-        public JsonResult AddPage(Pages page, HttpPostedFileBase PhotoPath, HttpPostedFileBase BigPhotoPath) {
+        public JsonResult AddPage(Pages page, FormCollection forms, HttpPostedFileBase PhotoPath, HttpPostedFileBase BigPhotoPath) {
             // add a page to a section.
 
             // set default value for esito.
@@ -47,6 +47,24 @@ namespace Antinori.Controllers {
 
                 // insert page.
                 result = this.Dc.Pages_Insert(page) > -1;
+
+                // if we have filters.
+                if(forms["Filters"] != null) {
+                    string[] filters = forms["Filters"].TrimStart(';').TrimEnd(';').Split(';');
+                    foreach(string f in filters) {
+                        // add filter.
+                        Filters filter = new Filters {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = f,
+                            Page = page.Id
+                        };
+                        if(this.Dc.Filters_Insert(filter) == -1) {
+                            // set log and return
+                            Log_Insert(page.Id, "Filters", "INSERT", false, "Errore nell'inserimento dell'entità.");
+                            return Json(false, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                }
 
                 // all ok.
                 if(result) {
@@ -445,7 +463,7 @@ namespace Antinori.Controllers {
                             this.Dc.Pages_Save();
 
                         }
-                    }
+                    } 
 
                     // save.
                     int esito = this.Dc.Pages_Save();

@@ -15,7 +15,7 @@ namespace Antinori.Models
     public partial class Filters
     {
         public string Id { get; set; }
-        public int Nome { get; set; }
+        public string Name { get; set; }
         public string Page { get; set; }
     
         public virtual Pages Pages { get; set; }

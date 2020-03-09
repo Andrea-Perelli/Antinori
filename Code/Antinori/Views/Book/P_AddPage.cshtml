@@ -17,12 +17,8 @@
                 <div class="col-md-4">
                     <small class="required">Filtri</small><br />
                     @{var filters = "";
-                        foreach(var f in ViewBag.Filters) {
-                            filters = filters + ";" + f.Name;
-                        }
-                        filters = filters.TrimEnd(';');
-                        filters = filters.TrimStart(';');
                     }
+
                     <input type="text" id="Filters" name="Filters" value="@filters" class="form-control" placeholder="Inserisci i filtri fra ;" />
                 </div>
             </div>
@@ -76,6 +72,7 @@ else {
         @Html.HiddenFor(p => p.PhotoPath)
         @Html.HiddenFor(p => p.SectionName)
         @Html.HiddenFor(p => p.SubSection)
+        @Html.HiddenFor(p => p.BookTitle)
 
         <div>
             <div class="row">
@@ -85,7 +82,13 @@ else {
                 </div>
                 <div class="col-md-4">
                     <small class="required">Filtri</small><br />
-                    @{var filters = ""; }
+                    @{var filters = "";
+                        foreach(var f in ViewBag.Filters) {
+                            filters = filters + ";" + f.Name;
+                        }
+                        filters = filters.TrimEnd(';');
+                        filters = filters.TrimStart(';');
+                    }
                     <input type="text" id="Filters" name="Filters" value="@filters" class="form-control" placeholder="Inserisci i filtri fra ;" />
                 </div>
             </div>
