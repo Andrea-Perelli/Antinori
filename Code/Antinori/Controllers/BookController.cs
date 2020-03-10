@@ -430,6 +430,36 @@ namespace Antinori.Controllers {
 
             Pages fromDb = this.Dc.Pages_Get(page.Id);
 
+            // if we have filters.
+            if(forms["Filters2"] != null) {
+                // remove items.
+                foreach(Filters ff in this.Dc.Filters_GetByPageId(fromDb.Id)) {
+                    this.Dc.Filters_Delete(ff);
+                }
+                fromDb.Filters.Clear();
+
+                string[] filters = forms["Filters2"].TrimStart(';').TrimEnd(';').Split(';');
+                foreach(string f in filters) {
+                    // add filter.
+                    Filters filter = new Filters {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = f,
+                        Page = page.Id
+                    };
+                    fromDb.Filters.Add(filter);
+                    if(this.Dc.Filters_Insert(filter) == -1) {
+                        // set log and return
+                        Log_Insert(page.Id, "Filters", "INSERT", false, "Errore nell'inserimento dell'entità.");
+                        return Json(false, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            else {
+                Log_Insert(page.Id, "Pages", "UPDATE", false, "Errore nel salvataggio");
+                op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore nel salvataggio" };
+                return Json(op, JsonRequestBehavior.AllowGet);
+            }
+            
             //map the two objects: it updates the DB object.
             if(TryUpdateModel(fromDb)) {
                 try {
@@ -463,7 +493,8 @@ namespace Antinori.Controllers {
                             this.Dc.Pages_Save();
 
                         }
-                    } 
+                    }
+
 
                     // save.
                     int esito = this.Dc.Pages_Save();
