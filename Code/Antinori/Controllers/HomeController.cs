@@ -12,5 +12,12 @@ namespace Antinori.Controllers {
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult PublicIndex() {
+
+            // return public home page.
+            return View();
+        }
+
     }
 }
