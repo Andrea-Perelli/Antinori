@@ -214,7 +214,9 @@ namespace Antinori.Controllers {
             switch(result) {
                 case SignInStatus.Success:
                     var u = Dc.AspNetUsers_Get_ByUsername(model.Email);
-
+                    if(u.AspNetRoles.FirstOrDefault().Name.Equals("User")) {
+                        return RedirectToLocal("/Home/Home");                        
+                    }
                     return RedirectToLocal(returnUrl);
 
                 case SignInStatus.LockedOut:
@@ -246,7 +248,7 @@ namespace Antinori.Controllers {
         public ActionResult LogOff() {
             // logout.
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Home", "Home");
         }
 
         public ActionResult P_ChangePassword() {
