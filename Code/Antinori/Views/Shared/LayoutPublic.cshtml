@@ -28,6 +28,90 @@
     <link rel="stylesheet" href="~/Content/Public/css/animate.min.css">
     <link rel="stylesheet" href="~/Content/Public/css/owl.carousel.css">
     <link rel="stylesheet" href="~/Content/Public/css/main.css">
+
+    <style>
+        
+        .ls{
+            letter-spacing: 0.04em;
+        }
+        .text-uppercase {
+            text-transform: uppercase !important;
+        }
+        label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            display: inline-block;
+        }
+        .form-control {
+            display: block;
+            width: 100%;
+            height: calc(3.05rem + 2px);
+            padding: 0.8rem 0.8rem;
+            font-size: 1rem;
+            line-height: 1.45;
+            color: #404040;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #e1e1e1;
+            border-radius: 0.1875rem;
+            -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+            transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+            -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+        }
+        input{
+            overflow: visible;
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            color: -internal-light-dark-color(black, white);
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            -webkit-appearance: textfield;
+            background-color: -internal-light-dark-color(white, black);
+            -webkit-rtl-ordering: logical;
+            cursor: text;
+            margin: 0em;
+            font: 400 13.3333px Arial;
+            padding: 1px 0px;
+            border-width: 2px;
+            border-style: inset;
+            border-color: initial;
+            border-image: initial;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .my-button{
+            border-radius: 5px!important;
+        }
+        .overlay{
+            z-index: 50;
+            background: rgba(255,255,255,0.7);
+            border-radius: 3px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 
@@ -59,7 +143,8 @@
                             <li class="menu-has-children" style="margin-left: 20px!important; float:right!important;">
                                 <a href="#">Benvento @User.Identity.Name</a>
                                 <ul>
-                                    <li><a href="@Url.Action("P_ForgotPassword","Account")">Cambia Password TODO</a></li>
+                                    <li><a href="@Url.Action("P_PublicProfile","Account")">Profilo to finish</a></li>
+                                    <li><a href="@Url.Action("P_PublicChangePassword","Account")">Cambia Password TODO</a></li>
                                     <li><a href="@Url.Action("LogOff","Account")">Logout</a></li>
                                 </ul>
                             </li>
@@ -72,12 +157,11 @@
 
                 </nav>
             </div>
-        </div>        
+        </div>
     </header><!-- #header -->
     <!-- BODY.   -->
     @RenderBody()
-    
-    
+
     <!-- start footer Area -->
     <footer class="footer-area section-gap">
         <div class="container">
@@ -148,7 +232,41 @@
     <script src="~/Content/Public/js/mail-script.js"></script>
     <script src="~/Content/Public/js/main.js"></script>
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/my.js"></script>
 
+    <script>
+
+        $(document).ready(function () {
+        });
+        function Save() {
+              // validate form.
+              $('#CONTENT_Profile_Form').validate({
+                  lang: 'it'
+              });
+
+              if ($('#CONTENT_Profile_Form').valid()) {
+                   REFRESH_show("CONTENT_Refresh");
+                   var url = '@Url.Action("Save", "Account")';
+                   // take the form content by id.
+                   var data = new FormData($('#CONTENT_Profile_Form').get(0));
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        success: function (risultato) {
+                        },
+                        error: function () {
+                            // set error.
+                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare","","","","OK");
+                        }
+                    });
+              }
+        }
+    </script>
 </body>
 </html>
 

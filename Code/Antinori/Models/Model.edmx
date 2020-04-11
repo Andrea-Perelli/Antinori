@@ -117,7 +117,7 @@
           <Property Name="TEI" Type="nvarchar(max)" />
           <Property Name="Page" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="IsApproved" Type="bit" Nullable="false" />
-          <Property Name="ProposedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ProposedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="ProposedDate" Type="datetime" />
         </EntityType>
@@ -203,6 +203,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transcriptions_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Transcriptions" Type="Self.Transcriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transcriptions">
+              <PropertyRef Name="ProposedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transcriptions_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Transcriptions" Type="Self.Transcriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transcriptions">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Transcriptions_Pages">
           <End Role="Pages" Type="Self.Pages" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -252,6 +276,14 @@
             <End Role="Sections" EntitySet="Sections" />
             <End Role="SubSections" EntitySet="SubSections" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transcriptions_AspNetUsers" Association="Self.FK_Transcriptions_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Transcriptions" EntitySet="Transcriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transcriptions_AspNetUsers1" Association="Self.FK_Transcriptions_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Transcriptions" EntitySet="Transcriptions" />
+          </AssociationSet>
           <AssociationSet Name="FK_Transcriptions_Pages" Association="Self.FK_Transcriptions_Pages">
             <End Role="Pages" EntitySet="Pages" />
             <End Role="Transcriptions" EntitySet="Transcriptions" />
@@ -289,6 +321,8 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Cancellato" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Transcriptions" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers" FromRole="AspNetUsers" ToRole="Transcriptions" />
+          <NavigationProperty Name="Transcriptions1" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers1" FromRole="AspNetUsers" ToRole="Transcriptions" />
         </EntityType>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
@@ -327,6 +361,14 @@
           <AssociationSet Name="FK_Filter_Pages" Association="AntinoriModel.FK_Filter_Pages">
             <End Role="Pages" EntitySet="Pages" />
             <End Role="Filters" EntitySet="Filters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transcriptions_AspNetUsers" Association="AntinoriModel.FK_Transcriptions_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Transcriptions" EntitySet="Transcriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transcriptions_AspNetUsers1" Association="AntinoriModel.FK_Transcriptions_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Transcriptions" EntitySet="Transcriptions" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Logs">
@@ -406,10 +448,12 @@
           <Property Name="TEI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Page" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="IsApproved" Type="Boolean" Nullable="false" />
-          <Property Name="ProposedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProposedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ProposedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Pages" Relationship="AntinoriModel.FK_Transcriptions_Pages" FromRole="Transcriptions" ToRole="Pages" />
+          <NavigationProperty Name="AspNetUsers" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers" FromRole="Transcriptions" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers1" FromRole="Transcriptions" ToRole="AspNetUsers" />
         </EntityType>
         <Association Name="FK_Sections_Sections">
           <End Type="AntinoriModel.Books" Role="Books" Multiplicity="1" />
@@ -478,6 +522,30 @@
             </Principal>
             <Dependent Role="Filters">
               <PropertyRef Name="Page" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transcriptions_AspNetUsers">
+          <End Type="AntinoriModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="AntinoriModel.Transcriptions" Role="Transcriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transcriptions">
+              <PropertyRef Name="ProposedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transcriptions_AspNetUsers1">
+          <End Type="AntinoriModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="AntinoriModel.Transcriptions" Role="Transcriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transcriptions">
+              <PropertyRef Name="ApprovedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

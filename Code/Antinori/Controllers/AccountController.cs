@@ -286,6 +286,26 @@ namespace Antinori.Controllers {
             return View(user);
         }
 
+        [Authorize(Roles = "Admin, Editor, User")]
+        public ActionResult P_PublicChangePassword() {
+            // set the public profile view. 
+
+            // retrieve the user with name mobile phone etc.
+            var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
+
+            return View("P_PublicProfile", user);
+        }
+
+        [Authorize(Roles = "Admin, Editor, User")]
+        public ActionResult P_PublicProfile() {
+            // set the public profile view. 
+
+            // retrieve the user with name mobile phone etc.
+            var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
+
+            return View("P_PublicProfile",user);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public JsonResult Save(AspNetUsers user, FormCollection forms, string username) {
@@ -388,7 +408,6 @@ namespace Antinori.Controllers {
                 }
             }
         }
-
 
 
 

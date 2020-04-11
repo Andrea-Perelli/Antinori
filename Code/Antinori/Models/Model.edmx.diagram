@@ -20,6 +20,8 @@
         <AssociationConnector Association="AntinoriModel.FK_SubSections_Sections" />
         <EntityTypeShape EntityType="AntinoriModel.Filters" Width="1.5" PointX="10.25" PointY="4.5" />
         <AssociationConnector Association="AntinoriModel.FK_Filter_Pages" />
+        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers" />
+        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

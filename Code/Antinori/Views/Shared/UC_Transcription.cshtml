@@ -6,6 +6,9 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     @Html.HiddenFor(p => p.Id, new { id = "Id" })
+    @Html.HiddenFor(p => p.ApprovedBy)
+    @Html.HiddenFor(p => p.ProposedBy)
+
     <!-- FIELD TO EDIT -->
     <div>
         <div class="row">
@@ -15,7 +18,7 @@
             </div>
             <div class="col-md-3">
                 <small class="required">Proposta da</small><br />
-                <input type="text" id="ProposedBy" name="ProposedBy" value="@Model.ProposedBy" class="form-control" readonly />
+                <input type="text" id="" name="" value="@Model.AspNetUsers.UserName" class="form-control" readonly />
             </div>
             <div class="col-md-3">
                 <small class="required">In data</small><br />
@@ -26,26 +29,26 @@
         <div class="row">
             <div class="col-md-2">
                 <small class="required">Approvato</small><br />
-                @Html.RadioButtonFor(m => m.IsApproved, true,Model.IsApproved==true ? new {Checked = "checked"} : null) Si
-                @Html.RadioButtonFor(m => m.IsApproved, false,Model.IsApproved==false ? new {Checked = "checked"} : null) No
+                @Html.RadioButtonFor(m => m.IsApproved, true, Model.IsApproved == true ? new { Checked = "checked" } : null) Si
+                @Html.RadioButtonFor(m => m.IsApproved, false, Model.IsApproved == false ? new { Checked = "checked" } : null) No
             </div>
 
             <div class="col-md-4">
                 @if(Model.IsApproved) {
                     <small class="required">Da</small><br />
-                    <input type="text" id="ApprovedBy" name="ApprovedBy" value="@Model.ApprovedBy" class="form-control" readonly />
+                    <input type="text" id="" name="" value="@Model.AspNetUsers1.UserName" class="form-control" readonly />
                 }
-                
+
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6" style=" margin-right:2px!important;">
-                    <small>JPEG</small><br />
-                    @{var path = Model.Pages.PhotoPath.Split('\\').Last();
-                        path = "/Pics/JPEG/" + path;
-                    }
-                    <img src="@path" alt="JPEG" style="max-height: 400px!important;">
+                <small>JPEG</small><br />
+                @{var path = Model.Pages.PhotoPath.Split('\\').Last();
+                    path = "/Pics/JPEG/" + path;
+                }
+                <img src="@path" alt="JPEG" style="max-height: 400px!important;">
             </div>
             <div class="col-md-5">
                 <small class="required">TEI</small><br />

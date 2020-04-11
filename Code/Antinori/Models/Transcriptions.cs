@@ -23,5 +23,7 @@ namespace Antinori.Models
         public Nullable<System.DateTime> ProposedDate { get; set; }
     
         public virtual Pages Pages { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual AspNetUsers AspNetUsers1 { get; set; }
     }
 }

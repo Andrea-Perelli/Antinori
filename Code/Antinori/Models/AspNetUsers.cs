@@ -18,6 +18,8 @@ namespace Antinori.Models
         public AspNetUsers()
         {
             this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.Transcriptions = new HashSet<Transcriptions>();
+            this.Transcriptions1 = new HashSet<Transcriptions>();
         }
     
         public string Id { get; set; }
@@ -38,5 +40,9 @@ namespace Antinori.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transcriptions> Transcriptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transcriptions> Transcriptions1 { get; set; }
     }
 }
