@@ -295,6 +295,14 @@ namespace Antinori.Controllers {
 
             return View("P_PublicChangePassword", user);
         }
+       
+        public ActionResult P_Register() {
+            // set the public register view. 
+
+            AspNetUsers user = new AspNetUsers();
+
+            return View("P_Register", user);
+        }
 
         [Authorize(Roles = "Admin, Editor, User")]
         public ActionResult P_PublicProfile() {
@@ -304,6 +312,58 @@ namespace Antinori.Controllers {
             var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
 
             return View("P_PublicProfile",user);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<JsonResult> Register(AspNetUsers user, FormCollection forms) {
+            // register function.
+            OpEsitoModel op;
+
+            // create new user.
+            var newUser = new ApplicationUser { Email = user.Email, PhoneNumber = user.PhoneNumber, Cancellato = false, LockoutEnabled = user.Attivo };
+            newUser.UserName = newUser.Email;
+            var result = UserManager.CreateAsync(newUser, user.Password);
+            // OK.
+            if(result.Result.Succeeded) {
+
+                // retrieve user.
+                AspNetUsers u = this.Dc.AspNetUsers_Get(newUser.Id);
+
+                // set again attivo field (for some reason is set always to to true).
+                u.LockoutEnabled = false;
+                u.LockoutEndDateUtc = DateTime.MaxValue;
+                u.Name = user.Name;
+                u.Surname = user.Surname;
+                u.Profession = user.Profession;
+                // set roles
+                u.AspNetRoles.Add(this.Dc.Ruoli_Get("User"));
+                // save context (roles).
+                this.Dc.AspNetUsers_Save();
+
+                string msg = "Gentile <b>" + newUser.UserName + ", "
+                   + "</b>,<br><br>Benvenuto nella nostra piattaforma! <br/><br/>I dati per accedere ad Antinori sono i seguenti:<br>Username: <b>" + newUser.UserName + "</b><br>Password: " + user.Password + "<br/><br/>"
+                   + "<br><br><br><br>Saluti,<br> il team Antinori.";
+
+                this.mailController.SendEmail("Benvenuto su Antinori", msg, user.Email);
+
+                // login operation
+                var r = await SignInManager.PasswordSignInAsync(u.Email, user.Password, true, shouldLockout: false);
+
+                Log_Insert(newUser.Id, "Account", "REGISTER", true, "Operazione conclusa con successo", "", "", "", "");
+                op = new OpEsitoModel() { idReturn = newUser.Id, riuscita = true };
+                return Json(op, JsonRequestBehavior.AllowGet);
+            }
+            else { // PROBLEMS.
+                string error_msg = "";
+                foreach(var er in result.Result.Errors) {
+                    error_msg += er + ";";
+                }
+                Log_Insert(newUser.Email, "Account", "INSERT", false, "Errore:" + error_msg);
+                op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = error_msg };
+                return Json(op, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
         [Authorize(Roles = "Admin,Editor")]
