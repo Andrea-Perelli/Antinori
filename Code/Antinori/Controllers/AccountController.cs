@@ -293,7 +293,7 @@ namespace Antinori.Controllers {
             // retrieve the user with name mobile phone etc.
             var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
 
-            return View("P_PublicProfile", user);
+            return View("P_PublicChangePassword", user);
         }
 
         [Authorize(Roles = "Admin, Editor, User")]

@@ -144,13 +144,14 @@
                                 <a href="#">Benvento @User.Identity.Name</a>
                                 <ul>
                                     <li><a href="@Url.Action("P_PublicProfile","Account")">Profilo</a></li>
-                                    <li><a href="@Url.Action("P_PublicChangePassword","Account")">Cambia Password TODO</a></li>
+                                    <li><a href="@Url.Action("P_PublicChangePassword","Account")">Cambia Password</a></li>
                                     <li><a href="@Url.Action("LogOff","Account")">Logout</a></li>
                                 </ul>
                             </li>
                         }
                         else {
                             <li><a href="@Url.Action("Login","Account")">Login</a></li>
+                            <li><a href="@Url.Action("P_ForgotPassword","Account")">Register TODO</a></li>
                             <li><a href="@Url.Action("P_ForgotPassword","Account")">Recupero Password</a></li>
                         }
                     </ul>
@@ -179,7 +180,7 @@
         </div>
     </div>
 
-    <div id="errorModal" class="modal alert-danger" tabindex="-1" role="dialog">
+    <div id="errorModal" class="modal" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -273,6 +274,70 @@
         $(document).ready(function () {
 
         });
+
+        function PublicChangePassword() {
+            $('#CONTENT_PublicChangePassword_Form').validate({
+                lang: 'it'
+            });
+
+            if ($('#CONTENT_PublicChangePassword_Form').valid()) {
+                // hide things.
+                $("#smallpass").fadeOut('slow');
+                $("#nosamepass").fadeOut('slow');                                     
+
+                // if it is not small
+                if ($("#pass2").val().length >= 6) {
+                    // if are not equal.
+                    if ($("#pass2").val() != $("#pass3").val()) {
+                        $("#nosamepass").fadeIn('slow');
+                        // exit.
+                        return false;
+                    }
+                    else {
+                        // hide nosamepass
+                        $("#nosamepass").fadeOut('slow');
+                    }
+                }
+                else { // small password.
+                      $("#smallpass").show();
+                      $("#smallpass").fadeIn(1000);
+                    // exit.
+                    return false;
+                }
+
+            // show the refresher.
+            REFRESH_show("MODAL_Refresh");
+            var url = '@Url.Action("ChangePassword", "Account")';
+            // take the form content by id.
+            var data = new FormData($('#CONTENT_PublicChangePassword_Form').get(0));
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                contentType: false,
+                processData: false,
+                success: function (risultato) {
+
+                    $("#MODAL_ID").modal('toggle');
+                        if (!risultato.riuscita) {
+                            // set error.
+                            $("#errorModal").show();
+                        }
+                        else {
+                            //if all was ok
+                            $("#successModal").show();
+                        }
+                    },
+                    error: function () {
+                        // set error.
+                            $("#errorModal").show();
+                    }
+            });
+                    
+        }
+    }
+
         function Save() {
               // validate form.
               $('#CONTENT_Profile_Form').validate({
