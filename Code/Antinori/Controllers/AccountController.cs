@@ -306,7 +306,7 @@ namespace Antinori.Controllers {
             return View("P_PublicProfile",user);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Editor")]
         [HttpPost]
         public JsonResult Save(AspNetUsers user, FormCollection forms, string username) {
             // save. 
@@ -377,6 +377,7 @@ namespace Antinori.Controllers {
                     u.LockoutEndDateUtc = DateTime.MaxValue;
                     u.Name = user.Name;
                     u.Surname = user.Surname;
+                    u.Profession = user.Profession;
                     // set roles
                     foreach(var key in forms) {
                         if(key.ToString().Equals("Role")) {
@@ -409,7 +410,41 @@ namespace Antinori.Controllers {
             }
         }
 
+        [Authorize(Roles = "Editor,User")]
+        [HttpPost]
+        public JsonResult SavePublic(AspNetUsers user, FormCollection forms) {
+            // this save gives us the possibility to save from a public profile. 
+            // we removed the creation section to improve security.
+            OpEsitoModel op;
 
+            if(user.Id != null) {
+                // we are editing user.
+                AspNetUsers daDb = this.Dc.AspNetUsers_Get(user.Id);
+
+                //map the two objects: it updates the DB object.
+                if(TryUpdateModel(daDb)) {
+                    try {
+                        // save
+                        this.Dc.AspNetUsers_Save();                        
+
+                        // set log.
+                        Log_Insert(user.Id, "AspNetUsers", "UPDATE", true, "Operazione conclusa con successo", "", "", "", "");
+                        op = new OpEsitoModel() { idReturn = user.Id, riuscita = true };
+                        return Json(op, JsonRequestBehavior.AllowGet);
+                    }
+                    catch(Exception ex) {
+                        Log_Insert(user.Id, "AspNetUsers", "UPDATE", false, "Errore:" + ex.Message);
+                        op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = ex.Message };
+                        return Json(op, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                // I couldn't map the object.
+                Log_Insert(user.Id, "AspNetUsers", "UPDATE", false, "Errore mappatura su DB");
+                op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore mappatura su DB" };
+                return Json(op, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
 
         // ************************ NOT CHECKED ************************
 

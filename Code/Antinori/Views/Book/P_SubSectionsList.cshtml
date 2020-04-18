@@ -88,7 +88,6 @@
         function list() {
             // set the list on the view.
             var url = '@Url.Action("P_SubSectionsListContent", "Book")';
-
             // show the refresher.
             REFRESH_show("CONTENT_Refresh");
             $.getJSON(url,
@@ -179,7 +178,7 @@
             REFRESH_show("CONTENT_Refresh");
             $.getJSON(url,
                 function (data) {
-                     // set data.
+                    // set data.
                     $("#CONTENT_PAGES").html(data);
                     // set the table name as parameter: DataTables_Table_0.
                     $("#DataTables_Table_1").DataTable({

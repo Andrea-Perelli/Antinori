@@ -22,7 +22,13 @@
             </div>
             <div class="col-md-3">
                 <small class="required">In data</small><br />
-                <input type="date" id="ProposedDate" name="ProposedDate" value="@Model.ProposedDate" class="form-control" readonly />
+                @{ 
+                    string d = "";
+                    if(Model.ProposedDate.HasValue) {
+                        d = Model.ProposedDate.Value.ToString("yyyy-MM-ddThh:mm");
+                    }
+                }
+                <input type="datetime-local" id="ProposedDate" name="ProposedDate" value="@d" class="form-control" readonly />
             </div>
         </div>
 

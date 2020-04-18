@@ -22,11 +22,11 @@
             <div class="col-md-4">
                 <small class="required">Nome</small><br />
                 <!-- try update binds with the name attribute. -->
-                <input type="text" id="Incaricato_Nome" name="Incaricato_Nome" value="@Model.Name" class="form-control" required />
+                <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control" required />
             </div>
             <div class="col-md-4">
                 <small class="required">Cognome</small><br />
-                <input type="text" id="Incaricato_Cognome" name="Incaricato_Cognome" value="@Model.Surname" class="form-control" required />
+                <input type="text" id="Surname" name="Surname" value="@Model.Surname" class="form-control" required />
             </div>
         </div>
 
@@ -38,6 +38,10 @@
             <div class="col-md-4">
                 <small class="required"> Cellulare</small><br />
                 <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <small class="required"> Professione</small><br />
+                @Html.DropDownList("Profession", new SelectList(Antinori.Static.BL_Utility.professions), "Seleziona Professione", new { @class = "form-control" })
             </div>
         </div>
     </div>

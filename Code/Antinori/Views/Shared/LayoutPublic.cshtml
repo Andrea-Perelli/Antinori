@@ -143,7 +143,7 @@
                             <li class="menu-has-children" style="margin-left: 20px!important; float:right!important;">
                                 <a href="#">Benvento @User.Identity.Name</a>
                                 <ul>
-                                    <li><a href="@Url.Action("P_PublicProfile","Account")">Profilo to finish</a></li>
+                                    <li><a href="@Url.Action("P_PublicProfile","Account")">Profilo</a></li>
                                     <li><a href="@Url.Action("P_PublicChangePassword","Account")">Cambia Password TODO</a></li>
                                     <li><a href="@Url.Action("LogOff","Account")">Logout</a></li>
                                 </ul>
@@ -161,6 +161,39 @@
     </header><!-- #header -->
     <!-- BODY.   -->
     @RenderBody()
+
+    <!-- MODALS -->
+    <div id="successModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document" >
+            <div class="modal-content" >
+                <div class="modal-header" >
+                    <h5 class="modal-title modal-">Risultato Operazione</h5>
+                </div>
+                <div class="modal-body" >
+                    <p>Operazione Conclusa con successo!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="{$('#successModal').hide()}" class="btn btn-primary" style="background-color: #0abb87!important; border-color: #0abb87!important;">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorModal" class="modal alert-danger" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Risultato Operazione</h5>                    
+                </div>
+                <div class="modal-body">
+                    <p>Si è verificato un errore durante l'operazione, controllare i dati inseriti e riprovare</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="{$('#errorModal').hide()}" style="background-color: #FF0000!important; border-color: #FF4500!important;">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- start footer Area -->
     <footer class="footer-area section-gap">
@@ -238,6 +271,7 @@
     <script>
 
         $(document).ready(function () {
+
         });
         function Save() {
               // validate form.
@@ -247,7 +281,7 @@
 
               if ($('#CONTENT_Profile_Form').valid()) {
                    REFRESH_show("CONTENT_Refresh");
-                   var url = '@Url.Action("Save", "Account")';
+                   var url = '@Url.Action("SavePublic", "Account")';
                    // take the form content by id.
                    var data = new FormData($('#CONTENT_Profile_Form').get(0));
 
@@ -258,10 +292,20 @@
                         contentType: false,
                         processData: false,
                         success: function (risultato) {
+                            REFRESH_hide("CONTENT_Refresh");
+                            if (risultato.riuscita) {
+                                // set error.
+                                $("#successModal").show();
+                            }
+                            else {
+                                // set error.
+                                $("#errorModal").show();
+                            }
+
                         },
                         error: function () {
                             // set error.
-                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare","","","","OK");
+                            $("#errorModal").show();
                         }
                     });
               }

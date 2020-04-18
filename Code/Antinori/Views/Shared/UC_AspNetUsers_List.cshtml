@@ -8,6 +8,7 @@
                 <th style="width: 100px">Cognome</th>
                 <th style="width: 100px">Nome</th>
                 <th style="width: 70px">Cellulare</th>
+                <th style="width: 70px">Professione</th>
                 <th style="width: 100px">Email</th>
                 <th style="width: 100px">Ruoli</th>
                 <th style="width: 180px"> </th>
@@ -22,7 +23,7 @@
                 <td>@item.Surname</td>
                 <td>@item.Name</td>
                 <td>@item.PhoneNumber</td>
-
+                <td>@item.Profession</td>
                 <td>@item.Email</td>
                 <td>
                     @foreach(var role in item.AspNetRoles) {
@@ -46,7 +47,7 @@
                     <button class="btn btn-default btn-sm" onclick="delete_get('@item.Id')" title="Cancella">
                         <i class="fa fa-trash-o">
                         </i>
-                    </button>                
+                    </button>
                 </td>
             </tr>
             }
@@ -54,7 +55,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="7"></th>
+                <th colspan="8"></th>
             </tr>
         </tfoot>
     </table>

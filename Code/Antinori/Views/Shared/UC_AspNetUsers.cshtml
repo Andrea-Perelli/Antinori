@@ -40,6 +40,10 @@
                 <small class="required"> Cellulare</small><br />
                 <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" class="form-control" />
             </div>
+            <div class="col-md-4">
+                <small class="required"> Professione</small><br />
+                @Html.DropDownList("Profession", new SelectList(Antinori.Static.BL_Utility.professions), "Seleziona Professione", new { @class = "form-control" })
+            </div>
         </div>
 
 
