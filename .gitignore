@@ -24,6 +24,7 @@ _UpgradeReport_Files/
 ###############
 bin/
 obj/
+Pics
 TestResults/
 Template/
 .vs/
