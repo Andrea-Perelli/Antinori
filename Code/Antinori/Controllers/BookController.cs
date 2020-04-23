@@ -193,6 +193,16 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "P_AddPage", page), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        public JsonResult P_BookSections(string bookId) {
+            // return the Subsection list page.
+
+            List<Sections> sections = this.Dc.Sections_GetsByBookId(bookId);
+
+            // return the partial view containing the BookSections page.
+            return Json(GetRenderPartialView(this, "UC_BookSections", sections), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult P_Create() {
             // open p create page.
@@ -223,6 +233,14 @@ namespace Antinori.Controllers {
 
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "UC_Transcription", t), JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public ActionResult P_ReadBooks() {
+            // set the leggi opera view. 
+            // retrieve books.
+            List<Books> books = this.Dc.Books_Gets();
+            return View(books);
         }
 
         [Authorize(Roles = "Admin,Editor")]

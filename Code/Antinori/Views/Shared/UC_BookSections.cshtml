@@ -1,0 +1,36 @@
+﻿@model List<Antinori.Models.Sections>
+
+
+@{
+    var title = "L'opera non ha nessuna sezione";
+    if(Model.Count > 0) {
+        title = "Sezioni dell'opera: " + Model.FirstOrDefault().Books.Title;
+    }
+}
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="menu-content pb-60 col-lg-10" style="padding:0;">
+            <div class="title text-center" >
+                <h4 class="mb-10">@title</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="active-course-carusel" style="margin-left: auto;">
+            @foreach(var s in Model) {
+                <div class="single-course item" style=" max-width: 200px!important; max-height: 200px!important; display: inline-block; margin: 7px!important;">
+                    <img class="img-fluid" src="~/Content/Public/img/c1.jpg" alt="">
+                    <p class="sale-btn">@s.Name</p>
+                    <div class="details">
+                        <a href="#">
+                            <h4>Breakthrough Thinking <span class="price float-right">$25</span></h4>
+                        </a>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

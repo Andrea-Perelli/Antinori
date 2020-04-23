@@ -17,9 +17,7 @@
     <title>Book</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-    <!--
-    CSS 
-    ============================================= -->
+    <!-- CSS ============================================= -->
     <link rel="stylesheet" href="~/Content/Public/css/linearicons.css">
     <link rel="stylesheet" href="~/Content/Public/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/Public/css/bootstrap.css">
@@ -126,15 +124,15 @@
                 <nav id="nav-menu-container" style="margin-right: 0!important;">
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="@Url.Action("Home","Home")">Home</a></li>
-                        <li><a href="#fact">Leggi Opere</a></li>
-                        <li><a href="#about">Contesto Progetto?</a></li>
+                        <li><a href="@Url.Action("P_ReadBooks","Book")">Leggi Opere</a></li>
                         <li class="menu-has-children">
-                            <a href="">Guide</a>
+                            <a href="#">Guide</a>
                             <ul>
                                 <li><a href="@Url.Action("P_GuidaTEI","Home")">Guida TEI</a></li>
                                 <li><a href="@Url.Action("P_GuidaFiltri","Home")">Guida Filtri</a></li>
                             </ul>
                         </li>
+                        <li><a href="#about">Contesto Progetto?</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
                 <nav id="nav-menu-container" style="float: right!important;">
@@ -155,7 +153,6 @@
                             <li><a href="@Url.Action("P_ForgotPassword","Account")">Recupero Password</a></li>
                         }
                     </ul>
-
                 </nav>
             </div>
         </div>
@@ -374,6 +371,19 @@
                         }
                     });
               }
+        }
+
+        function ShowOpera(bookId) {
+            // shhow opera composition.
+
+            // show refresher.
+            REFRESH_show("MODAL_Refresh");
+
+            $.getJSON('@Url.Action("P_BookSections","Book")' + "?bookId=" + bookId,
+                function (model) {
+                    $("#container").html(model);   
+                    REFRESH_hide("MODAL_Refresh");
+            });
         }
     </script>
 </body>

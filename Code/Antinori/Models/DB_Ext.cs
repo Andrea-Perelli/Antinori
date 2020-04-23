@@ -316,6 +316,12 @@ namespace Antinori.Models {
 
         #region Sections
 
+        public List<Sections> Sections_GetsByBookId(string bookId) {
+            // return the list of all SubSections.
+            return Sections.Where(s => s.Book.Equals(bookId)).ToList();
+        }
+
+
         public int Sections_Save() {
             int esito = -1;
             try {
