@@ -256,6 +256,26 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_Section", Sections), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        public JsonResult P_SubsectionPages(string subSectionId) {
+            // return the subsections list view.
+
+            List<Pages> pages = this.Dc.Pages_GetBySubSection(subSectionId);
+
+            // return the partial view containing the UC_SectionSubsections page.
+            return Json(GetRenderPartialView(this, "UC_SubsectionPages", pages), JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public JsonResult P_SectionSubsections(string sectionId) {
+            // return the subsections list view.
+
+            List<SubSections> subSections = this.Dc.Sections_GetsBySectionId(sectionId);
+
+            // return the partial view containing the UC_SectionSubsections page.
+            return Json(GetRenderPartialView(this, "UC_SectionSubsections", subSections), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult P_SubSections(int numberOfSubSections, string parent) {
             // return the section page.

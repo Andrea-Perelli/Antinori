@@ -268,6 +268,8 @@
 
     <script>
 
+        var previousIdSelected = "";
+
         $(document).ready(function () {
 
         });
@@ -377,13 +379,57 @@
             // shhow opera composition.
 
             // show refresher.
-            REFRESH_show("MODAL_Refresh");
+            REFRESH_show("CONTENT_Refresh");
 
             $.getJSON('@Url.Action("P_BookSections","Book")' + "?bookId=" + bookId,
                 function (model) {
-                    $("#container").html(model);   
-                    REFRESH_hide("MODAL_Refresh");
+                    $("#container").html(model);  
+
+                    // clear childs
+                    $("#subsections").html('');
+
+                    REFRESH_hide("CONTENT_Refresh");
             });
+        }
+
+        function ShowSubsections(sectionId) {
+            // shhow section composition.
+
+            // show refresher.
+            REFRESH_show("CONTENT_Refresh");
+
+            $.getJSON('@Url.Action("P_SectionSubsections","Book")' + "?sectionId=" + sectionId,
+                function (model) {
+                    $("#subsections").html(model);  
+                    // clear childs
+                    $("#pages").html('');
+
+                    REFRESH_hide("CONTENT_Refresh");
+            });
+        }
+
+
+        function ShowSubsectionPages(subSectionId, subSectionName) {
+            // shhow subsection pages.
+
+            // show refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON('@Url.Action("P_SubsectionPages","Book")' + "?subSectionId=" + subSectionId,
+                function (model) {
+                    $("#pages").html(model);   
+
+                    // deselect.
+                    $("#sub_" + previousIdSelected).css("background-color", "white");
+                    // select new.
+                    $("#sub_" + subSectionName).css("background-color", "wheat");
+                    $("#sub_" + subSectionName).css("border-radius", "0px 25px 25px 0px");
+
+                    REFRESH_hide("CONTENT_Refresh");
+
+                    // update var.
+                    previousIdSelected = subSectionName;
+                });
+           
         }
     </script>
 </body>

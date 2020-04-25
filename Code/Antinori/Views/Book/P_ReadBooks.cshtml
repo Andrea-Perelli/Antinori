@@ -13,21 +13,21 @@
     </div>
 </section>
 <!-- upper  Area -->
-
 <!-- REFRESHER -->
-<div id="CONTENT_Refresh" class="overlay text-center" style="z-index:100; height:80px; background-color:rgba(255, 255, 255, 0.60); margin: auto; position: fixed; display: none;">
-    <i class="fa fa-refresh fa-spin"></i>
+<div id="CONTENT_Refresh" class="overlay text-center" style="z-index:100; height:80px; background-color:rgba(255, 255, 255, 0.00); margin: auto; position: fixed; display: none;">
+    <h3>
+        <i class="fa fa-refresh fa-spin"></i>
+    </h3>
 </div>
 <!-- REFRESHER -->
-
 <!-- Start BOOKS Area -->
 <section class="testomial-area section-gap" style="padding-bottom: 20px!important; padding-top: 20px!important;">
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-60 col-lg-8">
+            <div class="menu-content pb-60 col-lg-8" style="padding-bottom: 30px!important;">
                 <div class="title text-center">
                     <h1 class="mb-10">@ViewBag.Title</h1>
-                    <p>Ecco la lista delle opere presenti su.....</p>
+                    <p>Seleziona l'opera che vuoi leggere</p>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="active-tstimonial-carusel">
                 @foreach(var b in Model) {
                     <div class="single-testimonial item">
-                        <img class="mx-auto" style="max-height: 300px!important;" src="~/Pics/JPEG/BibliotecaTommasi.Antinori.Corografia.XXVI-1_0047_12r.jpg" />
+                        <img class="mx-auto" style="max-height: 350px!important;" src="~/Pics/JPEG/BibliotecaTommasi.Antinori.Corografia.XXVI-1_0047_12r.jpg" />
                         <p class="desc">
                             @b.Description
                         </p>
@@ -50,8 +50,14 @@
     </div>
 </section>
 <!-- End BOOKS Area -->
-<!-- Start course Area -->
-<section class="course-area section-gap" id="container" style="padding-top: 0!important;">
+
+<!-- Start container Area -->
+<section class="course-area section-gap" id="container" style="padding-top: 0!important; padding-bottom: 5px!important;">
+</section>
+<!-- End container Area -->
+
+<!-- Start subsections Area -->
+<section class="course-area section-gap" id="subsections" style="padding-top: 0!important; ">
     
 </section>
-<!-- End course Area -->
+<!-- End subsections Area -->

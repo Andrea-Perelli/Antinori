@@ -1,0 +1,29 @@
+﻿@model List<Antinori.Models.Pages>
+
+@{ 
+    int i = 0;
+    string path = "";
+}
+
+<div class="section-top-border">
+    <h3>Image Gallery</h3>
+    <div class="row gallery-item">
+        @foreach(var p in Model.Take(15)) {
+            
+            path = p.PhotoPath.Split('\\').Last();
+            path = "/Pics/JPEG/" + path;
+       
+            <div class="col-md-2" style="max-width: 10.66667%">
+                <a href="#" class="img-pop-up">
+                    <div class="single-gallery-image" style="max-height: 220px; max-width: 170px; background: url(@path);"></div>
+                    <p class="text-center desc" style="color: black;">
+                        # @p.NumericOrder
+                    </p>
+                </a>
+                
+            </div>
+        }
+
+
+    </div>
+</div>

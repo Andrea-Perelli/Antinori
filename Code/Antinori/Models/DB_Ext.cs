@@ -230,7 +230,7 @@ namespace Antinori.Models {
 
         public List<Pages> Pages_GetBySubSection(string subSectionId) {
             // return all Pages of a subsection.
-            List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).ToList();
+            List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p =>p.NumericOrder).ToList();
             return pages;
         }
 
@@ -321,7 +321,6 @@ namespace Antinori.Models {
             return Sections.Where(s => s.Book.Equals(bookId)).ToList();
         }
 
-
         public int Sections_Save() {
             int esito = -1;
             try {
@@ -341,6 +340,11 @@ namespace Antinori.Models {
         public List<SubSections> SubSections_Gets() {
             // return the list of all SubSections.
             return SubSections.ToList();
+        }
+
+        public List<SubSections> Sections_GetsBySectionId(string sectionId) {
+            // return the list of all SubSections by section id.
+            return SubSections.Where(s => s.Section.Equals(sectionId)).OrderBy(s => s.Name).ToList();
         }
 
         public SubSections SubSectionss_Get(string id) {
