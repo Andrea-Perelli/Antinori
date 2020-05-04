@@ -234,6 +234,18 @@ namespace Antinori.Models {
             return pages;
         }
 
+        public List<Pages> Pages_GetFirstNBySubSection(string subSectionId, int n) {
+            // return all Pages of a subsection.
+            List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p => p.NumericOrder).Take(n).ToList();
+            return pages;
+        }
+
+        public List<Pages> Pages_GetFirstNBySubSectionAndIndex(string subSectionId, int n, int index) {
+            // return all Pages of a subsection.
+            List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p => p.NumericOrder).Take(n).ToList();
+            return pages;
+        }
+
         public int Pages_Insert(Pages c) {
             // insert a book.
             int esito = -1;
