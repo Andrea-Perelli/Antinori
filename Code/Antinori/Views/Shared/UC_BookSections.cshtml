@@ -1,6 +1,5 @@
 ﻿@model List<Antinori.Models.Sections>
 
-
 @{
     var title = "L'opera non ha nessuna sezione";
     if(Model.Count > 0) {
@@ -20,7 +19,7 @@
             @foreach(var s in Model) {
                 <div class="single-course item" style="max-width: 200px!important; max-height: 150px!important; min-width: 200px!important; min-height: 150px!important; display: inline-block; margin: 7px!important; border: 3px solid red;" onclick="ShowSubsections('@s.Id')">
                     <div class="details" style="padding: 5px 10px 5px 10px;">
-                        <a class="text-center" href="#">
+                        <a class="text-center" href="#!">
                             <h5>@s.Name </h5>
                         </a>
                         @{ 

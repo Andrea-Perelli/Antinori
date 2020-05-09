@@ -257,24 +257,24 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
-        public JsonResult P_SubsectionPages(string subSectionId) {
+        public JsonResult P_SubsectionPages(string subSectionId, string page) {
             // return the subsections page list view.
 
-            // QUERY
-            // (ANTINORI-ANNALI-1) QUERY TIME DEBUG: 0.35.
-            // (ANTINORI-ANNALI-1) QUERY TIME EXECUTION: 0.54   .
-
-            // VIEW.
-            // (ANTINORI-ANNALI-1) QUERY TIME DEBUG: .
-            // (ANTINORI-ANNALI-1) QUERY TIME EXECUTION: .
-
-            DateTime start = DateTime.Now;
-
-            List<Pages> pages = this.Dc.Pages_GetFirstNBySubSection(subSectionId, 9);
-
-            ViewBag.end = DateTime.Now;
-
-            ViewBag.elapsedTime = ViewBag.end.Subtract(start).TotalSeconds;
+            List<Pages> pages = null;
+            int numberOfPageToShow = 9;
+            
+            if(page == "-") {
+                // default call: retrieve pages.
+                pages = this.Dc.Pages_GetFirstNBySubSection(subSectionId, numberOfPageToShow);
+            }
+            else {
+                //if(page == "1") {
+                //    // in order to not start from n+1.
+                //    page = "0";
+                //}
+                // when we clicked on the pagination. 
+                pages = this.Dc.Pages_GetFirstNBySubSectionAndIndex(subSectionId, numberOfPageToShow, Convert.ToInt32(page));
+            }
 
             // return the partial view containing the UC_SectionSubsections page.
             return Json(GetRenderPartialView(this, "UC_SubsectionPages", pages), JsonRequestBehavior.AllowGet);

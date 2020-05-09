@@ -240,9 +240,9 @@ namespace Antinori.Models {
             return pages;
         }
 
-        public List<Pages> Pages_GetFirstNBySubSectionAndIndex(string subSectionId, int n, int index) {
+        public List<Pages> Pages_GetFirstNBySubSectionAndIndex(string subSectionId, int n, int page) {
             // return all Pages of a subsection.
-            List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p => p.NumericOrder).Take(n).ToList();
+            List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p => p.NumericOrder).Skip((page-1) * n).Take(n).ToList();
             return pages;
         }
 

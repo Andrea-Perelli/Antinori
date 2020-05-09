@@ -1,16 +1,16 @@
 ﻿@model List<Antinori.Models.SubSections>
 
-<div class="row" style="margin-right: 18px!important; margin-left: 18px!important;">
+<div class="row" style="margin-right: 18px!important; margin-left: 18px!important; ">
     <div class=".col-sm">
         <div class="section-top-border" style="padding: 20px!important; border-top: 0!important;">
-            <div class="row">
+            <h5 class="mb-20">Sottosezioni</h5>
+            <div class="row" style="border-right: 1px solid #eee;">
                 <div class="col-md-11 mt-sm-30">
-                    <h5 class="mb-20">Sottosezioni</h5>
                     <div class="">
                         <ul class="unordered-list">
                             @foreach(var sub in Model) {
-                                <a href="#" onclick="ShowSubsectionPages('@sub.Id','@sub.Name')" style="color: black;">
-                                    <li  id="sub_@sub.Name">@sub.Name</li>
+                                <a href="#!" onclick="ShowSubsectionPages('@sub.Id','@sub.Name')" style="color: black;">
+                                    <li id="sub_@sub.Name">@sub.Name</li>
                                 </a>
                             }
                         </ul>
@@ -24,4 +24,9 @@
     </div>
     <div class=".col-sm">
     </div>
+
+</div>
+<!-- PAGINATION -->
+<div id="pagination" style="display: flex; justify-content: center; margin-top: 20px;">
+
 </div>

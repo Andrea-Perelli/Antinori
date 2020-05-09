@@ -1,41 +1,24 @@
 ﻿@model List<Antinori.Models.Pages>
 
-@{ 
+@{
     string path = "";
+    //int index = Model.LastOrDefault().NumericOrder;
 }
+@*<input value="@index" id="numericOrderLastIndex" name="numericOrderLastIndex" type="hidden">*@
 
-<div class="section-top-border">
-    <h3>Image Gallery</h3>
+<div class="section-top-border" style="padding: 0!important; ">
     <div class="row gallery-item">
         @foreach(var p in Model) {
 
             path = "/Pics/JPEG/" + p.PhotoPath.Split('\\').Last();
-
-            @*<div class="col-md-2" style="max-width: 10.66667%">
-                <a href="#" class="img-pop-up">
-                    <div class="single-gallery-image" style="max-height: 220px; max-width: 170px; background: url(@path);"></div>
-                    <p class="text-center desc" style="color: black;">
-                        # @p.NumericOrder
-                    </p>
-                </a>
-            </div>*@
-            <div class="col-md-3" >
-                <a href="#" class="img-pop-up">
-                    <div class="single-gallery-image" style="max-height: 400px; max-width: 300px; background: url(@path); margin-left: auto; margin-right: auto;"></div>
+            <div style="padding: 12px; display: table-cell; vertical-align: middle; text-align: center; float: left; clear: both;">
+                <a href="#" onclick="">
+                    <img src="@path" class="mx-auto" style="height: 400px; width: 330px;" />
                     <p class="text-center desc" style="color: black;">
                         # @p.NumericOrder
                     </p>
                 </a>
             </div>
         }
-
-
-        @{
-            var end = DateTime.Now;
-        }
-        View  @end.Subtract(ViewBag.end).TotalSeconds
-        <br />
-        Query @ViewBag.elapsedTime
-
     </div>
 </div>

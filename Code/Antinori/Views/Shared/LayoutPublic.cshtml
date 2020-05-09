@@ -162,12 +162,12 @@
 
     <!-- MODALS -->
     <div id="successModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document" >
-            <div class="modal-content" >
-                <div class="modal-header" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h5 class="modal-title modal-">Risultato Operazione</h5>
                 </div>
-                <div class="modal-body" >
+                <div class="modal-body">
                     <p>Operazione Conclusa con successo!</p>
                 </div>
                 <div class="modal-footer">
@@ -177,11 +177,11 @@
         </div>
     </div>
 
-    <div id="errorModal" class="modal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div id="errorModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Risultato Operazione</h5>                    
+                    <h5 class="modal-title">Risultato Operazione</h5>
                 </div>
                 <div class="modal-body">
                     <p>Si è verificato un errore durante l'operazione, controllare i dati inseriti e riprovare</p>
@@ -264,6 +264,8 @@
     <script src="~/Content/Public/js/main.js"></script>
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.twbsPagination.min.js"></script>
+
     <script src="~/Scripts/my.js"></script>
 
     <script>
@@ -282,7 +284,7 @@
             if ($('#CONTENT_PublicChangePassword_Form').valid()) {
                 // hide things.
                 $("#smallpass").fadeOut('slow');
-                $("#nosamepass").fadeOut('slow');                                     
+                $("#nosamepass").fadeOut('slow');
 
                 // if it is not small
                 if ($("#pass2").val().length >= 6) {
@@ -333,7 +335,7 @@
                             $("#errorModal").show();
                     }
             });
-                    
+
         }
     }
 
@@ -383,7 +385,7 @@
 
             $.getJSON('@Url.Action("P_BookSections","Book")' + "?bookId=" + bookId,
                 function (model) {
-                    $("#container").html(model);  
+                    $("#container").html(model);
 
                     // clear childs
                     $("#subsections").html('');
@@ -400,7 +402,7 @@
 
             $.getJSON('@Url.Action("P_SectionSubsections","Book")' + "?sectionId=" + sectionId,
                 function (model) {
-                    $("#subsections").html(model);  
+                    $("#subsections").html(model);
                     // clear childs
                     $("#pages").html('');
 
@@ -414,22 +416,48 @@
 
             // show refresher.
             REFRESH_show("CONTENT_Refresh");
-            $.getJSON('@Url.Action("P_SubsectionPages","Book")' + "?subSectionId=" + subSectionId,
+            $.getJSON('@Url.Action("P_SubsectionPages","Book")' + "?subSectionId=" + subSectionId + "&page=" + "1",
                 function (model) {
-                    $("#pages").html(model);   
+                    $("#pages").html(model);
 
                     // deselect.
                     $("#sub_" + previousIdSelected).css("background-color", "white");
+
+                    subSectionName = subSectionName.replace(".", "\\.");
+
                     // select new.
                     $("#sub_" + subSectionName).css("background-color", "wheat");
                     $("#sub_" + subSectionName).css("border-radius", "0px 25px 25px 0px");
+
+                    // reset pagination.
+                    $('#pagination').empty();
+                    $('#pagination').removeData("twbs-pagination");
+                    $('#pagination').unbind("page");
+
+                    // set pagination.
+                    $('#pagination').twbsPagination({
+                        totalPages: 35,
+                        visiblePages: 3,
+                        cssStyle: 'pagination',
+                        onPageClick: function (event, page) {
+                            REFRESH_show("CONTENT_Refresh");
+
+                            // re-load pages.
+                            $.getJSON('@Url.Action("P_SubsectionPages","Book")' + "?subSectionId=" + subSectionId + "&page=" + page,
+                                function (model) {
+                                    // set html.
+                                    $("#pages").html(model);
+                            });
+                            REFRESH_hide("CONTENT_Refresh");
+                        }
+                    });
 
                     REFRESH_hide("CONTENT_Refresh");
 
                     // update var.
                     previousIdSelected = subSectionName;
                 });
-           
+
         }
     </script>
 </body>
