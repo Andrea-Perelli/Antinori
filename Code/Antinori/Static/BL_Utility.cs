@@ -9,10 +9,9 @@ namespace Antinori.Static {
         public static string[] professions {
             get {
                 string[] professions = new string[]{
-                    "Altro",
-                    "Pensionato",
-                    "Professore",
-                    "Ricercatore",
+                    "Altro", 
+                    "Insegnante",
+                    "Insegnante in pensione",
                     "Studente"
                 };
                 return professions;

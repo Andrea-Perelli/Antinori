@@ -82,8 +82,8 @@ namespace Antinori.Controllers {
                 Dc.AspNetUsers_Save();
 
                 string corpo = "Gentile <b>" + user.Name + " " + user.Surname + "</b>,"
-                           + "<br><br>la tua password è stata modificata: la tua nuova password è: <b>" + aspNetUsers.NewPassword + "</b>.<br>"
-                           + "Ti consigliamo di proteggere questi dati. <br><br><br><br>Saluti,<br> il team Antinori.";
+                           + "<br><br>la tua password è stata modificata. <br> La tua nuova password è: <b>" + aspNetUsers.NewPassword + "</b>.<br>"
+                           + "Ti consigliamo di proteggere questi dati. <br><br><br><br>Cordiali saluti"; 
 
                 // send mail.
                 string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];
@@ -152,8 +152,8 @@ namespace Antinori.Controllers {
                     if(addPasswordEsito.Succeeded) {
                         // set corpo.
                         string corpo = "Gentile <b>" + User.Name + " " + User.Surname
-                            + "</b>,<br><br>La tua password è stata resettata: la tua nuova password è: <b>" + password + "</b>.<br>"
-                            + "Ti consigliamo di cambiare la password al più presto. <br><br><br><br>Saluti,<br> il team Antinori.";
+                            + "</b>,<br><br>come da tua richiesta il sistema ha modificato la tua password. <br> La nuova è: <b>" + password + "</b>.<br>"
+                            + "Ti ricordiamo che hai la possibilità di cambiarla. <br><br><br><br>Cordiali saluti.";
 
                         // send mail.
                         this.mailController.SendEmail("Reset Password", corpo, User.Email);
@@ -342,8 +342,8 @@ namespace Antinori.Controllers {
                 this.Dc.AspNetUsers_Save();
 
                 string msg = "Gentile <b>" + newUser.UserName + ", "
-                   + "</b>,<br><br>Benvenuto nella nostra piattaforma! <br/><br/>I dati per accedere ad Antinori sono i seguenti:<br>Username: <b>" + newUser.UserName + "</b><br>Password: " + user.Password + "<br/><br/>"
-                   + "<br><br><br><br>Saluti,<br> il team Antinori.";
+                   + "</b>,<br><br>grazie per la tua iscrizione! <br/><br/>I dati di accesso sono i seguenti:<br>Username: <b>" + newUser.UserName + "</b><br>Password: " + user.Password + "<br/><br/>"
+                   + "<br><br><br><br>Saluti cordiali.";
 
                 this.mailController.SendEmail("Benvenuto su Antinori", msg, user.Email);
 
@@ -449,8 +449,8 @@ namespace Antinori.Controllers {
                     this.Dc.AspNetUsers_Save();
 
                     string msg = "Gentile <b>" + newUser.UserName + ", "
-                       + "</b>,<br><br>Benvenuto nel nostro Team! <br/><br/>I dati per accedere ad Antinori sono i seguenti:<br>Username: <b>" + newUser.UserName + "</b><br>Password: " + password + "<br/><br/>"
-                       + "Ti consigliamo di modificare la password al più presto. <br><br><br><br>Saluti,<br> il team Antinori.";
+                       + "</b>,<br><br>grazie per la tua iscrizione! <br/><br/>I dati di accesso sono i seguenti: <br>Username: <b>" + newUser.UserName + "</b><br>Password: " + password + "<br/><br/>"
+                       + "Ti consigliamo di modificare la password al più presto. <br><br><br><br>Saluti cordiali.";
 
                     this.mailController.SendEmail("Benvenuto su Antinori", msg, user.Email);
 
