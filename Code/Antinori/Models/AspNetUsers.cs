@@ -38,6 +38,7 @@ namespace Antinori.Models
         public string UserName { get; set; }
         public bool Cancellato { get; set; }
         public string Profession { get; set; }
+        public string OtherProfession { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }

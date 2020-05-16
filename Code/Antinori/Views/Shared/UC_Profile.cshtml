@@ -15,7 +15,11 @@
             <div class="col-md-4">
                 <small class="required">Username</small><br />
                 <input type="text" id="Username" name="Username" value="@Model.UserName" disabled class="form-control" />
-            </div>         
+            </div>  
+            <div class="col-md-4">
+                <small class="required">Email</small><br />
+                <input type="email" id="Email" name="Email" value="@Model.Email" class="form-control" required />
+            </div>
         </div>
 
         <div class="row">
@@ -28,22 +32,46 @@
                 <small class="required">Cognome</small><br />
                 <input type="text" id="Surname" name="Surname" value="@Model.Surname" class="form-control" required />
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <small class="required">Email</small><br />
-                <input type="email" id="Email" name="Email" value="@Model.Email" class="form-control" required />
-            </div>
             <div class="col-md-4">
                 <small class="required"> Cellulare</small><br />
                 <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" class="form-control" />
             </div>
+        </div>
+
+        <div class="row">
+
             <div class="col-md-4">
                 <small class="required"> Professione</small><br />
                 @Html.DropDownList("Profession", new SelectList(Antinori.Static.BL_Utility.professions), "Seleziona Professione", new { @class = "form-control" })
             </div>
+            @{
+                // set style.
+                string style = "";
+                if (Model.Profession == null || !Model.Profession.Equals("Altro") || Model.Profession.Equals("")) {
+                    style = "display: none;";
+                }
+            }
+
+            <div class="col-md-4" id="OtherProfessionDiv" style="@style">
+                <small> Altro</small><br />
+                <input type="text" id="OtherProfession" name="OtherProfession" value="@Model.OtherProfession" class="form-control" />
+            </div>
         </div>
     </div>
 }
+
+<script>
+
+    $("#Profession").change(function () {
+        // show/hide other profession field.
+        var value = $("#Profession").val();
+        if (value == "Altro") {
+            $("#OtherProfessionDiv").show();
+        }
+        else {
+            $("#OtherProfessionDiv").hide();
+        }
+    });
+
+</script>
 

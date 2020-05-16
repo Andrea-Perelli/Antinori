@@ -470,7 +470,7 @@ namespace Antinori.Controllers {
             }
         }
 
-        [Authorize(Roles = "Editor,User")]
+        [Authorize(Roles = "Admin, Editor,User")]
         [HttpPost]
         public JsonResult SavePublic(AspNetUsers user, FormCollection forms) {
             // this save gives us the possibility to save from a public profile. 

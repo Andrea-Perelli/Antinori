@@ -276,6 +276,17 @@
 
         });
 
+        $("#Profession").change(function () {
+            // show/hide other profession field.
+            var value = $("#Profession").val();
+            if (value == "Altro") {
+                $("#OtherProfessionDiv").show();
+            }
+            else {
+                $("#OtherProfessionDiv").hide();
+            }
+        });
+
         function PublicChangePassword() {
             $('#CONTENT_PublicChangePassword_Form').validate({
                 lang: 'it'
@@ -344,14 +355,13 @@
               $('#CONTENT_Profile_Form').validate({
                   lang: 'it'
               });
-
               if ($('#CONTENT_Profile_Form').valid()) {
                    REFRESH_show("CONTENT_Refresh");
                    var url = '@Url.Action("SavePublic", "Account")';
                    // take the form content by id.
                    var data = new FormData($('#CONTENT_Profile_Form').get(0));
 
-                    $.ajax({
+                  $.ajax({
                         type: "POST",
                         url: url,
                         data: data,
@@ -360,7 +370,7 @@
                         success: function (risultato) {
                             REFRESH_hide("CONTENT_Refresh");
                             if (risultato.riuscita) {
-                                // set error.
+                                // set view.
                                 $("#successModal").show();
                             }
                             else {
@@ -409,7 +419,6 @@
                     REFRESH_hide("CONTENT_Refresh");
             });
         }
-
 
         function ShowSubsectionPages(subSectionId, subSectionName) {
             // shhow subsection pages.

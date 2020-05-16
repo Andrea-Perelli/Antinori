@@ -29,6 +29,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Surname" Type="nvarchar" MaxLength="100" />
           <Property Name="Profession" Type="nvarchar" MaxLength="50" />
+          <Property Name="OtherProfession" Type="nvarchar" MaxLength="100" />
           <Property Name="EmailConfirmed" Type="bit" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
@@ -325,6 +326,7 @@
           <NavigationProperty Name="Transcriptions" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers" FromRole="AspNetUsers" ToRole="Transcriptions" />
           <NavigationProperty Name="Transcriptions1" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers1" FromRole="AspNetUsers" ToRole="Transcriptions" />
           <Property Name="Profession" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OtherProfession" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
@@ -568,6 +570,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="AntinoriModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="OtherProfession" ColumnName="OtherProfession" />
                 <ScalarProperty Name="Profession" ColumnName="Profession" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

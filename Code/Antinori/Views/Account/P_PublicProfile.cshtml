@@ -49,7 +49,20 @@
                                 <label class="ls text-uppercase mb-0">Professione</label>
                                 @Html.DropDownList("Profession", new SelectList(Antinori.Static.BL_Utility.professions), "Seleziona Professione", new { @class = "form-control", style = "height: auto" })
                             </div>
+                            @{
+                                // set style.
+                                string style = "";
+                                if (Model.Profession == null || !Model.Profession.Equals("Altro") || Model.Profession.Equals("")) {
+                                    style = "display: none;";
+                                }
+                            }
+
+                            <div class="form-group" style="margin-right: 50px!important; @style" id="OtherProfessionDiv">
+                                <label class="ls text-uppercase mb-0">Altro</label>
+                                <input type="text" id="OtherProfession" name="OtherProfession" value="@Model.OtherProfession" placeholder="Professione" class="form-control">
+                            </div>
                         </div>
+                        
                         <div class="row">
                             <div class="form-group" style="margin-right: 50px!important;">
                                 <label class="ls text-uppercase mb-0">Nome</label>
@@ -81,7 +94,6 @@
                         </div>
                     }
                 </div>
-
             </div>
         </div>
     </div>

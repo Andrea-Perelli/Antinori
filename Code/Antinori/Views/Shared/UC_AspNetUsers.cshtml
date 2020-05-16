@@ -32,33 +32,46 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <small class="required">Email</small><br />
                 <input type="email" id="Email" name="Email" value="@Model.Email" class="form-control" required />
             </div>
             <div class="col-md-4">
                 <small class="required"> Cellulare</small><br />
                 <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" class="form-control" />
-            </div>
-            <div class="col-md-4">
-                <small class="required"> Professione</small><br />
-                @Html.DropDownList("Profession", new SelectList(Antinori.Static.BL_Utility.professions), "Seleziona Professione", new { @class = "form-control" })
-            </div>
+            </div>           
         </div>
 
 
         <div class="row">
             <div class="col-md-4">
+                <small class="required"> Professione</small><br />
+                @Html.DropDownList("Profession", new SelectList(Antinori.Static.BL_Utility.professions), "Seleziona Professione", new { @class = "form-control" })
+            </div>
+
+            @{ 
+                // set style.
+                string style = "";
+                if (Model.Profession == null || !Model.Profession.Equals("Altro") || Model.Profession.Equals("")) {
+                    style = "display: none;";
+                }
+            }
+
+            <div class="col-md-4" id="OtherProfessionDiv" style="@style">
+                <small > Altro</small><br />
+                <input type="text" id="OtherProfession" name="OtherProfession" value="@Model.OtherProfession" class="form-control" />
+            </div>
+
+            <div class="col-md-4">
                 <small class="required"> Ruoli</small><br />
-                @foreach(string role in ViewBag.RuoliList) {
-                    if(Model.AspNetRoles.Where(it => it.Name.Equals(role)).ToList().Count > 0) {
+                @foreach (string role in ViewBag.RuoliList) {
+                    if (Model.AspNetRoles.Where(it => it.Name.Equals(role)).ToList().Count > 0) {
                         <input type="radio" id="@role" name="Role" value="R_@role" checked /> @role
                     }
                     else {
                         <input type="radio" id="@role" name="Role" value="R_@role" /> @role
                     }
                     <br />
-
                 }
             </div>
 
@@ -70,30 +83,15 @@
 
 <script>
 
-    function update(visibility) {
-        // if we are giving a visibiluty to the user we set also the visualizzazione iscritti role.
-
-        // check some roles if we give some visibility.
-        if (visibility.toLowerCase() == "V_Totale".toLowerCase()) { // todo.
-            $('#Visualizzazione_Iscritti').attr('checked', true);
+    $("#Profession").change(function () {
+        // show/hide other profession field.
+        var value = $("#Profession").val();
+        if (value == "Altro") {
+            $("#OtherProfessionDiv").show();
         }
-
-        if (visibility.toLowerCase() == "V_Regione".toLowerCase()) { // todo.
-            $('#Visualizzazione_Iscritti').attr('checked', true);
+        else {
+            $("#OtherProfessionDiv").hide();
         }
+    });
 
-        if (visibility.toLowerCase() == "V_Provincia".toLowerCase()) { // todo.
-            $('#Visualizzazione_Iscritti').attr('checked', true);
-        }
-
-        if (visibility.toLowerCase() == "V_Sezione".toLowerCase()) { // todo.
-            $('#Visualizzazione_Iscritti').attr('checked', true);
-        }
-
-        if (visibility.toLowerCase() == "V_Incaricato".toLowerCase()) { // todo.
-            $('#Visualizzazione_Iscritti').attr('checked', true);
-        }
-
-
-    }
 </script>
