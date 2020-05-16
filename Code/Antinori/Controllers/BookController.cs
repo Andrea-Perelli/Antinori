@@ -268,16 +268,30 @@ namespace Antinori.Controllers {
                 pages = this.Dc.Pages_GetFirstNBySubSection(subSectionId, numberOfPageToShow);
             }
             else {
-                //if(page == "1") {
-                //    // in order to not start from n+1.
-                //    page = "0";
-                //}
                 // when we clicked on the pagination. 
                 pages = this.Dc.Pages_GetFirstNBySubSectionAndIndex(subSectionId, numberOfPageToShow, Convert.ToInt32(page));
             }
 
             // return the partial view containing the UC_SectionSubsections page.
             return Json(GetRenderPartialView(this, "UC_SubsectionPages", pages), JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public JsonResult P_SubsectionPagesNumber(string subSectionId) {
+            // return the number of page to show.
+            
+            double numberOfPageToShow = 9.0;
+            int tabs = 0; 
+
+            SubSections s = this.Dc.SubSectionss_Get(subSectionId);
+
+            if(s != null) {
+                double temp = ((double)s.Pages.Count) / numberOfPageToShow;
+                tabs = (int) Math.Ceiling(temp);
+            }
+
+            // return the number of pages to show.
+            return Json(tabs, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]

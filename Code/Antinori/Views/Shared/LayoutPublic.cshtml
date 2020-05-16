@@ -416,8 +416,16 @@
 
             // show refresher.
             REFRESH_show("CONTENT_Refresh");
-            $.getJSON('@Url.Action("P_SubsectionPages","Book")' + "?subSectionId=" + subSectionId + "&page=" + "1",
+
+            var numberOfPages = 1;
+
+                    // retrieve number of pages.
+            $.getJSON('@Url.Action("P_SubsectionPagesNumber", "Book")' + "?subSectionId=" + subSectionId,
                 function (model) {
+                    numberOfPages = model;
+
+                    $.getJSON('@Url.Action("P_SubsectionPages","Book")' + "?subSectionId=" + subSectionId + "&page=" + "1",
+                    function (model) {
                     $("#pages").html(model);
 
                     // deselect.
@@ -436,7 +444,7 @@
 
                     // set pagination.
                     $('#pagination').twbsPagination({
-                        totalPages: 35,
+                        totalPages: numberOfPages,
                         visiblePages: 3,
                         cssStyle: 'pagination',
                         onPageClick: function (event, page) {
@@ -457,6 +465,9 @@
                     // update var.
                     previousIdSelected = subSectionName;
                 });
+            });
+
+
 
         }
     </script>
