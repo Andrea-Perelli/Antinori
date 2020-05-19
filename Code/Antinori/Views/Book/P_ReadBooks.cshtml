@@ -35,7 +35,7 @@
             <div class="active-tstimonial-carusel">
                 @foreach(var b in Model) {
                     <div class="single-testimonial item">
-                        <img class="mx-auto" style="max-height: 350px!important;" src="~/Pics/JPEG/BibliotecaTommasi.Antinori.Corografia.XXV-1_0001_PiattoAnteriore.jpg" />
+                        <img class="mx-auto" style="max-height: 350px!important;" src="@b.PreviewImage" />
                         <p class="desc">
                             @b.Description
                         </p>

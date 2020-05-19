@@ -51,6 +51,7 @@
           <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="EndDate" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PreviewImage" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Filters">
           <Key>
@@ -402,6 +403,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EndDate" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Sections" Relationship="AntinoriModel.FK_Sections_Sections" FromRole="Books" ToRole="Sections" />
+          <Property Name="PreviewImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Pages">
           <Key>
@@ -619,6 +621,7 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="AntinoriModel.Books">
               <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="PreviewImage" ColumnName="PreviewImage" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Author" ColumnName="Author" />
