@@ -35,5 +35,12 @@ namespace Antinori.Controllers {
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Privacy() {
+            // set the privacy view. 
+
+            return View();
+        }
+
     }
 }
