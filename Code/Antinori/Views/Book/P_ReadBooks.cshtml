@@ -34,16 +34,24 @@
         <div class="row">
             <div class="active-tstimonial-carusel">
                 @foreach(var b in Model) {
-                    <div class="single-testimonial item">
-                        <img class="mx-auto" style="max-height: 350px!important;" src="@b.PreviewImage" />
-                        <p class="desc">
-                            @b.Description
-                        </p>
-                        <h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>
-                        <p>
-                            scritto da @b.Author
-                        </p>
-                    </div>
+                <div class="single-testimonial item">
+                    @{
+                        string path = "";
+                    }
+                    @if (b.PreviewImage != null) {
+                        path = b.PreviewImage.Split('\\').Last();
+                        path = "/Pics/JPEG/" + path;
+                    }
+
+                    <img class="mx-auto" style="max-height: 350px!important;" src="@path" />
+                    <p class="desc">
+                        @b.Description
+                    </p>
+                    <h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>
+                    <p>
+                        scritto da @b.Author
+                    </p>
+                </div>
                 }
             </div>
         </div>

@@ -129,7 +129,7 @@ else {
                     <small>Tiff</small><br />
 
                     @{var path2 = Model.BigPhotoPath.Split('\\').Last();
-                        path2 = "/Pics/Tiff/" + path2;
+                        path2 = "/Pics/Tiff/" + path2.Replace("jpg", "tiff");
                     }
                     <img src="@path2" alt="Tiff" style="max-height: 400px!important;">
                 </div>

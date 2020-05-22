@@ -356,7 +356,7 @@ namespace Antinori.Controllers {
 
         [Authorize(Roles = "Admin, Editor")]
         [HttpPost]
-        public JsonResult Save(Books book, FormCollection forms) {
+        public JsonResult Save(Books book, FormCollection forms, HttpPostedFileBase PreviewImagePath) {
             // save. 
             OpEsitoModel op;
 
@@ -364,8 +364,23 @@ namespace Antinori.Controllers {
                 // we are editing user.
                 Books daDb = this.Dc.Books_Get(book.Id);
 
+                if(PreviewImagePath != null) {
+                    string relativePathJpeg = "~/Pics/JPEG/";
+                    string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + PreviewImagePath.FileName;
+
+                    // delete small photo.
+                    if (System.IO.File.Exists(book.PreviewImage)) {
+                        System.IO.File.Delete(book.PreviewImage);
+                    }
+                    // save.
+                    PreviewImagePath.SaveAs(diskPathJpeg);
+                    daDb.PreviewImage = diskPathJpeg;
+                    //this.Dc.Pages_Save();
+                }
+               
+
                 //map the two objects: it updates the DB object.
-                if(TryUpdateModel(daDb)) {
+                if (TryUpdateModel(daDb)) {
                     try {
 
                         int numberOfSection = Convert.ToInt16(forms["numberOfSection"]);

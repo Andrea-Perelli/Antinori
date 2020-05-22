@@ -19,23 +19,31 @@
             </div>
         </div>
 
-        <div class="row">
-           
-            <div class="col-md-4">
-                <small class="required">Data di pubblicazione</small><br />
-                <input type="date" id="EndDate" name="EndDate" value="@Model.EndDate" class="form-control" required />
-            </div>
+        <div class="row" style="margin-bottom: 20px!important;">
 
             <div class="col-md-6" style=" margin-right:2px!important;">
                 <small>Copertina</small><br />
-                @{var path = Model.PreviewImage.Split('\\').Last();
+                @{ 
+                    string path = "";
+                }
+                @if(Model.PreviewImage != null) {
+                    path = Model.PreviewImage.Split('\\').Last();
                     path = "/Pics/JPEG/" + path;
                 }
-                <img src="@path" alt="JPEG" style="max-height: 400px!important;">
+                <img src="@path" alt="JPEG" style="max-height: 300px!important;">
+            </div>
+
+            <div class="col-md-4">
+                <small class="required">Foto </small><br />
+                <input type="file" id="PreviewImagePath" name="PreviewImagePath" value="@Model.PreviewImage" class="form-control" >
             </div>
         </div>
 
         <div class="row">
+            <div class="col-md-4">
+                <small class="required">Data di pubblicazione</small><br />
+                <input type="date" id="EndDate" name="EndDate" value="@Model.EndDate" class="form-control" required />
+            </div>
             <div class="col-md-6">
                 <small>Descrizione</small><br>
                 <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
