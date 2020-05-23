@@ -178,6 +178,12 @@ namespace Antinori.Models {
             return filter;
         }
 
+        public Filters Filters_GetByName(string name) {
+            // return a filter by name.
+            Filters filter = Filters.FirstOrDefault(f => f.Name.Equals(name));
+            return filter;
+        }
+
         public List<Filters> Filters_GetByPageId(string pageId) {
             // return all the page filter.
             List<Filters> filters = Filters.Where(f => f.Page.Equals(pageId)).ToList();
@@ -227,7 +233,27 @@ namespace Antinori.Models {
             Pages page = Pages.FirstOrDefault(it => it.Id == id);
             return page;
         }
+        public List<Pages> Pages_GetByFilterName(string filterName) {
+            // return all Pages of a filter name.
+            List<Pages> pages = Filters.Where(p => p.Name.Equals(filterName)).Select( p=> p.Pages).ToList();
+            return pages;
+        }
 
+        public List<Pages> Pages_GetByFilterNameList(string[] filterNames) {
+            // return all Pages of a filter list.
+
+            List<Pages> pages = new List<Pages>();
+            foreach(var filter in filterNames) {
+
+                pages = pages.Union(this.Pages_GetByFilterName(filter)).ToList();
+            }
+            return pages;
+        }
+        public int Pages_GetByFilterNameListNumber(string[] filterNames) {
+            // return the number of pages containing a filter inside a list.
+     
+            return Pages_GetByFilterNameList(filterNames).Count();
+        }
         public List<Pages> Pages_GetBySubSection(string subSectionId) {
             // return all Pages of a subsection.
             List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p =>p.NumericOrder).ToList();

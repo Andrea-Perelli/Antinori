@@ -9,6 +9,9 @@ using System.Web.Mvc;
 namespace Antinori.Controllers {
     public class BookController : ApplicationController {
 
+        // number of pages to show inside read opera page.
+        private double numberOfPageToShow = 9.0;       
+
         [Authorize(Roles = "Admin")]
         public JsonResult Add() {
             // return the add book page.
@@ -236,6 +239,39 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
+        public JsonResult P_PagesByFilters(string filters) {
+            // return the subsections page list view.
+
+            // split filters.
+            string[] fs = filters.Split(',');
+
+            List<Pages> p = this.Dc.Pages_GetByFilterNameList(fs);
+
+            // return the partial view containing the UC_SectionSubsections page.
+            return Json(GetRenderPartialView(this, "UC_SubsectionPages", p), JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public JsonResult P_PagesNumberByFilters(string filters) {
+            // return the number of page to show for advanced search.
+
+            int tabs = 0;
+
+            // split filters.
+            string[] fs = filters.Split(',');
+
+            int p = this.Dc.Pages_GetByFilterNameListNumber(fs);
+
+            if (p > 0) {
+                double temp = ((double)p) / this.numberOfPageToShow;
+                tabs = (int)Math.Ceiling(temp);
+            }
+
+            // return the number of pages to show.
+            return Json(tabs, JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
         public ActionResult P_ReadBooks() {
             // set the leggi opera view. 
             // retrieve books.
@@ -261,15 +297,14 @@ namespace Antinori.Controllers {
             // return the subsections page list view.
 
             List<Pages> pages = null;
-            int numberOfPageToShow = 9;
             
             if(page == "-") {
                 // default call: retrieve pages.
-                pages = this.Dc.Pages_GetFirstNBySubSection(subSectionId, numberOfPageToShow);
+                pages = this.Dc.Pages_GetFirstNBySubSection(subSectionId, (int)numberOfPageToShow);
             }
             else {
                 // when we clicked on the pagination. 
-                pages = this.Dc.Pages_GetFirstNBySubSectionAndIndex(subSectionId, numberOfPageToShow, Convert.ToInt32(page));
+                pages = this.Dc.Pages_GetFirstNBySubSectionAndIndex(subSectionId, (int)numberOfPageToShow, Convert.ToInt32(page));
             }
 
             // return the partial view containing the UC_SectionSubsections page.
@@ -280,13 +315,12 @@ namespace Antinori.Controllers {
         public JsonResult P_SubsectionPagesNumber(string subSectionId) {
             // return the number of page to show.
             
-            double numberOfPageToShow = 9.0;
             int tabs = 0; 
 
             SubSections s = this.Dc.SubSectionss_Get(subSectionId);
 
             if(s != null) {
-                double temp = ((double)s.Pages.Count) / numberOfPageToShow;
+                double temp = ((double)s.Pages.Count) / this.numberOfPageToShow;
                 tabs = (int) Math.Ceiling(temp);
             }
 
@@ -650,6 +684,16 @@ namespace Antinori.Controllers {
             
             // return the partial view containing the pages.
             return Json(GetRenderPartialView(this, "UC_PageListContent", pages), JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public JsonResult UpdateFilterView(string filterName) {
+            // return the UpdateFilterView page.
+
+            Filters f = this.Dc.Filters_GetByName(filterName);
+
+            // return the partial view containing the Uc_filter page.
+            return Json(GetRenderPartialView(this, "UC_Filter", f), JsonRequestBehavior.AllowGet);
         }
     }
 }

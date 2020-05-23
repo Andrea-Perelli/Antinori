@@ -1,0 +1,11 @@
+﻿@model Antinori.Models.Filters
+
+@if (Model != null) {
+    <div id="@Model.Name" style="display: inline-block; padding: 4px; height:auto; background: #DCDCDC; border-radius: 10px 6px 10px 6px; margin-right: auto; margin-bottom: 5px;">
+        @Model.Name
+        <i onclick="RemoveFilter('@Model.Name')" class="fa fa-times" style="margin-left: 10px!important;" title="Rimuovi Filtro"> </i>
+    </div>
+
+    <br id="br_@Model.Name" />
+}
+
