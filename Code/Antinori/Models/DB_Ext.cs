@@ -249,6 +249,7 @@ namespace Antinori.Models {
             }
             return pages;
         }
+
         public int Pages_GetByFilterNameListNumber(string[] filterNames) {
             // return the number of pages containing a filter inside a list.
      
@@ -257,6 +258,18 @@ namespace Antinori.Models {
         public List<Pages> Pages_GetBySubSection(string subSectionId) {
             // return all Pages of a subsection.
             List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p =>p.NumericOrder).ToList();
+            return pages;
+        }
+        public List<Pages> Pages_GetFirstNByFilterNameList(string[] filterNames, int n) {
+            // return first n pages of an advanced search.
+            List<Pages> pages = this.Pages_GetByFilterNameList(filterNames).OrderBy(p => p.NumericOrder).Take(n).ToList();
+            return pages;
+        }
+        public List<Pages> Pages_GetFirstNByFilterNameListAndIndex(string[] filterNames, int n, int page) {
+            // return first n pages of an advanced search and of an index.
+
+            List<Pages> pages = this.Pages_GetByFilterNameList(filterNames).OrderBy(p => p.NumericOrder).Skip((page - 1) * n).Take(n).ToList();
+
             return pages;
         }
 

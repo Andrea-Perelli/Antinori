@@ -421,7 +421,7 @@
             // clear advanced search filters.
             $('#filters').empty();
 
-                    // retrieve number of pages.
+            // retrieve number of pages.
             $.getJSON('@Url.Action("P_SubsectionPagesNumber", "Book")' + "?subSectionId=" + subSectionId,
                 function (model) {
                     numberOfPages = model;

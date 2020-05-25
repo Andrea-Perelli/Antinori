@@ -239,16 +239,19 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
-        public JsonResult P_PagesByFilters(string filters) {
+        public JsonResult P_PagesByFilters(string filters, string page) {
             // return the subsections page list view.
 
             // split filters.
             string[] fs = filters.Split(',');
 
-            List<Pages> p = this.Dc.Pages_GetByFilterNameList(fs);
+            List<Pages> pages = null;
+
+            // when we clicked on the pagination. 
+            pages = this.Dc.Pages_GetFirstNByFilterNameListAndIndex(fs, (int)numberOfPageToShow, Convert.ToInt32(page));
 
             // return the partial view containing the UC_SectionSubsections page.
-            return Json(GetRenderPartialView(this, "UC_SubsectionPages", p), JsonRequestBehavior.AllowGet);
+            return Json(GetRenderPartialView(this, "UC_SubsectionPages", pages), JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
@@ -297,15 +300,9 @@ namespace Antinori.Controllers {
             // return the subsections page list view.
 
             List<Pages> pages = null;
-            
-            if(page == "-") {
-                // default call: retrieve pages.
-                pages = this.Dc.Pages_GetFirstNBySubSection(subSectionId, (int)numberOfPageToShow);
-            }
-            else {
-                // when we clicked on the pagination. 
-                pages = this.Dc.Pages_GetFirstNBySubSectionAndIndex(subSectionId, (int)numberOfPageToShow, Convert.ToInt32(page));
-            }
+           
+            // when we clicked on the pagination. 
+            pages = this.Dc.Pages_GetFirstNBySubSectionAndIndex(subSectionId, (int)numberOfPageToShow, Convert.ToInt32(page));
 
             // return the partial view containing the UC_SectionSubsections page.
             return Json(GetRenderPartialView(this, "UC_SubsectionPages", pages), JsonRequestBehavior.AllowGet);
