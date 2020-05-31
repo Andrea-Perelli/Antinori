@@ -385,6 +385,25 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_TranscriptionsList", transcriptions), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult P_TranslatePage(string pageId) {
+            // return the p translation page.
+
+            Pages p = this.Dc.Pages_Get(pageId);
+
+            // return the partial view containing the P_TranslatePage page.
+            return View( p);
+        }
+
+        [Authorize(Roles = "Admin,Editor,User")]
+        public ActionResult P_TranslatePageWithAuth(string pageId) {
+            // return the translation page with needed auth.
+
+            Pages p = this.Dc.Pages_Get(pageId);
+
+            // return the partial view containing the P_TranslatePage page.
+            return View("P_TranslatePage", p);
+        }
+
         [Authorize(Roles = "Admin, Editor")]
         [HttpPost]
         public JsonResult Save(Books book, FormCollection forms, HttpPostedFileBase PreviewImagePath) {

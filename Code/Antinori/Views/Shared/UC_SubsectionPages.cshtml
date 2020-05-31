@@ -2,21 +2,41 @@
 
 @{
     string path = "";
+    string text = "";
 }
 
 <div class="section-top-border" style="padding: 0!important; ">
     <div class="row gallery-item">
-        @foreach(var p in Model) {
-
+        @foreach (var p in Model) {
             path = "/Pics/JPEG/" + p.PhotoPath.Split('\\').Last();
-            <div style="padding: 12px; display: table-cell; vertical-align: middle; text-align: center; float: left; clear: both;">
-                <a href="#" onclick="">
-                    <img src="@path" class="mx-auto" style="height: 400px; width: 330px;" />
-                    <p class="text-center desc" style="color: black;">
-                        # @p.NumericOrder
-                    </p>
-                </a>
-            </div>
+            <!-- TO READ IT -->
+            if (p.Transcriptions.Count > 0) {
+                <div style="padding: 12px; display: table-cell; vertical-align: middle; text-align: center; float: left; clear: both;">
+                    <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = p.Id })" target="_blank" title="Leggi">
+                        <img src="@path" class="mx-auto" style="height: 400px; width: 330px;" />
+                        <p class="text-center desc" style="color: black; margin-bottom: 3px;">
+                            # @p.NumericOrder
+                        </p>
+                    </a>
+                    <div class="button-group-area mt-40" style="margin-left: auto; margin-right: auto; margin-top: 0;">
+                        <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = p.Id })"  target="_blank" class="myButton genric-btn info circle my-button" style="margin: 0; background: #0abb87; line-height: 28px; padding-left: 19px; padding-right: 19px;">Leggi</a>
+                    </div>
+                </div>
+            }
+            else {
+                <!-- TO TRANSCRIBE IT -->
+                <div style="padding: 12px; display: table-cell; vertical-align: middle; text-align: center; float: left; clear: both;">
+                    <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = p.Id })" target="_blank" title="Trascrivi">
+                        <img src="@path" class="mx-auto" style="height: 400px; width: 330px;" />
+                        <p class="text-center desc" style="color: black; margin-bottom: 3px;">
+                            # @p.NumericOrder
+                        </p>
+                    </a>
+                    <div class="button-group-area mt-40" style="margin-left: auto; margin-right: auto; margin-top: 0;">
+                        <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = p.Id })" target="_blank" class="myButton2 genric-btn info circle my-button" style="margin: 0; background: #f53f51; line-height: 28px; padding-left: 19px; padding-right: 19px;">Trascrivi!</a>
+                    </div>
+                </div>
+            }
         }
     </div>
 </div>
