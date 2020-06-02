@@ -390,6 +390,10 @@ namespace Antinori.Controllers {
 
             Pages p = this.Dc.Pages_Get(pageId);
 
+            ViewBag.previous = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder-1);
+
+            ViewBag.after = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder + 1);
+
             // return the partial view containing the P_TranslatePage page.
             return View( p);
         }
@@ -400,6 +404,9 @@ namespace Antinori.Controllers {
 
             Pages p = this.Dc.Pages_Get(pageId);
 
+            ViewBag.previous = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder - 1);
+
+            ViewBag.after = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder + 1);
             // return the partial view containing the P_TranslatePage page.
             return View("P_TranslatePage", p);
         }
