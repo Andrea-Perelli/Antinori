@@ -27,18 +27,26 @@
 <!-- Start page Area -->
 <section class="course-area section-gap" id="subsections" style="padding-top: 30px!important;">
 
+    <!-- PAGE NUMBER -->
+    <div class="row" >
+        <h3 style="margin-left: auto; margin-right: auto;">
+            Pagina #@Model.NumericOrder
+        </h3>      
+    </div>
+
+    <!-- CONTENT ROW -->
     <div class="row" style="margin-right: 25px!important; margin-left: 25px!important; ">
         <!-- ARROW LEFT COL --> 
-        <div class=".col-sm" style="max-width: 5%; min-width: 5%;">
+        <div class=".col-sm" style="max-width: 5%; min-width: 5%; margin-top: -10px;">
             @if (ViewBag.previous != null) {
                 if (ViewBag.previous.Transcriptions.Count > 0) {
                     <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = ViewBag.previous.Id })">
-                        <i class="fa fa-arrow-left" style="font-size: 35px; margin-right: 12px;"></i>
+                        <i class="fa fa-arrow-left" style="font-size: 35px; margin-right: 12px;" title="Precedente"></i>
                     </a>
                 }
                 else {
                     <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = ViewBag.previous.Id })">
-                        <i class="fa fa-arrow-left" style="font-size: 35px; margin-right: 12px;"></i>
+                        <i class="fa fa-arrow-left" style="font-size: 35px; margin-right: 12px;" title="Precedente"></i>
                     </a>
                 }
             }
@@ -46,15 +54,54 @@
                 <i class="fa fa-arrow-left" style="font-size: 35px; margin-right: 12px;"></i>
             }
         </div>
-        <div class="col-sm" style="max-width: 45%; min-width: 45%;">
+        <!-- PHOTO COL -->
+        <div class="col-sm" style="max-width: 45%; min-width: 45%; margin-top: 40px;">
 
-            <div class="row">@Model.NumericOrder</div>
+            <div class="grid-container" style="display: grid; grid-template-columns: auto auto auto;">
+                <div class="grid-item"><b class="myB">Opera:</b>&nbsp;@Model.BookTitle</div>
+                <div class="grid-item"><b class="myB">Titolo pagina:</b>&nbsp;@Model.Title</div><br />
+
+                <div class="grid-item"><b class="myB">Sezione:</b>&nbsp;@Model.SectionName</div>
+                <div class="grid-item"><b class="myB">Sottosezione:</b>&nbsp;@Model.SubSections.Name</div>
+                @{
+                    string editor = "-";
+                    if (Model.Editor != null && Model.Editor.Length > 1) {
+                        editor = Model.Editor;
+                    }
+                }
+            <div class="grid-item"><b class="myB">Editor:</b>&nbsp;@editor</div>
+
+            <div class="grid-item"><b class="myB">#:</b>&nbsp;@Model.NumericOrder</div>
+            <div class="grid-item"><b class="myB">Ordine:</b>&nbsp;@Model.CompleteOrder</div>
+            @{
+                var filters = "";
+                foreach (var f in Model.Filters.ToList()) {
+                    filters = filters + ";" + f.Name;
+                }
+                filters = filters.TrimEnd(';');
+                filters = filters.TrimStart(';');
+                if (filters.Equals("")) {
+                    filters = "-";
+                }
+            }
+            <div class="grid-item"><b class="myB">Filtri:</b>&nbsp;@filters</div>
+
+            </div>
             <div class="row">
                 <img src="@path" class="mx-auto" style="width: 100%; margin-bottom: 20px; margin-top: 20px;" />
             </div>
+            <div class="row" style="display: grid; margin-bottom: 30px;">
+                @{ 
+                    string description = "-";
+                    if(Model.Description != null && Model.Description.Length > 0) {
+                        description = Model.Description;
+                    }
+                }
+                <div class="grid-item" style="padding: 0px;"><b class="myB">Descrizione:</b>&nbsp;@description</div>
+            </div>
             <!-- BUTTONS ROW -->
             <div class="row" style="padding-bottom: 20px; ">
-                <h5 style="color:#777777; border-bottom: 1.5px solid #eee;">
+                <h5 style="color:#777777; border-bottom: 2px solid #eee;">
                     Downloads
                     <i class="fa fa-cloud-download info circle"></i>
                 </h5>
@@ -72,40 +119,39 @@
 
             </div>
         </div>
-        <div class="col-sm" style="max-width: 45%; min-width: 45%;">
-            @if(Model.Transcriptions.Count > 0) {
-            <p>
-                - colore frecce
-                - info pagina + info opera.
-                - invia traduzione.
+            
+            <!-- TRANSCRIPTION COL -->
+            <div class="col-sm" style="max-width: 45%; min-width: 45%; margin-top: 40px;">
+                @if (Model.Transcriptions.Count > 0) {
+                    <p>
 
-                @Model.Transcriptions.FirstOrDefault().TEI
-            </p>
-            }
-            else {
-
-            }
-        </div>
-        <!-- ARROW RIGHT COL --->
-        <div class=".col-sm" style="max-width: 5%;  min-width: 5%;">
-
-            @if (ViewBag.after != null) {
-                if (ViewBag.after.Transcriptions.Count > 0) {
-                    <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = ViewBag.after.Id })">
-                        <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float:right;"></i>
-                    </a>
+                        @Model.Transcriptions.FirstOrDefault().TEI
+                    </p>
                 }
                 else {
-                    <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = ViewBag.after.Id })">
-                        <i class="fa fa-arrow-right" style="font-size: 35px;  margin-left: 12px; float:right;"></i>
-                    </a>
+
                 }
-            }
-            else {
-                <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float:right;"></i>
-            }
+            </div>
+            <!-- ARROW RIGHT COL --->
+            <div class=".col-sm" style="max-width: 5%;  min-width: 5%; margin-top: -10px;">
+
+                @if (ViewBag.after != null) {
+                    if (ViewBag.after.Transcriptions.Count > 0) {
+                        <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = ViewBag.after.Id })">
+                            <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float:right;" title="Successiva"></i>
+                        </a>
+                    }
+                    else {
+                        <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = ViewBag.after.Id })">
+                            <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float: right;" title="Successiva"></i>
+                        </a>
+                    }
+                }
+                else {
+                    <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float:right;"></i>
+                }
+            </div>
         </div>
-    </div>
 
 </section>
 <!-- End page Area -->
