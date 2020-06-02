@@ -160,7 +160,7 @@
                                 <li><a href="@Url.Action("P_GuidaFiltri","Home")">Guida Filtri</a></li>
                             </ul>
                         </li>
-                        <li><a href="#about">Contesto Progetto?</a></li>
+                        <li><a href="@Url.Action("ContestoProgetto","Home")">Contesto Progetto</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
                 <nav id="nav-menu-container" style="float: right!important;">
@@ -227,10 +227,9 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <h6>About Us</h6>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
-                        </p>
+                        <a href="@Url.Action("ContestoProgetto","Home")">
+                            <h6>Contesto Progetto</h6>
+                        </a>                        
                         <p class="footer-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright &copy;
@@ -249,7 +248,6 @@
                 <div class="col-lg-2 col-md-6 col-sm-6 social-widget">
                     <div class="single-footer-widget">
                         <h6>Seguici!</h6>
-                        <p>Let us be social</p>
                         <div class="footer-social d-flex align-items-center">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>

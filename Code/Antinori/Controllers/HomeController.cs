@@ -7,7 +7,14 @@ using System.Web.Mvc;
 namespace Antinori.Controllers {
 
     public class HomeController : ApplicationController {
-        
+
+        [AllowAnonymous]
+        public ActionResult ContestoProgetto() {
+
+            // return public home page.
+            return View("P_ContestoProgetto");
+        }
+
         [AllowAnonymous]
         public ActionResult Home() {
 
