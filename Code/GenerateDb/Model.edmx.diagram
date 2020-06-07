@@ -20,6 +20,12 @@
         <AssociationConnector Association="AntinoriModel.FK_Transcriptions_Pages" ManuallyRouted="false" />
         <AssociationConnector Association="AntinoriModel.FK_SubSections_Sections" ManuallyRouted="false" />
         <AssociationConnector Association="AntinoriModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AntinoriModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="11.375" />
+        <EntityTypeShape EntityType="AntinoriModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="14.125" />
+        <AssociationConnector Association="AntinoriModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AntinoriModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers" />
+        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

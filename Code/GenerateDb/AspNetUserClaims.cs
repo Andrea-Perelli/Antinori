@@ -12,18 +12,13 @@ namespace GenerateDb
     using System;
     using System.Collections.Generic;
     
-    public partial class Transcriptions
+    public partial class AspNetUserClaims
     {
-        public string Id { get; set; }
-        public string TEI { get; set; }
-        public string Page { get; set; }
-        public bool IsApproved { get; set; }
-        public string ProposedBy { get; set; }
-        public string ApprovedBy { get; set; }
-        public Nullable<System.DateTime> ProposedDate { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
-        public virtual Pages Pages { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual AspNetUsers AspNetUsers1 { get; set; }
     }
 }

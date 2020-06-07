@@ -34,5 +34,7 @@ namespace GenerateDb
         public virtual DbSet<Sections> Sections { get; set; }
         public virtual DbSet<SubSections> SubSections { get; set; }
         public virtual DbSet<Transcriptions> Transcriptions { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
     }
 }

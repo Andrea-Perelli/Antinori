@@ -18,6 +18,10 @@ namespace GenerateDb
         public AspNetUsers()
         {
             this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
+            this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            this.Transcriptions = new HashSet<Transcriptions>();
+            this.Transcriptions1 = new HashSet<Transcriptions>();
         }
     
         public string Id { get; set; }
@@ -35,8 +39,18 @@ namespace GenerateDb
         public Nullable<int> AccessFailedCount { get; set; }
         public string UserName { get; set; }
         public bool Cancellato { get; set; }
+        public string Profession { get; set; }
+        public string OtherProfession { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transcriptions> Transcriptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transcriptions> Transcriptions1 { get; set; }
     }
 }
