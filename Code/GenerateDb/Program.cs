@@ -13,18 +13,20 @@ namespace GenerateDb {
 
             //******** CONFIG DATA ********
             //string photoPath = @"C:\Users\g\Desktop\Biblioteca Tommasi\Antinori";
-            string photoPath = @"C:\Users\Andrea\Desktop\Ciurci";
+            string photoPath = @"E:\Biblioteca Tommasi\Antinori";
+            //string photoPath = @"C:\Users\Andrea\Desktop\Ciurci";
             //string photoPath = @"C:\Users\Andrea\Desktop\Crispomonti";
 
-            //string author = "Antinori";
-            string author = "Ciurci";
+            string author = "Antinori";
+            //string author = "Ciurci";
             //string author = "Crispomonti";
 
-            //string bookName = "Antinori";
-            string bookName = "Ciurci";
+            string bookName = "Antinori";
+            //string bookName = "Ciurci";
             //string bookName = "Crispomonti";
 
-            string previewImage = @"C:\Users\Andrea\Desktop\Ciurci\Familiari Ragionamenti\JPEG\BibliotecaTommasi.Ciurci.FamiliariRagionamenti_0001_PiattoAnteriore.jpg";
+            string previewImage = @"E:\Biblioteca Tommasi\Antinori\Annali\1\JPEG\BibliotecaTommasi.Antinori.Annali.I-1_0001_PiattoAnteriore.jpg";
+            //string previewImage = @"C:\Users\Andrea\Desktop\Ciurci\Familiari Ragionamenti\JPEG\BibliotecaTommasi.Ciurci.FamiliariRagionamenti_0001_PiattoAnteriore.jpg";
             //string previewImage = @"C:\Users\Andrea\Desktop\Crispomonti\Historia\II\BibliotecaTommasi.Crispomonti.Historia.II_0001_PiattoAnteriore.jpg";
 
             string description = "";
@@ -104,12 +106,12 @@ namespace GenerateDb {
 
                             }
 
-                            string a = "I-1_0001_PiattoAnteriore";
-                            string b = "I-1_0002_ControguardiaAnteriore";
-                            string aa = "I-1_0003_CartaDiGuardiaAnteriore_r";
-                            string c = "II_0028_5v";
-                            string e = "I-1_0016_Indice_bis_v";
-                            string d = "LIII_0194_Taglio";
+                            //string a = "I-1_0001_PiattoAnteriore";
+                            //string b = "I-1_0002_ControguardiaAnteriore";
+                            //string aa = "I-1_0003_CartaDiGuardiaAnteriore_r";
+                            //string c = "II_0028_5v";
+                            //string e = "I-1_0016_Indice_bis_v";
+                            //string d = "LIII_0194_Taglio";
 
                             string tiffPage = Directory.GetFiles(photoPath + '\\' + sectionName + '\\' + subSectionName + '\\' + "MASTER").FirstOrDefault(pages_ => pages_.Contains(numericOrder));
                             if (tiffPage == null) {
@@ -137,7 +139,6 @@ namespace GenerateDb {
                         sec.SubSections.Add(subSec);
                     }
                 }
-
                 else {
                     // create fake subsection
 
