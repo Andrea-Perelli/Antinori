@@ -186,6 +186,19 @@ namespace Antinori.Controllers {
         }
 
         [Authorize(Roles = "Admin,Editor")]
+        public JsonResult P_AddAttachment(string pageId) {
+            // return the edit Attachments page.
+
+            // create Attachment.
+            Attachments a = new Attachments {
+                PageId = pageId
+            };
+
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "UC_Attachment", a), JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
         public JsonResult P_AddPage(string subSectionId) {
             // return the add page view.
 
@@ -212,6 +225,17 @@ namespace Antinori.Controllers {
             Books s = new Books();
 
             return View(s);
+        }
+
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult P_EditAttachment(string id) {
+            // return the edit Attachments page.
+
+            // retrieve Attachment.
+            Attachments a = this.Dc.Attachments_Get(id);
+
+            // return the partial view containing the P_Create page.
+            return Json(GetRenderPartialView(this, "UC_Attachment", a), JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Admin,Editor")]
@@ -552,7 +576,7 @@ namespace Antinori.Controllers {
                     return Json(op, JsonRequestBehavior.AllowGet);
                 }
                 else {
-                    Log_Insert(newBook.Id, "BOOKS", "INSERT", false, "Operazione conclusa con successo", "", "", "", "");
+                    Log_Insert(newBook.Id, "BOOKS", "INSERT", false, "Operazione non conclusa", "", "", "", "");
                     op = new OpEsitoModel() { idReturn = newBook.Id, riuscita = false };
                     return Json(op, JsonRequestBehavior.AllowGet);
                 }
@@ -691,6 +715,97 @@ namespace Antinori.Controllers {
             return Json(op, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult SaveAttachment(Attachments attachment, HttpPostedFileBase PhotoPath) {
+            // save function,
+
+            OpEsitoModel op;
+
+            if (attachment.Id != null) {
+                // edit case.
+
+                Attachments daDb = this.Dc.Attachments_Get(attachment.Id);
+
+                if (PhotoPath != null) {
+                    string relativePathJpeg = "~/Attachments/";
+                    string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + PhotoPath.FileName;
+
+                    // delete small photo.
+                    if (System.IO.File.Exists(daDb.PhotoPath)) {
+                        System.IO.File.Delete(daDb.PhotoPath);
+                    }
+                    // save.
+                    PhotoPath.SaveAs(diskPathJpeg);
+                    daDb.PhotoPath = diskPathJpeg;
+                }
+
+                //map the two objects: it updates the DB object.
+                if (TryUpdateModel(daDb)) {
+                    // save context.
+                    int esito = this.Dc.Attachments_Save();
+                    // check if all is ok.
+                    if (esito > -1) {
+                        Log_Insert(attachment.Id, "ATTACHMENT", "EDIT", true, "Operazione conclusa con successo", "", "", "", "");
+                        op = new OpEsitoModel() { idReturn = attachment.Id, riuscita = true };
+                        return Json(op, JsonRequestBehavior.AllowGet);
+                    }
+                    else {
+                        Log_Insert(attachment.Id, "BOOKS", "EDIT", false, "Operazione non conclusa", "", "", "", "");
+                        op = new OpEsitoModel() { idReturn = attachment.Id, riuscita = false };
+                        return Json(op, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                Log_Insert(attachment.Id, "BOOKS", "EDIT", false, "Operazione non conclusa", "", "", "", "");
+                op = new OpEsitoModel() { idReturn = attachment.Id, riuscita = false };
+                return Json(op, JsonRequestBehavior.AllowGet);
+            }
+            else {
+                // create case.
+
+                attachment.Id = Guid.NewGuid().ToString();
+
+                if (PhotoPath != null) {
+                    string relativePathJpeg = "~/Attachments/";
+                    string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + PhotoPath.FileName;
+
+                    // save.
+                    PhotoPath.SaveAs(diskPathJpeg);
+                    attachment.PhotoPath = diskPathJpeg;
+                }
+                else {
+                    Log_Insert(attachment.Id, "BOOKS", "INSERT", false, "Operazione non conclusa: file mancante", "", "", "", "");
+                    op = new OpEsitoModel() { idReturn = attachment.Id, riuscita = false };
+                    return Json(op, JsonRequestBehavior.AllowGet);
+                }
+
+                // save context.
+                int esito = this.Dc.Attachments_Insert(attachment);
+
+                // check if all is ok.
+                if (esito > -1) {
+                    Log_Insert(attachment.Id, "ATTACHMENT", "INSERT", true, "Operazione conclusa con successo", "", "", "", "");
+                    op = new OpEsitoModel() { idReturn = attachment.Id, riuscita = true };
+                    return Json(op, JsonRequestBehavior.AllowGet);
+                }
+                else {
+                    Log_Insert(attachment.Id, "BOOKS", "INSERT", false, "Operazione non conclusa", "", "", "", "");
+                    op = new OpEsitoModel() { idReturn = attachment.Id, riuscita = false };
+                    return Json(op, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+        }
+
+
+        [Authorize(Roles = "Admin,Editor")]
+        public JsonResult ShowAttachments(string pageId) {
+            // return the Attachment list page.
+
+            List<Attachments> att = this.Dc.Attachments_GetsByPageId(pageId);
+ 
+            // return the partial view containing the pages.
+            return Json(GetRenderPartialView(this, "UC_AttachmentsListContent", att), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult ShowPages(string subSectionId) {
             // return the Subsection list page.
@@ -698,13 +813,13 @@ namespace Antinori.Controllers {
             List<Pages> pages = this.Dc.Pages_GetBySubSection(subSectionId);
 
             // set viewbag.
-            if(pages.Count > 0) {
+            if (pages.Count > 0) {
                 Pages p = pages.First();
-                if(p.SubSections != null) {
+                if (p.SubSections != null) {
                     ViewBag.SubTitle = p.SubSections.Name;
                 }
             }
-            
+
             // return the partial view containing the pages.
             return Json(GetRenderPartialView(this, "UC_PageListContent", pages), JsonRequestBehavior.AllowGet);
         }

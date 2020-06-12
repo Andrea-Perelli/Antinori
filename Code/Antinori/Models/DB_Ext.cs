@@ -10,6 +10,63 @@ namespace Antinori.Models {
 
     public partial class AntinoriEntities {
 
+        #region Attachments
+
+        public int Attachments_Delete(Attachments a) {
+            // delete an Attachments.
+            int esito = -1;
+            try {
+                Attachments.Remove(a);
+                // Entity framework stores its current status on the db (we don't pass any object to store).
+                esito = SaveChanges();
+            }
+            catch (Exception e) {
+
+            }
+            return esito;
+        }
+
+        public List<Attachments> Attachments_Gets() {
+            // return the list of all Attachments.
+            return Attachments.ToList();
+        }
+
+        public List<Attachments> Attachments_GetsByPageId(string pageId) {
+            // return the list of all Attachments of a page.
+            return Attachments.Where(a => a.PageId.Equals(pageId)).ToList();
+        }
+
+        public Attachments Attachments_Get(string id) {
+            // return a Attachments by Id.
+            Attachments att = Attachments.FirstOrDefault(it => it.Id == id);
+            return att;
+        }
+
+        public int Attachments_Insert(Attachments c) {
+            // insert an Attachments.
+            int esito = -1;
+            try {
+                Attachments.Add(c);
+                esito = SaveChanges();
+            }
+            catch (Exception ex) {
+            }
+            return esito;
+        }
+
+        public int Attachments_Save() {
+            int esito = -1;
+            try {
+                // esito is the number of modifications.
+                esito = SaveChanges();
+            }
+            catch (Exception e) {
+
+            }
+            return esito;
+        }
+        #endregion
+
         #region AspNetUsers
 
         public List<AspNetUsers> AspNetUsers_Gets() {

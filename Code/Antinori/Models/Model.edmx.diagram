@@ -22,6 +22,8 @@
         <AssociationConnector Association="AntinoriModel.FK_Filter_Pages" />
         <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers" />
         <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers1" />
+        <EntityTypeShape EntityType="AntinoriModel.Attachments" Width="1.5" PointX="9.375" PointY="7.125" />
+        <AssociationConnector Association="AntinoriModel.FK_Attachments_Pages" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

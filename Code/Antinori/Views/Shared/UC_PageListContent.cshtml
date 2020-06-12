@@ -7,15 +7,14 @@
         <tr>
             <th style="width: 100px">Titolo</th>
             <th style="width: 150px">Descrizione</th>
-            <th style="width: 150px">Numero Pagina</th>
-            <th style="width: 150px">Numero Completo</th>
+            <th style="width: 50px">Numero Pagina</th>
+            <th style="width: 50px">Numero Completo</th>
             <th style="width: 100px">Editor</th>
             <th style="width: 100px">Opera</th>
             <th style="width: 70px">Sezione</th>
             <th style="width: 70px">Sottosezione</th>
             <th style="width: 70px">Trascrizione</th>
-
-            <th style="width: 50px"> </th>
+            <th style="width: 80px"> </th>
         </tr>
     </thead>
 
@@ -43,16 +42,24 @@
                 <td>Mancante</td>
             }
 
-            <td>
-                <button class="btn btn-default btn-sm" onclick="P_EditPage('@page.Id')" title="Modifica Pagine">
-                    <i class="fa fa-edit">
-                    </i>
-                </button>
-                <button class="btn btn-default btn-sm" onclick="DeletePage('@page.Id')" title="Cancella Pagina">
-                    <i class="fa fa-trash-o">
-                    </i>
-                </button>
-            </td>
+        <td>
+            <button class="btn btn-default btn-sm" onclick="P_EditPage('@page.Id')" title="Modifica Pagine">
+                <i class="fa fa-edit">
+                </i>
+            </button>
+            <button class="btn btn-default btn-sm" onclick="DeletePage('@page.Id')" title="Cancella Pagina">
+                <i class="fa fa-trash-o">
+                </i>
+            </button>
+            <button class="btn btn-default btn-sm" onclick="P_AddAttachment('@page.Id')" title="Aggiungi Allegato">
+                <i class="fa fa-plus">
+                </i>
+            </button>
+            <button class="btn btn-default btn-sm" onclick="ShowAttachments('@page.Id')" title="Mostra Allegati">
+                <i class="fa fa-files-o">
+                </i>
+            </button>
+        </td>
         </tr>
         }
 

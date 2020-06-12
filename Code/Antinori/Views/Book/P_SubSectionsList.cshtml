@@ -16,6 +16,11 @@
     <div class="box-body" id="CONTENT_PAGES">
 
     </div>
+
+    <div class="box-body" id="CONTENT_ATTACHMENTS">
+
+    </div>
+
     <div class="box-footer">
         <div class="pull-right">
         </div>
@@ -32,7 +37,7 @@
       });
 
         function AddPage() {
-            // add a page. 
+            // add a page.
 
             // validate form.
             $('#CONTENT_Page_Form').validate({
@@ -59,7 +64,7 @@
                             $("#MODAL_ID").modal('toggle');
                             list();
                         }
-                        
+
                     },
                     error: function () {
                         // set error.
@@ -109,6 +114,22 @@
                 });
         }
 
+        function P_AddAttachment(pageId) {
+            // show edit page.
+            var url = '@Url.Action("P_AddAttachment", "Book")' + "?pageId=" + pageId;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+
+            $.getJSON(url,
+                function (data) {
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                    $("#CONTENT_ID").css({ width: "150%" });
+
+                    MODAL_function("Modifica Allegato", data, "SaveAttachment()", "Salva", "", "Annulla", "");
+                });
+        }
+
         function P_AddPage(subSectionId) {
 
             var url = '@Url.Action("P_AddPage", "Book")' + "?subSectionId=" + subSectionId;
@@ -121,7 +142,23 @@
                     REFRESH_hide("CONTENT_Refresh");
                     MODAL_function("Nuova Pagina", data, "AddPage()", "Aggiungi", "", "Annulla", "");
                 });
-        }        
+        }
+
+        function P_EditAttachment(id) {
+            // show edit page.
+            var url = '@Url.Action("P_EditAttachment", "Book")' + "?id=" + id;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+
+            $.getJSON(url,
+                function (data) {
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                    $("#CONTENT_ID").css({ width: "150%" });
+
+                    MODAL_function("Modifica Allegato", data, "SaveAttachment()", "Salva", "", "Annulla", "");
+                });
+        }
 
         function P_EditPage(pageId) {
             // show edit page.
@@ -137,6 +174,45 @@
 
                     MODAL_function("Modifica Pagina", data, "SavePage()", "Salva", "", "Annulla", "");
                 });
+        }
+
+        function SaveAttachment() {
+            // save an Attachment.
+
+            // validate form.
+            $('#CONTENT_Attachments_Form').validate({
+                lang: 'it'
+            });
+
+            if ($('#CONTENT_Attachments_Form').valid()) {
+
+                REFRESH_show("MODAL_Refresh");
+                var url = '@Url.Action("SaveAttachment", "Book")';
+                // take the form content by id.
+                var data = new FormData($('#CONTENT_Attachments_Form').get(0));
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (risultato) {
+                        if (risultato.riuscita) {
+                            $("#MODAL_ID").modal('toggle');
+                            list();
+                        }
+                        else {
+                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare", "", "", "", "OK");
+                        }
+
+                    },
+                    error: function () {
+                        // set error.
+                        DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare", "", "", "", "OK");
+                    }
+                });
+            }
         }
 
         function SavePage() {
@@ -170,6 +246,29 @@
                     }
                 });
             }
+        }
+
+        function ShowAttachments(pageId) {
+            var url = '@Url.Action("ShowAttachments", "Book")' + "?pageId=" + pageId;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // set data.
+                    $("#CONTENT_ATTACHMENTS").html(data);
+                    // set the table name as parameter: DataTables_Table_0.
+                    $("#DataTables_Table_2").DataTable({
+                        dom: 'Bfrtip',
+                        language: DataTablesLanguage,
+                        responsive: true,
+                        columnDefs: [
+                            { className: "desktop", targets: [4, 5] },  // x > 1024
+                            { className: "all", targets: [0, 1, 2, 3] } // for each width
+                        ]
+                    });
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                });
         }
 
         function ShowPages(subSectionId) {

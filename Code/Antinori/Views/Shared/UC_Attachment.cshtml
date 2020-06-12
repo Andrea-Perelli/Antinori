@@ -1,0 +1,145 @@
+﻿@model Antinori.Models.Attachments
+
+<!-- Create a form  -->
+@using (Html.BeginForm("SaveAttachments", "Book", FormMethod.Post, new { id = "CONTENT_Attachments_Form" })) {
+    <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(p => p.Id, new { id = "Id" })
+    @Html.HiddenFor(p => p.PageId)
+
+    <!-- FIELD TO EDIT -->
+    <div>
+
+        @if (Model.Id == null) {
+            // create case.
+
+            <div class="row">
+                <div class="col-md-5">
+                    <small class="required">Identificativo</small><br />
+                    <input type="text" id="PublicId" name="PublicId" value="@Model.PublicId" class="form-control" />
+                </div>
+                <div class="col-md-5">
+                    <small class="required">Natura del Documento</small><br />
+                    <input type="text" id="Nature" name="Nature" value="@Model.Nature" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Data Cronica</small><br />
+                    <input type="date" id="ChronicDate" name="ChronicDate" value="@Model.ChronicDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <small class="required">Data Topica</small><br />
+                    <input type="text" id="TopicDate" name="TopicDate" value="@Model.TopicDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <small class="required">Istituto di Conservazione</small><br />
+                    <input type="text" id="ConservationInstitute" name="ConservationInstitute" value="@Model.ConservationInstitute" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Regesto</small><br />
+                    <input type="text" id="Regesto" name="Regesto" value="@Model.Regesto" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <small class="required">Sigilli</small><br />
+                    <input type="text" id="Seals" name="Seals" value="@Model.Seals" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <small>Foto </small><br>
+                    <input type="file" id="PhotoPath" name="PhotoPath" value="" class="form-control">
+                </div>
+
+                <div class="col-md-5">
+                    <small class="required">Note</small><br />
+                    <textarea id="Note" name="Note" value="@Model.Note" class="form-control" style="min-height: 300px">@Model.Note</textarea>
+                </div>
+            </div>
+        }
+        else {
+            // EDIT CASE: show identifier.
+
+            <div class="row">
+                <div class="col-md-5">
+                    <small class="required">Identificativo</small><br />
+                    <input type="text" id="PublicId" name="PublicId" value="@Model.PublicId" class="form-control" readonly />
+                </div>
+                <div class="col-md-5">
+                    <small class="required">Natura del Documento</small><br />
+                    <input type="text" id="Nature" name="Nature" value="@Model.Nature" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Data Cronica</small><br />
+                    @{
+                        string d = "";
+                        if (Model.ChronicDate.HasValue) {
+                            d = Model.ChronicDate.Value.ToString("yyyy-MM-ddThh:mm");
+                        }
+                    }
+                    <input type="datetime-local" id="ChronicDate" name="ChronicDate" value="@d" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <small class="required">Data Topica</small><br />
+                    <input type="text" id="TopicDate" name="TopicDate" value="@Model.TopicDate" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <small class="required">Istituto di Conservazione</small><br />
+                    <input type="text" id="ConservationInstitute" name="ConservationInstitute" value="@Model.ConservationInstitute" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <small class="required">Regesto</small><br />
+                    <input type="text" id="Regesto" name="Regesto" value="@Model.Regesto" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <small class="required">Sigilli</small><br />
+                    <input type="text" id="Seals" name="Seals" value="@Model.Seals" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" style=" margin-right:2px!important;">
+                    <small>Allegato</small><br />
+                    @{
+                        var path = Model.PhotoPath.Split('\\').Last();
+                        path = "/Attachments/" + path;
+                    }
+
+                    @if (Model.PhotoPath.Split('\\').Last().Split('.').Last().Equals("jpg") || Model.PhotoPath.Split('\\').Last().Split('.').Last().Equals("png")) {
+                        // is an image.
+
+                        <img src="@path" alt="JPEG" style="max-height: 400px!important;">
+                    }
+                    else {
+                        // download.
+                        <a href="@path" download class="circle my-button-blue genric-btn info" title="Download Allegato" style="margin: 0; color: white; line-height: 34px; padding-left: 19px; padding-right: 19px;">
+                            Download &nbsp;
+                            <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
+                        </a>
+                    }
+                </div>
+                <div class="col-md-5">
+                    <small class="required">Note</small><br />
+                    <textarea id="Note" name="Note" value="@Model.Note" class="form-control" style="min-height: 300px">@Model.Note</textarea>
+                </div>
+            </div>
+            <br />
+        }
+
+
+    </div>
+}
+
+

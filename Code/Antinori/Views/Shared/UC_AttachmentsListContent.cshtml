@@ -1,0 +1,61 @@
+﻿@model List<Antinori.Models.Attachments>
+
+@{ 
+    string title = "";
+    if(Model.FirstOrDefault() != null) {
+        title = Model.FirstOrDefault().Pages.NumericOrder.ToString();
+    }
+}
+
+<h3><span class="fa fa-file"></span> Allegati di Pagina @title</h3>
+<!-- TABLE -->
+<table id="DataTables_Table_2" class="table dataTable table-hover">
+    <thead>
+        <tr>
+            <th style="width: 100px">Identificativo</th>
+            <th style="width: 80px">Data Cronica</th>
+            <th style="width: 80px">Data Topica</th>
+            <th style="width: 80px">Natura</th>
+            <th style="width: 100px">Regesto</th>
+            <th style="width: 100px">Sigilli</th>
+            <th style="width: 70px">Istituto di Conservazione</th>
+            <th style="width: 150px">Note</th>
+            <th style="width: 50px"> </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <!-- Loop on the model.-->
+        @foreach(var att in Model) {
+        <tr>
+            <td>@att.PublicId</td>
+            <td>@att.ChronicDate</td>
+            <td>@att.TopicDate</td>
+            <td>@att.Nature</td>
+            <td>@att.Regesto</td>
+            <td>@att.Seals</td>
+            <td>@att.ConservationInstitute</td>
+            <td>@att.Note</td>
+
+            <td>
+                <button class="btn btn-default btn-sm" onclick="P_EditAttachment('@att.Id')" title="Modifica Pagine">
+                    <i class="fa fa-edit">
+                    </i>
+                </button>
+                <button class="btn btn-default btn-sm" onclick="DeletePage('@att.Id')" title="Cancella Pagina">
+                    <i class="fa fa-trash-o">
+                    </i>
+                </button>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="9"></th>
+        </tr>
+    </tfoot>
+</table>
+
+

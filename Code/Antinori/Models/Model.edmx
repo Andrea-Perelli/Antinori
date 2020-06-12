@@ -42,6 +42,22 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Cancellato" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PublicId" Type="nvarchar" MaxLength="100" />
+          <Property Name="TopicDate" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChronicDate" Type="datetime" />
+          <Property Name="PhotoPath" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nature" Type="nvarchar(max)" />
+          <Property Name="Regesto" Type="nvarchar(max)" />
+          <Property Name="Seals" Type="nvarchar(max)" />
+          <Property Name="ConservationInstitute" Type="nvarchar(max)" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="PageId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Books">
           <Key>
             <PropertyRef Name="Id" />
@@ -124,6 +140,20 @@
           <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="ProposedDate" Type="datetime" />
         </EntityType>
+        <Association Name="FK_Attachments_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attachments" Type="Self.Attachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attachments">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -248,6 +278,7 @@
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Filters" EntityType="Self.Filters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
@@ -255,6 +286,10 @@
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubSections" EntityType="Self.SubSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transcriptions" EntityType="Self.Transcriptions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Attachments_Pages" Association="Self.FK_Attachments_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Attachments" EntitySet="Attachments" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
@@ -375,6 +410,11 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Transcriptions" EntitySet="Transcriptions" />
           </AssociationSet>
+          <EntitySet Name="Attachments" EntityType="AntinoriModel.Attachments" />
+          <AssociationSet Name="FK_Attachments_Pages" Association="AntinoriModel.FK_Attachments_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Attachments" EntitySet="Attachments" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Logs">
           <Key>
@@ -423,6 +463,7 @@
           <NavigationProperty Name="SubSections" Relationship="AntinoriModel.FK_Pages_SubSections" FromRole="Pages" ToRole="SubSections" />
           <NavigationProperty Name="Transcriptions" Relationship="AntinoriModel.FK_Transcriptions_Pages" FromRole="Pages" ToRole="Transcriptions" />
           <NavigationProperty Name="Filters" Relationship="AntinoriModel.FK_Filter_Pages" FromRole="Pages" ToRole="Filters" />
+          <NavigationProperty Name="Attachments" Relationship="AntinoriModel.FK_Attachments_Pages" FromRole="Pages" ToRole="Attachments" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -552,6 +593,37 @@
             </Principal>
             <Dependent Role="Transcriptions">
               <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PublicId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TopicDate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChronicDate" Type="DateTime" Precision="3" />
+          <Property Name="PhotoPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConservationInstitute" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PageId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pages" Relationship="AntinoriModel.FK_Attachments_Pages" FromRole="Attachments" ToRole="Pages" />
+          <Property Name="Regesto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Seals" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Attachments_Pages">
+          <End Type="AntinoriModel.Pages" Role="Pages" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AntinoriModel.Attachments" Role="Attachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attachments">
+              <PropertyRef Name="PageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -685,6 +757,23 @@
               <MappingFragment StoreEntitySet="Filters">
                 <ScalarProperty Name="Page" ColumnName="Page" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="AntinoriModel.Attachments">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="Seals" ColumnName="Seals" />
+                <ScalarProperty Name="Regesto" ColumnName="Regesto" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ConservationInstitute" ColumnName="ConservationInstitute" />
+                <ScalarProperty Name="Nature" ColumnName="Nature" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="ChronicDate" ColumnName="ChronicDate" />
+                <ScalarProperty Name="TopicDate" ColumnName="TopicDate" />
+                <ScalarProperty Name="PublicId" ColumnName="PublicId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

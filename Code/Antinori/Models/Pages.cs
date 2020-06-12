@@ -19,6 +19,7 @@ namespace Antinori.Models
         {
             this.Transcriptions = new HashSet<Transcriptions>();
             this.Filters = new HashSet<Filters>();
+            this.Attachments = new HashSet<Attachments>();
         }
     
         public string Id { get; set; }
@@ -38,5 +39,7 @@ namespace Antinori.Models
         public virtual ICollection<Transcriptions> Transcriptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Filters> Filters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Attachments> Attachments { get; set; }
     }
 }
