@@ -163,6 +163,12 @@ namespace Antinori.Models {
 
         #region Books
 
+        public int Books_Count() {
+            // count number of Books.
+            int res = Books_Gets().Count;
+            return res;
+        }
+
         public int Books_Delete(Books b) {
             // delete a book.
             int esito = -1;
@@ -271,6 +277,12 @@ namespace Antinori.Models {
 
         #region Pages
 
+        public int Pages_Count() {
+            // count number of pages.
+            int res = Pages_Gets().Count;
+            return res;
+        }
+
         public int Pages_Delete(Pages p) {
             // delete a Page.
             int esito = -1;
@@ -289,6 +301,12 @@ namespace Antinori.Models {
             // return a Page by Id.
             Pages page = Pages.FirstOrDefault(it => it.Id == id);
             return page;
+        }
+
+        public List<Pages> Pages_Gets() {
+            // return all Pages.
+            List<Pages> pages = Pages.ToList();
+            return pages;
         }
         public List<Pages> Pages_GetByFilterName(string filterName) {
             // return all Pages of a filter name.
@@ -464,6 +482,11 @@ namespace Antinori.Models {
 
         #region Transcriptions
 
+        public int Transcriptions_Count() {
+            // count number of Transcriptions.
+            int res = Transcriptions_Gets().Count;
+            return res;
+        }
         public Transcriptions Transcriptions_Get(string id) {
             // return a Transcriptions by Id.
             return Transcriptions.FirstOrDefault(it => it.Id == id);

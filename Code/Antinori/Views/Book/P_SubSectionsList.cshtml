@@ -32,7 +32,6 @@
 
     <script>
       $(document).ready(function () {
-
             list();
       });
 
@@ -84,6 +83,7 @@
             $.getJSON(url,
                 function (data) {
                     if (Boolean(data)) {
+                        $("#CONTENT_ATTACHMENTS").empty();
                         ShowAttachments(pageId)
                     }
                     // hide the refresher.

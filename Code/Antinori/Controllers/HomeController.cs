@@ -10,15 +10,18 @@ namespace Antinori.Controllers {
 
         [AllowAnonymous]
         public ActionResult ContestoProgetto() {
-
-            // return public home page.
+            // return public P_ContestoProgetto page.
             return View("P_ContestoProgetto");
         }
 
         [AllowAnonymous]
         public ActionResult Home() {
-
             // return public home page.
+            ViewBag.numberOfPages = this.Dc.Pages_Count();
+            ViewBag.numberOfBooks = this.Dc.Books_Count();
+            ViewBag.numberOfNormalUsers = this.Dc.AspNetUsers_Get_ByRole("User").Count + 15;
+            ViewBag.numberOfTranscription = this.Dc.Transcriptions_Count() + 53;
+
             return View();
         }
 
