@@ -110,7 +110,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6" style=" margin-right:2px!important;">
+                <div class="col-md-5" style=" margin-right:2px!important;">
                     <small>Allegato</small><br />
                     @{
                         var path = Model.PhotoPath.Split('\\').Last();
@@ -119,18 +119,17 @@
 
                     @if (Model.PhotoPath.Split('\\').Last().Split('.').Last().Equals("jpg") || Model.PhotoPath.Split('\\').Last().Split('.').Last().Equals("png")) {
                         // is an image.
-
                         <img src="@path" alt="JPEG" style="max-height: 400px!important;">
                     }
                     else {
                         // download.
-                        <a href="@path" download class="circle my-button-blue genric-btn info" title="Download Allegato" style="margin: 0; color: white; line-height: 34px; padding-left: 19px; padding-right: 19px;">
+                        <a href="@path" download class="btn btn-primary btn-warning" title="Download Allegato" style="margin-top: 10px;;line-height: 30px;">
                             Download &nbsp;
                             <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
                         </a>
                     }
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <small class="required">Note</small><br />
                     <textarea id="Note" name="Note" value="@Model.Note" class="form-control" style="min-height: 300px">@Model.Note</textarea>
                 </div>

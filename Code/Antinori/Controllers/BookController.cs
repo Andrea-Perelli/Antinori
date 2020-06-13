@@ -120,6 +120,31 @@ namespace Antinori.Controllers {
         }
 
         [Authorize(Roles = "Admin")]
+        public JsonResult DeleteAttachment(string id) {
+            // delete an attchment by id.
+
+            // set default value for esito.
+            bool esito = false;
+
+            // attchment.
+            Attachments a = this.Dc.Attachments_Get(id);
+            esito = this.Dc.Attachments_Delete(a) > -1;
+
+            try {
+                // delete file.
+                if(System.IO.File.Exists(a.PhotoPath)) {
+                    System.IO.File.Delete(a.PhotoPath);
+                }
+            }
+            catch (Exception e) {
+                Log_Insert(a.Id, "Attachments", "DELETE FILE", false, "Errore nella cancellazione del file: " + e.Message );
+            }
+
+            //save and update the esito value.
+            return Json(esito, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin")]
         public JsonResult DeletePage(string id) {
             // delete a page     by id.
 
@@ -132,16 +157,16 @@ namespace Antinori.Controllers {
 
             try {
                 // small photo.
-                if(System.IO.File.Exists(p.PhotoPath)) {
+                if (System.IO.File.Exists(p.PhotoPath)) {
                     System.IO.File.Delete(p.PhotoPath);
                 }
                 // big photo.
-                if(System.IO.File.Exists(p.BigPhotoPath)) {
+                if (System.IO.File.Exists(p.BigPhotoPath)) {
                     System.IO.File.Delete(p.BigPhotoPath);
                 }
             }
             catch (Exception e) {
-                Log_Insert(p.Id, "Pages", "DELETE FILE", false, "Errore nella cancellazione del file: " + e.Message );
+                Log_Insert(p.Id, "Pages", "DELETE FILE", false, "Errore nella cancellazione del file: " + e.Message);
             }
 
             //save and update the esito value.

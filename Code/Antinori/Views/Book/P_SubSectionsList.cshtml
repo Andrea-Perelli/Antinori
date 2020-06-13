@@ -47,6 +47,7 @@
             if ($('#CONTENT_Page_Form').valid()) {
 
                 REFRESH_show("MODAL_Refresh");
+
                 var url = '@Url.Action("AddPage", "Book")';
                 // take the form content by id.
                 var data = new FormData($('#CONTENT_Page_Form').get(0));
@@ -72,6 +73,22 @@
                     }
                 });
             }
+        }
+
+        function DeleteAttachment(id, pageId) {
+            // delete attachment.
+            var url = '@Url.Action("DeleteAttachment", "Book")' + "?id=" + id;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+
+            $.getJSON(url,
+                function (data) {
+                    if (Boolean(data)) {
+                        ShowAttachments(pageId)
+                    }
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                });
         }
 
         function DeletePage(pageId) {
@@ -135,6 +152,7 @@
             var url = '@Url.Action("P_AddPage", "Book")' + "?subSectionId=" + subSectionId;
             // show the refresher.
             REFRESH_show("CONTENT_Refresh");
+            $("#CONTENT_ID").css({ width: "150%" });
 
             $.getJSON(url,
                 function (data) {
