@@ -121,12 +121,12 @@ namespace Antinori.Controllers {
 
         [Authorize(Roles = "Admin")]
         public JsonResult DeleteAttachment(string id) {
-            // delete an attchment by id.
+            // delete an attachment by id.
 
             // set default value for esito.
             bool esito = false;
 
-            // attchment.
+            // attachment.
             Attachments a = this.Dc.Attachments_Get(id);
             esito = this.Dc.Attachments_Delete(a) > -1;
 
