@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/LayoutPublic.cshtml";
     string path = "/Pics/JPEG_Full/" + Model.PhotoPath.Split('\\').Last();
     string tiff = "/Pics/Tiff/" + Model.BigPhotoPath.Split('\\').Last();
-
 }
 
 <!-- upper Area -->
@@ -28,15 +27,15 @@
 <section class="course-area section-gap" id="subsections" style="padding-top: 30px!important;">
 
     <!-- PAGE NUMBER -->
-    <div class="row" >
+    <div class="row">
         <h3 style="margin-left: auto; margin-right: auto;">
             Pagina #@Model.NumericOrder
-        </h3>      
+        </h3>
     </div>
 
     <!-- CONTENT ROW -->
     <div class="row" style="margin-right: 25px!important; margin-left: 25px!important; ">
-        <!-- ARROW LEFT COL --> 
+        <!-- ARROW LEFT COL -->
         <div class=".col-sm" style="max-width: 5%; min-width: 5%; margin-top: -10px;">
             @if (ViewBag.previous != null) {
                 if (ViewBag.previous.Transcriptions.Count > 0) {
@@ -69,37 +68,37 @@
                         editor = Model.Editor;
                     }
                 }
-            <div class="grid-item"><b class="myB">Editor:</b>&nbsp;@editor</div>
+                <div class="grid-item"><b class="myB">Editor:</b>&nbsp;@editor</div>
 
-            <div class="grid-item"><b class="myB">#:</b>&nbsp;@Model.NumericOrder</div>
-            <div class="grid-item"><b class="myB">Ordine:</b>&nbsp;@Model.CompleteOrder</div>
-            @{
-                var filters = "";
-                foreach (var f in Model.Filters.ToList()) {
-                    filters = filters + ";" + f.Name;
+                <div class="grid-item"><b class="myB">#:</b>&nbsp;@Model.NumericOrder</div>
+                <div class="grid-item"><b class="myB">Ordine:</b>&nbsp;@Model.CompleteOrder</div>
+                @{
+                    var filters = "";
+                    foreach (var f in Model.Filters.ToList()) {
+                        filters = filters + ";" + f.Name;
+                    }
+                    filters = filters.TrimEnd(';');
+                    filters = filters.TrimStart(';');
+                    if (filters.Equals("")) {
+                        filters = "-";
+                    }
                 }
-                filters = filters.TrimEnd(';');
-                filters = filters.TrimStart(';');
-                if (filters.Equals("")) {
-                    filters = "-";
-                }
-            }
-            <div class="grid-item"><b class="myB">Filtri:</b>&nbsp;@filters</div>
+                <div class="grid-item"><b class="myB">Filtri:</b>&nbsp;@filters</div>
 
             </div>
             <div class="row">
                 <img src="@path" class="mx-auto" style="width: 100%; margin-bottom: 20px; margin-top: 20px;" />
             </div>
             <div class="row" style="display: grid; margin-bottom: 30px;">
-                @{ 
+                @{
                     string description = "-";
-                    if(Model.Description != null && Model.Description.Length > 0) {
+                    if (Model.Description != null && Model.Description.Length > 0) {
                         description = Model.Description;
                     }
                 }
                 <div class="grid-item" style="padding: 0px;"><b class="myB">Descrizione:</b>&nbsp;@description</div>
             </div>
-            <!-- BUTTONS ROW -->
+            <!-- BUTTONS ROWS -->
             <div class="row" style="padding-bottom: 20px; ">
                 <h5 style="color:#777777; border-bottom: 2px solid #eee;">
                     Downloads
@@ -116,42 +115,100 @@
                     Tiff &nbsp;
                     <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
                 </a>
-
             </div>
-        </div>
-            
-            <!-- TRANSCRIPTION COL -->
-            <div class="col-sm" style="max-width: 45%; min-width: 45%; margin-top: 40px;">
-                @if (Model.Transcriptions.Count > 0) {
-                    <p>
-
-                        @Model.Transcriptions.FirstOrDefault().TEI
-                    </p>
-                }
-                else {
-
-                }
-            </div>
-            <!-- ARROW RIGHT COL --->
-            <div class=".col-sm" style="max-width: 5%;  min-width: 5%; margin-top: -10px;">
-
-                @if (ViewBag.after != null) {
-                    if (ViewBag.after.Transcriptions.Count > 0) {
-                        <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = ViewBag.after.Id })">
-                            <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float:right;" title="Successiva"></i>
-                        </a>
-                    }
-                    else {
-                        <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = ViewBag.after.Id })">
-                            <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float: right;" title="Successiva"></i>
-                        </a>
-                    }
-                }
-                else {
-                    <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float:right;"></i>
-                }
+            <!-- ATTACHMENT TITLE ROW -->
+            <div class="row" style="margin-top: 80px;">
+                <div class="single-defination">
+                    <h4 class="mb-20">Allegati</h4>
+                </div>
             </div>
         </div>
 
+        <!-- TRANSCRIPTION COL -->
+        <div class="col-sm" style="max-width: 45%; min-width: 45%; margin-top: 40px;">
+            @if (Model.Transcriptions.Count > 0) {
+                <p>
+
+                    @Model.Transcriptions.FirstOrDefault().TEI
+                </p>
+            }
+            else {
+
+            }
+        </div>
+        <!-- ARROW RIGHT COL --->
+        <div class=".col-sm" style="max-width: 5%;  min-width: 5%; margin-top: -10px;">
+
+            @if (ViewBag.after != null) {
+                if (ViewBag.after.Transcriptions.Count > 0) {
+                    <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = ViewBag.after.Id })">
+                        <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float:right;" title="Successiva"></i>
+                    </a>
+                }
+                else {
+                    <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = ViewBag.after.Id })">
+                        <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float: right;" title="Successiva"></i>
+                    </a>
+                }
+            }
+            else {
+                <i class="fa fa-arrow-right" style="font-size: 35px; margin-left: 12px; float:right;"></i>
+            }
+        </div>
+    </div>
+
+    <!-- ATTACHMENT ROW -->
+    <div class="row" style="margin-left: 5%; margin-right: 5%;">
+        <ul style="list-style-type: none; width: 100%;">
+            @foreach (var att in Model.Attachments) {
+                <li style="background-color: #eee; border-radius: 5%; padding: 10px 10px 10px 10px; width: 100%;">
+                    <span class="caret fa fa-angle-down" style="width: 100%;">
+                        <b style="color: #777777; font-size: 16px;"> Allegato 1 </b>
+                    </span>
+                    <ul class="nested">
+                        <li style="margin-left: 10px; ">Id: @att.PublicId</li>
+                        <li style="margin-left: 10px; ">@att.ChronicDate</li>
+                    </ul>
+                </li>
+            }
+
+            <li style="background-color: #eee; border-radius: 5%; padding: 10px 10px 10px 10px; width: 100%;">
+                <span class="caret fa fa-angle-down" style="width: 100%;">
+                    <b style="color: #777777; font-size: 16px;"> Allegato 1 </b>
+                </span>
+                <ul class="nested">
+                    <li style="margin-left: 10px; ">Coffee</li>
+                </ul>
+            </li>
+
+            <li style="background-color: #eee; border-radius: 5%; padding: 10px 10px 10px 10px; width: 100%;">
+                <span class="caret fa fa-angle-down" style="width: 100%;">
+                    <b style="color: #777777; font-size: 16px;">Allegato 2</b>
+                </span>
+                
+                <ul class="nested">
+                    <div class="grid-container nested" style="display: grid; grid-template-columns: auto auto auto;">
+                        <div class="grid-item"><b class="myB">Opera:</b>&nbsp;@Model.BookTitle</div>
+                        <div class="grid-item"><b class="myB">Titolo pagina:</b>&nbsp;@Model.Title</div><br />
+
+                        <div class="grid-item"><b class="myB">Sezione:</b>&nbsp;@Model.SectionName</div>
+                        <div class="grid-item"><b class="myB">Sottosezione:</b>&nbsp;@Model.SubSections.Name</div>
+                    </div>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </section>
 <!-- End page Area -->
+
+<script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
+</script>

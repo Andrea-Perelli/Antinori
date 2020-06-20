@@ -140,6 +140,31 @@
             font-weight: bold;
             font-size: 16px;
         }
+        /* Style the caret/arrow */
+        .caret {
+            cursor: pointer;
+            user-select: none; /* Prevent text selection */
+        }
+        /* Create the caret/arrow and style it */
+        .caret::before {
+            float: right;
+            display: inline-block;
+            font-size: 20px;
+        }
+        /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+        .caret-down::before {
+            transform: rotate(180deg);
+        }
+        /* Hide the nested list */
+        .nested {
+            display: none;
+            background-color: white;
+            margin-top: 5px;
+        }
+        /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+        .active {
+            display: block;
+        }
     </style>
 </head>
 <body>
