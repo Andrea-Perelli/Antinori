@@ -32,6 +32,7 @@ Oxygen/
 .vs/
 ####################
 # FILES #
+passwords.txt
 ####################
 *.csproj
 *.config
