@@ -3,16 +3,14 @@
     ViewBag.Title = "Accedi";
     Layout = "~/Views/Shared/_LayoutPublic.cshtml";
 }
-
-    <div class="login-box">
+    <div class="login-box" >
         <div class="login-logo">
             <a href="@Url.Action("Home","Home")">
-                <img src="~/Content/img/logo.png" style="width:360px" />
+                <img src="~/Content/img/Logos/vector/default-monochrome-white.svg" />
             </a>
-          
         </div>
         <!-- /.login-logo -->
-        <div class="login-box-body">
+        <div class="login-box-body" style="border-radius: 10px!important; padding-left: 30px; padding-right: 30px;">
 
             <p class="login-box-msg">Inserisci i tuoi dati per entrare</p>
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
@@ -40,7 +38,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Entra</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" style="background-color: #38a4ff; border-radius: 5px; border-width: 0px!important;">Entra</button>
                     </div>
                     <!-- /.col -->
                 </div>

@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Yesteryear-Regular
+font link: https://fonts.google.com/specimen/Yesteryear
+font author: Astigmatic
+font author site: http://www.astigmatic.com/
+
+
+icon designer: Christopher T. Howlett
+icon designer link: /howlettstudios
+        
+{"bg":"#F1A418","icon":"#C36A2B","font":"#ffffff","slogan":"#ffffff"}
+      
