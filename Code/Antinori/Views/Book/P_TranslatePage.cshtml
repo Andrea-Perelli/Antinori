@@ -15,6 +15,7 @@
     </div>
 </section>
 <!-- upper  Area -->
+
 <!-- REFRESHER -->
 <div id="CONTENT_Refresh" class="overlay text-center" style="z-index:100; height:80px; background-color:rgba(255, 255, 255, 0.00); margin: auto; position: fixed; display: none;">
     <h3>       
@@ -160,42 +161,37 @@
     <!-- ATTACHMENT ROW -->
     <div class="row" style="margin-left: 5%; margin-right: 5%;">
         <ul style="list-style-type: none; width: 100%;">
-            @foreach (var att in Model.Attachments) {
-                <li style="background-color: #eee; border-radius: 5%; padding: 10px 10px 10px 10px; width: 100%;">
+            @{ 
+                int j = 1;
+            }
+            @foreach (var att in Model.Attachments.OrderBy(p => p.PublicId)) {
+                <li style="background-color: #eee; border-radius: 1%; padding: 10px 10px 10px 10px; width: 100%; margin-bottom: 5px;">
                     <span class="caret fa fa-angle-down" style="width: 100%;">
-                        <b style="color: #777777; font-size: 16px;"> Allegato 1 </b>
+                        <b style="color: #777777; font-size: 16px;"> Allegato @j </b>
                     </span>
                     <ul class="nested">
-                        <li style="margin-left: 10px; ">Id: @att.PublicId</li>
-                        <li style="margin-left: 10px; ">@att.ChronicDate</li>
-                    </ul>
+                        <div class="grid-container nested" style="display: grid; grid-template-columns: auto auto auto; padding: 10px;">
+                            <div class="grid-item"><b class="myB">Identificativo:</b>&nbsp;@att.PublicId</div>
+                            <div class="grid-item"><b class="myB">Istituto di Conservazione:</b>&nbsp;@att.ConservationInstitute</div>
+                            <div class="grid-item"><b class="myB">Natura:</b>&nbsp;@att.Nature</div>
+
+                            <div class="grid-item"><b class="myB">Data Cronica:</b>&nbsp;@att.ChronicDate</div>
+                            <div class="grid-item"><b class="myB">Data Topica:</b>&nbsp;@att.TopicDate</div>
+                            <div class="grid-item"><b class="myB">Regesto:</b>&nbsp;@att.Regesto</div>
+
+                            <div class="grid-item"><b class="myB">Sigilli:</b>&nbsp;@att.Seals</div>
+                            <div class="grid-item"><b class="myB">Note:</b>&nbsp;@att.Note</div>
+
+                            <div class="grid-item"><b class="myB"></b>
+                                <a href="/Attachments/@att.PhotoPath.Split('\\').Last()" download class="circle my-button-blue genric-btn info" title="Download Anteprima" style="margin: 0; color: white; line-height: 30px; padding-left: 19px; padding-right: 19px;">Anteprima &nbsp;
+                                    <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </ul>                    
                 </li>
+                j++;
             }
-
-            <li style="background-color: #eee; border-radius: 5%; padding: 10px 10px 10px 10px; width: 100%;">
-                <span class="caret fa fa-angle-down" style="width: 100%;">
-                    <b style="color: #777777; font-size: 16px;"> Allegato 1 </b>
-                </span>
-                <ul class="nested">
-                    <li style="margin-left: 10px; ">Coffee</li>
-                </ul>
-            </li>
-
-            <li style="background-color: #eee; border-radius: 5%; padding: 10px 10px 10px 10px; width: 100%;">
-                <span class="caret fa fa-angle-down" style="width: 100%;">
-                    <b style="color: #777777; font-size: 16px;">Allegato 2</b>
-                </span>
-                
-                <ul class="nested">
-                    <div class="grid-container nested" style="display: grid; grid-template-columns: auto auto auto;">
-                        <div class="grid-item"><b class="myB">Opera:</b>&nbsp;@Model.BookTitle</div>
-                        <div class="grid-item"><b class="myB">Titolo pagina:</b>&nbsp;@Model.Title</div><br />
-
-                        <div class="grid-item"><b class="myB">Sezione:</b>&nbsp;@Model.SectionName</div>
-                        <div class="grid-item"><b class="myB">Sottosezione:</b>&nbsp;@Model.SubSections.Name</div>
-                    </div>
-                </ul>
-            </li>
         </ul>
     </div>
 </section>
