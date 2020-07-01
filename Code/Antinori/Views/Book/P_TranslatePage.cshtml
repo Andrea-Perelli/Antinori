@@ -120,7 +120,9 @@
             <!-- ATTACHMENT TITLE ROW -->
             <div class="row" style="margin-top: 80px;">
                 <div class="single-defination">
-                    <h4 class="mb-20">Allegati</h4>
+                    @if (Model.Attachments.Count > 0) {
+                        <h4 class="mb-20">Allegati</h4>
+                    }
                 </div>
             </div>
         </div>

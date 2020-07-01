@@ -118,6 +118,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Book" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ViewOrder" Type="int" />
         </EntityType>
         <EntityType Name="SubSections">
           <Key>
@@ -475,6 +476,7 @@
           <Property Name="Book" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Books" Relationship="AntinoriModel.FK_Sections_Sections" FromRole="Sections" ToRole="Books" />
           <NavigationProperty Name="SubSections" Relationship="AntinoriModel.FK_SubSections_Sections" FromRole="Sections" ToRole="SubSections" />
+          <Property Name="ViewOrder" Type="Int32" />
         </EntityType>
         <EntityType Name="SubSections">
           <Key>
@@ -722,6 +724,7 @@
           <EntitySetMapping Name="Sections">
             <EntityTypeMapping TypeName="AntinoriModel.Sections">
               <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="ViewOrder" ColumnName="ViewOrder" />
                 <ScalarProperty Name="Book" ColumnName="Book" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
