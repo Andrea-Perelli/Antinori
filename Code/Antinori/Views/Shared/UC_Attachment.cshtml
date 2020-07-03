@@ -41,9 +41,9 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <small class="required">Regesto</small><br />
-                    <input type="text" id="Regesto" name="Regesto" value="@Model.Regesto" class="form-control" />
+                    <textarea id="Regesto" name="Regesto" value="@Model.Regesto" class="form-control" style="min-height: 200px">@Model.Regesto</textarea>
                 </div>
                 <div class="col-md-4">
                     <small class="required">Sigilli</small><br />
@@ -99,9 +99,10 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <small class="required">Regesto</small><br />
-                    <input type="text" id="Regesto" name="Regesto" value="@Model.Regesto" class="form-control" />
+                    <textarea id="Regesto" name="Regesto" value="@Model.Regesto" class="form-control" style="min-height: 200px">@Model.Regesto</textarea>
+
                 </div>
                 <div class="col-md-4">
                     <small class="required">Sigilli</small><br />
@@ -119,19 +120,18 @@
 
                     @if (Model.PhotoPath.Split('\\').Last().Split('.').Last().Equals("jpg") || Model.PhotoPath.Split('\\').Last().Split('.').Last().Equals("png")) {
                         // is an image.
-                        <img src="@path" alt="JPEG" style="max-height: 400px!important;">
+                        <img src="@path" alt="JPEG" style="max-height: 400px!important; max-width: 350px;">
                     }
-                    else {
-                        // download.
-                        <a href="@path" download class="btn btn-primary btn-warning" title="Download Allegato" style="margin-top: 10px;;line-height: 30px;">
-                            Download &nbsp;
-                            <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
-                        </a>
-                    }
+                    
+                    <a href="@path" download class="btn btn-primary btn-warning" title="Download Allegato" style="margin-top: 20px; line-height: 30px;">
+                        Download &nbsp;
+                        <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
+                    </a>
+                    
                 </div>
                 <div class="col-md-6">
                     <small class="required">Note</small><br />
-                    <textarea id="Note" name="Note" value="@Model.Note" class="form-control" style="min-height: 300px">@Model.Note</textarea>
+                    <textarea id="Note" name="Note" value="@Model.Note" class="form-control" style="min-height: 400px">@Model.Note</textarea>
                 </div>
             </div>
             <br />

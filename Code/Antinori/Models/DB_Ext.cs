@@ -330,6 +330,16 @@ namespace Antinori.Models {
      
             return Pages_GetByFilterNameList(filterNames).Count();
         }
+
+        public List<Pages> Pages_GetByNumber(int number) {
+            // return a list of pages with the same number.
+            return Pages.Where(p => p.NumericOrder == number).ToList();
+        }
+        public List<Pages> Pages_GetByNumberOrderedBySectionName(int number) {
+            // return a list of pages with the same number.
+            return Pages_GetByNumber(number).OrderBy(p => p.SectionName).ToList();
+        }
+
         public List<Pages> Pages_GetBySubSection(string subSectionId) {
             // return all Pages of a subsection.
             List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p =>p.NumericOrder).ToList();

@@ -331,6 +331,19 @@ namespace Antinori.Controllers {
             return View(books);
         }
 
+        [AllowAnonymous]
+        public JsonResult P_SearchedPages(int pageNumber) {
+            // return the searched pages (by number).
+
+            List<Pages> pages = null;
+
+            // when we clicked on the pagination. 
+            pages = this.Dc.Pages_GetByNumberOrderedBySectionName(pageNumber);
+
+            // return the partial view containing the UC_SectionSubsections page.
+            return Json(GetRenderPartialView(this, "UC_SubsectionPagesSearched", pages), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult P_Sections(int numberOfSections) {
             // return the section page.
@@ -819,7 +832,6 @@ namespace Antinori.Controllers {
             }
 
         }
-
 
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult ShowAttachments(string pageId) {
