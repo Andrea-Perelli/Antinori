@@ -22,6 +22,9 @@ namespace Antinori.Controllers {
             ViewBag.numberOfNormalUsers = this.Dc.AspNetUsers_Get_ByRole("User").Count + 15;
             ViewBag.numberOfTranscription = this.Dc.Transcriptions_Count() + 53;
 
+            // retrieve homepage image.
+            ViewBag.page = this.Dc.FrontSlider_GetFromDate();
+
             return View();
         }
 

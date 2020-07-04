@@ -24,6 +24,7 @@
         <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers1" />
         <EntityTypeShape EntityType="AntinoriModel.Attachments" Width="1.5" PointX="9.375" PointY="7.125" />
         <AssociationConnector Association="AntinoriModel.FK_Attachments_Pages" />
+        <EntityTypeShape EntityType="AntinoriModel.FrontSlider" Width="1.5" PointX="0.75" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

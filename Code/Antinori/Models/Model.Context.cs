@@ -35,5 +35,6 @@ namespace Antinori.Models
         public virtual DbSet<Transcriptions> Transcriptions { get; set; }
         public virtual DbSet<Filters> Filters { get; set; }
         public virtual DbSet<Attachments> Attachments { get; set; }
+        public virtual DbSet<FrontSlider> FrontSlider { get; set; }
     }
 }

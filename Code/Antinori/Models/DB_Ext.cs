@@ -275,6 +275,15 @@ namespace Antinori.Models {
 
         #endregion
 
+        #region FrontSlider
+
+        public FrontSlider FrontSlider_GetFromDate() {
+            // return the image of the current date.
+            return FrontSlider.FirstOrDefault(f => f.Month == DateTime.Now.Month);
+        }
+
+        #endregion
+
         #region Pages
 
         public int Pages_Count() {

@@ -77,6 +77,18 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Page" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
+        <EntityType Name="FrontSlider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="256" />
+          <Property Name="Link" Type="nvarchar" MaxLength="256" />
+          <Property Name="Text" Type="nvarchar" MaxLength="256" />
+          <Property Name="Path" Type="nvarchar" MaxLength="256" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Week" Type="int" />
+        </EntityType>
         <EntityType Name="Logs">
           <Key>
             <PropertyRef Name="Id" />
@@ -282,6 +294,7 @@
           <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Filters" EntityType="Self.Filters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FrontSlider" EntityType="Self.FrontSlider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
@@ -416,6 +429,7 @@
             <End Role="Pages" EntitySet="Pages" />
             <End Role="Attachments" EntitySet="Attachments" />
           </AssociationSet>
+          <EntitySet Name="FrontSlider" EntityType="AntinoriModel.FrontSlider" />
           </EntityContainer>
         <EntityType Name="Logs">
           <Key>
@@ -629,6 +643,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FrontSlider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Week" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -777,6 +803,19 @@
                 <ScalarProperty Name="ChronicDate" ColumnName="ChronicDate" />
                 <ScalarProperty Name="TopicDate" ColumnName="TopicDate" />
                 <ScalarProperty Name="PublicId" ColumnName="PublicId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FrontSlider">
+            <EntityTypeMapping TypeName="AntinoriModel.FrontSlider">
+              <MappingFragment StoreEntitySet="FrontSlider">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Week" ColumnName="Week" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
