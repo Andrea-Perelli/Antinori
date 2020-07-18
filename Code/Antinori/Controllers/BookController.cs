@@ -344,6 +344,28 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_SubsectionPagesSearched", pages), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        public JsonResult P_SearchedPagesByNumberAndName(int pageNumber, string subSectionName) {
+            // return the searched pages (by number) and subsection name.
+
+            List<Pages> pages = new List<Pages>();
+            Pages p = null;
+
+            try {
+                p = this.Dc.Pages_GetBySubSectionNameAndNumber(subSectionName, Convert.ToInt32(pageNumber));
+                // if is different from null: add it.
+                if(p!= null) {
+                    pages.Add(p);
+                }
+            }
+            catch (Exception e) {
+                Log_Insert("", "PAGES", "SELECT", false, e.Message);
+            }
+
+            // return the partial view containing the UC_SectionSubsections page.
+            return Json(GetRenderPartialView(this, "UC_SubsectionPagesSearched", pages), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult P_Sections(int numberOfSections) {
             // return the section page.
@@ -471,6 +493,47 @@ namespace Antinori.Controllers {
             ViewBag.after = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder + 1);
             // return the partial view containing the P_TranslatePage page.
             return View("P_TranslatePage", p);
+        }       
+
+        [Authorize(Roles = "Admin,Editor,User")]
+        public ActionResult P_TranslateSearchedPageWithAuth(string pageNumber, string subsectionId) {
+            // return the translation page with needed auth.
+
+            Pages p = new Pages();
+
+            try {
+                p = this.Dc.Pages_GetBySubSectionAndNumber(subsectionId, Convert.ToInt32(pageNumber));
+                if(p != null) {
+                    ViewBag.previous = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder - 1);
+                    ViewBag.after = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder + 1);
+                }
+                
+            }
+            catch(Exception e) {
+                Log_Insert("", "PAGES", "SELECT", false, e.Message);
+            }
+            
+            // return the partial view containing the P_TranslatePage page.
+            return View("P_TranslatePage", p);
+        }
+
+        [Authorize(Roles = "Admin,Editor,User")]
+        public JsonResult PageExists(string pageNumber, string subsectionId) {
+            // checkif the page exists
+
+            Pages p = new Pages();
+            bool res = false;
+            try {
+                p = this.Dc.Pages_GetBySubSectionAndNumber(subsectionId, Convert.ToInt32(pageNumber));
+                if (p != null) {
+                    res = true;
+                }
+            }
+            catch (Exception e) {
+                Log_Insert("", "PAGES", "SELECT", false, e.Message);
+            }
+            // return the partial view .
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "Admin, Editor")]
@@ -526,8 +589,10 @@ namespace Antinori.Controllers {
                                     if(temp2 != null) {
                                         temp2.Name = forms[temp.Id + "subName" + index2];
                                         temp2.Description = forms[temp.Id + "subDescription" + index2];
+                                        temp2.RopeNumber = Convert.ToInt16(forms[temp.Id + "subRope" + index2]);
+
                                     }
-                                    
+
                                     index2++;
                                 }
                                 index += 1;
@@ -589,7 +654,8 @@ namespace Antinori.Controllers {
                                 Id = Guid.NewGuid().ToString(),
                                 Name = forms[index + "subName" + index2],
                                 Description = forms[index + "subDescription" + index2],
-                                Section = sec.Id,                                
+                                RopeNumber = Convert.ToInt16(forms[index + "subRope" + index2]),
+                                Section = sec.Id                               
                             };
                             // add to the section.
                             sec.SubSections.Add(sub);

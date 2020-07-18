@@ -8,9 +8,10 @@
                 <div class="col-md-11 mt-sm-30">
                     <div class="">
                         <ul class="unordered-list">
-                            @foreach(var sub in Model) {
+                            @foreach (var sub in Model) {
                                 <a href="#!" onclick="ShowSubsectionPages('@sub.Id','@sub.Name')" style="color: black;">
-                                    <li id="sub_@sub.Name" >@sub.Name</li>
+                                    
+                                    <li id="sub_@sub.Name" title="@sub.Description">@sub.Name</li>
                                 </a>
                             }
                         </ul>
@@ -44,12 +45,12 @@
                     </div>
                     <div style="margin-top: 30px;">
                         <div class="form-group">
-                            <label class="ls text-uppercase mb-0">Cerca Pagina</label>
-                            <input type="number" id="pageToSearch" name="pageToSearch" placeholder="Numero Pagina" class="form-control" style="height: calc(2.05rem + 2px); width: 50%;">
+                            <label class="ls text-uppercase mb-0">Cerca Facsimile</label>
+                            <input type="number" id="pageToSearch" name="pageToSearch" placeholder="Numero Facsimile" class="form-control" style="height: calc(2.05rem + 2px); width: 50%;">
                         </div>
                         <div class="form-group" >
                             <div class="button-group-area mt-40" style="display: table; margin: auto;">
-                                <i onclick="SearchPage()" class="fa fa-check genric-btn info circle my-button" title="Cerca Pagina">
+                                <i onclick="SearchPage()" class="fa fa-check genric-btn info circle my-button" title="Cerca Facsimile">
                                 </i>
                             </div>
                         </div>
@@ -187,33 +188,5 @@
 
     }
 
-    function SearchPage() {
-        // retrieve page and show it.
-        
-        // clear advanced search filters.
-        $('#filters').empty();
-
-        // reset pagination.
-        $('#pagination').empty();
-        $('#pagination').removeData("twbs-pagination");
-        $('#pagination').unbind("page");
-
-        var pNumber = $("#pageToSearch").val();
-        // if the page is empty.
-        if (!pNumber) {
-            $("#errorModal").show();
-        }
-        else {
-            var url = '@Url.Action("P_SearchedPages", "Book")' + "?pageNumber=" + pNumber;
-            // show the refresher.
-            REFRESH_show("CONTENT_Refresh");
-            $.getJSON(url,
-                function (data) {
-                    // set data.
-                    $("#pages").html(data);
-                    // hide the refresher.
-                    REFRESH_hide("CONTENT_Refresh");
-                });
-        }
-    }
+    
 </script>

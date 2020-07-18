@@ -354,6 +354,20 @@ namespace Antinori.Models {
             List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p =>p.NumericOrder).ToList();
             return pages;
         }
+
+        public Pages Pages_GetBySubSectionAndNumber(string subSectionId, int number) {
+            // return a Page of a subsection.
+
+            Pages pages = SubSectionss_Get(subSectionId).Pages.FirstOrDefault(p => p.NumericOrder == number);
+            return pages;
+        }
+
+        public Pages Pages_GetBySubSectionNameAndNumber(string subSectionName, int number) {
+            // return a Page of a subsection.
+
+            Pages pages = SubSectionss_GetByName(subSectionName).Pages.FirstOrDefault(p => p.NumericOrder == number);
+            return pages;
+        }
         public List<Pages> Pages_GetFirstNByFilterNameList(string[] filterNames, int n) {
             // return first n pages of an advanced search.
             List<Pages> pages = this.Pages_GetByFilterNameList(filterNames).OrderBy(p => p.NumericOrder).Take(n).ToList();
@@ -489,12 +503,17 @@ namespace Antinori.Models {
 
         public List<SubSections> Sections_GetsBySectionId(string sectionId) {
             // return the list of all SubSections by section id.
-            return SubSections.Where(s => s.Section.Equals(sectionId)).OrderBy(s => s.Name).ToList();
+            return SubSections.Where(s => s.Section.Equals(sectionId)).OrderBy(s => s.RopeNumber).ToList();
         }
 
         public SubSections SubSectionss_Get(string id) {
             // return a SubSectionsr by Id.
             return SubSections.FirstOrDefault(it => it.Id == id);
+        }
+
+        public SubSections SubSectionss_GetByName(string name) {
+            // return a SubSectionsr by Name.
+            return SubSections.FirstOrDefault(it => it.Name == name);
         }
 
         #endregion

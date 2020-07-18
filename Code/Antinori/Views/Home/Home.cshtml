@@ -1,25 +1,22 @@
 ﻿@{
     ViewBag.Title = "Titolo";
     Layout = "~/Views/Shared/LayoutPublic.cshtml";
-}
 
+}
+@using System.Linq
 <!-- start banner Area -->
 <section class="banner-area" id="home">
     <div class="container">
         <div class="row fullscreen d-flex align-items-center justify-content-start">
             <div class="col-lg-6 banner-right">
-                @*<img class="img-fluid" src="~/Content/Public/img/header-img.png">*@
                 <img class="img-fluid" src="~/Content/img/Home/@ViewBag.page.Path">
             </div>
             <div class="banner-content col-lg-6">
-                <h5 class="text-white text-uppercase">Author: Travor James</h5>
-                <h1 class="text-uppercase" style="font-size: 65px;">
-                    @ViewBag.page.Title
-                </h1>
+                <h5 class="text-white text-uppercase">@ViewBag.page.Title</h5>
                 <p class="text-white pt-20 pb-20">
                     @ViewBag.page.Text
                 </p>
-                <a href="@ViewBag.page.Link" target="_blank" class="primary-btn text-uppercase">Leggi</a>
+                <a href="@Url.Action("P_TranslatePageWithAuth","Book")?pageId=@ViewBag.page.Link" target="_blank" class="primary-btn text-uppercase">Leggi</a>
             </div>
         </div>
     </div>
@@ -54,64 +51,64 @@
 <!-- End about Area -->
 <!-- Start fact Area -->
 <section class="fact-area relative section-gap" id="fact" style="background: url('../../Content/Public/img/1.jpg') center; background-size: cover">
-                <div class="overlay overlay-bg" style="z-index: 0!important; background:rgba(0, 0, 0, 0.55) "></div>
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                        <div class="menu-content pb-40 col-lg-8">
-                            <div class="title text-center">
-                                <h1 class="mb-10">Some Features that Made us Unique</h1>
-                                <p>Who are in extremely love with eco friendly system.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-    <!-- End fact Area -->
-    <!-- Start counter Area -->
-    <section class="counter-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-counter">
-                        <h1 class="counter">@ViewBag.numberOfPages</h1>
-                        <p>Pagine</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-counter">
-                        <h1 class="counter">@ViewBag.numberOfBooks</h1>
-                        <p>Opere</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-counter">
-                        <h1 class="counter">@ViewBag.numberOfNormalUsers</h1>
-                        <p>Trascrittori</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-counter">
-                        <h1 class="counter">@ViewBag.numberOfTranscription</h1>
-                        <p>Trascrizioni Sottomesse</p>
-                    </div>
+    <div class="overlay overlay-bg" style="z-index: 0!important; background:rgba(0, 0, 0, 0.5) "></div>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-40 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">Some Features that Made us Unique</h1>
+                    <p>Who are in extremely love with eco friendly system.</p>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- end counter Area -->
-    <!-- Start price Area -->
-    <section class="price-area section-gap" id="price">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="menu-content pb-60 col-lg-8">
-                    <div class="title text-center">
-                        <a target="_blank" href="@Url.Action("P_ReadBooks","Book")">
-                            <h1 class="mb-10">Inizia a trascrivere ora!</h1>
-                        </a>
-                        <p>Non vediamo l'ora di ricevere le tue trascrizioni.</p>
-                    </div>
+    </div>
+</section>
+<!-- End fact Area -->
+<!-- Start counter Area -->
+<section class="counter-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="single-counter">
+                    <h1 class="counter">@ViewBag.numberOfPages</h1>
+                    <p>Facsimili</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-counter">
+                    <h1 class="counter">@ViewBag.numberOfBooks</h1>
+                    <p>Opere</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-counter">
+                    <h1 class="counter">@ViewBag.numberOfNormalUsers</h1>
+                    <p>Trascrittori</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-counter">
+                    <h1 class="counter">@ViewBag.numberOfTranscription</h1>
+                    <p>Trascrizioni Sottomesse</p>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- End price Area -->
+    </div>
+</section>
+<!-- end counter Area -->
+<!-- Start price Area -->
+<section class="price-area section-gap" id="price">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-8">
+                <div class="title text-center">
+                    <a target="_blank" href="@Url.Action("P_ReadBooks","Book")">
+                        <h1 class="mb-10">Inizia a trascrivere ora!</h1>
+                    </a>
+                    <p>Non vediamo l'ora di ricevere le tue trascrizioni.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End price Area -->

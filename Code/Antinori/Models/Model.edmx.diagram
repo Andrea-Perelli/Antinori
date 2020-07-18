@@ -25,6 +25,10 @@
         <EntityTypeShape EntityType="AntinoriModel.Attachments" Width="1.5" PointX="9.375" PointY="7.125" />
         <AssociationConnector Association="AntinoriModel.FK_Attachments_Pages" />
         <EntityTypeShape EntityType="AntinoriModel.FrontSlider" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AntinoriModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="12.875" />
+        <EntityTypeShape EntityType="AntinoriModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="10.375" />
+        <AssociationConnector Association="AntinoriModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AntinoriModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

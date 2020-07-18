@@ -20,6 +20,8 @@ namespace Antinori.Models
             this.AspNetRoles = new HashSet<AspNetRoles>();
             this.Transcriptions = new HashSet<Transcriptions>();
             this.Transcriptions1 = new HashSet<Transcriptions>();
+            this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
+            this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
         }
     
         public string Id { get; set; }
@@ -46,5 +48,9 @@ namespace Antinori.Models
         public virtual ICollection<Transcriptions> Transcriptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transcriptions> Transcriptions1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
     }
 }

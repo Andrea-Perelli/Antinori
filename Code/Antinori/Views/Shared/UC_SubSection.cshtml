@@ -14,9 +14,14 @@
             <p style="font-weight: bold">Sottosezione @index</p>
             <div class="row">
                 <div class="col-md-4">
-                    <small class="required">Nome</small><br />
+                    <small class="required">Manoscritto</small><br />
                     @{var name = parent + "subName" + i.ToString();}
                     <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
+                </div>
+                <div class="col-md-2">
+                    <small class="required">Numero di Corda</small><br />
+                    @{var name3 = parent + "subRope" + i.ToString();}
+                    <input type="number" id="@name3" name="@name3" value="@Model[i].RopeNumber" class="form-control" required />
                 </div>
                 <div class="col-md-6">
                     <small>Descrizione</small><br>
@@ -34,6 +39,11 @@
                     <small class="required">Nome</small><br />
                     @{var name = ViewBag.Parent + "subName" + i.ToString();}
                     <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
+                </div>
+                <div class="col-md-2">
+                    <small class="required">Numero di Corda</small><br />
+                    @{var name3 = ViewBag.Parent+ "subRope" + i.ToString();}
+                    <input type="number" id="@name3" name="@name3" value="@Model[i].RopeNumber" class="form-control" required />
                 </div>
                 <div class="col-md-6">
                     <small>Descrizione</small><br>

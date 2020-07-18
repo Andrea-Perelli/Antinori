@@ -48,7 +48,7 @@
                         processData: false,
                         success: function (risultato) {
                             if (risultato.riuscita) {
-                                SUCCESS_function("Inserita nuova opera", "Complimenti!  L'operazione di inserimento si è conclusa con successo!", "vai('@Url.Action("Index","Books")')", "OK");
+                                SUCCESS_function("Inserita nuova opera", "Complimenti!  L'operazione di inserimento si è conclusa con successo!", "vai('@Url.Action("Index","Book")')", "OK");
                             }
                             else {
                                 DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare", "", "OK");

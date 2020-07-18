@@ -36,5 +36,7 @@ namespace Antinori.Models
         public virtual DbSet<Filters> Filters { get; set; }
         public virtual DbSet<Attachments> Attachments { get; set; }
         public virtual DbSet<FrontSlider> FrontSlider { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
     }
 }

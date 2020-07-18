@@ -180,7 +180,11 @@
                 <nav id="nav-menu-container" style="margin-right: 0!important;">
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="@Url.Action("Home","Home")">Home</a></li>
-                        <li><a href="@Url.Action("P_ReadBooks","Book")">Leggi Opere</a></li>
+                        <li><a href="@Url.Action("P_ReadBooks","Book")">Antinori</a>
+                            <ul>
+                                <li><a href="@Url.Action("P_Fonti","Book")">Fonti</a></li>
+                            </ul>
+                        </li>
                         <li class="menu-has-children">
                             <a href="#">Guide</a>
                             <ul>
@@ -255,8 +259,8 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <a href="@Url.Action("ContestoProgetto","Home")">
-                            <h6>Contesto Progetto</h6>
+                        <a href="@Url.Action("ChiSiamo","Home")">
+                            <h6>Chi Siamo</h6>
                         </a>                        
                         <p class="footer-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -311,13 +315,39 @@
     <script src="~/Scripts/jquery.twbsPagination.min.js"></script>
     <script src="~/Scripts/my.js"></script>
 
-
     <script>
-
         var previousIdSelected = "";
 
         $(document).ready(function () {
+            // we want to change the row to be as a menu.
+            $(window).scroll(function () {
 
+                if ($("#MyFixedHeader").length) {
+
+                    if ($(this).scrollTop() <= 0) {
+                        // we are to the top: set css as normal.
+                        $("#MyFixedHeader").css('background-color', '#fff');
+                        $("#MyFixedHeader").css('display', 'flex');
+                        // remove data.
+                        $("#MyFixedHeader").css("position", "");
+                        $("#MyFixedHeader").css("width", "");
+                        $("#MyFixedHeader").css("top", "");
+
+                        $("#myText").css('color', '#222222');
+
+                    }
+                    else {
+                        // we are scrolling.
+                        $("#MyFixedHeader").css('background-color', 'black');
+                        $("#MyFixedHeader").css('width', '100%');
+                        $("#MyFixedHeader").css('position', 'fixed');
+                        var menuHeight = $("#header").outerHeight(true);
+                        $("#MyFixedHeader").css("top", menuHeight);
+
+                        $("#myText").css('color', 'white');
+                    }
+                }
+            });
         });
 
         $("#Profession").change(function () {
@@ -431,6 +461,92 @@
               }
         }
 
+        function SearchPage() {
+            // retrieve page and show it.
+
+            // clear advanced search filters.
+            $('#filters').empty();
+
+            // reset pagination.
+            $('#pagination').empty();
+            $('#pagination').removeData("twbs-pagination");
+            $('#pagination').unbind("page");
+
+            // retrieve page number and section.
+            var pNumber = $("#pageToSearch").val();
+            
+
+            // if we arrived here the page exists.
+            var selectedSection = previousIdSelected;
+            if (selectedSection) {
+                // if the page is empty.
+                if (!pNumber) {
+                    $("#errorModal").show();
+                    return;
+                }
+                var url = '@Url.Action("P_SearchedPagesByNumberAndName", "Book")' + "?pageNumber=" + pNumber + "&subSectionName=" + selectedSection;
+                    // show the refresher.
+                    REFRESH_show("CONTENT_Refresh");
+                    $.getJSON(url,
+                        function (data) {
+                            // set data.
+                            $("#pages").html(data);
+                            // hide the refresher.
+                            REFRESH_hide("CONTENT_Refresh");
+                        });
+            }
+            else {               
+                var url = '@Url.Action("P_SearchedPages", "Book")' + "?pageNumber=" + pNumber;
+                // show the refresher.
+                REFRESH_show("CONTENT_Refresh");
+                $.getJSON(url,
+                    function (data) {
+                        // set data.
+                        $("#pages").html(data);
+                        // hide the refresher.
+                        REFRESH_hide("CONTENT_Refresh");
+                    });
+                
+            }
+
+
+    }
+
+        function SearchPageBySub(subsectionId) {
+            var pageNumber = $("#pageToSearch").val();
+            // if it is not empty.
+            if (pageNumber) {
+
+                // check if the page exists.
+                var url = '@Url.Action("PageExists", "Book")' + "?pageNumber=" + pageNumber + "&subsectionId=" + subsectionId;
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    contentType: false,
+                    processData: false,
+                    success: function (risultato) {
+                        REFRESH_hide("CONTENT_Refresh");
+                        if (risultato) {
+                            // set view.
+                            var url2 = '@Url.Action("P_TranslateSearchedPageWithAuth", "Book")' + "?pageNumber=" + pageNumber + "&subsectionId=" + subsectionId;
+                            window.location.href = url2;
+                        }
+                        else {
+                            // set error.
+                            $("#errorModal").show();
+                        }
+                    },
+                    error: function () {
+                        // set error.
+                        $("#errorModal").show();
+                    }
+                });
+
+
+
+            }
+        }
+
         function ShowOpera(bookId) {
             // shhow opera composition.
 
@@ -488,6 +604,7 @@
                     $("#sub_" + previousIdSelected).css("background-color", "white");
 
                     subSectionName = subSectionName.replace(".", "\\.");
+                    subSectionName = subSectionName.replace(" ", "\\ ");
 
                     // select new.
                     $("#sub_" + subSectionName).css("background-color", "wheat");
