@@ -10,7 +10,7 @@ namespace Antinori.Controllers {
     public class BookController : ApplicationController {
 
         // number of pages to show inside read opera page.
-        private double numberOfPageToShow = 9.0;       
+        //private double numberOfPageToShow = 9.0;       
 
         [Authorize(Roles = "Admin")]
         public JsonResult Add() {
@@ -288,7 +288,7 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
-        public JsonResult P_PagesByFilters(string filters, string page) {
+        public JsonResult P_PagesByFilters(string filters, string page, int numberOfPageToShow) {
             // return the subsections page list view.
 
             // split filters.
@@ -297,14 +297,14 @@ namespace Antinori.Controllers {
             List<Pages> pages = null;
 
             // when we clicked on the pagination. 
-            pages = this.Dc.Pages_GetFirstNByFilterNameListAndIndex(fs, (int)numberOfPageToShow, Convert.ToInt32(page));
+            pages = this.Dc.Pages_GetFirstNByFilterNameListAndIndex(fs, numberOfPageToShow, Convert.ToInt32(page));
 
             // return the partial view containing the UC_SectionSubsections page.
             return Json(GetRenderPartialView(this, "UC_SubsectionPages", pages), JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
-        public JsonResult P_PagesNumberByFilters(string filters) {
+        public JsonResult P_PagesNumberByFilters(string filters, double numberOfPageToShow) {
             // return the number of page to show for advanced search.
 
             int tabs = 0;
@@ -315,7 +315,7 @@ namespace Antinori.Controllers {
             int p = this.Dc.Pages_GetByFilterNameListNumber(fs);
 
             if (p > 0) {
-                double temp = ((double)p) / this.numberOfPageToShow;
+                double temp = ((double)p) / numberOfPageToShow;
                 tabs = (int)Math.Ceiling(temp);
             }
 
@@ -347,6 +347,8 @@ namespace Antinori.Controllers {
         [AllowAnonymous]
         public JsonResult P_SearchedPagesByNumberAndName(int pageNumber, string subSectionName) {
             // return the searched pages (by number) and subsection name.
+
+            subSectionName = subSectionName.Replace("\\", "");
 
             List<Pages> pages = new List<Pages>();
             Pages p = null;
@@ -380,11 +382,11 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
-        public JsonResult P_SubsectionPages(string subSectionId, string page) {
+        public JsonResult P_SubsectionPages(string subSectionId, string page, int numberOfPageToShow) {
             // return the subsections page list view.
 
             List<Pages> pages = null;
-           
+
             // when we clicked on the pagination. 
             pages = this.Dc.Pages_GetFirstNBySubSectionAndIndex(subSectionId, (int)numberOfPageToShow, Convert.ToInt32(page));
 
@@ -393,7 +395,7 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
-        public JsonResult P_SubsectionPagesNumber(string subSectionId) {
+        public JsonResult P_SubsectionPagesNumber(string subSectionId, double numberOfPageToShow) {
             // return the number of page to show.
             
             int tabs = 0; 
@@ -401,7 +403,7 @@ namespace Antinori.Controllers {
             SubSections s = this.Dc.SubSectionss_Get(subSectionId);
 
             if(s != null) {
-                double temp = ((double)s.Pages.Count) / this.numberOfPageToShow;
+                double temp = ((double)s.Pages.Count) / numberOfPageToShow;
                 tabs = (int) Math.Ceiling(temp);
             }
 
