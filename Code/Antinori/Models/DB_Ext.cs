@@ -187,10 +187,28 @@ namespace Antinori.Models {
             // return the list of all books.
             return Books.ToList();
         }
+        public List<Books> Books_Gets(bool includeSources) {
+            // return the list of all books.
+            if (includeSources) {
+                return Books.ToList();
+            }
+            return Books.Where( b => b.IsSource == false).ToList();
+        }
+
+        public List<Books> Books_GetsBySource(string sourceId) {
+            // return the list of all books source of the given one.
+            return Books.Where(b => b.Source != null && b.Source == sourceId).ToList();
+        }
 
         public Books Books_Get(string id) {
             // return a Books by Id.
             Books book = Books.FirstOrDefault(it => it.Id == id);
+            return book;
+        }
+
+        public Books Books_GetByTitle(string title) {
+            // return a Books by Title.
+            Books book = Books.FirstOrDefault(it => it.Title == title);
             return book;
         }
 

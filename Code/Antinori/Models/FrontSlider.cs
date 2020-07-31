@@ -21,5 +21,6 @@ namespace Antinori.Models
         public string Path { get; set; }
         public Nullable<int> Week { get; set; }
         public Nullable<int> Month { get; set; }
+        public string Style { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace Antinori.Controllers {
     public class BookController : ApplicationController {
@@ -182,6 +183,16 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_Book", book), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        public ActionResult Fonti() {
+            // get the antinori sources.
+            // retrieve Antinori.
+            Books antinori = this.Dc.Books_GetByTitle("Antinori");
+            // retrieve sources.
+            List<Books> books = this.Dc.Books_GetsBySource(antinori.Id);
+            return View("P_Sources", books);
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public JsonResult GetBooksInfo() {
             // return user info.
@@ -327,7 +338,7 @@ namespace Antinori.Controllers {
         public ActionResult P_ReadBooks() {
             // set the leggi opera view. 
             // retrieve books.
-            List<Books> books = this.Dc.Books_Gets();
+            List<Books> books = this.Dc.Books_Gets(includeSources: false);
             return View(books);
         }
 
