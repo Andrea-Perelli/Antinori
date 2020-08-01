@@ -174,13 +174,14 @@
             <div class="row align-items-center justify-content-between d-flex">
                 <div id="logo">
                     <a href="/Home/Home">
-                        <img src="~/Content/img/Logos/vector/default-monochrome-white.svg" alt="" title="" style="min-width: 200px;"/>
+                        <img src="~/Content/img/Logos/vector/default-monochrome-white.svg" alt="" title="" style="min-width: 200px;" />
                     </a>
                 </div>
                 <nav id="nav-menu-container" style="margin-right: 0!important;">
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="@Url.Action("Home","Home")">Home</a></li>
-                        <li><a href="">Opere</a>
+                        <li>
+                            <a href="">Opere</a>
                             <ul>
                                 <li><a href="@Url.Action("P_ReadBooks","Book")">Antinori</a></li>
                                 <li><a href="@Url.Action("Fonti","Book")">Fonti</a></li>
@@ -198,7 +199,7 @@
                 </nav><!-- #nav-menu-container -->
                 <nav id="nav-menu-container" style="float: right!important;">
                     <ul class="nav-menu">
-                        @if(User.Identity.IsAuthenticated) {
+                        @if (User.Identity.IsAuthenticated) {
                             <li class="menu-has-children" style="margin-left: 20px!important; float:right!important;">
                                 <a href="#">Benvento @User.Identity.Name</a>
                                 <ul>
@@ -262,7 +263,7 @@
                     <div class="single-footer-widget">
                         <a href="@Url.Action("ChiSiamo","Home")">
                             <h6>Chi Siamo</h6>
-                        </a>                        
+                        </a>
                         <p class="footer-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright &copy;
@@ -273,8 +274,8 @@
                 </div>
                 <div class="col-lg-5  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <a href="@Url.Action("Privacy","Home")"> 
-                        <h6 onclick="">Note Legali e Privacy</h6>
+                        <a href="@Url.Action("Privacy","Home")">
+                            <h6 onclick="">Note Legali e Privacy</h6>
                         </a>
                     </div>
                 </div>
@@ -311,7 +312,6 @@
     <script src="~/Content/Public/js/jquery.counterup.min.js"></script>
     <script src="~/Content/Public/js/mail-script.js"></script>
     <script src="~/Content/Public/js/main.js"></script>
-    @RenderSection("scripts", required: false)
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.twbsPagination.min.js"></script>
     <script src="~/Scripts/my.js"></script>
@@ -596,11 +596,6 @@
                             // show first subsection.
                             ShowSubsectionPages(subSectionId, subSectionName);
                     });
-
-
-                    
-
-                    
                     REFRESH_hide("CONTENT_Refresh");
             });
         }
@@ -796,6 +791,8 @@
         }
 
     </script>
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>
 

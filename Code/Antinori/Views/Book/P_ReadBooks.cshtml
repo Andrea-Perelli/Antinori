@@ -1,7 +1,7 @@
 ﻿@model List<Antinori.Models.Books>
 
 @{
-    ViewBag.Title = "Opere";
+    ViewBag.Title = "Antinori";
     Layout = "~/Views/Shared/LayoutPublic.cshtml";
 }
 
@@ -27,13 +27,13 @@
             <div class="menu-content pb-60 col-lg-8" style="padding-bottom: 30px!important;">
                 <div class="title text-center">
                     <h1 class="mb-10">@ViewBag.Title</h1>
-                    <p>Seleziona l'opera che vuoi leggere</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="active-tstimonial-carusel">
-                @foreach(var b in Model) {
+    </div>
+    <div class="row" style="margin-left: 4%; margin-right: 4%;">
+        <div class="col-3">
+            @foreach (var b in Model) {
                 <div class="single-testimonial item">
                     @{
                         string path = "";
@@ -42,27 +42,30 @@
                         path = b.PreviewImage.Split('\\').Last();
                         path = "/Pics/JPEG/" + path;
                     }
-
                     <img class="mx-auto" onclick="ShowOpera('@b.Id')" style="max-height: 350px!important;" src="@path" />
                     <p class="desc">
                         @b.Description
                     </p>
                     <h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>
                 </div>
-                }
-            </div>
+            }
+        </div>
+        <div class="col-9">
+            <section class="course-area section-gap" id="container" style=" position: absolute; bottom: 0; padding: 0;">
+                
+            </section>
         </div>
     </div>
 </section>
 <!-- End BOOKS Area -->
-
-<!-- Start container Area -->
-<section class="course-area section-gap" id="container" style="padding-top: 0!important; padding-bottom: 5px!important;">
-</section>
-<!-- End container Area -->
-
 <!-- Start subsections Area -->
 <section class="course-area section-gap" id="subsections" style="padding-top: 30px!important;">
-    
 </section>
 <!-- End subsections Area -->
+
+@section Scripts {
+    <script>
+
+        ShowOpera('be41c37a-11fb-44ea-b9a3-3b4298b487ba');
+    </script>
+}

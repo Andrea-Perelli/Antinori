@@ -3,14 +3,19 @@
 @{
     var title = "L'opera non ha nessuna sezione";
     if(Model.Count > 0) {
-        title = "Sezioni dell'opera: " + Model.FirstOrDefault().Books.Title;
+        if (Model.FirstOrDefault().Books.Title.Equals("Antinori")) {
+            title = "Sezioni";
+        }
+        else {
+            title = "Sezioni dell'opera: " + Model.FirstOrDefault().Books.Title;
+        }
     }
 }
 <div class="container" style="max-width: 1740px;">
     <div class="row d-flex justify-content-center">
         <div class="menu-content pb-60 col-lg-10" style="padding:0;">
             <div class="title text-center" >
-                <h4 class="mb-10">@title</h4>
+                <h4 class="mb-10" >@title</h4>
             </div>
         </div>
     </div>
@@ -20,7 +25,7 @@
                 <div class="single-course item" style="max-width: 200px!important; max-height: 150px!important; min-width: 200px!important; min-height: 150px!important; display: inline-block; margin: 7px!important; border: 3px solid #E0D3AF;" onclick="ShowSubsections('@s.Id')">
                     <div class="details" style="padding: 5px 10px 5px 10px;">
                         <a class="text-center" href="#!">
-                            <h5>@s.Name </h5>
+                            <h5 >@s.Name </h5>
                         </a>
                         @{ 
                             // prepare description text.
