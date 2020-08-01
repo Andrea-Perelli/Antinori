@@ -43,14 +43,11 @@
                         path = "/Pics/JPEG/" + path;
                     }
 
-                    <img class="mx-auto" style="max-height: 350px!important;" src="@path" />
+                    <img class="mx-auto" onclick="ShowOpera('@b.Id')" style="max-height: 350px!important;" src="@path" />
                     <p class="desc">
                         @b.Description
                     </p>
                     <h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>
-                    <p>
-                        scritto da @b.Author
-                    </p>
                 </div>
                 }
             </div>

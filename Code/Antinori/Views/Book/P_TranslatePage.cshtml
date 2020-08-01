@@ -62,7 +62,7 @@
                 else {
                     <i class="fa fa-arrow-right" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-140%,-50%);"></i>
                 }
-                <input type="number" id="pageToSearch" name="pageToSearch" placeholder="# Facsimile" class="form-control" style="width: 100px; min-height: 30px; max-height: 38px; padding: 0.3rem; font-size: 0.8rem!important; display: inline; border-radius: 0px!important;">
+                <input type="number" id="pageToSearch" name="pageToSearch" placeholder="# Facsimile" class="form-control" style="width: 100px; min-height: 30px; max-height: 38px; padding: 0.3rem; font-size: 0.8rem!important; display: inline; border-radius: 0px!important;" min="0">
                     <i onclick="SearchPageBySub('@Model.SubSection')" class="fa fa-check genric-btn info circle my-button" title="Cerca Facsimile" style="padding: 0 15px 0 15px; min-height: 30px; max-height: 38px; border-radius: 0px!important;">
                     </i>
                 </div>                
@@ -80,9 +80,7 @@
                 </h3>
             }
         </div>
-
-
-        </div>
+    </div>
 
     <!-- CONTENT ROW -->
     <div class="row" style="margin-right: 25px!important; margin-left: 25px!important; ">

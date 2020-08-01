@@ -297,7 +297,22 @@ namespace Antinori.Models {
 
         public FrontSlider FrontSlider_GetFromDate() {
             // return the image of the current date.
-            return FrontSlider.FirstOrDefault(f => f.Month == DateTime.Now.Month);
+
+            // calculate week number(1,2,3,4).
+            int weekNum = 1;
+            if(DateTime.Now.Day <= 8) {
+                weekNum = 1;
+            }
+            if (DateTime.Now.Day > 8 && DateTime.Now.Day <= 16) {
+                weekNum = 2;
+            }
+            if (DateTime.Now.Day > 16 && DateTime.Now.Day <= 24) {
+                weekNum = 3;
+            }
+            if (DateTime.Now.Day > 24 && DateTime.Now.Day <= 31) {
+                weekNum = 4;
+            }
+            return FrontSlider.FirstOrDefault(f => f.Month == DateTime.Now.Month && f.Week == weekNum);
         }
 
         #endregion
@@ -493,6 +508,12 @@ namespace Antinori.Models {
 
         #region Sections
 
+        public Sections Sections_Get(string id) {
+            // return a section by Id.
+            Sections section = Sections.FirstOrDefault(it => it.Id == id);
+            return section;
+        }
+
         public List<Sections> Sections_GetsByBookId(string bookId) {
             // return the list of all SubSections.
             return Sections.Where(s => s.Book.Equals(bookId)).ToList();
@@ -522,6 +543,11 @@ namespace Antinori.Models {
         public List<SubSections> Sections_GetsBySectionId(string sectionId) {
             // return the list of all SubSections by section id.
             return SubSections.Where(s => s.Section.Equals(sectionId)).OrderBy(s => s.RopeNumber).ToList();
+        } 
+        
+        public SubSections Sections_GetFirstBySectionId(string sectionId) {
+            // return the first subsection by section id.
+            return SubSections.Where(s => s.Section.Equals(sectionId)).OrderBy(s => s.RopeNumber).FirstOrDefault();
         }
 
         public SubSections SubSectionss_Get(string id) {

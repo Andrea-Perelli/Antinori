@@ -117,8 +117,8 @@
         }
         .myButton2:hover {
             color: white !important;
-            background: #c43240 !important;
-            border-color: #f53f51 !important;
+            background: #54391d !important;
+            border-color: #654321 !important;
         }
         .overlay{
             z-index: 50;
@@ -557,9 +557,6 @@
                         $("#errorModal").show();
                     }
                 });
-
-
-
             }
         }
 
@@ -592,6 +589,18 @@
                     // clear childs
                     $("#pages").html('');
 
+                    $.getJSON('@Url.Action("GetFirstSubsectionInfo","Book")' + "?sectionId=" + sectionId,
+                        function (model) {
+                            var subSectionId = model.id;
+                            var subSectionName = model.name;
+                            // show first subsection.
+                            ShowSubsectionPages(subSectionId, subSectionName);
+                    });
+
+
+                    
+
+                    
                     REFRESH_hide("CONTENT_Refresh");
             });
         }

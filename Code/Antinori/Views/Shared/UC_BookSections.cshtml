@@ -17,7 +17,7 @@
     <div class="row">
         <div class="active-course-carusel" style="margin-left: auto; margin-right: auto; display: flex;">
             @foreach(var s in Model.OrderBy( p=> p.ViewOrder)) {
-                <div class="single-course item" style="max-width: 200px!important; max-height: 150px!important; min-width: 200px!important; min-height: 150px!important; display: inline-block; margin: 7px!important; border: 3px solid red;" onclick="ShowSubsections('@s.Id')">
+                <div class="single-course item" style="max-width: 200px!important; max-height: 150px!important; min-width: 200px!important; min-height: 150px!important; display: inline-block; margin: 7px!important; border: 3px solid #E0D3AF;" onclick="ShowSubsections('@s.Id')">
                     <div class="details" style="padding: 5px 10px 5px 10px;">
                         <a class="text-center" href="#!">
                             <h5>@s.Name </h5>

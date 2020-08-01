@@ -9,8 +9,7 @@
                     <div class="">
                         <ul class="unordered-list">
                             @foreach (var sub in Model) {
-                                <a href="#!" onclick="ShowSubsectionPages('@sub.Id','@sub.Name')" style="color: black;">
-                                    
+                                <a href="#!" onclick="ShowSubsectionPages('@sub.Id','@sub.Name')" style="color: black;">                                    
                                     <li id="sub_@sub.Name" title="@sub.Description">@sub.Name</li>
                                 </a>
                             }
@@ -46,8 +45,8 @@
                     </div>
                     <div style="margin-top: 30px;">
                         <div class="form-group">
-                            <label class="ls text-uppercase mb-0">Cerca Facsimile</label>
-                            <input type="number" id="pageToSearch" name="pageToSearch" placeholder="Numero Facsimile" class="form-control" style="height: calc(2.05rem + 2px); width: 50%;">
+                            <label class="ls text-uppercase mb-0">Cerca Facsimile Per Numero</label>
+                            <input type="number" id="pageToSearch" name="pageToSearch" placeholder="Numero Facsimile" class="form-control" style="height: calc(2.05rem + 2px); width: 50%;" min="0">
                         </div>
                         <div class="form-group" >
                             <div class="button-group-area mt-40" style="display: table; margin: auto;">

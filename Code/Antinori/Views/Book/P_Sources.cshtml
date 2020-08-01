@@ -34,7 +34,7 @@
         <div class="row">
             <div style="display: inline-block; margin-left: auto; margin-right: auto; ">
                 @foreach(var b in Model) {
-                <div class="single-testimonial item" style="display: inline-block;">
+                <div class="single-testimonial item" style="display: inline-block; margin-right: 10px;">
                     @{
                         string path = "";
                     }
@@ -43,14 +43,11 @@
                         path = "/Pics/JPEG/" + path;
                     }
 
-                    <img class="mx-auto" style="max-height: 350px!important;" src="@path" />
+                    <img class="mx-auto" style="max-height: 350px!important;" src="@path" onclick="ShowOpera('@b.Id')" />
                     <p class="desc">
                         @b.Description
                     </p>
                     <h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>
-                    <p>
-                        scritto da @b.Author
-                    </p>
                 </div>
                 }
             </div>

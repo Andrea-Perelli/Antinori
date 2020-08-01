@@ -205,6 +205,16 @@ namespace Antinori.Controllers {
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        public JsonResult GetFirstSubsectionInfo(string sectionId) {
+            // return first subsection info.
+
+            SubSections s = this.Dc.Sections_GetFirstBySectionId(sectionId);
+
+            // return the partial view .
+            return Json(new { id = s.Id, name = s.Name }, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin, Editor")]
         public ActionResult Index() {
             // return the opere list view.           
