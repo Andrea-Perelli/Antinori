@@ -189,7 +189,12 @@ namespace Antinori.Controllers {
         public void Log_Insert(string rif_Id, string rif_Tabella, string operazioneTipo, bool operazioneRiuscita, string operazioneEsito, string dettagli1, string dettagli2, string dettagli3, string dettagli4) {
             Logs log = new Logs();
             log.Operazione_Data = DateTime.Now;
-            log.Operazione_Username = User.Identity.Name;
+            if(User != null) {
+                log.Operazione_Username = User.Identity.Name;
+            }
+            else {
+                log.Operazione_Username = System.Web.HttpContext.Current.User.Identity.Name;
+            }
             log.Operazione_Dettagli1 = dettagli1;
             log.Operazione_Dettagli2 = dettagli2;
             log.Operazione_Dettagli3 = dettagli3;

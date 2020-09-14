@@ -537,7 +537,7 @@ namespace Antinori.Models {
 
         public List<SubSections> SubSections_Gets() {
             // return the list of all SubSections.
-            return SubSections.ToList();
+            return SubSections.OrderBy(s => s.RopeNumber).ToList();
         }
 
         public List<SubSections> Sections_GetsBySectionId(string sectionId) {

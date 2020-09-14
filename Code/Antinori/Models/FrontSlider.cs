@@ -22,5 +22,6 @@ namespace Antinori.Models
         public Nullable<int> Week { get; set; }
         public Nullable<int> Month { get; set; }
         public string Style { get; set; }
+        public string Title2 { get; set; }
     }
 }

@@ -41,8 +41,9 @@ namespace Antinori.Controllers {
             catch (Exception ex) {
 
                 // set log.
-                //this.Log_Insert("", "AspNetUsers", "SEND EMAIL", true, ex.Message, "", "", "", "");
-           }
+                Log_Insert(this.Dc.AspNetUsers_Get_ByName(System.Web.HttpContext.Current.User.Identity.Name).Id, "AspNetUsers", "SEND EMAIL", false, ex.Message, "", "", "", "");
+
+            }
         }
 
     }

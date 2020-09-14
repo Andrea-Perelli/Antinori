@@ -104,6 +104,7 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="256" />
+          <Property Name="Title2" Type="nvarchar" MaxLength="256" />
           <Property Name="Link" Type="nvarchar" MaxLength="256" />
           <Property Name="Text" Type="nvarchar" MaxLength="256" />
           <Property Name="Path" Type="nvarchar" MaxLength="256" />
@@ -731,6 +732,7 @@
           <Property Name="Week" Type="Int32" />
           <Property Name="Month" Type="Int32" />
           <Property Name="Style" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -939,6 +941,7 @@
           <EntitySetMapping Name="FrontSlider">
             <EntityTypeMapping TypeName="AntinoriModel.FrontSlider">
               <MappingFragment StoreEntitySet="FrontSlider">
+                <ScalarProperty Name="Title2" ColumnName="Title2" />
                 <ScalarProperty Name="Style" ColumnName="Style" />
                 <ScalarProperty Name="Month" ColumnName="Month" />
                 <ScalarProperty Name="Week" ColumnName="Week" />

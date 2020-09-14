@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Titolo";
+    ViewBag.Title = "Home";
     Layout = "~/Views/Shared/LayoutPublic.cshtml";
 
 }
@@ -12,11 +12,13 @@
                 <img class="img-fluid" src="~/Content/img/Home/@ViewBag.page.Path" style="@ViewBag.page.Style">
             </div>
             <div class="banner-content col-lg-6">
-                <h5 class="text-white text-uppercase">@ViewBag.page.Title</h5>
-                <p class="text-white pt-20 pb-20">
+                <h5 class="text-white" style="text-align: left;">@ViewBag.page.Title</h5>
+                <br /> 
+                <h5 class="text-white" style="font-weight: 300!important; text-align: left;">@ViewBag.page.Title2</h5>
+                <p class="text-white pt-20 pb-20" style="text-align: right;">
                     @ViewBag.page.Text
                 </p>
-                <a href="@Url.Action("P_TranslatePageWithAuth","Book")?pageId=@ViewBag.page.Link" target="_blank" class="primary-btn text-uppercase">Leggi</a>
+                <a href="@Url.Action("P_TranslatePageWithAuth","Book")?pageId=@ViewBag.page.Link" target="_blank" class="primary-btn" style="padding-left: 15px!important; padding-right: 15px!important; line-height: 35px; float: right; text-transform: none;">Vedi</a>
             </div>
         </div>
     </div>

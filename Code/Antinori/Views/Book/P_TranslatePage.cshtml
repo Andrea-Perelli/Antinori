@@ -71,12 +71,12 @@
         <div class="row" style="width: 100%;">
             @if (Model.Title != null && Model.Title.Length > 0) {
                 <h3 style="margin-left: auto; margin-right: auto; padding: 6px;" id="myText">
-                    Pagina #@Model.NumericOrder - @Model.Title
+                    #@Model.NumericOrder <i>@Model.Title</i>
                 </h3>
             }
             else {
                 <h3 style="margin-left: auto; margin-right: auto; padding: 6px;" id="myText">
-                    Pagina #@Model.NumericOrder
+                    #@Model.NumericOrder
                 </h3>
             }
         </div>
@@ -93,15 +93,18 @@
 
             <div class="grid-container" style="display: grid; grid-template-columns: auto auto auto;">
 
-                <div class="grid-item"><b class="myB">Sezione:</b>&nbsp;@Model.SectionName</div>
-                <div class="grid-item"><b class="myB">Manoscritto:</b>&nbsp;@Model.SubSections.Name</div> <br />
+                <div class="grid-item"><b class="myB">Parte</b>&nbsp;<i>@Model.SectionName</i></div>
+                <div class="grid-item"><b class="myB">Manoscritto</b>&nbsp;<i>@Model.SubSections.Name</i></div> <br />
                 @{
                     string editor = "-";
                     if (Model.Editor != null && Model.Editor.Length > 1) {
                         editor = Model.Editor;
                     }
                 }
-                <div class="grid-item"><b class="myB">Mano:</b>&nbsp;@editor</div>
+                @if (!editor.Equals("-")) {
+                    <div class="grid-item"><b class="myB">Mano</b>&nbsp;<i>@editor</i></div>
+                }
+
                 @{
                     var filters = "";
                     foreach (var f in Model.Filters.ToList()) {
@@ -113,7 +116,9 @@
                         filters = "-";
                     }
                 }
-                <div class="grid-item"><b class="myB">Filtri:</b>&nbsp;@filters</div>
+                @if (!filters.Equals("-")) {
+                    <div class="grid-item"><b class="myB">Filtri</b>&nbsp;<i>@filters</i></div>
+                }
 
             </div>
             <div class="row">
@@ -126,7 +131,9 @@
                         description = Model.Description;
                     }
                 }
-                <div class="grid-item" style="padding: 0px;"><b class="myB">Note:</b>&nbsp;@description</div>
+                @if (!description.Equals("-")) {
+                    <div class="grid-item" style="padding: 0px;"><b class="myB">Note</b>&nbsp;@description</div>
+                }
             </div>
             <!-- BUTTONS ROWS -->
             <div class="row" style="padding-bottom: 20px; ">

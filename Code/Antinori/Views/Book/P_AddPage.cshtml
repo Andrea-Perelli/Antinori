@@ -74,78 +74,87 @@ else {
         @Html.HiddenFor(p => p.SubSection)
         @Html.HiddenFor(p => p.BookTitle)
 
-        <div>
-            <div class="row">
-                <div class="col-md-6">
-                    <small class="required">Titolo</small><br />
-                    <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" />
-                </div>
-                <div class="col-md-4">
-                    <small class="required">Filtri</small><br />
-                    @{var filters = "";
-                        foreach(var f in ViewBag.Filters) {
-                            filters = filters + ";" + f.Name;
-                        }
-                        filters = filters.TrimEnd(';');
-                        filters = filters.TrimStart(';');
-                    }
-                    <input type="text" id="Filters2" name="Filters2" value="@filters" class="form-control" placeholder="Inserisci i filtri fra ;" />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <small class="required">Numero di pagina</small><br />
-                    <input type="number" id="NumericOrder" name="NumericOrder" value="@Model.NumericOrder" class="form-control" required />
-                </div>
-
-                <div class="col-md-4">
-                    <small class="required">Numero di pagina completo</small><br />
-                    <input type="text" id="CompleteOrder" name="CompleteOrder" value="@Model.CompleteOrder" class="form-control" required />
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <small>Descrizione</small><br>
-                    <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
-                </div>
-
-                <div class="col-md-6">
-                    <small class="required">Mano</small><br />
-                    <input type="text" id="Editor" name="Editor" value="@Model.Editor" class="form-control" />
-                </div>
-            </div>
-
-            <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
-                <div class="col-md-5" style=" margin-right:10px!important;">
-                    <small>JPEG</small><br />
-                    @{var path = Model.PhotoPath.Split('\\').Last();
-                        path = "/Pics/JPEG/" + path;
-                    }
-                    <img src="@path" alt="JPEG" style="max-height: 400px!important;">
-                </div>
-                <div class="col-md-5">
-                    <small>Tiff</small><br />
-
-                    @{var path2 = Model.BigPhotoPath.Split('\\').Last();
-                        path2 = "/Pics/Tiff/" + path2.Replace("jpg", "tiff");
-                    }
-                    <img src="@path2" alt="Tiff" style="max-height: 400px!important;">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <small>Foto </small><br />
-                    <input type="file" id="PhotoPath1" name="PhotoPath1" value="" class="form-control">
-                </div>
-
-                <div class="col-md-4">
-                    <small>Foto Tiff</small><br />
-                    <input type="file" id="BigPhotoPath1" name="BigPhotoPath1" value="" class="form-control">
-                </div>
-            </div>
-            <br />
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <small class="required">Titolo</small><br />
+            <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" />
         </div>
+        <div class="col-md-4">
+            <small class="required">Filtri</small><br />
+            @{var filters = "";
+                foreach (var f in ViewBag.Filters) {
+                    filters = filters + ";" + f.Name;
+                }
+                filters = filters.TrimEnd(';');
+                filters = filters.TrimStart(';');
+            }
+            <input type="text" id="Filters2" name="Filters2" value="@filters" class="form-control" placeholder="Inserisci i filtri fra ;" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <small class="required">Numero di pagina</small><br />
+            <input type="number" id="NumericOrder" name="NumericOrder" value="@Model.NumericOrder" class="form-control" required />
+        </div>
+
+        <div class="col-md-4">
+            <small class="required">Numero di pagina completo</small><br />
+            <input type="text" id="CompleteOrder" name="CompleteOrder" value="@Model.CompleteOrder" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <small>Descrizione</small><br>
+            <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
+        </div>
+
+        <div class="col-md-6">
+            <small class="required">Mano</small><br />
+            <input type="text" id="Editor" name="Editor" value="@Model.Editor" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="col-md-5" style=" margin-right:10px!important;">
+            <small>JPEG</small><br />
+            @{var path = Model.PhotoPath.Split('\\').Last();
+                path = "/Pics/JPEG/" + path;
+            }
+            <img src="@path" alt="JPEG" style="max-height: 400px!important;">
+        </div>
+        <div class="col-md-5">
+            <small>Tiff</small><br />
+
+            @{var path2 = Model.BigPhotoPath.Split('\\').Last();
+                path2 = "/Pics/Tiff/" + path2.Replace("jpg", "tiff");
+            }
+            <img src="@path2" alt="Tiff" style="max-height: 400px!important;">
+        </div>
+    </div>
+    <div class="row" style="margin-top: 5px;">
+        <div class="col-md-6" style=" margin-right:2px!important;">
+            <a href="@path" title="Download Jpeg" download>
+                <button class="btn btn-primary" type="button">
+                    Download &nbsp;
+                </button>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <small>Foto </small><br />
+            <input type="file" id="PhotoPath1" name="PhotoPath1" value="" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+            <small>Foto Tiff</small><br />
+            <input type="file" id="BigPhotoPath1" name="BigPhotoPath1" value="" class="form-control">
+        </div>
+    </div>
+    <br />
+</div>
     }
 }

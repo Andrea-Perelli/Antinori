@@ -22,9 +22,9 @@
             </div>
             <div class="col-md-3">
                 <small class="required">In data</small><br />
-                @{ 
+                @{
                     string d = "";
-                    if(Model.ProposedDate.HasValue) {
+                    if (Model.ProposedDate.HasValue) {
                         d = Model.ProposedDate.Value.ToString("yyyy-MM-ddThh:mm");
                     }
                 }
@@ -40,7 +40,7 @@
             </div>
 
             <div class="col-md-4">
-                @if(Model.IsApproved) {
+                @if (Model.IsApproved) {
                     <small class="required">Da</small><br />
                     <input type="text" id="" name="" value="@Model.AspNetUsers1.UserName" class="form-control" readonly />
                 }
@@ -59,6 +59,15 @@
             <div class="col-md-5">
                 <small class="required">TEI</small><br />
                 <textarea id="TEI" name="TEI" value="@Model.TEI" class="form-control" style="min-height: 300px">@Model.TEI</textarea>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 5px;">
+            <div class="col-md-6" style=" margin-right:2px!important;">
+                <a href="@path" title="Download Jpeg" download>
+                    <button class="btn btn-primary" type="button">
+                        Download &nbsp;
+                    </button>
+                </a>
             </div>
         </div>
         <br />

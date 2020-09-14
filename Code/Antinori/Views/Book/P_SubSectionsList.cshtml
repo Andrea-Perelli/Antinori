@@ -118,6 +118,7 @@
                     $("#CONTENT_SUBSECTIONS").html(data);
                     // set the table name as parameter: DataTables_Table_0.
                     $("#DataTables_Table_0").DataTable({
+                        "aaSorting": [],
                         dom: 'Bfrtip',
                         language: DataTablesLanguage,
                         responsive: true,
@@ -190,7 +191,7 @@
                     REFRESH_hide("CONTENT_Refresh");
                     $("#CONTENT_ID").css({ width: "150%" });
 
-                    MODAL_function("Modifica Pagina", data, "SavePage()", "Salva", "", "Annulla", "");
+                    MODAL_function("Modifica Facsimile", data, "SavePage()", "Salva", "", "Annulla", "");
                 });
         }
 
@@ -305,7 +306,8 @@
                         columnDefs: [
                             { className: "desktop", targets: [4, 5] },  // x > 1024
                             { className: "all", targets: [0, 1, 2, 3] } // for each width
-                        ]
+                        ],
+                        "order": [[2, "asc"]]
                     });
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
