@@ -4,11 +4,11 @@
     <table id="DataTables_Table_0" class="table dataTable table-hover">
         <thead>
             <tr>
-                <th style="width: 100px">Titolo</th>
-                <th style="width: 100px">Autore</th>
-                <th style="width: 150px">Descrizione</th>
-                <th style="width: 100px">Num. Sezioni</th>
-                <th style="width: 100px">Num. Sotto-Sezioni</th>
+                <th style="width: 30px">Titolo</th>
+                <th style="width: 30px">Autore</th>
+                <th style="width: 100px">Descrizione</th>
+                <th style="width: 30px">Num. Sezioni</th>
+                <th style="width: 30px">Num. Sotto-Sezioni</th>
 
                 <th style="width: 100px"> </th>
             </tr>
@@ -20,7 +20,7 @@
             <tr>
                 <td>@item.Title</td>
                 <td>@item.Author</td>
-                <td>@item.Description</td>
+                <td style="max-width:  100px!important;">@item.Description</td>
 
                 <td>
                     @item.Sections.Count

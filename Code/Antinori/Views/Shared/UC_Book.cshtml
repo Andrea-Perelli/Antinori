@@ -42,7 +42,12 @@
             <div class="col-md-6">
                 <small>Descrizione</small><br>
                 <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
+                @*<textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Description))
+            </textarea>*@
             </div>
+            <br />
+
         </div>
         <br />
         <br />

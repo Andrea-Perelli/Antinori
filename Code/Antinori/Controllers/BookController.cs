@@ -563,6 +563,7 @@ namespace Antinori.Controllers {
         [HttpPost]
         public JsonResult Save(Books book, FormCollection forms, HttpPostedFileBase PreviewImagePath) {
             // save. 
+            Log_Insert("", "BOOK", "PROVA", true, "arrivato all'inizio del controller.");
             OpEsitoModel op;
 
             if(book.Id != null) {

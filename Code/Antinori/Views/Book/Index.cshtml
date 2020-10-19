@@ -71,8 +71,8 @@
                         language: DataTablesLanguage,
                         responsive: true,
                         columnDefs: [
-                            { className: "desktop", targets: [4, 5] },  // x > 1024
-                            { className: "all", targets: [0, 1, 2, 3] } // for each width
+                            { className: "desktop", targets: [0, 1, 2, 4, 5] },  // x > 1024
+                            { className: "all", targets: [0, 1, 3] } // for each width
                         ]
                     });
                     // hide the refresher.
@@ -143,11 +143,21 @@
 
             if ($('#CONTENT_Book_Form').valid()) {
 
-
                 REFRESH_show("MODAL_Refresh");
                 var url = '@Url.Action("Save", "Book")';
                 // take the form content by id.
                 var data = new FormData($('#CONTENT_Book_Form').get(0));
+                var encoded;
+                // *** NOT WORKING ***
+                //var encoded = $("<div></div>").text(data.get("Description")).html();
+                //var encoded = encodeURIComponent(data.get("Description"));
+                //encoded = $('<textarea/>').text(data.get("Description")).html();
+
+                // set encoded text.
+                //data.set("Description", encoded);
+
+                alert(data.get("Description"));
+                //alert(encoded);
 
                 $.ajax({
                     type: "POST",
@@ -167,6 +177,8 @@
                 });
             }
         }
+
+
     </script>
 
 

@@ -208,6 +208,9 @@
                                     <li><a href="@Url.Action("LogOff","Account")">Logout</a></li>
                                 </ul>
                             </li>
+                            if (User.IsInRole("Admin") || User.IsInRole("Editor")) {
+                                <li><a href="@Url.Action("Index","Home")">Backoffice</a></li>
+                            }
                         }
                         else {
                             <li><a href="@Url.Action("Login","Account")">Login</a></li>

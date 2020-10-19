@@ -5,31 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="295510b56b0b46b0998987294b1ae08e" Name="Diagram1">
-        <EntityTypeShape EntityType="AntinoriModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AntinoriModel.AspNetUsers" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <AssociationConnector Association="AntinoriModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="AntinoriModel.Logs" Width="1.5" PointX="5.375" PointY="5.75" />
-        <EntityTypeShape EntityType="AntinoriModel.Books" Width="1.5" PointX="1.25" PointY="1.125" />
-        <EntityTypeShape EntityType="AntinoriModel.Pages" Width="1.5" PointX="8" PointY="0.5" />
-        <EntityTypeShape EntityType="AntinoriModel.Sections" Width="1.5" PointX="3.5" PointY="1.125" />
-        <EntityTypeShape EntityType="AntinoriModel.SubSections" Width="1.5" PointX="5.75" PointY="1.125" />
-        <EntityTypeShape EntityType="AntinoriModel.Transcriptions" Width="1.5" PointX="10.25" PointY="1" />
+        <EntityTypeShape EntityType="AntinoriModel.AspNetRoles" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="AntinoriModel.AspNetUsers" Width="1.5" PointX="7.5" PointY="0.75" />
+        <EntityTypeShape EntityType="AntinoriModel.Attachments" Width="1.5" PointX="9.75" PointY="12.5" />
+        <EntityTypeShape EntityType="AntinoriModel.Books" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AntinoriModel.Filters" Width="1.5" PointX="9.75" PointY="10" />
+        <EntityTypeShape EntityType="AntinoriModel.FrontSlider" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="AntinoriModel.Logs" Width="1.5" PointX="0.75" PointY="11.875" />
+        <EntityTypeShape EntityType="AntinoriModel.Pages" Width="1.5" PointX="7.5" PointY="7.25" />
+        <EntityTypeShape EntityType="AntinoriModel.Sections" Width="1.5" PointX="3" PointY="8" />
+        <EntityTypeShape EntityType="AntinoriModel.SubSections" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="AntinoriModel.Transcriptions" Width="1.5" PointX="9.75" PointY="5.75" />
+        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers" />
+        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers1" />
+        <AssociationConnector Association="AntinoriModel.FK_Attachments_Pages" />
         <AssociationConnector Association="AntinoriModel.FK_Sections_Sections" />
+        <AssociationConnector Association="AntinoriModel.FK_Filter_Pages" />
         <AssociationConnector Association="AntinoriModel.FK_Pages_SubSections" />
         <AssociationConnector Association="AntinoriModel.FK_Transcriptions_Pages" />
         <AssociationConnector Association="AntinoriModel.FK_SubSections_Sections" />
-        <EntityTypeShape EntityType="AntinoriModel.Filters" Width="1.5" PointX="10.25" PointY="4.5" />
-        <AssociationConnector Association="AntinoriModel.FK_Filter_Pages" />
-        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers" />
-        <AssociationConnector Association="AntinoriModel.FK_Transcriptions_AspNetUsers1" />
-        <EntityTypeShape EntityType="AntinoriModel.Attachments" Width="1.5" PointX="9.375" PointY="7.125" />
-        <AssociationConnector Association="AntinoriModel.FK_Attachments_Pages" />
-        <EntityTypeShape EntityType="AntinoriModel.FrontSlider" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="AntinoriModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="12.875" />
-        <EntityTypeShape EntityType="AntinoriModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="10.375" />
-        <AssociationConnector Association="AntinoriModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="AntinoriModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        </Diagram>
+        <AssociationConnector Association="AntinoriModel.AspNetUserRoles" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

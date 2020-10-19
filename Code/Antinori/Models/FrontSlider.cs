@@ -16,12 +16,12 @@ namespace Antinori.Models
     {
         public string Id { get; set; }
         public string Title { get; set; }
+        public string Title2 { get; set; }
         public string Link { get; set; }
         public string Text { get; set; }
         public string Path { get; set; }
-        public Nullable<int> Week { get; set; }
         public Nullable<int> Month { get; set; }
+        public Nullable<int> Week { get; set; }
         public string Style { get; set; }
-        public string Title2 { get; set; }
     }
 }
