@@ -104,11 +104,14 @@
         }
         .my-button-blue {
             border-radius: 5px !important;
+            color: white !important;
+            background: #654321 !important;
+            border-color: #654321 !important;
         }
         .my-button-blue:hover {
-            color: #38a4ff!important;
+            color: #654321 !important;
             background: white !important;
-            border-color: #38a4ff !important;
+            border-color: #654321 !important;
         }
         .myButton:hover {
             color: white !important;
@@ -146,11 +149,11 @@
             user-select: none; /* Prevent text selection */
         }
         /* Create the caret/arrow and style it */
-        .caret::before {
-            float: right;
-            display: inline-block;
-            font-size: 20px;
-        }
+            .caret::before {
+                float: right;
+                display: inline-block;
+                font-size: 20px;
+            }
         /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
         .caret-down::before {
             transform: rotate(180deg);
@@ -181,9 +184,9 @@
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="@Url.Action("Home","Home")">Home</a></li>
                         <li>
-                            <a href="">Opere</a>
+                            <a href="">Risorse</a>
                             <ul>
-                                <li><a href="@Url.Action("P_ReadBooks","Book")">Antinori</a></li>
+                                <li><a href="@Url.Action("P_ReadBooks","Book")">Manoscritti Antinoriani</a></li>
                                 <li><a href="@Url.Action("Fonti","Book")">Fonti</a></li>
                             </ul>
                         </li>
@@ -327,6 +330,7 @@
 
         var previousIdSelected = "";
         var previousIdSelected2 = "";
+        var previousSelectedSection = "";
 
         $(document).ready(function () {
             // we want to change the row to be as a menu.
@@ -585,6 +589,15 @@
 
             // show refresher.
             REFRESH_show("CONTENT_Refresh");
+
+            // clear previousSelectedSection.
+            $("#" + previousSelectedSection).css("background-color", "white");
+            // update var.
+            previousSelectedSection = sectionId;
+
+            // color selected section.
+            $("#" + sectionId).css("background-color", "wheat");
+
 
             $.getJSON('@Url.Action("P_SectionSubsections","Book")' + "?sectionId=" + sectionId,
                 function (model) {

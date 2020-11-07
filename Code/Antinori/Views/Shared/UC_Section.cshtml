@@ -14,22 +14,27 @@
 
         <p style="font-weight: bold">Sezione @index </p>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <small class="required">Nome</small><br />
                 @{var name = "name" + i.ToString();}
                 <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <small>Descrizione</small><br>
                 @{var name2 = "description" + i.ToString();}
                 <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px">@Model[i].Description</textarea>
+            </div>
+            <div class="col-md-4">
+                <small>Descrizione 2</small><br>
+                @{var name33 = "2description" + i.ToString();}
+                <textarea id="@name33" name="@name33" value="@Model[i].Description2" class="form-control" style="min-height: 100px">@Model[i].Description2</textarea>
             </div>
 
             @{var name4 = "subSectionBody" + i.ToString();}
             @{var name5 = "numberOfSubSection" + i.ToString();}
 
             <!-- CREATE CASE -->
-            @if(Model[i].Id == null || Model[i].Id.Length == 0) {
+            @if (Model[i].Id == null || Model[i].Id.Length == 0) {
                 <div class="col-md-2">
                     <small>Numero di sottosezioni</small>
                 </div>
@@ -51,10 +56,10 @@
             else {
                 <input style="visibility:hidden;" type="number" id="@name5" name="@name5" value="@Model[i].SubSections.Count" min="@Model[i].SubSections.Count" class="form-control" required />
 
-                 var css = "hidden";
-                 if(Model[i].SubSections.Count > 0) {
+                var css = "hidden";
+                if (Model[i].SubSections.Count > 0) {
                     css = "visible";
-                 }
+                }
                 <div class="box-body" style="border-left: solid 3px #ffa401; visibility: @css;">
                     @Html.Partial("UC_SubSection", Model[i].SubSections.OrderBy(p => p.Name).ToList())
 

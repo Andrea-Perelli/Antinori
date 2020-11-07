@@ -28,6 +28,7 @@ namespace Antinori.Models
         public string PreviewImage { get; set; }
         public Nullable<bool> IsSource { get; set; }
         public string Source { get; set; }
+        public string Description2 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sections> Sections { get; set; }

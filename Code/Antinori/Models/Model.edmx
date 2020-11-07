@@ -70,6 +70,7 @@
           <Property Name="PreviewImage" Type="nvarchar(max)" />
           <Property Name="IsSource" Type="bit" />
           <Property Name="Source" Type="nvarchar" MaxLength="128" />
+          <Property Name="Description2" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Filters">
           <Key>
@@ -132,6 +133,7 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Description2" Type="nvarchar(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Book" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ViewOrder" Type="int" />
@@ -462,6 +464,7 @@
           <Property Name="IsSource" Type="Boolean" />
           <Property Name="Source" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sections" Relationship="AntinoriModel.FK_Sections_Sections" FromRole="Books" ToRole="Sections" />
+          <Property Name="Description2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Filters">
           <Key>
@@ -534,6 +537,7 @@
           <Property Name="ViewOrder" Type="Int32" />
           <NavigationProperty Name="Books" Relationship="AntinoriModel.FK_Sections_Sections" FromRole="Sections" ToRole="Books" />
           <NavigationProperty Name="SubSections" Relationship="AntinoriModel.FK_SubSections_Sections" FromRole="Sections" ToRole="SubSections" />
+          <Property Name="Description2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SubSections">
           <Key>
@@ -729,6 +733,7 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="AntinoriModel.Books">
               <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Description2" ColumnName="Description2" />
                 <ScalarProperty Name="Source" ColumnName="Source" />
                 <ScalarProperty Name="IsSource" ColumnName="IsSource" />
                 <ScalarProperty Name="PreviewImage" ColumnName="PreviewImage" />
@@ -802,6 +807,7 @@
           <EntitySetMapping Name="Sections">
             <EntityTypeMapping TypeName="AntinoriModel.Sections">
               <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="Description2" ColumnName="Description2" />
                 <ScalarProperty Name="ViewOrder" ColumnName="ViewOrder" />
                 <ScalarProperty Name="Book" ColumnName="Book" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

@@ -146,18 +146,7 @@
                 REFRESH_show("MODAL_Refresh");
                 var url = '@Url.Action("Save", "Book")';
                 // take the form content by id.
-                var data = new FormData($('#CONTENT_Book_Form').get(0));
-                var encoded;
-                // *** NOT WORKING ***
-                //var encoded = $("<div></div>").text(data.get("Description")).html();
-                //var encoded = encodeURIComponent(data.get("Description"));
-                //encoded = $('<textarea/>').text(data.get("Description")).html();
-
-                // set encoded text.
-                //data.set("Description", encoded);
-
-                alert(data.get("Description"));
-                //alert(encoded);
+                var data = new FormData($('#CONTENT_Book_Form').get(0));               
 
                 $.ajax({
                     type: "POST",

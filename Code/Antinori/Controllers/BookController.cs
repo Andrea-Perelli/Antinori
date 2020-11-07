@@ -187,7 +187,7 @@ namespace Antinori.Controllers {
         public ActionResult Fonti() {
             // get the antinori sources.
             // retrieve Antinori.
-            Books antinori = this.Dc.Books_GetByTitle("Antinori");
+            Books antinori = this.Dc.Books_GetByTitle("Manoscritti antinoriani");
             // retrieve sources.
             List<Books> books = this.Dc.Books_GetsBySource(antinori.Id);
             return View("P_Sources", books);
@@ -563,7 +563,6 @@ namespace Antinori.Controllers {
         [HttpPost]
         public JsonResult Save(Books book, FormCollection forms, HttpPostedFileBase PreviewImagePath) {
             // save. 
-            Log_Insert("", "BOOK", "PROVA", true, "arrivato all'inizio del controller.");
             OpEsitoModel op;
 
             if(book.Id != null) {
@@ -601,6 +600,8 @@ namespace Antinori.Controllers {
                                 if(temp!= null) {
                                     temp.Name = forms["name" + index];
                                     temp.Description = forms["description" + index];
+                                    temp.Description2 = forms["2description" + index];
+
                                 }
 
                                 // retrieve number of sub sections.
@@ -721,7 +722,7 @@ namespace Antinori.Controllers {
             Pages fromDb = this.Dc.Pages_Get(page.Id);
 
             // if we have filters.
-            if(forms["Filters2"] != null) {
+            if(forms["Filters2"] != null && forms["Filters2"] != "") {
                 // remove items.
                 foreach(Filters ff in this.Dc.Filters_GetByPageId(fromDb.Id)) {
                     this.Dc.Filters_Delete(ff);
@@ -733,7 +734,7 @@ namespace Antinori.Controllers {
                     // add filter.
                     Filters filter = new Filters {
                         Id = Guid.NewGuid().ToString(),
-                        Name = f,
+                        Name = f.Trim(),
                         Page = page.Id
                     };
                     fromDb.Filters.Add(filter);
