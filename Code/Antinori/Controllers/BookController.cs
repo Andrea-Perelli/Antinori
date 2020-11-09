@@ -722,7 +722,7 @@ namespace Antinori.Controllers {
             Pages fromDb = this.Dc.Pages_Get(page.Id);
 
             // if we have filters.
-            if(forms["Filters2"] != null && forms["Filters2"] != "") {
+            if(forms["Filters2"] != null && forms["Filters2"].ToString() != "") {
                 // remove items.
                 foreach(Filters ff in this.Dc.Filters_GetByPageId(fromDb.Id)) {
                     this.Dc.Filters_Delete(ff);
@@ -744,11 +744,6 @@ namespace Antinori.Controllers {
                         return Json(false, JsonRequestBehavior.AllowGet);
                     }
                 }
-            }
-            else {
-                Log_Insert(page.Id, "Pages", "UPDATE", false, "Errore nel salvataggio");
-                op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore nel salvataggio" };
-                return Json(op, JsonRequestBehavior.AllowGet);
             }
             
             //map the two objects: it updates the DB object.
