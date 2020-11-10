@@ -2,7 +2,6 @@
 
 @{
     string path = "";
-    string text = "";
 }
 
     <div class="section-top-border" style="padding: 0!important;">
@@ -64,6 +63,12 @@
                         </div>
                     </div>
                 }
+            }
+            @if (Model.Count == 0) {
+                <p></p>
+                <p class="desc" style="text-align: center; font-weight: bold; margin-left: auto; margin-right: auto; margin-top: 10px;">
+                    Nessun Facsimile trovato!
+                </p>
             }
         </div>
     </div>

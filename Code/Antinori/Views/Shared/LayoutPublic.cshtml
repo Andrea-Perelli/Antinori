@@ -590,6 +590,9 @@
             // show refresher.
             REFRESH_show("CONTENT_Refresh");
 
+            // reset filters list.
+            filters = [];
+
             // clear previousSelectedSection.
             $("#" + previousSelectedSection).css("background-color", "white");
             // update var.
@@ -623,6 +626,9 @@
             REFRESH_show("CONTENT_Refresh");
 
             var numberOfPages = 1;
+
+            // reset filters list.
+            filters = [];
 
             // clear advanced search filters.
             $('#filters').empty();
@@ -696,6 +702,7 @@
 
             // if the user inserted a filter.
             if (insertedFilter != '') {
+                // update filter view.
                 var url = '@Url.Action("UpdateFilterView", "Book")' + "?filterName=" + insertedFilter;
                 // show refresher.
                 REFRESH_show("CONTENT_Refresh");
@@ -703,16 +710,18 @@
                     function (data) {
                         // if the filter exists.
                         if (data && data != "") {
-
                             // if the filter exists inside the array.
                             if (filters.indexOf(insertedFilter) > -1) {
 
                             }
                             else {
                                 $('#filters').append(data);
-
-                                // update current list of filters.
-                                filters.push(insertedFilter);
+                                // chek if the filter exists.
+                                if ($("#" + insertedFilter).length) {
+                                    // update current list of filters.
+                                    filters.push(insertedFilter);
+                                }
+                                
                             }
 
                             // update view.
@@ -722,7 +731,6 @@
                             $.getJSON('@Url.Action("P_PagesNumberByFilters", "Book")' + "?filters=" + filters + "&numberOfPageToShow=" + numOfElementsToShow,
                                 function (model) {
                                     numberOfPages = model;
-
                                     // retrieve pages for advanced search.
                                     $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&page=" + "1" + "&numberOfPageToShow=" + numOfElementsToShow,
                                         function (model) {

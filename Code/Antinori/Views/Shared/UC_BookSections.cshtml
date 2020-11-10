@@ -11,7 +11,7 @@
         <div class="active-course-carusel" style="margin-left: auto; margin-right: auto; display: flex;">
             @foreach(var s in Model.OrderBy( p=> p.ViewOrder)) {
                 <div id="@s.Id" class="single-course item" style="max-width: 200px!important; max-height: 150px!important; min-width: 200px!important; min-height: 150px!important; display: inline-block; margin: 7px!important; border: 3px solid #E0D3AF;" onclick="ShowSubsections('@s.Id')">
-                    <div class="details" style="padding: 5px 10px 5px 10px;">
+                    <div class="details" style="padding: 10px 10px 5px 10px; height:35%;">
                         <a class="text-center" href="#!">
                             <h5>@s.Name </h5>
                         </a>
@@ -28,9 +28,13 @@
                                 }
                             }
                         }
+                        
+                    </div>
+                    <div class="details">
                         <p class="text-center desc" style="margin-top: 5px!important;">
                             @desc
                         </p>
+
                         <p class="text-center desc" style="margin-top: 5px!important;">
                             @s.Description2
                         </p>
