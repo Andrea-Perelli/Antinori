@@ -19,15 +19,20 @@
                 @{var name = "name" + i.ToString();}
                 <input type="text" id="@name" name="@name" value="@Model[i].Name" class="form-control" required />
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <small>Descrizione</small><br>
                 @{var name2 = "description" + i.ToString();}
                 <textarea id="@name2" name="@name2" value="@Model[i].Description" class="form-control" style="min-height: 100px">@Model[i].Description</textarea>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <small>Descrizione 2</small><br>
                 @{var name33 = "2description" + i.ToString();}
                 <textarea id="@name33" name="@name33" value="@Model[i].Description2" class="form-control" style="min-height: 100px">@Model[i].Description2</textarea>
+            </div>
+            <div class="col-md-3">
+                <small>Descrizione 3</small><br>
+                @{var name333 = "3description" + i.ToString();}
+                <textarea id="@name333" name="@name333" value="@Model[i].Description2" class="form-control" style="min-height: 100px">@Model[i].Description3</textarea>
             </div>
 
             @{var name4 = "subSectionBody" + i.ToString();}

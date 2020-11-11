@@ -601,6 +601,7 @@ namespace Antinori.Controllers {
                                     temp.Name = forms["name" + index];
                                     temp.Description = forms["description" + index];
                                     temp.Description2 = forms["2description" + index];
+                                    temp.Description3 = forms["3description" + index];
 
                                 }
 
@@ -670,6 +671,9 @@ namespace Antinori.Controllers {
                             Id = Guid.NewGuid().ToString(),
                             Name = forms["name" + index],
                             Description = forms["description" + index],
+                            Description2 = forms["2description" + index],
+                            Description3 = forms["3description" + index],
+
                             Book = newBook.Id
                         };
                         int numberOfSubSection = Convert.ToInt16(forms["numberOfSubSection" + index]);

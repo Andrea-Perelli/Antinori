@@ -26,6 +26,7 @@ namespace Antinori.Models
         public string Book { get; set; }
         public Nullable<int> ViewOrder { get; set; }
         public string Description2 { get; set; }
+        public string Description3 { get; set; }
     
         public virtual Books Books { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
