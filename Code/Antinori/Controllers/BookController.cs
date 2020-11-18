@@ -59,7 +59,7 @@ namespace Antinori.Controllers {
                         // add filter.
                         Filters filter = new Filters {
                             Id = Guid.NewGuid().ToString(),
-                            Name = f,
+                            Name = f.Trim(),
                             Page = page.Id
                         };
                         if(this.Dc.Filters_Insert(filter) == -1) {
@@ -735,18 +735,25 @@ namespace Antinori.Controllers {
 
                 string[] filters = forms["Filters2"].TrimStart(';').TrimEnd(';').Split(';');
                 foreach(string f in filters) {
-                    // add filter.
-                    Filters filter = new Filters {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = f.Trim(),
-                        Page = page.Id
-                    };
-                    fromDb.Filters.Add(filter);
-                    if(this.Dc.Filters_Insert(filter) == -1) {
-                        // set log and return
-                        Log_Insert(page.Id, "Filters", "INSERT", false, "Errore nell'inserimento dell'entità.");
-                        return Json(false, JsonRequestBehavior.AllowGet);
+                    if(f.Trim() != "") {
+                        // add filter.
+                        Filters filter = new Filters {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = f.Trim(),
+                            Page = page.Id
+                        };
+                        fromDb.Filters.Add(filter);
+                        if (this.Dc.Filters_Insert(filter) == -1) {
+                            // set log and return
+                            Log_Insert(page.Id, "Filters", "INSERT", false, "Errore nell'inserimento dell'entità.");
+                            return Json(false, JsonRequestBehavior.AllowGet);
+                        }
+                        else {
+                            // set log.
+                            Log_Insert(page.Id, "Filters", "INSERT", true, "Inserito filtro con nome: " + filter.Name);
+                       }
                     }
+                    
                 }
             }
             
@@ -843,6 +850,7 @@ namespace Antinori.Controllers {
             return Json(op, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize(Roles = "Admin,Editor")]
         public JsonResult SaveAttachment(Attachments attachment, HttpPostedFileBase PhotoPath) {
             // save function,
 

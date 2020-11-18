@@ -272,7 +272,7 @@ namespace Antinori.Models {
         }
 
         public List<Filters> Filters_Gets() {
-            // return all the filter by Id.
+            // return all the filters.
             List<Filters> filters = Filters.ToList();
             return filters;
         }
@@ -352,7 +352,7 @@ namespace Antinori.Models {
         }
         public List<Pages> Pages_GetByFilterName(string filterName) {
             // return all Pages of a filter name.
-            List<Pages> pages = Filters.Where(p => p.Name.Equals(filterName)).Select( p=> p.Pages).ToList();
+            List<Pages> pages = Filters.Where(p => p.Name.ToLower().Equals(filterName.ToLower())).Select(p=> p.Pages).ToList();
             return pages;
         }
 

@@ -697,13 +697,13 @@
 
         function Apply() {
             // set url.
-            var insertedFilter = $('#filter').val();
-
+            var insertedFilter = $.trim($('#filter').val()).toLowerCase();
+            
             // clear input.
             $('#filter').val('');
-
             // if the user inserted a filter.
-            if (insertedFilter != '') {
+            if (insertedFilter.length > 0) {
+
                 // update filter view.
                 var url = '@Url.Action("UpdateFilterView", "Book")' + "?filterName=" + insertedFilter;
                 // show refresher.
@@ -714,16 +714,11 @@
                         if (data && data != "") {
                             // if the filter exists inside the array.
                             if (filters.indexOf(insertedFilter) > -1) {
-
                             }
                             else {
                                 $('#filters').append(data);
-                                // chek if the filter exists.
-                                if ($("#" + insertedFilter).length) {
-                                    // update current list of filters.
-                                    filters.push(insertedFilter);
-                                }
-                                
+                                // update current list of filters.
+                                filters.push(insertedFilter);                             
                             }
 
                             // update view.
@@ -809,10 +804,10 @@
 
         function RemoveFilter(name) {
             // remove filter.
-            filters = $(filters).not([name]).get();
+            filters = $(filters).not([name.toLowerCase()]).get();
             // remove html.
-            $('#' + name).remove();
-            $('#br_' + name).remove();
+            $('#' + name.toLowerCase()).remove();
+            $('#br_' + name.toLowerCase()).remove();
 
         }
 
