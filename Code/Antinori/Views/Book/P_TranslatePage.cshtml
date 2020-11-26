@@ -31,16 +31,16 @@
     <div class="row" id="MyFixedHeader" style="z-index: 1; margin-right: 0; margin-left: 0px;">
         <!-- SEARCH ROW-->
         <div class="row" style="width: 100%; z-index: 1; padding-top: 1%;">
-            <div class="col-sm" style="text-align: center; ">
+            <div class="col-sm" style="text-align: center;">
                 @if (ViewBag.previous != null) {
                     if (ViewBag.previous.Transcriptions.Count > 0) {
                         <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = ViewBag.previous.Id })">
-                            <i class="fa fa-arrow-left" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-260%,-50%);" title="Precedente"></i>
+                            <i class="fa fa-arrow-left" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-260%,-50%);  color: #654321;" title="Precedente"></i>
                         </a>
                     }
                     else {
                         <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = ViewBag.previous.Id })">
-                            <i class="fa fa-arrow-left" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-260%,-50%);" title="Precedente"></i>
+                            <i class="fa fa-arrow-left" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-260%,-50%); color: #654321;" title="Precedente"></i>
                         </a>
                     }
                 }
@@ -50,21 +50,30 @@
                 @if (ViewBag.after != null) {
                     if (ViewBag.after.Transcriptions.Count > 0) {
                         <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = ViewBag.after.Id })">
-                            <i class="fa fa-arrow-right" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-140%,-50%);" title="Successiva"></i>
+                            <i class="fa fa-arrow-right" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-140%,-50%); color: #654321;" title="Successiva"></i>
                         </a>
                     }
                     else {
                         <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = ViewBag.after.Id })">
-                            <i class="fa fa-arrow-right" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-140%,-50%);" title="Successiva"></i>
+                            <i class="fa fa-arrow-right" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-140%,-50%); color: #654321;" title="Successiva"></i>
                         </a>
                     }
                 }
                 else {
                     <i class="fa fa-arrow-right" style="font-size: 15px; position: absolute; top: 50%; transform: translate(-140%,-50%);"></i>
                 }
-                <input type="number" id="pageToSearch" name="pageToSearch" placeholder="# Facsimile" class="form-control" style="width: 100px; min-height: 30px; max-height: 38px; padding: 0.3rem; font-size: 0.8rem!important; display: inline; border-radius: 0px!important;" min="0">
-                    <i onclick="SearchPageBySub('@Model.SubSection')" class="fa fa-check genric-btn info circle my-button" title="Cerca Facsimile" style="padding: 0 15px 0 15px; min-height: 30px; max-height: 38px; border-radius: 0px!important;">
-                    </i>
+            <div style="display: inline-flex; background: white;">
+                <input type="number" id="pageToSearch" name="pageToSearch" placeholder="# Facsimile" class="form-control" style="width: 100px; min-height: 38px; max-height: 38px; padding: 0.3rem;
+        font-size: 0.8rem !important;
+        border-radius: 0px !important;" min="0">
+               
+                <i onclick="SearchPageBySub('@Model.SubSection')" class="fa fa-check genric-btn info circle my-button" title="Cerca Facsimile" style="        padding: 0 15px 0 15px;
+        min-height: 38px;
+        max-height: 38px;
+        border-radius: 0px !important;">
+                </i>
+            </div>
+                
                 </div>                
         </div>
             <!-- TITLE ROW-->

@@ -90,6 +90,11 @@
             border-color: initial;
             border-image: initial;
         }
+        .form-control:focus {
+            border-width: 2.5px;
+            border-color: #C0BEBE;
+            box-shadow: none;
+        }
         .row {
             display: flex;
             flex-wrap: wrap;
@@ -186,6 +191,7 @@
             color: white;
             background-color: #C0BEBE;
         }
+
     </style>
 </head>
 <body>
@@ -374,7 +380,7 @@
                         $("#MyFixedHeader").css('width', '100%');
                         $("#MyFixedHeader").css('position', 'fixed');
                         var menuHeight = $("#header").outerHeight(true);
-                        $("#MyFixedHeader").css("top", menuHeight);
+                        $("#MyFixedHeader").css("top", menuHeight -0.5);
 
                         $("#myText").css('color', 'white');
                     }
