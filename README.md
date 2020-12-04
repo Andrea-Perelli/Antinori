@@ -1,3 +1,3 @@
 # Manoscritti Antinoriani 
 
-Information technology and human sciences in the diffusion of handwritten sources.
+Web application with the aim to spread up handwritten sources and their collaborative TEI transcriptions.
