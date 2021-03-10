@@ -720,7 +720,6 @@
         function Apply() {
             // set url.
             var insertedFilter = $.trim($('#filter').val()).toLowerCase();
-            
             // clear input.
             $('#filter').val('');
             // if the user inserted a filter.
@@ -827,9 +826,23 @@
         function RemoveFilter(name) {
             // remove filter.
             filters = $(filters).not([name.toLowerCase()]).get();
-            // remove html.
-            $('#' + name.toLowerCase()).remove();
-            $('#br_' + name.toLowerCase()).remove();
+
+            // if the name has spaces
+            if (name.indexOf(' ') >= 0) {
+                // remove it with JS.
+                var element = document.getElementById(name.toLowerCase());
+                var element2 = document.getElementById("br_" + name.toLowerCase());
+
+                element.parentNode.removeChild(element);
+                element2.parentNode.removeChild(element2);
+
+            }
+            else {
+                // remove it with jquery.
+                // remove html.
+                $('#' + name.toLowerCase()).remove();
+                $('#br_' + name.toLowerCase()).remove();
+            }
 
         }
 
