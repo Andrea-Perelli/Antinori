@@ -91,7 +91,7 @@
                 });
         }
 
-        function DeletePage(pageId) {
+        function DeletePageOk(pageId) {
             // delete page.
             var url = '@Url.Action("DeletePage", "Book")' + "?id=" + pageId;
             // show the refresher.
@@ -105,6 +105,11 @@
                     // hide the refresher.
                     REFRESH_hide("CONTENT_Refresh");
                 });
+        }
+
+        function DeletePage(id) {
+            // set a dangerous alert.
+            DANGER_function("ATTENZIONE", "Questa operazione cancellerà il facsimile selezionato: sei sicuro di voler procedere?", "DeletePageOk('" + id + "')", "Procedi", "", "Annulla")
         }
 
         function list() {
