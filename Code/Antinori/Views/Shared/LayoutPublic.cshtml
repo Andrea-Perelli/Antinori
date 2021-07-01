@@ -522,7 +522,6 @@
             // retrieve page number and section.
             var pNumber = $("#pageToSearch").val();
 
-
             // if we arrived here the page exists.
             var selectedSection = previousIdSelected;
             if (selectedSection) {
@@ -716,10 +715,18 @@
             ShowSubsectionPages(previousIdSelected2, previousIdSelected);
         }
 
-
         function Apply() {
             // set url.
             var insertedFilter = $.trim($('#filter').val()).toLowerCase();
+            // recover selected section.
+            var selectedSection = $("#selectedSection").val();
+            var additionalUrl = "";
+            if (selectedSection) {
+                additionalUrl = "&selectedSection=" + selectedSection;
+            }
+            
+            alert(selectedSection)
+            alert(additionalUrl)
             // clear input.
             $('#filter').val('');
             // if the user inserted a filter.
@@ -746,11 +753,11 @@
                             var numberOfPages = 1;
 
                             // retrieve number of pages for advanced search.
-                            $.getJSON('@Url.Action("P_PagesNumberByFilters", "Book")' + "?filters=" + filters + "&numberOfPageToShow=" + numOfElementsToShow,
+                            $.getJSON('@Url.Action("P_PagesNumberByFilters", "Book")' + "?filters=" + filters + "&numberOfPageToShow=" + numOfElementsToShow + additionalUrl,
                                 function (model) {
                                     numberOfPages = model;
                                     // retrieve pages for advanced search.
-                                    $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&page=" + "1" + "&numberOfPageToShow=" + numOfElementsToShow,
+                                    $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&page=" + "1" + "&numberOfPageToShow=" + numOfElementsToShow + additionalUrl,
                                         function (model) {
                                             $("#pages").html(model);
                                             $("#pages").html(model);
@@ -768,7 +775,7 @@
                                                     REFRESH_show("CONTENT_Refresh");
 
                                                     // re-load pages.
-                                                    $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&page=" + page + "&numberOfPageToShow=" + numOfElementsToShow,
+                                                    $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&page=" + page + "&numberOfPageToShow=" + numOfElementsToShow + additionalUrl,
                                                         function (model) {
                                                             // set html.
                                                             $("#pages").html(model);
@@ -787,12 +794,12 @@
             else {
                 // the user removed a filter.
                 // retrieve number of pages for advanced search.
-                $.getJSON('@Url.Action("P_PagesNumberByFilters", "Book")' + "?filters=" + filters + "&numberOfPageToShow=" + numOfElementsToShow,
+                $.getJSON('@Url.Action("P_PagesNumberByFilters", "Book")' + "?filters=" + filters + "&numberOfPageToShow=" + numOfElementsToShow + additionalUrl,
                                 function (model) {
                                     numberOfPages = model;
 
                                     // retrieve pages for advanced search.
-                                    $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&numberOfPageToShow=" + numOfElementsToShow,
+                                    $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&numberOfPageToShow=" + numOfElementsToShow + additionalUrl,
                                         function (model) {
                                             $("#pages").html(model);
                                             // reset pagination.
@@ -809,7 +816,7 @@
                                                     REFRESH_show("CONTENT_Refresh");
 
                                                     // re-load pages.
-                                                    $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&page=" + page + "&numberOfPageToShow=" + numOfElementsToShow,
+                                                    $.getJSON('@Url.Action("P_PagesByFilters", "Book")' + "?filters=" + filters + "&page=" + page + "&numberOfPageToShow=" + numOfElementsToShow + additionalUrl,
                                                         function (model) {
                                                             // set html.
                                                             $("#pages").html(model);

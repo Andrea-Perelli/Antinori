@@ -1,0 +1,182 @@
+﻿@model List<Antinori.Models.Places>
+
+@{
+    ViewBag.Title = "Luoghi";
+}
+
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+        <!-- PAGE TITLE -->
+        <h2><span class="fa fa-globe"></span> @ViewBag.Title</h2>
+    </section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <!-- TABLE -->
+            <div class="box">
+                <div class="box-header">
+                    <ul class="nav nav-tabs" id="ADD_PLACE">
+                     @if (User.IsInRole("Admin")) {
+                        <li class="pull-right"><a href="#" onclick="add()" class="text-muted"><i class="fa fa-plus"></i></a></li>
+                        }
+                    </ul>
+                </div>
+                <!-- /.box-header -->
+                    <div class="overlay text-center" id="CONTENT_Refresh" style="z-index:300; background-color:rgba(255, 255, 255, 0.60); vertical-align:middle">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                    
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <!-- here will be inserted the html code. -->
+                        <div id="CONTENT" style="min-height:300px;">
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+@section scripts {
+    <script>
+        // funzione jquery che richiama la funzione DataTable() per caricare i plugin relativi.
+        $(document).ready(function () {     
+            list();
+        });
+
+
+        function list() {
+            // set the list on the view.
+            var url = '@Url.Action("List", "Place")';
+
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // set data.
+                    $("#CONTENT").html(data);
+                    // set the table name as parameter: DataTables_Table_0.
+                    $("#DataTables_Table_0").DataTable({
+                        dom: 'Bfrtip',
+                        language: DataTablesLanguage,
+                        responsive: true,
+                        columnDefs: [
+                            { className: "desktop", targets: [4, 5, 6] },  // x > 1024
+                            { className: "all", targets: [0, 1, 2, 3] } // for each width                        
+                        ]
+                    });
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");
+                });
+        }
+
+        function OpenMap(latitude, longitude) {
+            // open google maps from coordinates.
+            var url = "https://www.google.com.sa/maps/search/" + latitude + "," + longitude; //+ ",12.21z?hl=en";
+
+            window.open(url, '_blank');
+            return;
+        }
+
+        function add() {
+            // set url.
+            var url = '@Url.Action("Add", "Place")';
+            // show refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // hide refresher.
+                    REFRESH_hide("CONTENT_Refresh"); 
+                    // set a modal view.
+                    MODAL_function("Nuovo Luogo", data,"save()","Crea","","Annulla","");                 
+                })
+        }
+
+        function edit(id) {
+            // edit a user.
+            // set url.
+            var url = '@Url.Action("Edit", "Place")' + "?id=" + id;
+
+            // show refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // hide the refresher.
+                    REFRESH_hide("CONTENT_Refresh");  
+                    // set a modal view.
+                    MODAL_function("Modifica Luogo", data,"save()","Salva","","Annulla","");                  
+                })
+        }
+
+        function delete_ok(id) {
+            // delete the user.
+
+            // hide the modal view.
+            $("#MODAL_ID").hide();
+
+            var url = '@Url.Action("Delete", "Place")' + "?id=" + id;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // hide the refresher.
+                    $("#MODAL_ID").modal('toggle');
+                    if (Boolean(data)) {
+                        list();
+                    }
+        });
+        }
+
+        function delete_get(id) {
+            // set a dangerous alert.
+            DANGER_function("ATTENZIONE", "Questa operazione cancellerà il luogo selezionato: sei sicuro di voler procedere?", "delete_ok('" + id + "')","Procedi","","Annulla")
+        }
+
+       function save() {   
+              // validate form.
+              $('#CONTENT_Place_Form').validate({
+                  lang: 'it'
+              });
+             
+           if ($('#CONTENT_Place_Form').valid()) {
+
+                
+                   REFRESH_show("MODAL_Refresh");
+                   var url = '@Url.Action("Save", "Place")';
+                   // take the form content by id.
+               var data = new FormData($('#CONTENT_Place_Form').get(0));
+                 
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        success: function (risultato) {
+                            
+                            $("#MODAL_ID").modal('toggle');
+                            list();
+                        },
+                        error: function () {
+                            // set error.
+                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare","","","","OK");
+                        }
+                    });
+              }
+        }
+
+    </script>
+
+    
+}

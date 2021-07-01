@@ -25,6 +25,8 @@
         <AssociationConnector Association="AntinoriModel.FK_Transcriptions_Pages" />
         <AssociationConnector Association="AntinoriModel.FK_SubSections_Sections" />
         <AssociationConnector Association="AntinoriModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="AntinoriModel.Places" Width="1.5" PointX="9.75" PointY="2" />
+        <AssociationConnector Association="AntinoriModel.PagePlaces" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

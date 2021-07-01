@@ -36,5 +36,6 @@ namespace Antinori.Models
         public virtual DbSet<Sections> Sections { get; set; }
         public virtual DbSet<SubSections> SubSections { get; set; }
         public virtual DbSet<Transcriptions> Transcriptions { get; set; }
+        public virtual DbSet<Places> Places { get; set; }
     }
 }

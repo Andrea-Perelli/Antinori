@@ -14,25 +14,23 @@
                     <small class="required">Titolo</small><br />
                     <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <small class="required">Filtri</small><br />
-                    @{var filters = "";
-                    }
-
+                    @{var filters = "";}
                     <input type="text" id="Filters" name="Filters" value="@filters" class="form-control" placeholder="Inserisci i filtri fra ;" />
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <small class="required">Numero di pagina</small><br />
                     <input type="number" id="NumericOrder" name="NumericOrder" value="@Model.NumericOrder" class="form-control" required />
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <small class="required">Numero di pagina completo</small><br />
                     <input type="text" id="CompleteOrder" name="CompleteOrder" value="@Model.CompleteOrder" class="form-control" required />
-                </div>
+                </div>         
             </div>
 
             <div class="row">
@@ -80,7 +78,7 @@ else {
             <small class="required">Titolo</small><br />
             <input type="text" id="Title" name="Title" value="@Model.Title" class="form-control" />
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <small class="required">Filtri</small><br />
             @{var filters = "";
                 foreach (var f in ViewBag.Filters) {
@@ -94,15 +92,31 @@ else {
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <small class="required">Numero di pagina</small><br />
             <input type="number" id="NumericOrder" name="NumericOrder" value="@Model.NumericOrder" class="form-control" required />
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <small class="required">Numero di pagina completo</small><br />
             <input type="text" id="CompleteOrder" name="CompleteOrder" value="@Model.CompleteOrder" class="form-control" required />
         </div>
+
+        <div class="col-md-6">
+            <small class="required">Luoghi</small><br />
+            <select class="js-example-basic-multiple js-states form-control" style="width: 75%" name="selectedPlaces"  multiple="multiple">
+                @foreach(var p in ViewBag.ListOfPlaces) {
+                    if (Model.Places.Contains(p)) {
+                        <option value="@p.Name" selected>@p.Name, @p.OldName</option>
+                    }
+                    else {
+                        <option value="@p.Name">@p.Name, @p.OldName</option>
+
+                    }
+                 }
+            </select>
+        </div>
+        
     </div>
 
     <div class="row">
@@ -158,3 +172,19 @@ else {
 </div>
     }
 }
+
+<script>
+    $(document).ready(function () {
+                               
+        $('.js-example-basic-multiple').select2({
+            placeholder: "Seleziona almeno un Luogo",
+            allowClear: true,
+            language: "it",
+            theme: "classic"
+        });
+        $(".select2-search__field").css({ width: "100%" });
+        $(".select2-selection__rendered").css({ width: "100%" });
+        $(".select2-search--inline").css({ width: "100%" });
+
+    });
+</script>

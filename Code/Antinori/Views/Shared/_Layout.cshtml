@@ -80,7 +80,10 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
     <script src="~/Scripts/my.js"></script>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"
+          rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js">
+    </script>
     <script>
         function UpdateSections() {
             // update section view.
@@ -189,8 +192,8 @@
                         <a href="@Url.Action("Index","Home")">
                             <i class="fa fa-home"></i> <span>Dashboard</span>
                             @*<span class="pull-right-container">
-                                    <small class="label pull-right bg-green">new2222</small>
-                                </span>*@
+                    <small class="label pull-right bg-green">new2222</small>
+                </span>*@
                         </a>
                     </li>
                     @if (User.IsInRole("Admin")) {
@@ -205,6 +208,22 @@
                                     <li><a href="@Url.Action("P_Create","Account")"><i class="fa fa-plus"></i> Nuovo</a></li>
                                 }
 
+                            </ul>
+                        </li>
+                    }
+
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("Editor")) {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-globe"></i>
+                                <span>Luoghi</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Index","Place")"><i class="fa fa-search"></i> Cerca</a></li>
+                                @if (User.IsInRole("Admin")) {
+                                    <li><a href="@Url.Action("P_Create","Place")"><i class="fa fa-plus"></i> Nuova</a></li>
+                                }
                             </ul>
                         </li>
                     }

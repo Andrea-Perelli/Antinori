@@ -18,6 +18,8 @@ namespace Antinori.Controllers {
             // return the add book page.
 
             Books book = new Books();
+
+            
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "UC_Book", book), JsonRequestBehavior.AllowGet);
         }
@@ -292,7 +294,7 @@ namespace Antinori.Controllers {
             Pages p = this.Dc.Pages_Get(id);
             ViewBag.Filters = this.Dc.Filters_GetByPageId(id);
 
-
+            ViewBag.ListOfPlaces = this.Dc.Places_Gets();
             // return the partial view containing the P_Create page.
             return Json(GetRenderPartialView(this, "P_AddPage", p), JsonRequestBehavior.AllowGet);
         }
@@ -309,7 +311,7 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
-        public JsonResult P_PagesByFilters(string filters, string page, int numberOfPageToShow) {
+        public JsonResult  P_PagesByFilters(string filters, string page, int numberOfPageToShow, string selectedSection) {
             // return the subsections page list view.
 
             // split filters.
@@ -317,23 +319,33 @@ namespace Antinori.Controllers {
 
             List<Pages> pages = null;
 
-            // when we clicked on the pagination. 
-            pages = this.Dc.Pages_GetFirstNByFilterNameListAndIndex(fs, numberOfPageToShow, Convert.ToInt32(page));
+            if (selectedSection == null || selectedSection == "") {
+                // when we clicked on the pagination. 
+                pages = this.Dc.Pages_GetFirstNByFilterNameListAndIndex(fs, numberOfPageToShow, Convert.ToInt32(page));
+            }
+            else {
+                // when we clicked on the pagination. 
+                pages = this.Dc.Pages_GetFirstNByFilterNameListAndIndexAndSection(fs, numberOfPageToShow, Convert.ToInt32(page), selectedSection);
+            }  
 
             // return the partial view containing the UC_SectionSubsections page.
             return Json(GetRenderPartialView(this, "UC_SubsectionPages", pages), JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
-        public JsonResult P_PagesNumberByFilters(string filters, double numberOfPageToShow) {
+        public JsonResult P_PagesNumberByFilters(string filters, double numberOfPageToShow, string selectedSection) {
             // return the number of page to show for advanced search.
 
             int tabs = 0;
-
+            int p = 0;
             // split filters.
             string[] fs = filters.Split(',');
-
-            int p = this.Dc.Pages_GetByFilterNameListNumber(fs);
+            if(selectedSection == null || selectedSection == "") {
+                p = this.Dc.Pages_GetByFilterNameListNumber(fs);
+            }
+            else {
+                p = this.Dc.Pages_GetByFilterNameListNumberAndSection(fs, selectedSection);
+            }
 
             if (p > 0) {
                 double temp = ((double)p) / numberOfPageToShow;
@@ -437,7 +449,7 @@ namespace Antinori.Controllers {
             // return the subsections list view.
 
             List<SubSections> subSections = this.Dc.Sections_GetsBySectionId(sectionId);
-
+            ViewBag.Sections = this.Dc.Sections_GetsNamesByBookId(subSections.First().Sections.Books.Id);
             // return the partial view containing the UC_SectionSubsections page.
             return Json(GetRenderPartialView(this, "UC_SectionSubsections", subSections), JsonRequestBehavior.AllowGet);
         }
@@ -792,6 +804,15 @@ namespace Antinori.Controllers {
                         }
                     }
 
+                    // update places.
+                    if(forms["selectedPlaces"] != null && forms["selectedPlaces"].ToString() != "") {
+                        fromDb.Places.Clear();
+                        foreach(string place in forms["selectedPlaces"].ToString().Split(',')) {
+                            Places p = this.Dc.Places_GetByName(place);
+                            fromDb.Places.Add(p);
+                        }
+                    }
+
 
                     // save.
                     int esito = this.Dc.Pages_Save();
@@ -822,28 +843,19 @@ namespace Antinori.Controllers {
             // save. 
             OpEsitoModel op;
 
-            Transcriptions fromDb = this.Dc.Transcriptions_Get(transcription.Id);
 
-            //map the two objects: it updates the DB object.
-            if(TryUpdateModel(fromDb)) {
-                try {
-                    // save.
-                    int esito = this.Dc.Transcriptions_Save();
+            if (ModelState.IsValid) {
+                Transcriptions fromDb = this.Dc.Transcriptions_Get(transcription.Id);
 
-                    // is we couldn't save.
-                    if(esito == -1) {
+                //map the two objects: it updates the DB object.
+                if (TryUpdateModel(fromDb)) {
 
                         Log_Insert(transcription.Id, "Transcriptions", "UPDATE", false, "Errore nel salvataggio");
                         op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore nel salvataggio" };
                         return Json(op, JsonRequestBehavior.AllowGet);
-                    }
-                }
-                catch(Exception ex) {
-                    Log_Insert(transcription.Id, "Transcriptions", "UPDATE", false, "Errore:" + ex.Message);
-                    op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = ex.Message };
-                    return Json(op, JsonRequestBehavior.AllowGet);
                 }
             }
+           
             // set log.
             Log_Insert(transcription.Id, "Transcriptions", "UPDATE", true, "Operazione conclusa con successo", "", "", "", "");
             op = new OpEsitoModel() { idReturn = transcription.Id, riuscita = true };

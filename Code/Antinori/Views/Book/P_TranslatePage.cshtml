@@ -144,6 +144,31 @@
                     <div class="grid-item" style="padding: 0px;"><b class="myB">Note</b>&nbsp;@description</div>
                 }
             </div>
+            <div class="row" style="display: grid; margin-bottom: 30px; margin-top: 15px;">
+                
+                @if (Model.Places.Count > 0) {
+
+                <div class="grid-item" style="padding: 0px;">
+                    <b class="myB">
+                        Luoghi
+                        <i class="fa fa-globe info circle"></i>
+                    </b>
+                    <br />
+                    @{ int index = 0;}
+                    @foreach (var place in Model.Places) {
+                        string myUrl = "https://www.google.com.sa/maps/search/" + place.Latitude + "," + place.Longitude;
+                        if (index < Model.Places.Count-1) {
+                            <a href="@myUrl" target="_blank" title="Scopri" style="color: #777777;">&nbsp;@place.Name,</a>
+
+                        }
+                        else {
+                            <a href="@myUrl" target="_blank" title="Scopri" style="color: #777777;">&nbsp;@place.Name</a>
+                        }
+                        index++;
+                    }
+                </div>
+                }
+            </div>
             <!-- BUTTONS ROWS -->
             <div class="row" style="padding-bottom: 20px; ">
                 <h5 style="color:#777777; border-bottom: 2px solid #eee;">

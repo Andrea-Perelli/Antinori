@@ -1,0 +1,51 @@
+﻿@model Antinori.Models.Places
+
+<!-- Create a form  -->
+@using (Html.BeginForm("Save", "Place", FormMethod.Post, new { id = "CONTENT_Place_Form" })) {
+    <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(p => p.Id,new { id="Id"})
+    <!-- FIELD TO EDIT -->
+    <div>
+        <div class="row">
+            
+            <div class="col-md-4">
+                <small class="required">Nome</small><br />
+                <!-- try update binds with the name attribute. -->
+                <input type="text" id="Name" name="Name" value="@Model.Name" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <small class="required">Nome Antico</small><br />
+                <input type="text" id="OldName" name="OldName" value="@Model.OldName" class="form-control"  />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <small class="required">Latitudine</small><br />
+                <input type="text" id="Latitude" name="Latitude" value="@Model.Latitude" class="form-control" required />
+            </div>
+            <div class="col-md-5">
+                <small class="required"> Longitudine</small><br />
+                <input type="text" id="Longitude" name="Longitude" value="@Model.Longitude" class="form-control" />
+            </div>           
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <small>Descrizione</small><br>
+                <textarea id="Description" name="Description" value="@Model.Description" class="form-control" style="min-height: 150px">@Model.Description</textarea>
+
+            </div>
+            <div class="col-md-6">
+                <small>Note</small><br>
+                <textarea id="Notes" name="Notes" value="@Model.Notes" class="form-control" style="min-height: 150px">@Model.Notes</textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+}

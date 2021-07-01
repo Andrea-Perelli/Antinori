@@ -317,6 +317,60 @@ namespace Antinori.Models {
 
         #endregion
 
+        #region "Logs"
+
+                public int Logs_Count() {
+                    var query = Logs.Count();
+                    return query;
+                }
+
+                public List<Logs> Logs_Gets() {
+
+                    return Logs.OrderByDescending(l => l.Operazione_Data).ToList();
+                }
+
+
+                public Logs Logs_Get(int id) {
+                    var query = Logs.FirstOrDefault(c => c.Id == id);
+                    return query;
+                }
+
+                public int Logs_Insert(Logs c) {
+                    int esito = -1;
+                    try {
+                        Logs.Add(c);
+                        esito = SaveChanges();
+                    }
+                    catch(Exception ex) {
+                    }
+                    return esito;
+                }
+
+                public int Logs_Save() {
+                    int esito = -1;
+                    try {
+                        esito = SaveChanges();
+                    }
+                    catch {
+
+                    }
+                    return esito;
+                }
+
+                public int Logs_Delete(Logs c) {
+                    int esito = -1;
+                    try {
+                        Logs.Remove(c);
+                        esito = SaveChanges();
+                    }
+                    catch {
+
+                    }
+                    return esito;
+                }
+
+                #endregion
+
         #region Pages
 
         public int Pages_Count() {
@@ -369,10 +423,28 @@ namespace Antinori.Models {
             return pages;
         }
 
+        public List<Pages> Pages_GetByFilterNameListAndSection(string[] filterNames, string sectionName) {
+            // return all Pages of a filter list.
+
+            List<Pages> pages = new List<Pages>();
+
+            foreach (var filter in filterNames) {
+
+                pages = pages.Union(this.Pages_GetByFilterName(filter).Where(p => p.SubSections.Sections.Name==sectionName)).ToList();
+            }
+            return pages;
+        }
+
         public int Pages_GetByFilterNameListNumber(string[] filterNames) {
             // return the number of pages containing a filter inside a list.
      
             return Pages_GetByFilterNameList(filterNames).Count();
+        }
+
+        public int Pages_GetByFilterNameListNumberAndSection(string[] filterNames, string sectionName) {
+            // return the number of pages containing a filter inside a list.
+
+            return Pages_GetByFilterNameListAndSection(filterNames, sectionName).Count();
         }
 
         public List<Pages> Pages_GetByNumber(int number) {
@@ -416,6 +488,14 @@ namespace Antinori.Models {
             return pages;
         }
 
+        public List<Pages> Pages_GetFirstNByFilterNameListAndIndexAndSection(string[] filterNames, int n, int page, string sectionName) {
+            // return first n pages of an advanced search and of an index.
+
+            List<Pages> pages = this.Pages_GetByFilterNameListAndSection(filterNames,sectionName).OrderBy(p => p.NumericOrder).Skip((page - 1) * n).Take(n).ToList();
+
+            return pages;
+        }
+
         public List<Pages> Pages_GetFirstNBySubSection(string subSectionId, int n) {
             // return all Pages of a subsection.
             List<Pages> pages = Pages.Where(p => p.SubSection.Equals(subSectionId)).OrderBy(p => p.NumericOrder).Take(n).ToList();
@@ -454,58 +534,73 @@ namespace Antinori.Models {
 
         #endregion
 
-        #region "Logs"
+        #region Places
 
-        public int Logs_Count() {
-            var query = Logs.Count();
-            return query;
+        public int Places_Count() {
+            // count number of Places.
+            int res = Places_Gets().Count;
+            return res;
         }
 
-        public List<Logs> Logs_Gets() {
-
-            return Logs.OrderByDescending(l => l.Operazione_Data).ToList();
-        }
-
-
-        public Logs Logs_Get(int id) {
-            var query = Logs.FirstOrDefault(c => c.Id == id);
-            return query;
-        }
-
-        public int Logs_Insert(Logs c) {
+        public int Places_Delete(Places p) {
+            // delete a Places.
             int esito = -1;
             try {
-                Logs.Add(c);
+                Places.Remove(p);
+                // Entity framework stores its current status on the db (we don't pass any object to store).
                 esito = SaveChanges();
             }
-            catch(Exception ex) {
-            }
-            return esito;
-        }
-
-        public int Logs_Save() {
-            int esito = -1;
-            try {
-                esito = SaveChanges();
-            }
-            catch {
+            catch (Exception e) {
 
             }
             return esito;
         }
 
-        public int Logs_Delete(Logs c) {
+        public Places Places_Get(string id) {
+            // return a Places by Id.
+            return Places.FirstOrDefault(it => it.Id == id);
+        }
+
+        public Places Places_GetByName(string name) {
+            // return a Places by Id.
+            return  Places.FirstOrDefault(it => it.Name == name);
+        }
+
+        public List<Places> Places_Gets() {
+            // return the list of all Places.
+            return Places.Where(p=> !p.Deleted).ToList();
+        }
+
+        public List<Places> Places_GetsByName(string name) {
+            name = name.ToLower();
+            // return the list of all Places.
+            return Places.Where(p => !p.Deleted && p.Name.ToLower().Contains(name)).ToList();
+        }
+
+        public int Places_Insert(Places c) {
+            // insert a Places.
             int esito = -1;
             try {
-                Logs.Remove(c);
+                Places.Add(c);
                 esito = SaveChanges();
             }
-            catch {
+            catch (Exception ex) {
 
             }
             return esito;
         }
 
+        public int Places_Save() {
+            int esito = -1;
+            try {
+                // esito is the number of modifications.
+                esito = SaveChanges();
+            }
+            catch (Exception e) {
+
+            }
+            return esito;
+        }
         #endregion
 
         #region Sections
@@ -515,6 +610,13 @@ namespace Antinori.Models {
             Sections section = Sections.FirstOrDefault(it => it.Id == id);
             return section;
         }
+
+        public List<string> Sections_GetsNamesByBookId(string bookId) {
+            // return a section by Id.
+            List<string> sections = Sections_GetsByBookId(bookId).OrderBy(s => s.Name).Select(s => s.Name).ToList();
+            return sections;
+        }
+
 
         public List<Sections> Sections_GetsByBookId(string bookId) {
             // return the list of all SubSections.
@@ -541,6 +643,7 @@ namespace Antinori.Models {
             // return the list of all SubSections.
             return SubSections.OrderBy(s => s.RopeNumber).ToList();
         }
+
 
         public List<SubSections> Sections_GetsBySectionId(string sectionId) {
             // return the list of all SubSections by section id.

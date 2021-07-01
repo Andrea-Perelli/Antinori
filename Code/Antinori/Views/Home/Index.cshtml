@@ -66,6 +66,35 @@
         </div>
         <!-- ./col -->
     </div>
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3 id="numberOfPlaces">&nbsp;</h3>
+                    <p>Luoghi totali</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-globe"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            
+            
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            
+        </div>
+        <!-- ./col -->
+    </div>
     <!-- /.row -->
     <!-- Main row -->
     <div class="row">
@@ -73,7 +102,7 @@
         <section class="col-lg-7 connectedSortable">
         </section>
         <!-- /.Left col -->
-       
+
     </div>
     <!-- /.row(main row) -->
 
@@ -94,10 +123,11 @@
 <script src="~/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 
 <script>
-        
+
     $(document).ready(function () {
         LoadUserData();
         LoadTranscrpitiondata();
+        LoadPlaceData();
     });
 
     function LoadUserData() {
@@ -109,7 +139,7 @@
         $.getJSON('@Url.Action("GetUsersInfo","Account")',
             function (model) {
                 $("#numberOfUsers").html(model.numberOfUsers);
-                $("#numberOfNormalUsers").html(model.numberOfNormalUsers);   
+                $("#numberOfNormalUsers").html(model.numberOfNormalUsers);
                 REFRESH_hide("INEVIDENZA_Refresh");
 
             });
@@ -122,13 +152,25 @@
 
         $.getJSON('@Url.Action("GetBooksInfo","Book")',
             function (model) {
-                $("#numberOfBooks").html(model.numberOfBooks); 
-                $("#numberOfTranscriptionsToCheck").html(model.numberOfTranscriptionsToCheck); 
+                $("#numberOfBooks").html(model.numberOfBooks);
+                $("#numberOfTranscriptionsToCheck").html(model.numberOfTranscriptionsToCheck);
                 REFRESH_hide("INEVIDENZA_Refresh");
 
-            });        
+            });
     }
 
-        
+    function LoadPlaceData() {
+        // show refresher.
+        REFRESH_show("INEVIDENZA_Refresh");
+
+        $.getJSON('@Url.Action("GetPlaceNumber","Place")',
+            function (model) {
+                $("#numberOfPlaces").html(model.numberOfPlaces);
+                REFRESH_hide("INEVIDENZA_Refresh");
+
+            });
+    }
+
+
 </script>
         }

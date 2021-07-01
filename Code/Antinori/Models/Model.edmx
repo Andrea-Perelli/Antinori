@@ -111,6 +111,14 @@
           <Property Name="Operazione_Data" Type="datetime" Nullable="false" />
           <Property Name="Operazione_Username" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
+        <EntityType Name="PagePlaces">
+          <Key>
+            <PropertyRef Name="IdPlace" />
+            <PropertyRef Name="IdPage" />
+          </Key>
+          <Property Name="IdPlace" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IdPage" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Pages">
           <Key>
             <PropertyRef Name="Id" />
@@ -126,6 +134,19 @@
           <Property Name="SectionName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="SubSection" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Editor" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Places">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="OldName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -212,6 +233,30 @@
             </Principal>
             <Dependent Role="Filters">
               <PropertyRef Name="Page" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PagePlaces_PagePlaces">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="PagePlaces" Type="Self.PagePlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PagePlaces">
+              <PropertyRef Name="IdPage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PagePlaces_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="PagePlaces" Type="Self.PagePlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PagePlaces">
+              <PropertyRef Name="IdPlace" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -304,7 +349,9 @@
           <EntitySet Name="Filters" EntityType="Self.Filters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FrontSlider" EntityType="Self.FrontSlider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PagePlaces" EntityType="Self.PagePlaces" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubSections" EntityType="Self.SubSections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transcriptions" EntityType="Self.Transcriptions" Schema="dbo" store:Type="Tables" />
@@ -323,6 +370,14 @@
           <AssociationSet Name="FK_Filter_Pages" Association="Self.FK_Filter_Pages">
             <End Role="Pages" EntitySet="Pages" />
             <End Role="Filters" EntitySet="Filters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PagePlaces_PagePlaces" Association="Self.FK_PagePlaces_PagePlaces">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="PagePlaces" EntitySet="PagePlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PagePlaces_Places" Association="Self.FK_PagePlaces_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PagePlaces" EntitySet="PagePlaces" />
           </AssociationSet>
           <AssociationSet Name="FK_Pages_SubSections" Association="Self.FK_Pages_SubSections">
             <End Role="SubSections" EntitySet="SubSections" />
@@ -400,6 +455,11 @@
           <AssociationSet Name="AspNetUserRoles" Association="AntinoriModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Places" EntityType="AntinoriModel.Places" />
+          <AssociationSet Name="PagePlaces" Association="AntinoriModel.PagePlaces">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Places" EntitySet="Places" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetRoles">
@@ -526,6 +586,7 @@
           <NavigationProperty Name="Filters" Relationship="AntinoriModel.FK_Filter_Pages" FromRole="Pages" ToRole="Filters" />
           <NavigationProperty Name="SubSections" Relationship="AntinoriModel.FK_Pages_SubSections" FromRole="Pages" ToRole="SubSections" />
           <NavigationProperty Name="Transcriptions" Relationship="AntinoriModel.FK_Transcriptions_Pages" FromRole="Pages" ToRole="Transcriptions" />
+          <NavigationProperty Name="Places" Relationship="AntinoriModel.PagePlaces" FromRole="Pages" ToRole="Places" />
         </EntityType>
         <EntityType Name="Sections">
           <Key>
@@ -677,6 +738,24 @@
         <Association Name="AspNetUserRoles">
           <End Type="AntinoriModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="AntinoriModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Places">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Pages" Relationship="AntinoriModel.PagePlaces" FromRole="Places" ToRole="Pages" />
+          <Property Name="OldName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="PagePlaces">
+          <End Type="AntinoriModel.Pages" Role="Pages" Multiplicity="*" />
+          <End Type="AntinoriModel.Places" Role="Places" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -849,6 +928,28 @@
             </EndProperty>
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="AntinoriModel.Places">
+              <MappingFragment StoreEntitySet="Places">
+                <ScalarProperty Name="OldName" ColumnName="OldName" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PagePlaces" TypeName="AntinoriModel.PagePlaces" StoreEntitySet="PagePlaces">
+            <EndProperty Name="Places">
+              <ScalarProperty Name="Id" ColumnName="IdPlace" />
+            </EndProperty>
+            <EndProperty Name="Pages">
+              <ScalarProperty Name="Id" ColumnName="IdPage" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
