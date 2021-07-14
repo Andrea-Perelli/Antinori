@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Antinori.Models.Places>
+<!--The div element for the map -->
+<div id="myMap">
+    aaaa
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&libraries=&v=weekly"
+        async></script>
+<script>
+   
+
+    function initMap() {
+        // The location of Uluru
+        alert(2);
+        const uluru = { lat: -25.344, lng: 131.036 };
+        const map = new google.maps.Map(
+            document.getElementById("myMap"),
+            {
+                zoom: 4,
+                center: uluru,
+            }
+        );
+
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+        });
+    }
+</script>

@@ -18,11 +18,22 @@
                 <!-- TABLE -->
                 <div class="box">
                     <div class="box-header">
-                        <ul class="nav nav-tabs" id="ADD_OPERA">
-                            @if(User.IsInRole("Admin")) {
-                            <li class="pull-right"><a href="#" onclick="add()" class="text-muted"><i class="fa fa-plus"></i></a></li>
+                        <ul>
+                            @if (User.Identity.Name == "andreaperelli.95@gmail.com") {
+                                @Html.DropDownList("selectedBook",new SelectList(Model.Select(b => b.Title)),"Selezione un'opera",new {})
+                                @Html.TextBox("selectedPath","",new  { @placeholder="Selezione il path"})
+                                <a class="btn btn-default btn-sm" href="#" onclick="UploadSection()" title="Aggiungi Sezione">
+                                    <i class="fa fa-cloud">
+                                    </i>
+                                </a>
                             }
                         </ul>
+                        <ul class="nav nav-tabs" id="ADD_OPERA">
+                            @if (User.IsInRole("Admin")) {
+                                <li class="pull-right"><a href="#" onclick="add()" class="text-muted"><i class="fa fa-plus"></i></a></li>
+                            }
+                        </ul>
+                       
                     </div>
                     <!-- /.box-header -->
                     <div class="overlay text-center" id="CONTENT_Refresh" style="z-index:300; background-color:rgba(255, 255, 255, 0.60); vertical-align:middle">
@@ -47,13 +58,12 @@
     </section>
     <!-- /.content -->
     @section scripts {
-    <script>
+        <script>
         // funzione jquery che richiama la funzione DataTable() per caricare i plugin relativi.
         $(document).ready(function () {
-            
+
             list();
         });
-
 
         function list() {
             // set the list on the view.
@@ -135,6 +145,22 @@
             DANGER_function("ATTENZIONE", "Questa operazione cancellerà l'opera selezionata: sei sicuro di voler procedere?", "delete_ok('" + id + "')", "Procedi", "", "Annulla")
         }
 
+        function UploadSection() {
+            var selectedBook = $("#selectedBook").val();
+            var selectedPath = $("#selectedPath").val();
+            if (selectedBook && selectedPath) {
+                REFRESH_show("MODAL_Refresh");
+                var url = '@Url.Action("UploadSection", "Book")' + "?bookName=" + selectedBook + "&path=" + selectedPath;
+                $.getJSON(url,
+                    function (data) {
+                        // hide the refresher.
+                        REFRESH_show("MODAL_Refresh");
+                        return;
+                    });
+            }
+            return;
+        }
+
         function save() {
             // validate form.
             $('#CONTENT_Book_Form').validate({
@@ -146,7 +172,7 @@
                 REFRESH_show("MODAL_Refresh");
                 var url = '@Url.Action("Save", "Book")';
                 // take the form content by id.
-                var data = new FormData($('#CONTENT_Book_Form').get(0));               
+                var data = new FormData($('#CONTENT_Book_Form').get(0));
 
                 $.ajax({
                     type: "POST",
@@ -168,7 +194,7 @@
         }
 
 
-    </script>
+        </script>
 
 
     }

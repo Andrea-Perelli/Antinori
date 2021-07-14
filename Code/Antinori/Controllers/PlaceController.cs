@@ -17,6 +17,13 @@ namespace Antinori.Controllers {
             return Json(GetRenderPartialView(this, "UC_Place", place), JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
+        public JsonResult GetMap() {
+            // get map.
+            List<Places> places = this.Dc.Places_Gets();
+            return Json(GetRenderPartialView(this, "UC_Map", places), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = "Admin")]
         public JsonResult Delete(string id) {
             // delete a book by id.

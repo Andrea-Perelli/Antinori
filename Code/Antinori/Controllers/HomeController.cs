@@ -30,7 +30,7 @@ namespace Antinori.Controllers {
 
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult Index() {
-            // internal homepage.
+            // internal homepage.           
             return View();
         }
 

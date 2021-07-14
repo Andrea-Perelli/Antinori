@@ -719,14 +719,16 @@
             // set url.
             var insertedFilter = $.trim($('#filter').val()).toLowerCase();
             // recover selected section.
+            if (!insertedFilter) {
+                $("#errorModal").show();
+                return;
+            }
             var selectedSection = $("#selectedSection").val();
             var additionalUrl = "";
             if (selectedSection) {
                 additionalUrl = "&selectedSection=" + selectedSection;
             }
             
-            alert(selectedSection)
-            alert(additionalUrl)
             // clear input.
             $('#filter').val('');
             // if the user inserted a filter.

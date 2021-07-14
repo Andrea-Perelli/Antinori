@@ -100,6 +100,7 @@
     <div class="row">
         <!-- Left col -->
         <section class="col-lg-7 connectedSortable">
+            <div id="map"></div>
         </section>
         <!-- /.Left col -->
 
@@ -128,6 +129,7 @@
         LoadUserData();
         LoadTranscrpitiondata();
         LoadPlaceData();
+        LoadMap();
     });
 
     function LoadUserData() {
@@ -171,6 +173,16 @@
             });
     }
 
+    function LoadMap() {
+        // show refresher.
+        REFRESH_show("INEVIDENZA_Refresh");
+
+        $.getJSON('@Url.Action("GetMap","Place")',
+            function (model) {
+                $("#map").html(model);
+                REFRESH_hide("INEVIDENZA_Refresh");
+            });
+    }
 
 </script>
         }
