@@ -41,7 +41,7 @@
                         path = b.PreviewImage.Split('\\').Last();
                         path = "/Pics/JPEG/" + path;
                     }
-                    <img class="mx-auto" onclick="ShowOpera('@b.Id')" style="max-height: 350px!important;" src="@path" />
+                    <img class="mx-auto" onclick="ShowOpera('@b.Id')" style="max-width: -webkit-fill-available;" src="@path" />
                     <p class="desc" style="text-align: left;">
                     </p>
                     @*<h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>*@

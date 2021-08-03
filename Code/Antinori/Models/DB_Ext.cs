@@ -427,10 +427,10 @@ namespace Antinori.Models {
             // return all Pages of a filter list.
 
             List<Pages> pages = new List<Pages>();
-
+            string tempSectionName = sectionName.ToLower().Trim();
             foreach (var filter in filterNames) {
 
-                pages = pages.Union(this.Pages_GetByFilterName(filter).Where(p => p.SubSections.Sections.Name==sectionName)).ToList();
+                pages = pages.Union(this.Pages_GetByFilterName(filter).Where(p => p.SubSections.Sections.Name.ToLower().Trim()== tempSectionName)).ToList();
             }
             return pages;
         }
