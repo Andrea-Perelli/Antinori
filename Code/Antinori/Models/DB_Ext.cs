@@ -408,7 +408,7 @@ namespace Antinori.Models {
             // return all Pages of a filter name.
             string tempFilterName = filterName.ToLower();
 
-            List<Pages> pages = Filters.Where(p => p.Name.ToLower().Equals(tempFilterName) || p.Name.ToLower().Contains(tempFilterName)).Select(p=> p.Pages).ToList();
+            List<Pages> pages = Filters.Where(p => p.Name.ToLower().Equals(tempFilterName)).Select(p=> p.Pages).ToList();
             return pages;
         }
 
