@@ -198,14 +198,19 @@
         </div>
         <!-- TRANSCRIPTION COL -->
         <div class="col-sm" style="max-width: 45%; min-width: 45%; margin-top: 40px;">
-            @if (Model.Transcriptions.Count > 0) {
+            @if (Model.Transcriptions.Count > 0)
+            {
                 <p>
 
                     @Model.Transcriptions.FirstOrDefault().TEI
                 </p>
             }
-            else {
-
+            else
+            {
+                <iframe src="http://localhost:8080/oxygen-xml-web-author/app/oxygen.html" style="border: 1px solid black;"></iframe>
+                <iframe src="https://localhost:8080/oxygen-xml-web-author/app/oxygen.html"style="border: 1px solid black;"></iframe>
+                <iframe src="http://localhost:8080/oxygen-xml-web-author/app/admin.html"style="border: 1px solid black;"></iframe>
+                <iframe src="http://localhost:8080/oxygen-xml-web-author/"style="border: 1px solid black;"></iframe>
             }
         </div>
         <!-- RIGHT COL --->
