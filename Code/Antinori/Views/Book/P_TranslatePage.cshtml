@@ -92,13 +92,13 @@
     </div>
 
     <!-- CONTENT ROW -->
-    <div class="row" style="margin-right: 25px!important; margin-left: 25px!important; ">
+    <div class="row">
         <!-- LEFT COL -->
-        <div class=".col-sm" style="max-width: 5%; min-width: 5%; margin-top: -10px;">
-            
+        <div class=".col-sm" style="max-width: 4%; min-width: 4%; margin-top: -10px;">
+
         </div>
         <!-- PHOTO COL -->
-        <div class="col-sm" style="max-width: 45%; min-width: 45%; margin-top: 40px;">
+        <div class="col-sm" style="max-width: 44%; min-width: 44%; margin-top: 40px;">
 
             <div class="grid-container" style="display: grid; grid-template-columns: auto auto auto;">
 
@@ -106,67 +106,78 @@
                 <div class="grid-item"><b class="myB">Manoscritto</b>&nbsp;<i>@Model.SubSections.Name</i></div> <br />
                 @{
                     string editor = "-";
-                    if (Model.Editor != null && Model.Editor.Length > 1) {
+                    if (Model.Editor != null && Model.Editor.Length > 1)
+                    {
                         editor = Model.Editor;
                     }
                 }
-                @if (!editor.Equals("-")) {
+                @if (!editor.Equals("-"))
+                {
                     <div class="grid-item"><b class="myB">Mano</b>&nbsp;<i>@editor</i></div>
                 }
 
                 @{
                     var filters = "";
-                    foreach (var f in Model.Filters.ToList()) {
+                    foreach (var f in Model.Filters.ToList())
+                    {
                         filters = filters + ";" + f.Name;
                     }
                     filters = filters.TrimEnd(';');
                     filters = filters.TrimStart(';');
-                    if (filters.Equals("")) {
+                    if (filters.Equals(""))
+                    {
                         filters = "-";
                     }
                 }
-                @if (!filters.Equals("-")) {
+                @if (!filters.Equals("-"))
+                {
                     @*<div class="grid-item"><b class="myB">Filtri</b>&nbsp;<i>@filters</i></div>*@
                 }
 
             </div>
             <div class="row">
-                <img src="@path" class="mx-auto" style="width: 100%; height:100%; 20px; margin-top: 20px;" />
+                <img src="@path" class="mx-auto" style="width: 100%; height:100%; margin-top: 20px;" />
             </div>
             <div class="row" style="display: grid; margin-bottom: 30px; margin-top: 15px;">
                 @{
                     string description = "-";
-                    if (Model.Description != null && Model.Description.Length > 0) {
+                    if (Model.Description != null && Model.Description.Length > 0)
+                    {
                         description = Model.Description;
                     }
                 }
-                @if (!description.Equals("-")) {
+                @if (!description.Equals("-"))
+                {
                     <div class="grid-item" style="padding: 0px;"><b class="myB">Note</b>&nbsp;@description</div>
                 }
             </div>
             <div class="row" style="display: grid; margin-bottom: 30px; margin-top: 15px;">
-                
-                @if (Model.Places.Count > 0) {
 
-                <div class="grid-item" style="padding: 0px;">
-                    <b class="myB">
-                        Luoghi
-                        <i class="fa fa-globe info circle"></i>
-                    </b>
-                    <br />
-                    @{ int index = 0;}
-                    @foreach (var place in Model.Places) {
-                        string myUrl = "https://www.google.com.sa/maps/search/" + place.Latitude + "," + place.Longitude;
-                        if (index < Model.Places.Count-1) {
-                            <a href="@myUrl" target="_blank" title="Scopri" style="color: #777777;">&nbsp;@place.Name,</a>
+                @if (Model.Places.Count > 0)
+                {
 
+                    <div class="grid-item" style="padding: 0px;">
+                        <b class="myB">
+                            Luoghi
+                            <i class="fa fa-globe info circle"></i>
+                        </b>
+                        <br />
+                        @{ int index = 0;}
+                        @foreach (var place in Model.Places)
+                        {
+                            string myUrl = "https://www.google.com.sa/maps/search/" + place.Latitude + "," + place.Longitude;
+                            if (index < Model.Places.Count - 1)
+                            {
+                                <a href="@myUrl" target="_blank" title="Scopri" style="color: #777777;">&nbsp;@place.Name,</a>
+
+                            }
+                            else
+                            {
+                                <a href="@myUrl" target="_blank" title="Scopri" style="color: #777777;">&nbsp;@place.Name</a>
+                            }
+                            index++;
                         }
-                        else {
-                            <a href="@myUrl" target="_blank" title="Scopri" style="color: #777777;">&nbsp;@place.Name</a>
-                        }
-                        index++;
-                    }
-                </div>
+                    </div>
                 }
             </div>
             <!-- BUTTONS ROWS -->
@@ -190,14 +201,19 @@
             <!-- ATTACHMENT TITLE ROW -->
             <div class="row" style="margin-top: 80px;">
                 <div class="single-defination">
-                    @if (Model.Attachments.Count > 0) {
+                    @if (Model.Attachments.Count > 0)
+                    {
                         <h4 class="mb-20">Allegati</h4>
                     }
                 </div>
             </div>
         </div>
+        <!-- MIDDLE COL -->
+        <div class=".col-sm" style="max-width: 4%; min-width: 4%; margin-top: -10px;">
+
+        </div>
         <!-- TRANSCRIPTION COL -->
-        <div class="col-sm" style="max-width: 45%; min-width: 45%; margin-top: 40px;">
+        <div class="col-sm" style="max-width: 44%; min-width: 44%; margin-top: 40px;">
             @if (Model.Transcriptions.Count > 0)
             {
                 <p>
@@ -207,14 +223,12 @@
             }
             else
             {
-                <iframe src="http://localhost:8080/oxygen-xml-web-author/app/oxygen.html" style="border: 1px solid black;"></iframe>
-                <iframe src="https://localhost:8080/oxygen-xml-web-author/app/oxygen.html"style="border: 1px solid black;"></iframe>
-                <iframe src="http://localhost:8080/oxygen-xml-web-author/app/admin.html"style="border: 1px solid black;"></iframe>
-                <iframe src="http://localhost:8080/oxygen-xml-web-author/"style="border: 1px solid black;"></iframe>
+                <iframe src="@ViewBag.OxygenUrl" style="border: 1px solid black; height:100%; width:100%"></iframe>
             }
+
         </div>
         <!-- RIGHT COL --->
-        <div class=".col-sm" style="max-width: 5%;  min-width: 5%; margin-top: -10px;">
+        <div class=".col-sm" style="max-width: 4%;  min-width: 4%; margin-top: -10px;">
 
         </div>
     </div>

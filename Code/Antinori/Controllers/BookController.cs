@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
+using System.Configuration;
 
 namespace Antinori.Controllers {
     public class BookController : ApplicationController {
@@ -513,6 +514,7 @@ namespace Antinori.Controllers {
 
             ViewBag.after = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder + 1);
 
+
             // return the partial view containing the P_TranslatePage page.
             return View( p);
         }
@@ -526,6 +528,8 @@ namespace Antinori.Controllers {
             ViewBag.previous = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder - 1);
 
             ViewBag.after = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder + 1);
+
+            ViewBag.OxygenUrl = ConfigurationManager.AppSettings["Oxygen_URL"]; ;
             // return the partial view containing the P_TranslatePage page.
             return View("P_TranslatePage", p);
         }       
