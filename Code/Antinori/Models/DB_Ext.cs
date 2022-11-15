@@ -404,6 +404,7 @@ namespace Antinori.Models {
             List<Pages> pages = Pages.ToList();
             return pages;
         }
+
         public List<Pages> Pages_GetByFilterName(string filterName) {
             // return all Pages of a filter name.
             string tempFilterName = filterName.ToLower();
@@ -483,7 +484,7 @@ namespace Antinori.Models {
         public List<Pages> Pages_GetFirstNByFilterNameListAndIndex(string[] filterNames, int n, int page) {
             // return first n pages of an advanced search and of an index.
 
-            List<Pages> pages = this.Pages_GetByFilterNameList(filterNames).OrderBy(p => p.NumericOrder).Skip((page - 1) * n).Take(n).ToList();
+            List<Pages> pages = this.Pages_GetByFilterNameList(filterNames).OrderBy(p => p.SubSections.RopeNumber).ThenBy(p => p.NumericOrder).Skip((page - 1) * n).Take(n).ToList();
 
             return pages;
         }
