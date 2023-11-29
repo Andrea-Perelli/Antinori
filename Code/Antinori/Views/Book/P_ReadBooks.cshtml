@@ -41,7 +41,7 @@
                         path = b.PreviewImage.Split('\\').Last();
                         path = "/Pics/JPEG/" + path;
                     }
-                    <img class="mx-auto" onclick="ShowOpera('@b.Id')" style="max-width: -webkit-fill-available;" src="@path" />
+                    <img class="mx-auto" onclick="ShowOpera('@b.Id')" style="max-width: 100%;" src="@path" />
                     <p class="desc" style="text-align: left;">
                     </p>
                     @*<h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>*@
@@ -54,7 +54,7 @@
             <p class="desc" style="text-align: left;">
                 @Model.FirstOrDefault().Description
             </p>
-            <section class="course-area section-gap" id="container" style=" position: absolute; bottom: 0; padding: 0;">
+            <section class="course-area section-gap" id="container" style="bottom: 0; padding: 0;">
             </section>
         </div>
     </div>

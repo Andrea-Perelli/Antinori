@@ -78,16 +78,16 @@
         </div>
             <!-- TITLE ROW-->
         <div class="row" style="width: 100%;">
-            @if (Model.Title != null && Model.Title.Length > 0) {
+            @*@if (Model.Title != null && Model.Title.Length > 0) {
                 <h3 style="margin-left: auto; margin-right: auto; padding: 6px;" id="myText">
                     #@Model.NumericOrder <i>@Model.Title</i>
                 </h3>
             }
-            else {
+            else {*@
                 <h3 style="margin-left: auto; margin-right: auto; padding: 6px;" id="myText">
                     #@Model.NumericOrder
                 </h3>
-            }
+            @*}*@
         </div>
     </div>
 
@@ -141,13 +141,11 @@
             <div class="row" style="display: grid; margin-bottom: 30px; margin-top: 15px;">
                 @{
                     string description = "-";
-                    if (Model.Description != null && Model.Description.Length > 0)
-                    {
+                    if (Model.Description != null && Model.Description.Length > 0) {
                         description = Model.Description;
                     }
                 }
-                @if (!description.Equals("-"))
-                {
+                @if (!description.Equals("-")) {
                     <div class="grid-item" style="padding: 0px;"><b class="myB">Note</b>&nbsp;@description</div>
                 }
             </div>
@@ -201,8 +199,7 @@
             <!-- ATTACHMENT TITLE ROW -->
             <div class="row" style="margin-top: 80px;">
                 <div class="single-defination">
-                    @if (Model.Attachments.Count > 0)
-                    {
+                    @if (Model.Attachments.Count > 0) {
                         <h4 class="mb-20">Allegati</h4>
                     }
                 </div>

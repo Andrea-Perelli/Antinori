@@ -195,7 +195,7 @@ namespace Antinori.Controllers {
 
             // open login page.
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View(new LoginViewModel());
         }
 
         // POST: /Account/Login
