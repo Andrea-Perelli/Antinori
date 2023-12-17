@@ -136,7 +136,7 @@
 
             </div>
             <div class="row">
-                <img src="@path" class="mx-auto" style="width: 100%; height:100%; margin-top: 20px;" />
+                <img src="@path" class="mx-auto zoom" style="width: 100%; height:100%; margin-top: 20px;" />
             </div>
             <div class="row" style="display: grid; margin-bottom: 30px; margin-top: 15px;">
                 @{
@@ -195,15 +195,7 @@
                     Tiff &nbsp;
                     <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
                 </a>
-            </div>
-            <!-- ATTACHMENT TITLE ROW -->
-            <div class="row" style="margin-top: 80px;">
-                <div class="single-defination">
-                    @if (Model.Attachments.Count > 0) {
-                        <h4 class="mb-20">Allegati</h4>
-                    }
-                </div>
-            </div>
+            </div>           
         </div>
         <!-- MIDDLE COL -->
         <div class=".col-sm" style="max-width: 4%; min-width: 4%; margin-top: -10px;">
@@ -213,7 +205,6 @@
         <div class="col-sm" style="max-width: 44%; min-width: 44%; margin-top: 40px;">
             @if (Model.Transcriptions.Count > 0) {
                 <p>
-
                     @Model.Transcriptions.FirstOrDefault().TEI
                 </p>
             }
@@ -229,40 +220,58 @@
     </div>
 
     <!-- ATTACHMENT ROW -->
-    <div class="row" style="margin-left: 5%; margin-right: 5%;">
-        <ul style="list-style-type: none; width: 100%;">
-            @{ 
-                int j = 1;
-            }
-            @foreach (var att in Model.Attachments.OrderBy(p => p.PublicId)) {
-                <li style="background-color: #eee; border-radius: 1%; padding: 10px 10px 10px 10px; width: 100%; margin-bottom: 5px;">
-                    <span class="caret fa fa-angle-down" style="width: 100%;">
-                        <b style="color: #777777; font-size: 16px;"> Allegato @j </b>
-                    </span>
-                    <ul class="nested">
-                        <div class="grid-container nested" style="display: grid; grid-template-columns: auto auto auto; padding: 10px;">
-                            <div class="grid-item"><b class="myB">Identificativo:</b>&nbsp;@att.PublicId</div>
-                            <div class="grid-item"><b class="myB">Istituto di Conservazione:</b>&nbsp;@att.ConservationInstitute</div>
-                            <div class="grid-item"><b class="myB">Natura:</b>&nbsp;@att.Nature</div>
+    <div class="row" >
+        <!-- LEFT COL -->
+        <div class=".col-sm" style="max-width: 4%; min-width: 4%;">
 
-                            <div class="grid-item"><b class="myB">Data Cronica:</b>&nbsp;@att.ChronicDate</div>
-                            <div class="grid-item"><b class="myB">Data Topica:</b>&nbsp;@att.TopicDate</div>
-                            <div class="grid-item"><b class="myB">Regesto:</b>&nbsp;@att.Regesto</div>
+        </div>
+        <!-- PHOTO COL -->
+        <div class="col-sm" style="max-width: 92%; min-width: 92%; margin-top: 40px; padding:0;">
+            <div class="single-defination">
+                @if(Model.Attachments.Count > 0) {
+                    <h4 class="mb-20">Allegati</h4>
+                }
+            </div>
+            <ul style="list-style-type: none; width: 100%;">
+                @{
+                    int j = 1;
+                }
+                @foreach(var att in Model.Attachments.OrderBy(p => p.PublicId)) {
+                    <li style="background-color: #eee; border-radius: 1%; padding: 10px 10px 10px 10px; width: 100%; margin-bottom: 5px;">
+                        <span class="caret fa fa-angle-down" style="width: 100%;">
+                            <b style="color: #777777; font-size: 16px;"> Allegato @j </b>
+                        </span>
+                        <ul class="nested">
+                            <div class="grid-container nested" style="display: grid; grid-template-columns: auto auto auto; padding: 10px;">
+                                <div class="grid-item"><b class="myB">Identificativo:</b>&nbsp;@att.PublicId</div>
+                                <div class="grid-item"><b class="myB">Istituto di Conservazione:</b>&nbsp;@att.ConservationInstitute</div>
+                                <div class="grid-item"><b class="myB">Natura:</b>&nbsp;@att.Nature</div>
 
-                            <div class="grid-item"><b class="myB">Sigilli:</b>&nbsp;@att.Seals</div>
-                            <div class="grid-item"><b class="myB">Note:</b>&nbsp;@att.Note</div>
+                                <div class="grid-item"><b class="myB">Data Cronica:</b>&nbsp;@att.ChronicDate</div>
+                                <div class="grid-item"><b class="myB">Data Topica:</b>&nbsp;@att.TopicDate</div>
+                                <div class="grid-item"><b class="myB">Regesto:</b>&nbsp;@att.Regesto</div>
 
-                            <div class="grid-item"><b class="myB"></b>
-                                <a href="/Attachments/@att.PhotoPath.Split('\\').Last()" download class="circle my-button-blue genric-btn info" title="Download Anteprima" style="margin: 0; color: white; line-height: 30px; padding-left: 19px; padding-right: 19px;">Anteprima &nbsp;
-                                    <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
-                                </a>
+                                <div class="grid-item"><b class="myB">Sigilli:</b>&nbsp;@att.Seals</div>
+                                <div class="grid-item"><b class="myB">Note:</b>&nbsp;@att.Note</div>
+
+                                <div class="grid-item">
+                                    <b class="myB"></b>
+                                    <a href="/Attachments/@att.PhotoPath.Split('\\').Last()" download class="circle my-button-blue genric-btn info" title="Download Anteprima" style="margin: 0; color: white; line-height: 30px; padding-left: 19px; padding-right: 19px;">
+                                        Anteprima &nbsp;
+                                        <i class="fa fa-file-image-o" style="border-radius: 5px!important;"></i>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    </ul>                    
-                </li>
-                j++;
-            }
-        </ul>
+                        </ul>
+                    </li>
+                    j++;
+                }
+            </ul>
+        </div>
+        <!-- RIGHT COL --->
+        <div class=".col-sm" style="max-width: 4%;  min-width: 4%;">
+
+        </div>
     </div>
 </section>
 <!-- End page Area -->

@@ -31,26 +31,25 @@
         </div>
     </div>
     <div class="row" style="margin-left: 4%; margin-right: 4%;">
-        <div class="col-3">
-            @foreach (var b in Model) {
-                <div class="single-testimonial item">
-                    @{
-                        string path = "";
-                    }
-                    @if (b.PreviewImage != null) {
-                        path = b.PreviewImage.Split('\\').Last();
-                        path = "/Pics/JPEG/" + path;
-                    }
-                    <img class="mx-auto" onclick="ShowOpera('@b.Id')" style="max-width: 100%;" src="@path" />
-                    <p class="desc" style="text-align: left;">
-                    </p>
-                    @*<h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>*@
-                </div>
-                
-            }
-        
-        </div>
-        <div class="col-9">
+        <!--<div class="col-3">-->
+        @*@foreach (var b in Model) {*@
+        <!--<div class="single-testimonial item">-->
+        @*@{
+            string path = "";
+        }
+        @if (b.PreviewImage != null) {
+            path = b.PreviewImage.Split('\\').Last();
+            path = "/Pics/JPEG/" + path;
+        }*@
+        @*<img class="mx-auto" onclick="ShowOpera('@b.Id')" style="max-width: 100%;" src="@path" />*@
+        @*<p class="desc" style="text-align: left;">
+        </p>*@
+        @*<h4 onclick="ShowOpera('@b.Id')">@b.Title</h4>*@
+        <!--</div>-->
+        @*}*@
+
+        <!--</div>-->
+        <div class="col-12">
             <p class="desc" style="text-align: left;">
                 @Model.FirstOrDefault().Description
             </p>

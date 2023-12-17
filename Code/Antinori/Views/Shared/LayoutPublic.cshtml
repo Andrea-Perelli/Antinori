@@ -31,19 +31,22 @@
     <link rel="stylesheet" href="~/Content/Public/css/owl.carousel.css">
     <link rel="stylesheet" href="~/Content/Public/css/main.css">
 
-    <style>     
-        .ls{
+    <style>
+        .ls {
             letter-spacing: 0.04em;
         }
+
         .text-uppercase {
             text-transform: uppercase !important;
         }
+
         label {
             font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.02em;
             display: inline-block;
         }
+
         .form-control {
             display: block;
             width: 100%;
@@ -62,7 +65,8 @@
             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
         }
-        input{
+
+        input {
             overflow: visible;
             margin: 0;
             font-family: inherit;
@@ -90,23 +94,28 @@
             border-color: initial;
             border-image: initial;
         }
+
         .form-control:focus {
             border-width: 2.5px;
             border-color: #C0BEBE;
             box-shadow: none;
         }
+
         .row {
             display: flex;
             flex-wrap: wrap;
             margin-right: -15px;
             margin-left: -15px;
         }
+
         .form-group {
             margin-bottom: 1rem;
         }
-        .my-button{
-            border-radius: 5px!important;
+
+        .my-button {
+            border-radius: 5px !important;
         }
+
         .my-button-blue {
             border-radius: 5px !important;
             color: white !important;
@@ -118,19 +127,17 @@
             background: white !important;
             border-color: #777777 !important;
         }
-
         .myButton:hover {
             color: white !important;
             background: #08956c !important;
             border-color: #0abb87 !important;
         }
-
         .myButton2:hover {
             color: white !important;
             background: #54391d !important;
             border-color: #654321 !important;
         }
-        .overlay{
+        .overlay {
             z-index: 50;
             background: rgba(255,255,255,0.7);
             border-radius: 3px;
@@ -140,10 +147,12 @@
             width: 100%;
             height: 100%;
         }
+
         .grid-item {
             padding: 2px 6px 2px 6px;
             font-size: 16px;
         }
+
         .myB {
             /*color: black;*/
             color: #777777;
@@ -155,7 +164,7 @@
             cursor: pointer;
             user-select: none; /* Prevent text selection */
         }
-        /* Create the caret/arrow and style it */
+            /* Create the caret/arrow and style it */
             .caret::before {
                 float: right;
                 display: inline-block;
@@ -175,23 +184,44 @@
         .active {
             display: block;
         }
+
         .page-link {
             /* pagination style. */
             color: Grey;
             background-color: white;
         }
+
         .page-item.active .page-link {
             /* pagination style. */
             color: white;
             background-color: #C0BEBE;
             border-color: #C0BEBE;
         }
+
         .page-link:hover {
             /* pagination style. */
             color: white;
             background-color: #C0BEBE;
         }
 
+        .zoom {
+            transition: transform .2s; /* Animation */           
+            margin: 0 auto;
+            z-index: 5;
+        }
+
+        .zoom:hover {
+            transform: scale(1.4); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+        .zoom-big {
+            transition: transform .2s; /* Animation */
+            margin: 0 auto;
+            z-index: 5;
+        }
+
+        .zoom-big:hover {
+            transform: scale(2.5); /* (250% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
     </style>
 </head>
 <body>
@@ -221,12 +251,12 @@
                                 <li><a href="@Url.Action("P_GuidaFiltri","Home")">Guida Filtri</a></li>
                             </ul>
                         </li>
-                        <li><a href="@Url.Action("ChiSiamo","Home")">Chi Siamo</a></li>
+                        <li><a href="@Url.Action("Idea","Home")">Idea</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
                 <nav id="nav-menu-container" style="float: right!important;">
                     <ul class="nav-menu">
-                        @if (User.Identity.IsAuthenticated) {
+                        @if(User.Identity.IsAuthenticated) {
                             <li class="menu-has-children" style="margin-left: 20px!important; float:right!important;">
                                 <a href="#">Benvenuto @User.Identity.Name</a>
                                 <ul>
@@ -235,7 +265,7 @@
                                     <li><a href="@Url.Action("LogOff","Account")">Logout</a></li>
                                 </ul>
                             </li>
-                            if (User.IsInRole("Admin") || User.IsInRole("Editor")) {
+                            if(User.IsInRole("Admin") || User.IsInRole("Editor")) {
                                 <li><a href="@Url.Action("Index","Home")">Backoffice</a></li>
                             }
                         }
@@ -291,8 +321,8 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <a href="@Url.Action("ChiSiamo","Home")">
-                            <h6>Chi Siamo</h6>
+                        <a href="@Url.Action("Idea","Home")">
+                            <h6>Idea</h6>
                         </a>
                         <p class="footer-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -732,7 +762,7 @@
             if (selectedSection) {
                 additionalUrl = "&selectedSection=" + selectedSection;
             }
-            
+
             // clear input.
             $('#filter').val('');
             // if the user inserted a filter.
@@ -752,7 +782,7 @@
                             else {
                                 $('#filters').append(data);
                                 // update current list of filters.
-                                filters.push(insertedFilter);                             
+                                filters.push(insertedFilter);
                             }
 
                             // update view.

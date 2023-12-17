@@ -24,44 +24,47 @@
 
     </div>
     <div class=".col-sm">
-        <div class="section-top-border" style="padding: 20px!important; border-top: 0!important;">
-            <h5 class="mb-20">Ricerca Facsimili</h5>
-            <div class="row" style="border-left: 1.5px solid #eee;">
-                <div class="col-md-11 mt-sm-30">
-                    <div class="">
-                        <div class="form-group">
-                            <label class="ls text-uppercase mb-0">Seleziona una Sezione</label>
-                            @Html.DropDownList("selectedSection", new SelectList(ViewBag.Sections), "Tutte", new { @class = "form-control", style = "height: auto; " })
-                        </div>
-                        <div class="form-group">
-                            <label class="ls text-uppercase mb-0">Indici di Enrico Casti</label>
-                            <input type="text" id="filter" name="filter" value="" placeholder="Inserisci un indice" class="form-control" style="height: calc(2.05rem + 2px); width: 100%; margin: auto;">
-                        </div>
-                        <!-- FILTERS -->
-                        <div class="col-md-11 mt-sm-30" id="filters" style="padding: 0;">
-                        </div>
-                        <div class="form-group">
-                            <div class="button-group-area mt-40" style="display: table; margin: auto;">
-                                <i onclick="Apply()" class="fa fa-check genric-btn info circle my-button" title="Applica Filtri">
-                                </i>
+        @if(ViewBag.ShowSearch) {
+            <div class="section-top-border" style="padding: 20px!important; border-top: 0!important;">
+                <h5 class="mb-20">Ricerca Facsimili</h5>
+                <div class="row" style="border-left: 1.5px solid #eee;">
+                    <div class="col-md-11 mt-sm-30">
+                        <div class="">
+                            <div class="form-group">
+                                <label class="ls text-uppercase mb-0">Seleziona una Sezione</label>
+                                @Html.DropDownList("selectedSection", new SelectList(ViewBag.Sections), "Tutte", new { @class = "form-control", style = "height: auto; " })
+                            </div>
+                            <div class="form-group">
+                                <label class="ls text-uppercase mb-0">Indici di Enrico Casti</label>
+                                <input type="text" id="filter" name="filter" value="" placeholder="Inserisci un indice" class="form-control" style="height: calc(2.05rem + 2px); width: 100%; margin: auto;">
+                            </div>
+                            <!-- FILTERS -->
+                            <div class="col-md-11 mt-sm-30" id="filters" style="padding: 0;">
+                            </div>
+                            <div class="form-group">
+                                <div class="button-group-area mt-40" style="display: table; margin: auto;">
+                                    <i onclick="Apply()" class="fa fa-check genric-btn info circle my-button" title="Applica Filtri">
+                                    </i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div style="margin-top: 30px;">
-                        <div class="form-group">
-                            <label class="ls text-uppercase mb-0">Numero di facsimile</label>
-                            <input type="number" id="pageToSearch" name="pageToSearch" placeholder="Inserisci un Numero" class="form-control" style="height: calc(2.05rem + 2px); width: 50%;" min="0">
-                        </div>
-                        <div class="form-group" >
-                            <div class="button-group-area mt-40" style="display: table; margin: auto;">
-                                <i onclick="SearchPage()" class="fa fa-check genric-btn info circle my-button" title="Cerca Facsimile">
-                                </i>
+                        <div style="margin-top: 30px;">
+                            <div class="form-group">
+                                <label class="ls text-uppercase mb-0">Numero di facsimile</label>
+                                <input type="number" id="pageToSearch" name="pageToSearch" placeholder="Inserisci un Numero" class="form-control" style="height: calc(2.05rem + 2px); width: 50%;" min="0">
+                            </div>
+                            <div class="form-group">
+                                <div class="button-group-area mt-40" style="display: table; margin: auto;">
+                                    <i onclick="SearchPage()" class="fa fa-check genric-btn info circle my-button" title="Cerca Facsimile">
+                                    </i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+
     </div>
 </div>
 <!-- PAGINATION -->

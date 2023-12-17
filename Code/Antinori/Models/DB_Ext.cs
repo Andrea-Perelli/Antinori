@@ -492,7 +492,7 @@ namespace Antinori.Models {
         public List<Pages> Pages_GetFirstNByFilterNameListAndIndexAndSection(string[] filterNames, int n, int page, string sectionName) {
             // return first n pages of an advanced search and of an index.
 
-            List<Pages> pages = this.Pages_GetByFilterNameListAndSection(filterNames,sectionName).OrderBy(p => p.NumericOrder).Skip((page - 1) * n).Take(n).ToList();
+            List<Pages> pages = this.Pages_GetByFilterNameListAndSection(filterNames,sectionName).OrderBy(p => p.SubSections.RopeNumber).ThenBy(p => p.NumericOrder).Skip((page - 1) * n).Take(n).ToList();
 
             return pages;
         }

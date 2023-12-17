@@ -9,9 +9,9 @@ namespace Antinori.Controllers {
     public class HomeController : ApplicationController {
 
         [AllowAnonymous]
-        public ActionResult ChiSiamo() {
+        public ActionResult Idea() {
             // return public P_ContestoProgetto page.
-            return View("P_ChiSiamo");
+            return View("P_Idea");
         }
 
         [AllowAnonymous]

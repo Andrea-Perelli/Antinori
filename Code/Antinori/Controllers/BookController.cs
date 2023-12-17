@@ -451,6 +451,7 @@ namespace Antinori.Controllers {
 
             List<SubSections> subSections = this.Dc.Sections_GetsBySectionId(sectionId);
             ViewBag.Sections = this.Dc.Sections_GetsNamesByBookId(subSections.First().Sections.Books.Id);
+            ViewBag.ShowSearch = subSections.First().Sections.Books.Title != "Manoscritti antinoriani" ? false : true;
             // return the partial view containing the UC_SectionSubsections page.
             return Json(GetRenderPartialView(this, "UC_SectionSubsections", subSections), JsonRequestBehavior.AllowGet);
         }
@@ -879,7 +880,12 @@ namespace Antinori.Controllers {
 
                 if (PhotoPath != null) {
                     string relativePathJpeg = "~/Attachments/";
-                    string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + PhotoPath.FileName;
+                    string dir = "/" + Guid.NewGuid().ToString() + "/";
+
+                    if(!Directory.Exists(ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + dir)) {
+                        Directory.CreateDirectory(ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + dir);
+                    }
+                    string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + dir + PhotoPath.FileName;
 
                     // delete small photo.
                     if (System.IO.File.Exists(daDb.PhotoPath)) {
@@ -917,7 +923,11 @@ namespace Antinori.Controllers {
 
                 if (PhotoPath != null) {
                     string relativePathJpeg = "~/Attachments/";
-                    string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + PhotoPath.FileName;
+                    string dir = "/" + Guid.NewGuid().ToString() + "/";
+                    if(!Directory.Exists(ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + dir )) {
+                        Directory.CreateDirectory(ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + dir);
+                    }
+                    string diskPathJpeg = ControllerContext.HttpContext.Server.MapPath(relativePathJpeg) + dir  + PhotoPath.FileName;
 
                     // save.
                     PhotoPath.SaveAs(diskPathJpeg);

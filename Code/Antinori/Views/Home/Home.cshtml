@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row fullscreen d-flex align-items-center justify-content-start">
             <div class="col-lg-6 banner-right">
-                <img class="img-fluid" src="~/Content/img/Home/@ViewBag.page.Path" style="@ViewBag.page.Style">
+                    <img class="img-fluid" src="~/Content/img/Home/@ViewBag.page.Path" style="@ViewBag.page.Style">                
             </div>
             <div class="banner-content col-lg-6">
                 <h5 class="text-white" style="text-align: left;">@ViewBag.page.Title</h5>
@@ -28,28 +28,43 @@
 <section class="section-gap info-area" id="about">
     <div class="container">
         <div class="single-info row mt-40 align-items-center">
-            <div class="col-lg-6 col-md-12 text-center no-padding info-left">
-                <div class="info-thumb">
-                    <img src="~/Content/Public/img/about-img.jpg" class="img-fluid info-img" alt="">
-                </div>
-            </div>
             <div class="col-lg-6 col-md-12 no-padding info-rigth">
                 <div class="info-content">
-                    <h2 class="pb-30">Dr. Travor James</h2>
-                    <p>
-                        inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards – especially in the workplace. That’s why it’s crucial that, as women.
-                    </p>
+                    <h3 class="pb-30">
+                        I Manoscritti Antinoriani per la ricerca storiografica sull’Abruzzo
+                    </h3>
+                    <div>
+                        "L’Antinori nota e registra tutto: avvenimenti politici, piati e controversie giuridiche, elezioni di magistrati, deliberazioni di opere pubbliche, feste religiose, fondazioni di chiese, decessi illustri di signori o vescovi o prelati; impianti di scuole e di professioni di arti e mestieri, edizioni di libri, pestilenze, comete, terremoti, brinate, temporali; … trae vantaggio di tutto, le varie testimonianze adducendo, confrontandole, vagliandole".
+                    </div>
+                    <div style="text-align: right;">
+                        Giovanni Setti
+                    </div>
                     <br>
-                    <p>
-                        inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards – especially in the workplace. That’s why it’s crucial that, as women. inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards – especially in the workplace. That’s why it’s crucial that, as women.
-                    </p>
                     <br>
-                    <img src="~/Content/Public/img/signature.png" alt="">
+                    <br>
+                    <br>
+                    <p style="font-size: 12px;">
+                        I materiali pubblicati in questo sito sono di proprietà della Biblioteca Salvatore Tommasi dell’Aquila e sono sottoposti alla normativa vigente per quanto riguarda i diritti di riproduzione e pubblicazione.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 text-center no-padding info-left">
+                <div class="info-thumb">
+                    <figure>
+                        <img src="~/Content/Public/img/Pescara.jpg" class="img-fluid info-img" alt="">
+                        <figcaption style="font-size:12px;">
+                            Fortezza di Pescara e fiume omonimo che sfocia nell’Adriatico. Annali degli Abruzzi, XXIV-1, 137
+                            
+                        
+                        </figcaption>
+                            <a href="@Url.Action("P_TranslatePageWithAuth","Book")?pageId=25f26ff0-b7dd-4831-ac74-632fe67e11ce" target="_blank" class="" style="border-radius: 50px; border: 1px solid transparent; padding-left: 15px !important; padding-right: 15px !important; line-height: 35px; text-transform: none; background-color: wheat; color: #222; display: inline-block; font-weight: 500;">Vedi</a>
+                    </figure>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 <!-- End about Area -->
 <!-- Start fact Area -->
 <section class="fact-area relative section-gap" id="fact" style="background: url('../../Content/Public/img/1.jpg') center; background-size: cover">
@@ -58,8 +73,10 @@
         <div class="row d-flex justify-content-center">
             <div class="menu-content pb-40 col-lg-8">
                 <div class="title text-center">
-                    <h1 class="mb-10">Some Features that Made us Unique</h1>
-                    <p>Who are in extremely love with eco friendly system.</p>
+                    <h1 class="mb-10">Manoscritti Antinoriani on-line</h1>
+                    <p>
+                        trascrivibili fruibili scaricabili interrogabili per la storia della cultura degli Abruzzi … e <i>luoghi circonvicini</i>
+                    </p>
                 </div>
             </div>
         </div>
@@ -108,7 +125,10 @@
                     <a target="_blank" href="@Url.Action("P_ReadBooks","Book")">
                         <h1 class="mb-10">Inizia a trascrivere ora!</h1>
                     </a>
-                    <p>Non vediamo l'ora di ricevere le tue trascrizioni.</p>
+                    <p>
+                        "<i>Pubblicare tale apparato non era, com’è facile pensare, un’impresa delle più semplici. Nondimeno noi l'abbiamo affrontata con tutto l’ardore che ci ispirava la sua stessa grandiosità</i>”
+                    </p>
+                    <p>Vincenzo De Bartholomaeis</p>
                 </div>
             </div>
         </div>

@@ -25,6 +25,7 @@
             @Html.DropDownList("numOfElementsToShow", listItems, new { @class = "form-control", @onload = "LoadNumberOfPagesToShow();", @onchange = "UpdateNumberOfPagesToShow()", style = "height: 25px; width: 45px!important; margin-left: auto; margin-right: auto; margin-top: 5px; margin-bottom: 10px; padding: 0.2rem; font-size: 0.7rem;" })
         <script>
             LoadNumberOfPagesToShow();
+
         </script>
 
         <div class="row gallery-item">
@@ -39,7 +40,7 @@
                 if (p.Transcriptions.Count > 0) {
                     <div style="padding: 12px; display: table-cell; vertical-align: middle; text-align: center; margin: 0 auto;">
                         <a href="@Url.Action("P_TranslatePage", "Book", new { pageId = p.Id })" target="_blank" title="Leggi">
-                            <img src="@path" class="mx-auto" style="height: 300px; width: 247.5px;" />
+                            <img src="@path" class="mx-auto  zoom-big" style="height: 300px; width: 247.5px;" />
                             <p class="text-center desc" style="color: black; margin-bottom: 3px;">
                                 # @p.NumericOrder
                             </p>
@@ -53,7 +54,7 @@
                     <!-- TO TRANSCRIBE IT -->
                     <div style="padding: 12px; vertical-align: middle; text-align: center; margin: 0 auto;">
                         <a href="@Url.Action("P_TranslatePageWithAuth", "Book", new { pageId = p.Id })" target="_blank" title="Trascrivi">
-                            <img src="@path" class="mx-auto" style="height: 300px; width: 247.5px;" />
+                            <img src="@path" class="mx-auto zoom-big" style="height: 300px; width: 247.5px;" />
                             <p class="text-center desc" style="color: black; margin-bottom: 3px;">
                                 # @p.NumericOrder
                             </p>
