@@ -247,11 +247,41 @@
                         <li class="menu-has-children">
                             <a href="#">Guide</a>
                             <ul>
+                                <li class="menu-has-children">
+                                    <a href="#">Consultazione</a>
+                                    <ul>
+                                        <li><a href="@Url.Action("consultazione/presentazione","Home")">Presentazione</a></li>
+                                        <li><a href="@Url.Action("","Home")">Come accedere alla risorsa</a></li>
+                                        <li><a href="@Url.Action("","Home")">Struttura dei Manoscritti Antinoriani</a></li>
+                                        <li><a href="@Url.Action("","Home")">Ricerca degli argomenti e dei facsimili</a></li>
+                                        <li><a href="@Url.Action("","Home")">Restauro microfilm copie anastatiche</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="menu-has-children">
+                                    <a href="@Url.Action("#","Home")">Trascrizione</a>
+                                    <ul>
+                                        <li><a href="@Url.Action("","Home")">Presentazione</a></li>
+                                        <li><a href="@Url.Action("","Home")">Criteri di trascrizione</a></li>
+                                        <li><a href="@Url.Action("","Home")">Edizioni di trascrizioni dei manoscritti</a></li>
+                                        <li><a href="@Url.Action("","Home")">Codifica e marcatura dei testi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-has-children">
+                                    <a href="@Url.Action("#","Home")">Informazioni varie e curiosità</a>
+                                    <ul>
+                                        <li><a href="@Url.Action("","Home")">Biografia di Antinori</a></li>
+                                        <li><a href="@Url.Action("","Home")">Un corpus a più mani</a></li>
+                                        <li><a href="@Url.Action("","Home")">Altri manoscritti di Antinori</a></li>
+                                        <li><a href="@Url.Action("","Home")">Curiosità sul nome di Antinori</a></li>
+                                    </ul>
+                                </li>
+
                                 <li><a href="@Url.Action("P_GuidaTEI","Home")">Guida TEI</a></li>
                                 <li><a href="@Url.Action("P_GuidaFiltri","Home")">Guida Filtri</a></li>
                             </ul>
                         </li>
-                        <li><a href="@Url.Action("Idea","Home")">Idea</a></li>
+                        <li><a href="@Url.Action("Progetto","Home")">Il Progetto</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
                 <nav id="nav-menu-container" style="float: right!important;">
@@ -321,8 +351,8 @@
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <a href="@Url.Action("Idea","Home")">
-                            <h6>Idea</h6>
+                        <a href="@Url.Action("Progetto","Home")">
+                            <h6>Il Progetto</h6>
                         </a>
                         <p class="footer-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

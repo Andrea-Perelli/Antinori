@@ -9,9 +9,9 @@ namespace Antinori.Controllers {
     public class HomeController : ApplicationController {
 
         [AllowAnonymous]
-        public ActionResult Idea() {
+        public ActionResult Progetto() {
             // return public P_ContestoProgetto page.
-            return View("P_Idea");
+            return View("P_Progetto");
         }
 
         [AllowAnonymous]
@@ -42,10 +42,11 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
-        public ActionResult P_GuidaTEI() {
+        [Route("home/consultazione/presentazione")]
+        public ActionResult ConsultazionePresentazione() {
             // set the guida TEI view. 
 
-            return View();
+            return View("Consultazione/Presentazione");
         }
 
         [AllowAnonymous]
