@@ -35,18 +35,50 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
+        [Route("home/consultazione/presentazione")]
+        public ActionResult ConsultazionePresentazione() {
+            // set the view. 
+
+            return View("Consultazione/Presentazione");
+        }
+
+        [AllowAnonymous]
+        [Route("home/consultazione/risorse")]
+        public ActionResult AccedereAllaRisorsa() {
+            // set the view. 
+
+            return View("Consultazione/Risorsa");
+        }
+
+        [AllowAnonymous]
+        [Route("home/consultazione/struttura")]
+        public ActionResult StrutturaDeiManoscritti() {
+            // set the view. 
+
+            return View("Consultazione/Struttura");
+        }
+
+        [AllowAnonymous]
+        [Route("home/consultazione/ricerca")]
+        public ActionResult RicercaDegliArgomentiEDeiFacsimili() {
+            // set the view. 
+
+            return View("Consultazione/Ricerca");
+        }
+
+        [AllowAnonymous]
+        [Route("home/consultazione/restauro")]
+        public ActionResult RestauroMicrofileCopieAnastatiche() {
+            // set the view. 
+
+            return View("Consultazione/Restauro");
+        }
+
+        [AllowAnonymous]
         public ActionResult P_GuidaFiltri() {
             // set the guida Filtri view. 
 
             return View();
-        }
-
-        [AllowAnonymous]
-        [Route("home/consultazione/presentazione")]
-        public ActionResult ConsultazionePresentazione() {
-            // set the guida TEI view. 
-
-            return View("Consultazione/Presentazione");
         }
 
         [AllowAnonymous]
