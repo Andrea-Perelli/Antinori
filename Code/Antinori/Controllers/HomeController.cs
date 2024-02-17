@@ -75,10 +75,27 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
-        public ActionResult P_GuidaFiltri() {
-            // set the guida Filtri view. 
+        [Route("home/trascrizione/presentazione")]
+        public ActionResult TrascrizionePresentazione() {
+            // set the view. 
 
-            return View();
+            return View("trascrizione/Presentazione");
+        }
+
+        [AllowAnonymous]
+        [Route("home/trascrizione/criteri")]
+        public ActionResult TrascrizioneCriteri() {
+            // set the view. 
+
+            return View("trascrizione/Criteri");
+        }
+
+        [AllowAnonymous]
+        [Route("home/trascrizione/edizioni")]
+        public ActionResult TrascrizioneEdizioni() {
+            // set the view. 
+
+            return View("trascrizione/Edizioni");
         }
 
         [AllowAnonymous]
