@@ -99,6 +99,23 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
+        [Route("home/informazioni/biografia")]
+        public ActionResult InformazioniBiografia() {
+            // set the view. 
+
+            return View("informazioni/biografia");
+        }
+
+
+        [AllowAnonymous]
+        [Route("home/informazioni/corpus")]
+        public ActionResult InformazioniCorpus() {
+            // set the view. 
+
+            return View("informazioni/corpus");
+        }
+
+        [AllowAnonymous]
         public ActionResult Privacy() {
             // set the privacy view. 
 
