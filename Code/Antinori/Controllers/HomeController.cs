@@ -106,13 +106,28 @@ namespace Antinori.Controllers {
             return View("informazioni/biografia");
         }
 
-
         [AllowAnonymous]
         [Route("home/informazioni/corpus")]
         public ActionResult InformazioniCorpus() {
             // set the view. 
 
             return View("informazioni/corpus");
+        }
+
+        [AllowAnonymous]
+        [Route("home/informazioni/altri-manoscritti")]
+        public ActionResult InformazioniAltriManoscritti() {
+            // set the view. 
+
+            return View("informazioni/manoscritti");
+        }
+
+        [AllowAnonymous]
+        [Route("home/informazioni/curiosita")]
+        public ActionResult InformazioniNomeAntinori() {
+            // set the view. 
+
+            return View("informazioni/antinori");
         }
 
         [AllowAnonymous]
