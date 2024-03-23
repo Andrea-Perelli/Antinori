@@ -131,6 +131,14 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
+        [Route("home/sommario")]
+        public ActionResult Sommario() {
+            // set the view. 
+
+            return View("sommario");
+        }
+
+        [AllowAnonymous]
         public ActionResult Privacy() {
             // set the privacy view. 
 
