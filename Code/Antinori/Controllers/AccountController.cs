@@ -160,7 +160,7 @@ namespace Antinori.Controllers {
 
                         //the esito value.
                         esito = true;
-                        Log_Insert(User.UserName, "AspNetUsers", "UPDATE", true, "Operazione di reset password conclusa con successo");
+                        Log_Insert(User.UserName, "AspNetUsers", "UPDATE", true, "Operazione di reset password conclusa con successo: " + password);
                     }
                     else { //could not change password.
                         Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: non è stato possibile cambiare la password.");
