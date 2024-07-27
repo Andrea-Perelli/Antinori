@@ -28,6 +28,12 @@ namespace Antinori.Controllers {
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Supporto() {
+            // return public P_ContestoProgetto page.
+            return View("P_Supporto");
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public ActionResult Index() {
             // internal homepage.           

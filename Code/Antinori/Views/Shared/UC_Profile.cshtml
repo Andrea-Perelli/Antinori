@@ -3,7 +3,7 @@
 <!-- Create a form  -->
 @using (Html.BeginForm("Save", "Account", FormMethod.Post, new { id = "CONTENT_Profile_Form" })) {
     <!-- we can set an action with this attribute: we set that the authentication token has to be the same between requests. -->
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()    
     @Html.ValidationSummary(true)
     @Html.HiddenFor(p => p.Id)
 

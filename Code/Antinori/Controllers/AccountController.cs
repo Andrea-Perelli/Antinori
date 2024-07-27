@@ -94,7 +94,7 @@ namespace Antinori.Controllers {
                 op = new OpEsitoModel() { idReturn = id, riuscita = true };
             }
             else {
-                Log_Insert(id, "AspNetUsers", "CHANGE PASSWORD", false, "Errore:" + changePasswordEsito.Errors.ToString());
+                Log_Insert(id, "AspNetUsers", "CHANGE PASSWORD", false, "Errore: " + changePasswordEsito.Errors.ToString());
                 op = new OpEsitoModel() { idReturn = id, riuscita = false, msg = changePasswordEsito.Errors.ToString() };
             }
             return Json(op, JsonRequestBehavior.AllowGet);
