@@ -28,9 +28,9 @@
 <section class="course-area section-gap" id="subsections" style="padding-top: 30px!important;">
 
     <!-- PAGE NUMBER -->
-    <div class="row" id="MyFixedHeader" style="z-index: 1; margin-right: 0; margin-left: 0px;">
+    <div class="row" id="MyFixedHeader" style="z-index: 10; margin-right: 0; margin-left: 0px;">
         <!-- SEARCH ROW-->
-        <div class="row" style="width: 100%; z-index: 1; padding-top: 1%;">
+        <div class="row" style="width: 100%; z-index: 10; padding-top: 1%;">
             <div class="col-sm" style="text-align: center;">
                 @if (ViewBag.previous != null) {
                     if (ViewBag.previous.Transcriptions.Count > 0) {
@@ -209,7 +209,7 @@
                 </p>
             }
             else {
-                <iframe src="@ViewBag.OxygenUrl" style="border: 1px solid black; height:100%; width:100%"></iframe>
+                <iframe src="@ViewBag.OxygenUrl" loading="lazy" style="border: 1px solid black; height:100%; width:100%"></iframe>
             }
 
         </div>
