@@ -41,6 +41,7 @@
           <Property Name="AccessFailedCount" Type="int" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Cancellato" Type="bit" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="Attachments">
           <Key>
@@ -49,7 +50,7 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PublicId" Type="nvarchar" MaxLength="100" />
           <Property Name="TopicDate" Type="nvarchar" MaxLength="100" />
-          <Property Name="ChronicDate" Type="datetime" />
+          <Property Name="ChronicDate" Type="datetime2" Precision="7" />
           <Property Name="PhotoPath" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Nature" Type="nvarchar(max)" />
           <Property Name="Regesto" Type="nvarchar(max)" />
@@ -494,6 +495,7 @@
           <NavigationProperty Name="Transcriptions" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers" FromRole="AspNetUsers" ToRole="Transcriptions" />
           <NavigationProperty Name="Transcriptions1" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers1" FromRole="AspNetUsers" ToRole="Transcriptions" />
           <NavigationProperty Name="AspNetRoles" Relationship="AntinoriModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="CreationDate" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="Attachments">
           <Key>
@@ -502,7 +504,7 @@
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PublicId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TopicDate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ChronicDate" Type="DateTime" Precision="3" />
+          <Property Name="ChronicDate" Type="DateTime" Precision="7" />
           <Property Name="PhotoPath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Nature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Regesto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -774,6 +776,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="AntinoriModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="Cancellato" ColumnName="Cancellato" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />

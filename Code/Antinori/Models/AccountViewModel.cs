@@ -60,27 +60,36 @@ namespace Antinori.Models {
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
-    {
+    public class RegisterViewModel {
+
+        [Required]
+        public string Surname { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Posta elettronica")]
         public string Email { get; set; }
 
+        [Phone]
+        [Required]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        public string Profession { get; set; }
+
+        public string OtherProfession { get; set; }
+
+
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Conferma password")]
-        [Compare("Password", ErrorMessage = "La password e la password di conferma non corrispondono.")]
-        public string ConfirmPassword { get; set; }
 
-
-        public string Cognome { get; set; }
-        public string Nome { get; set; }
-        public string Sesso { get; set; }
+        
+        //public string Sesso { get; set; }
         public string DataNascita { get; set; }
     }
 

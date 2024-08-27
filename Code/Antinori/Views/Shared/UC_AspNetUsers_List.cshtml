@@ -10,6 +10,7 @@
                 <th style="width: 70px">Cellulare</th>
                 <th style="width: 70px">Professione</th>
                 <th style="width: 100px">Email</th>
+                <th style="width: 100px">Data Registrazione</th>
                 <th style="width: 100px">Ruoli</th>
                 <th style="width: 180px"> </th>
             </tr>
@@ -26,6 +27,8 @@
                 <td>@item.Profession</td>
                 <td>@item.Email</td>
                 <td>
+                    @(item.CreationDate.HasValue ? item.CreationDate.Value.ToString("yyyy-MM-ddThh:mm") : "-")           </td>
+                <td>
                     @foreach(var role in item.AspNetRoles) {
                         <div class="checkbox" style="margin-top: 0px; padding-top: 0px;">
                             <label>
@@ -34,9 +37,7 @@
                                 @Html.DisplayFor(modelItem => role.Name)
                             </label>
                         </div>
-
                     }
-
                 </td>
                 <td>
                     <button class="btn btn-default btn-sm" onclick="edit('@item.Id')" title="Modifica">
@@ -47,7 +48,6 @@
                         <i class="fa fa-unlock">
                         </i>
                     </button>
-
                     <button class="btn btn-default btn-sm" onclick="delete_get('@item.Id')" title="Cancella">
                         <i class="fa fa-trash-o">
                         </i>
@@ -59,7 +59,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="8"></th>
+                <th colspan="9"></th>
             </tr>
         </tfoot>
     </table>

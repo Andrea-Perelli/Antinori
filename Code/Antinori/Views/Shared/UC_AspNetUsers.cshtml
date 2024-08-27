@@ -32,14 +32,27 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <small class="required">Email</small><br />
                 <input type="email" id="Email" name="Email" value="@Model.Email" class="form-control" required />
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <small class="required"> Cellulare</small><br />
                 <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.PhoneNumber" class="form-control" />
-            </div>           
+            </div>
+            @if(Model.Id != null) {
+                <div class="col-md-4">
+                    <small class="required">Data di Registrazione</small><br />
+                    @if(Model.CreationDate.HasValue) {
+                        <input type="datetime" id="CreationDate" name="CreationDate" value="@Model.CreationDate.Value.ToString("yyyy-MM-ddThh:mm")" class="form-control" readonly />
+                    }
+                    else {
+                        <input type="datetime" id="CreationDate" name="CreationDate" value="-" class="form-control" readonly />
+                    }
+
+                </div>
+            }
+
         </div>
 
 

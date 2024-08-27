@@ -39,6 +39,7 @@ namespace Antinori.Models
         public Nullable<int> AccessFailedCount { get; set; }
         public string UserName { get; set; }
         public bool Cancellato { get; set; }
+        public Nullable<System.DateTime> CreationDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transcriptions> Transcriptions { get; set; }

@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Antinori.Models;
+using Newtonsoft.Json;
 
 namespace Antinori.Controllers {
 
@@ -281,7 +282,7 @@ namespace Antinori.Controllers {
             // set the profile view. 
 
             // retrieve the user with name mobile phone etc.
-            var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
+            AspNetUsers user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
 
             return View(user);
         }
@@ -299,7 +300,7 @@ namespace Antinori.Controllers {
         public ActionResult P_Register() {
             // set the public register view. 
 
-            AspNetUsers user = new AspNetUsers();
+            RegisterViewModel user = new RegisterViewModel();
 
             return View("P_Register", user);
         }
@@ -309,60 +310,68 @@ namespace Antinori.Controllers {
             // set the public profile view. 
 
             // retrieve the user with name mobile phone etc.
-            var user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
+            AspNetUsers user = this.Dc.AspNetUsers_Get(this.User.Identity.GetUserId());
 
             return View("P_PublicProfile",user);
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<JsonResult> Register(AspNetUsers user, FormCollection forms) {
+        public async Task<JsonResult> Register(RegisterViewModel user, FormCollection forms) {
             // register function.
             OpEsitoModel op;
 
-            // create new user.
-            var newUser = new ApplicationUser { Email = user.Email, PhoneNumber = user.PhoneNumber, Cancellato = false, LockoutEnabled = user.Attivo };
-            newUser.UserName = newUser.Email;
-            var result = UserManager.CreateAsync(newUser, user.Password);
-            // OK.
-            if(result.Result.Succeeded) {
+            if(ModelState.IsValid) {
+                // create new user.
+                var newUser = new ApplicationUser { Email = user.Email, PhoneNumber = user.PhoneNumber, Cancellato = false, LockoutEnabled = true };
+                newUser.UserName = newUser.Email;
+                var result = UserManager.CreateAsync(newUser, user.Password);
+                // OK.
+                if(result.Result.Succeeded) {
 
-                // retrieve user.
-                AspNetUsers u = this.Dc.AspNetUsers_Get(newUser.Id);
+                    // retrieve user.
+                    AspNetUsers u = this.Dc.AspNetUsers_Get(newUser.Id);
 
-                // set again attivo field (for some reason is set always to to true).
-                u.LockoutEnabled = false;
-                u.LockoutEndDateUtc = DateTime.MaxValue;
-                u.Name = user.Name;
-                u.Surname = user.Surname;
-                u.Profession = user.Profession;
-                // set roles
-                u.AspNetRoles.Add(this.Dc.Ruoli_Get("User"));
-                // save context (roles).
-                this.Dc.AspNetUsers_Save();
+                    // set again attivo field (for some reason is set always to to true).
+                    u.LockoutEnabled = false;
+                    u.LockoutEndDateUtc = DateTime.MaxValue;
+                    u.Name = user.Name;
+                    u.Surname = user.Surname;
+                    u.Profession = user.Profession;
+                    u.OtherProfession = user.OtherProfession;
+                    u.CreationDate = DateTime.Now;
+                    // set roles
+                    u.AspNetRoles.Add(this.Dc.Ruoli_Get("User"));
+                    // save context (roles).
+                    this.Dc.AspNetUsers_Save();
 
-                string msg = "Gentile <b>" + newUser.UserName + ", "
-                   + "</b>,<br><br>grazie per la tua iscrizione! <br/><br/>I dati di accesso sono i seguenti:<br>Username: <b>" + newUser.UserName + "</b><br>Password: " + user.Password + "<br/><br/>"
-                   + "<br><br><br><br>Saluti cordiali.";
+                    string msg = "Gentile <b>" + newUser.UserName + ", "
+                       + "</b>,<br><br>grazie per la tua iscrizione! <br/><br/>I dati di accesso sono i seguenti:<br>Username: <b>" + newUser.UserName + "</b><br>Password: " + user.Password + "<br/><br/>"
+                       + "<br><br><br><br>Saluti cordiali.";
 
-                this.mailController.SendEmail("Benvenuto su Antinori", msg, user.Email);
+                    this.mailController.SendEmail("Benvenuto su Antinori", msg, user.Email);
 
-                // login operation
-                var r = await SignInManager.PasswordSignInAsync(u.Email, user.Password, true, shouldLockout: false);
+                    // login operation
+                    var r = await SignInManager.PasswordSignInAsync(u.Email, user.Password, true, shouldLockout: false);
 
-                Log_Insert(newUser.Id, "Account", "REGISTER", true, "Operazione conclusa con successo", "", "", "", "");
-                op = new OpEsitoModel() { idReturn = newUser.Id, riuscita = true };
-                return Json(op, JsonRequestBehavior.AllowGet);
-            }
-            else { // PROBLEMS.
-                string error_msg = "";
-                foreach(var er in result.Result.Errors) {
-                    error_msg += er + ";";
+                    Log_Insert(newUser.Id, "Account", "REGISTER", true, "Operazione conclusa con successo", "", "", "", "");
+                    op = new OpEsitoModel() { idReturn = newUser.Id, riuscita = true };
+                    return Json(op, JsonRequestBehavior.AllowGet);
                 }
-                Log_Insert(newUser.Email, "Account", "INSERT", false, "Errore:" + error_msg);
-                op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = error_msg };
-                return Json(op, JsonRequestBehavior.AllowGet);
+                else { // PROBLEMS.
+                    string error_msg = "";
+                    foreach(var er in result.Result.Errors) {
+                        error_msg += er + ";";
+                    }
+                    Log_Insert(newUser.Email, "Account", "INSERT", false, "Errore:" + error_msg);
+                    op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = error_msg };
+                    return Json(op, JsonRequestBehavior.AllowGet);
+                }
             }
+            Log_Insert(user.Email, "Account", "INSERT", false, "Tentativo di registrazione non andato a buon fine:" + JsonConvert.SerializeObject(user));
+            op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "" };
+            return Json(op, JsonRequestBehavior.AllowGet);
+
 
         }
 
@@ -438,6 +447,7 @@ namespace Antinori.Controllers {
                     u.Name = user.Name;
                     u.Surname = user.Surname;
                     u.Profession = user.Profession;
+                    u.CreationDate = DateTime.Now;
                     // set roles
                     foreach(var key in forms) {
                         if(key.ToString().Equals("Role")) {
