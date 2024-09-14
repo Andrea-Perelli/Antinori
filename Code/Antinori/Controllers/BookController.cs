@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using System.Configuration;
+using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Antinori.Controllers {
     public class BookController : ApplicationController {
@@ -530,7 +532,7 @@ namespace Antinori.Controllers {
 
             ViewBag.after = p.SubSections.Pages.FirstOrDefault(page => page.NumericOrder == p.NumericOrder + 1);
 
-            ViewBag.OxygenUrl = ConfigurationManager.AppSettings["Oxygen_URL"]; ;
+            ViewBag.OxygenUrl = ConfigurationManager.AppSettings["Oxygen_URL"];
             // return the partial view containing the P_TranslatePage page.
             return View("P_TranslatePage", p);
         }       
@@ -983,6 +985,75 @@ namespace Antinori.Controllers {
 
             // return the partial view containing the pages.
             return Json(GetRenderPartialView(this, "UC_PageListContent", pages), JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public JsonResult SubmitTranscription(string PageId) {
+            OpEsitoModel op;
+            string idUser = this.Dc.AspNetUsers_Get_ByName(User.Identity.Name).Id;
+            string docRootFolderOxygen = ConfigurationManager.AppSettings["Oxygen_Folder"];
+            string docRootFolder = "~/" + ConfigurationManager.AppSettings["Doc_Folder"];
+            try {
+                Pages page = this.Dc.Pages_Get(PageId);
+                if(page == null) {
+                    op = new OpEsitoModel() { riuscita = false };                    
+                    return Json(op, JsonRequestBehavior.AllowGet);
+                }
+
+                Log_Insert(idUser, "BOOKS", "SUBMIT TRANSCRIPTION", true, "Inizio salvataggio trascrizione della pagina", page.Id,"", "", "");
+                // set page as not available to other transcription.
+
+                Transcriptions newTrascription = new Transcriptions() {
+                    Id = Guid.NewGuid().ToString(),
+                    IsApproved = false,
+                    ProposedBy = idUser,
+                    ProposedDate = DateTime.Now,
+                    FileName = ""
+                };
+                page.Transcriptions.Add(newTrascription);
+                int result = this.Dc.Transcriptions_Save();
+                Log_Insert(idUser, "BOOKS", "SUBMIT TRANSCRIPTION", true, "Salvataggio EF trascrizione della pagina", page.Id, "", "", "");
+
+                DirectoryInfo d = new DirectoryInfo(docRootFolderOxygen);
+                string currentDir = ControllerContext.HttpContext.Server.MapPath(docRootFolder);
+
+                if(result > 0 && d.Exists) {
+                    //move file.                        
+                    FileInfo[] files = d.GetFiles("*.xml", SearchOption.TopDirectoryOnly);
+                    if(files != null && files.Count ()> 0) {
+                        files = files.Where(f => !f.Name.Contains("sample")).OrderByDescending(f => f.LastWriteTime).ToArray();
+                        
+                        FileInfo sourceFile = files.FirstOrDefault();
+
+                        if(sourceFile != null) {
+                            Log_Insert(idUser, "BOOKS", "SUBMIT TRANSCRIPTION", true, "Trovata trascrizione: " + sourceFile.FullName, page.Id, "", "", "");
+
+                            string newFileName = Guid.NewGuid().ToString() +  sourceFile.Name;                             
+                            string newFilePath = Path.Combine(currentDir, newFileName);
+                            Log_Insert(idUser, "BOOKS", "SUBMIT TRANSCRIPTION", true, "Sposto la trascrizione su: " + newFilePath, page.Id, "", "", "");
+
+                            //  move a file or folder to a new location.
+                            System.IO.File.Move(sourceFile.FullName, newFilePath);
+                            Log_Insert(idUser, "BOOKS", "SUBMIT TRANSCRIPTION", true, "Trascrizione spostata", page.Id, "", "", "");
+
+                            // update transcription
+                            newTrascription = this.Dc.Transcriptions_Get(newTrascription.Id);
+                            newTrascription.FileName = newFileName;
+                            this.Dc.Transcriptions_Save();
+                            Log_Insert(idUser, "BOOKS", "SUBMIT TRANSCRIPTION", true, "Fine salvataggio trascrizione della pagina", page.Id, "", "", "");
+                            op = new OpEsitoModel() { riuscita = true };
+                            return Json(op, JsonRequestBehavior.AllowGet);
+                        }
+
+                    }
+                }
+                Log_Insert(idUser, "BOOKS", "SUBMIT TRANSCRIPTION", false, "Salvataggio non andato a buon fine", page.Id, "", "", "");
+            }
+            catch(Exception ex) {
+                Log_Insert(idUser, "BOOKS", "SUBMIT TRANSCRIPTION ", false, "Operazione non conclusa", ex.Message, "", "", "");
+            }
+            op = new OpEsitoModel() { riuscita = false };
+            return Json(op, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]

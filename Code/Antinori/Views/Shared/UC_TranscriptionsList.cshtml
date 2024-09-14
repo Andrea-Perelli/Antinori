@@ -9,7 +9,7 @@
             <th style="width: 50px">Numero Completo</th>
             <th style="width: 100px">Opera</th>
             <th style="width: 70px">Sezione</th>
-            <th style="width: 150px">Descrizione Pagina</th>
+            <th style="width: 150px">Proposta in data</th>
             <th style="width: 50px"> </th>
         </tr>
     </thead>
@@ -28,13 +28,19 @@
             <td>@t.Pages.CompleteOrder</td>
             <td>@t.Pages.BookTitle</td>
             <td>@t.Pages.SectionName</td>
-            <td>@t.Pages.Description</td>
+            <td>@t.ProposedDate</td>
 
             <td>
                 <button class="btn btn-default btn-sm" onclick="P_EditTranscription('@t.Id')" title="Modifica Trascrizione">
                     <i class="fa fa-edit">
                     </i>
                 </button>
+                <a href="/Transcriptions/@t.FileName" title="Download Jpeg" download>
+                    <button class="btn btn-default btn-sm" title="Scarica Trascrizione">
+                        <i class="fa fa-download">
+                        </i>
+                    </button>
+                </a>
             </td>
         </tr>
         }

@@ -151,8 +151,7 @@
             </div>
             <div class="row" style="display: grid; margin-bottom: 30px; margin-top: 15px;">
 
-                @if (Model.Places.Count > 0)
-                {
+                @if (Model.Places.Count > 0) {
 
                     <div class="grid-item" style="padding: 0px;">
                         <b class="myB">
@@ -161,16 +160,13 @@
                         </b>
                         <br />
                         @{ int index = 0;}
-                        @foreach (var place in Model.Places)
-                        {
+                        @foreach (var place in Model.Places) {
                             string myUrl = "https://www.google.com.sa/maps/search/" + place.Latitude + "," + place.Longitude;
-                            if (index < Model.Places.Count - 1)
-                            {
+                            if (index < Model.Places.Count - 1) {
                                 <a href="@myUrl" target="_blank" title="Scopri" style="color: #777777;">&nbsp;@place.Name,</a>
 
                             }
-                            else
-                            {
+                            else {
                                 <a href="@myUrl" target="_blank" title="Scopri" style="color: #777777;">&nbsp;@place.Name</a>
                             }
                             index++;
@@ -204,12 +200,23 @@
         <!-- TRANSCRIPTION COL -->
         <div class="col-sm" style="max-width: 44%; min-width: 44%; margin-top: 40px;">
             @if (Model.Transcriptions.Count > 0) {
+                 
+                    string text = "Trascrizione in fase di approvazione";
+                    Antinori.Models.Transcriptions t = Model.Transcriptions.FirstOrDefault();
+                    if(t != null && t.IsApproved) {
+                        text = t.TEI;
+                    }                  
+                
                 <p>
-                    @Model.Transcriptions.FirstOrDefault().TEI
+                    @text
                 </p>
-            }
+            } 
             else {
                 <iframe src="@ViewBag.OxygenUrl" loading="lazy" style="border: 1px solid black; height:100%; width:100%"></iframe>
+                <div class="button-group-area mt-40" style="margin-left: auto; margin-right: auto; margin-top: 0;">
+                    <button onclick="SendMsg()"  class="myButton2 genric-btn info circle my-button" style="margin: 0; background: #654321; line-height: 28px; padding-left: 19px; padding-right: 19px;">Invia</button>
+                </div>
+                
             }
 
         </div>
@@ -286,5 +293,45 @@
             this.parentElement.querySelector(".nested").classList.toggle("active");
             this.classList.toggle("caret-down");
         });
+    }
+</script>
+<script>
+    function SendMsg() {
+        // set a dangerous alert.
+        $("#warning-modal-ok-button").on('click', Send);
+        $("#warningModal").show();
+    }
+
+    function Send() {
+         // show the refresher.
+        REFRESH_show("CONTENT_Refresh");
+        var url = '@Url.Action("SubmitTranscription", "Book")' + "?pageId=" + "@Model.Id";
+
+         $.ajax({
+             type: "GET",
+             url: url,
+             contentType: false,
+             processData: false,
+             success: function (risultato) {
+                 REFRESH_hide("CONTENT_Refresh");
+                 console.log(risultato)
+                 if (risultato) {
+                     // set view.
+                     @*var url2 = '@Url.Action("P_TranslateSearchedPageWithAuth", "Book")' + "?pageNumber=" + pageNumber + "&subsectionId=" + subsectionId;
+                     window.location.href = url2;*@
+                 }
+                 else {
+                     // set error.
+                     $("#errorModal").show();
+                 }
+             },
+             error: function () {
+                 REFRESH_hide("CONTENT_Refresh");
+                 // set error.
+                 $("#errorModal").show();
+             }
+        });
+
+
     }
 </script>

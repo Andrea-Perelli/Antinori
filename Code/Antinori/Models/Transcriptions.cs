@@ -21,6 +21,7 @@ namespace Antinori.Models
         public string ProposedBy { get; set; }
         public string ApprovedBy { get; set; }
         public Nullable<System.DateTime> ProposedDate { get; set; }
+        public string FileName { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual AspNetUsers AspNetUsers1 { get; set; }

@@ -343,6 +343,23 @@
         </div>
     </div>
 
+    <div id="warningModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Attenzione</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="warningModalText">Sei sicuro di voler procedere?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="{$('#warningModal').hide()}" style="background-color: #FF0000!important; border-color: #FF4500!important;">No</button>
+                    <button type="button" class="btn btn-primary" onclick="{$('#warningModal').hide()}" style="background-color: #FF0000!important; border-color: #FF4500!important;" id="warning-modal-ok-button">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- start footer Area -->
     <footer class="footer-area section-gap" style="padding: 60px 0 60px 0;">
         <div class="container">
@@ -357,7 +374,7 @@
                             Copyright &copy;
                             <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            <p>Powered by <a href="https://www.linkedin.com/in/andrea-perelli" target="_blank">Andrea Perelli</a></p>
+                        <p>Powered by <a href="https://www.linkedin.com/in/andrea-perelli" target="_blank">Andrea Perelli</a></p>
                         </p>
                     </div>
                 </div>

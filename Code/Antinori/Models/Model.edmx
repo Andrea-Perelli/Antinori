@@ -182,6 +182,7 @@
           <Property Name="ProposedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
           <Property Name="ProposedDate" Type="datetime" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_Attachments_Pages">
           <End Role="Pages" Type="Self.Pages" Multiplicity="1">
@@ -630,6 +631,7 @@
           <NavigationProperty Name="AspNetUsers" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers" FromRole="Transcriptions" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUsers1" Relationship="AntinoriModel.FK_Transcriptions_AspNetUsers1" FromRole="Transcriptions" ToRole="AspNetUsers" />
           <NavigationProperty Name="Pages" Relationship="AntinoriModel.FK_Transcriptions_Pages" FromRole="Transcriptions" ToRole="Pages" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Transcriptions_AspNetUsers">
           <End Type="AntinoriModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
@@ -915,6 +917,7 @@
           <EntitySetMapping Name="Transcriptions">
             <EntityTypeMapping TypeName="AntinoriModel.Transcriptions">
               <MappingFragment StoreEntitySet="Transcriptions">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="ProposedDate" ColumnName="ProposedDate" />
                 <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
                 <ScalarProperty Name="ProposedBy" ColumnName="ProposedBy" />
