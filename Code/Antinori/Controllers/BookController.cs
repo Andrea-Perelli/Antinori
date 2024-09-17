@@ -9,6 +9,7 @@ using Microsoft.Ajax.Utilities;
 using System.Configuration;
 using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
+using System.Web.UI;
 
 namespace Antinori.Controllers {
     public class BookController : ApplicationController {
@@ -844,12 +845,13 @@ namespace Antinori.Controllers {
             return Json(op, JsonRequestBehavior.AllowGet);
         }
 
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)] //DISABLED validate to accept HTML inside textarea
         [Authorize(Roles = "Admin, Editor")]
         [HttpPost]
         public JsonResult SaveTranscription(Transcriptions transcription, FormCollection forms) {
             // save. 
             OpEsitoModel op;
-
 
             if (ModelState.IsValid) {
                 Transcriptions fromDb = this.Dc.Transcriptions_Get(transcription.Id);
@@ -857,9 +859,18 @@ namespace Antinori.Controllers {
                 //map the two objects: it updates the DB object.
                 if (TryUpdateModel(fromDb)) {
 
+                    fromDb.ApprovedBy = this.Dc.AspNetUsers_Get_ByName(User.Identity.Name).Id;
+
+                    // save.
+                    int esito = this.Dc.Transcriptions_Save();
+
+                    // is we couldn't save.
+                    if(esito == -1) {
+
                         Log_Insert(transcription.Id, "Transcriptions", "UPDATE", false, "Errore nel salvataggio");
                         op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "Errore nel salvataggio" };
                         return Json(op, JsonRequestBehavior.AllowGet);
+                    }
                 }
             }
            

@@ -208,7 +208,7 @@
                     }                  
                 
                 <p>
-                    @text
+                    @Html.Raw(text)
                 </p>
             } 
             else {
@@ -314,11 +314,10 @@
              processData: false,
              success: function (risultato) {
                  REFRESH_hide("CONTENT_Refresh");
-                 console.log(risultato)
                  if (risultato) {
                      // set view.
-                     @*var url2 = '@Url.Action("P_TranslateSearchedPageWithAuth", "Book")' + "?pageNumber=" + pageNumber + "&subsectionId=" + subsectionId;
-                     window.location.href = url2;*@
+                     $("#successModal").show();
+                     location.reload();
                  }
                  else {
                      // set error.
