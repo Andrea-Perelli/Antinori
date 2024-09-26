@@ -675,6 +675,21 @@ namespace Antinori.Models {
             int res = Transcriptions_Gets().Count;
             return res;
         }
+
+        public int Transcriptions_Delete(Transcriptions t) {
+            // delete a Transcription.
+            int esito = -1;
+            try {
+                Transcriptions.Remove(t);
+                // Entity framework stores its current status on the db (we don't pass any object to store).
+                esito = SaveChanges();
+            }
+            catch(Exception e) {
+
+            }
+            return esito;
+        }
+
         public Transcriptions Transcriptions_Get(string id) {
             // return a Transcriptions by Id.
             return Transcriptions.FirstOrDefault(it => it.Id == id);

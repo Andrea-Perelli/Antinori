@@ -41,6 +41,13 @@
                         </i>
                     </button>
                 </a>
+                @if(!t.IsApproved) {
+                    <button class="btn btn-default btn-sm" onclick="delete_get('@t.Id')" title="Modifica Trascrizione">
+                        <i class="fa fa-trash">
+                        </i>
+                    </button>
+                }
+
             </td>
         </tr>
         }

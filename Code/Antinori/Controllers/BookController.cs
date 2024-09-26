@@ -126,6 +126,7 @@ namespace Antinori.Controllers {
             return Json(esito, JsonRequestBehavior.AllowGet);
         }
 
+
         [Authorize(Roles = "Admin")]
         public JsonResult DeleteAttachment(string id) {
             // delete an attachment by id.
@@ -176,6 +177,34 @@ namespace Antinori.Controllers {
                 Log_Insert(p.Id, "Pages", "DELETE FILE", false, "Errore nella cancellazione del file: " + e.Message);
             }
 
+            //save and update the esito value.
+            return Json(esito, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult DeleteTranscription(string id) {
+            // delete a Transcription by id.
+
+            // set default value for esito.
+            bool esito = false;
+            try {
+                Transcriptions t = this.Dc.Transcriptions_Get(id);
+
+                // Delete transcrption file.
+                string path = "~/" + ConfigurationManager.AppSettings["Doc_Folder"];
+                path = Path.Combine(path, t.FileName);
+                path = ControllerContext.HttpContext.Server.MapPath(path);
+                System.IO.File.Delete(path);
+
+                // delete transcription.
+                esito = this.Dc.Transcriptions_Delete(t) > -1;
+                
+            }
+            catch(Exception ex) {
+                esito = false;
+                Log_Insert(id, "Transcriptions", "DELETE", false, "Errore nel salvataggio: " + ex.Message);
+
+            }
             //save and update the esito value.
             return Json(esito, JsonRequestBehavior.AllowGet);
         }

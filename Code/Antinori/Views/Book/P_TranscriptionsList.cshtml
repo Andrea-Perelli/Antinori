@@ -54,6 +54,30 @@
                 });
         }
 
+        function delete_ok(id) {
+            // delete the user.
+
+            // hide the modal view.
+            $("#MODAL_ID").hide();
+
+            var url = '@Url.Action("DeleteTranscription", "Book")' + "?id=" + id;
+            // show the refresher.
+            REFRESH_show("CONTENT_Refresh");
+            $.getJSON(url,
+                function (data) {
+                    // hide the refresher.
+                    $("#MODAL_ID").modal('toggle');
+                    if (Boolean(data)) {
+                        list();
+                    }
+                });
+        }
+
+        function delete_get(id) {
+            // set a dangerous alert.
+            DANGER_function("ATTENZIONE", "Questa operazione cancellerà l'opera selezionata: sei sicuro di voler procedere?", "delete_ok('" + id + "')", "Procedi", "", "Annulla")
+        }
+
         function P_EditTranscription(id) {
             var url = '@Url.Action("P_EditTranscription", "Book")' + "?id=" + id;
 
@@ -102,7 +126,7 @@
                 });
             }
         }
-        
+
     </script>
 }
 
