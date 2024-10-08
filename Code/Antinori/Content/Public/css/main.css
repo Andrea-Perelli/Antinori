@@ -2001,6 +2001,10 @@ h1, h2, h3, h4, h5, h6 {
   #nav-menu-container {
     display: none;
   }
+
+    #nav-menu-container2 {
+        display: none;
+    }
 }
 
 /* Nav Meu Styling */

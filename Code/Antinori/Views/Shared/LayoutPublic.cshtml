@@ -237,11 +237,11 @@
                 <nav id="nav-menu-container" style="margin-right: 0!important;">
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="@Url.Action("Home","Home")">Home</a></li>
-                        <li>
-                            <a href="">Risorse</a>
+                        <li class="menu-has-children">
+                            <a href="#">Risorse</a>
                             <ul>
-                                <li><a href="@Url.Action("P_ReadBooks","Book")">Manoscritti Antinoriani</a></li>
-                                <li><a href="@Url.Action("Fonti","Book")">Fonti</a></li>
+                                <li class=""><a href="@Url.Action("P_ReadBooks","Book")">Manoscritti Antinoriani</a></li>
+                                <li class=""><a href="@Url.Action("Fonti","Book")">Fonti</a></li>
                             </ul>
                         </li>
                         <li class="menu-has-children">
@@ -280,10 +280,12 @@
                         </li>
                         <li><a href="@Url.Action("Progetto","Home")">Il Progetto</a></li>
                         <li><a href="@Url.Action("Supporto","Home")">Supporto</a></li>
-                    </ul>
-                </nav><!-- #nav-menu-container -->
-                <nav id="nav-menu-container" style="float: right!important; padding: 0;">
-                    <ul class="nav-menu">
+                    </ul>  
+                    
+                </nav>
+                <!-- #nav-menu-container -->
+                <nav id="nav-menu-container2" style="float: right!important; padding: 0;">
+                    <ul class="nav-menu" id="menu-2">
                         @if(User.Identity.IsAuthenticated) {
                             <li class="menu-has-children" style="margin-left: 20px!important; float:right!important;">
                                 <a href="#">Benvenuto @User.Identity.Name</a>

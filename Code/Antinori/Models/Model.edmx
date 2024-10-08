@@ -103,12 +103,12 @@
           <Property Name="Rif_Tabella" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Rif_Id" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="Operazione_Tipo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Operazione_Esito" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Operazione_Esito" Type="varchar(max)" Nullable="false" />
           <Property Name="Operazione_Riuscita" Type="bit" Nullable="false" />
-          <Property Name="Operazione_Dettagli1" Type="varchar" MaxLength="200" />
-          <Property Name="Operazione_Dettagli2" Type="varchar" MaxLength="200" />
-          <Property Name="Operazione_Dettagli3" Type="varchar" MaxLength="200" />
-          <Property Name="Operazione_Dettagli4" Type="varchar" MaxLength="200" />
+          <Property Name="Operazione_Dettagli1" Type="varchar(max)" />
+          <Property Name="Operazione_Dettagli2" Type="varchar(max)" />
+          <Property Name="Operazione_Dettagli3" Type="varchar(max)" />
+          <Property Name="Operazione_Dettagli4" Type="varchar(max)" />
           <Property Name="Operazione_Data" Type="datetime" Nullable="false" />
           <Property Name="Operazione_Username" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
@@ -561,12 +561,12 @@
           <Property Name="Rif_Tabella" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Rif_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="Operazione_Tipo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Operazione_Esito" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Operazione_Esito" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Operazione_Riuscita" Type="Boolean" Nullable="false" />
-          <Property Name="Operazione_Dettagli1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Operazione_Dettagli2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Operazione_Dettagli3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Operazione_Dettagli4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Operazione_Dettagli1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Operazione_Dettagli2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Operazione_Dettagli3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Operazione_Dettagli4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Operazione_Data" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Operazione_Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>

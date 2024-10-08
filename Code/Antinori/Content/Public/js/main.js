@@ -54,10 +54,15 @@ $(document).ready(function(){
     var $mobile_nav = $('#nav-menu-container').clone().prop({
       id: 'mobile-nav'
     });
+    var $mobile_nav2 = $('#menu-2').clone().prop({
+        id: 'mobile-nav2',
+        class: ''
+    });
     $mobile_nav.find('> ul').attr({
       'class': '',
       'id': ''
     });
+    $mobile_nav.append($mobile_nav2)
     $('body').append($mobile_nav);
     $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="lnr lnr-menu"></i></button>');
     $('body').append('<div id="mobile-body-overly"></div>');

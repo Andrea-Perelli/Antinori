@@ -137,43 +137,57 @@ namespace Antinori.Controllers {
 
             // set default value for esito.
             bool esito = false;
+            try {
+                // retrieve user.
+                var User = this.Dc.AspNetUsers_Get_ByUsername(Username);
+                if(User != null) {
+                    // retrieve configuration file email.
+                    string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];
 
-            // retrieve user.
-            var User = this.Dc.AspNetUsers_Get_ByUsername(Username);
-            if(User != null) {
-                // retrieve configuration file email.
-                string email = System.Configuration.ConfigurationManager.AppSettings["SMTP_From"];
+                    // reset password
+                    string password = this.CreatePassword(Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["minPasswordLenght"]));
 
-                // reset password
-                string password = this.CreatePassword(Int16.Parse(System.Configuration.ConfigurationManager.AppSettings["minPasswordLenght"]));
+                    var removePasswordEsito = this.UserManager.RemovePassword(User.Id);
+                    if(removePasswordEsito.Succeeded) {
+                        var addPasswordEsito = this.UserManager.AddPassword(User.Id, password);
+                        if(addPasswordEsito.Succeeded) {
+                            Log_Insert(User.UserName, "AspNetUsers", "UPDATE", true, "Operazione di reset password effettuata: " + password);
 
-                var removePasswordEsito = this.UserManager.RemovePassword(User.Id);
-                if(removePasswordEsito.Succeeded) {
-                    var addPasswordEsito = this.UserManager.AddPassword(User.Id, password);
-                    if(addPasswordEsito.Succeeded) {
-                        // set corpo.
-                        string corpo = "Gentile <b>" + User.Name + " " + User.Surname
-                            + "</b>,<br><br>come da tua richiesta il sistema ha modificato la tua password. <br> La nuova è: <b>" + password + "</b>.<br>"
-                            + "Ti ricordiamo che hai la possibilità di cambiarla. <br><br><br><br>Cordiali saluti.";
+                            // set corpo.
+                            string corpo = "Gentile <b>" + User.Name + " " + User.Surname
+                                + "</b>,<br><br>come da tua richiesta il sistema ha modificato la tua password. <br> La nuova è: <b>" + password + "</b>.<br>"
+                                + "Ti ricordiamo che hai la possibilità di cambiarla. <br><br><br><br>Cordiali saluti.";
 
-                        // send mail.
-                        this.mailController.SendEmail("Reset Password", corpo, User.Email);
+                            // send mail.
+                            this.mailController.SendEmail("Reset Password", corpo, User.Email);
 
-                        //the esito value.
-                        esito = true;
-                        Log_Insert(User.UserName, "AspNetUsers", "UPDATE", true, "Operazione di reset password conclusa con successo: " + password);
+                            //the esito value.
+                            esito = true;
+                            Log_Insert(User.UserName, "AspNetUsers", "UPDATE", true, "Operazione di reset password ed invio mail conclusa con successo: " + password);
+                        }
+                        else { //could not change password.
+                            Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: non è stato possibile cambiare la password.");
+                        }
                     }
                     else { //could not change password.
                         Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: non è stato possibile cambiare la password.");
                     }
                 }
-                else { //could not change password.
-                    Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: non è stato possibile cambiare la password.");
+                else { //user == null
+                    Log_Insert("", "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: utente non trovato.");
                 }
             }
-            else { //user == null
-                Log_Insert(User.UserName, "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: utente non trovato.");
+            catch(Exception ex) {
+                if(ex.InnerException != null && !string.IsNullOrEmpty(ex.InnerException.Message)) {
+                    Log_Insert("", "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: " + ex.Message + " " + ex.InnerException.Message);
+
+                }
+                else {
+                    Log_Insert("", "AspNetUsers", "UPDATE", false, "Operazione di reset password conclusa con errore: " + ex.Message);
+                }
+
             }
+
             // return the partial view .
             return Json(esito, JsonRequestBehavior.AllowGet);
         }
@@ -371,8 +385,6 @@ namespace Antinori.Controllers {
             Log_Insert(user.Email, "Account", "INSERT", false, "Tentativo di registrazione non andato a buon fine:" + JsonConvert.SerializeObject(user));
             op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = "" };
             return Json(op, JsonRequestBehavior.AllowGet);
-
-
         }
 
         [Authorize(Roles = "Admin,Editor")]
