@@ -377,6 +377,9 @@ namespace Antinori.Controllers {
                     foreach(var er in result.Result.Errors) {
                         error_msg += er + ";";
                     }
+                    if(error_msg.Contains("Passwords must be at least 6 characters")) {
+                        error_msg = "La password deve essere di almeno 6 caratteri";
+                    }
                     Log_Insert(newUser.Email, "Account", "INSERT", false, "Errore:" + error_msg);
                     op = new OpEsitoModel() { idReturn = "", riuscita = false, msg = error_msg };
                     return Json(op, JsonRequestBehavior.AllowGet);

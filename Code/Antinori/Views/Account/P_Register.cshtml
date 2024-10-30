@@ -52,6 +52,11 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
+                <p id="msg-error" class="text-danger">
+
+                </p>
+            </div>
+            <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                     </div>
@@ -88,7 +93,9 @@
                   lang: 'it'
               });
 
-              if ($('#CONTENT_Form').valid()) {
+            if ($('#CONTENT_Form').valid()) {
+                $("#msg-error").text("");
+
                    REFRESH_show("CONTENT_Refresh");
                    var url = '@Url.Action("Register", "Account")';
                    // take the form content by id.
@@ -107,8 +114,10 @@
                                 SUCCESS_function("Utente salvato ", "Complimenti!  L'operazione di inserimento si è conclusa con successo!","vai('@Url.Action("Home","Home")')","OK");
                             }
                             else {
+                                console.log(risultato)
+                                $("#msg-error").text(risultato.msg)
                                 // set error.
-                            DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare");
+                                DANGER_function("Si è verificato un errore durante l'operazione", "Controllare i dati inseriti e riprovare");
                             }
                         },
                         error: function () {
