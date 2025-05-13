@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "Marcatori per la codifica testuale";
+    Layout = "~/Views/Shared/LayoutPublic.cshtml";
+}
+
+<section class="banner-area">
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start" style="max-height: 100px!important;">
+        </div>
+    </div>
+</section>
+<section class="testomial-area section-gap" style="padding-bottom: 20px!important;">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">@ViewBag.Title</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="single-defination">
+                    <h5><i>Paragrafo e inizio testo</i> @Html.Raw(HttpUtility.HtmlEncode("<p> e <lb>"))</h5>
+
+                    <p>Il testo da trascrivere viene marcato all’interno dell’elemento <b>@Html.Raw(HttpUtility.HtmlEncode("<p>"))</b> con gli attributi di collegamento tra numero e nomenclatura del facsimile con @@ n e @@ facs </p>
+                    <p>Se il testo è in latino seguirà la dichiarazione con @@ xml:lang =”lat”</p>
+                    <p>
+                        <b>@Html.Raw(HttpUtility.HtmlEncode("<lb>"))</b> segnala l'inizio del testo che sarà sempre il numero di pagina espresso con @@n. Il numero della pagina da inserire è di modulo grande, generalmente scritto in blu e verificabile attraverso gli indici di Casti (riportati all’inizio di ogni volume o su ogni primo tomo).
+                    </p>
+
+                    <p>Si raccomanda di attenersi ai <a href="~/home/trascrizione/criteri" target="_blank">criteri di trascrizione</a>.</p>
+
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/p_lb.png">
+                    </div>
+
+
+                    <h5><i>Nomi propri </i> @Html.Raw(HttpUtility.HtmlEncode("<persName>"))</h5>
+                    <p>@Html.Raw(HttpUtility.HtmlEncode("<persName>")) marca i nomi propri di persona, normalizzati dall’attributo @@key  necessario anche per la costruzione di indici. Si scriverà prima il cognome/nome della famiglia seguito da virgola e poi il nome di battesimo; nel caso di nomi con patronimici si rispetta la forma usata nel manoscritto; @@<b>role</b> definisce il titolo, il ruolo, la professione … della persona.</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/persname.png">
+                    </div>
+
+                    <h5><i>Nomi di luogo </i> @Html.Raw(HttpUtility.HtmlEncode("<placeName>"))</h5>
+                    <p><b>@Html.Raw(HttpUtility.HtmlEncode("<placeName>"))</b> per marcare i nomi di luogo normalizzati da @@<b>key</b> e disambiguando dopo la virgola; la tipologia del luogo (chiesa, monastero, piazza, località ...) sarà espressa con @@<b>type</b>.</p>
+
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/place_name.png">
+                    </div>
+
+                    <h5><i>Coordinate geografiche </i> @Html.Raw(HttpUtility.HtmlEncode("<geo></geo>"))</h5>
+                    <p>Per l’inserimento delle coordinate geografiche secondo il sistema di posizionamento globale</p>
+
+                    <h5><i>Date </i> @Html.Raw(HttpUtility.HtmlEncode("<date>"))</h5>
+                    <p>L’attributo <b>@Html.Raw(HttpUtility.HtmlEncode("<date>"))</b> per marcare le date, normalizzate attraverso @@key.</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Date.png">
+                    </div>
+
+
+
+                    <h5><i>Note </i> @Html.Raw(HttpUtility.HtmlEncode("<note>"))</h5>
+                    <p><b>@Html.Raw(HttpUtility.HtmlEncode("<note>"))</b> contiene una nota o annotazione a latere della trattazione (nota posta ovunque, a piè di pagina, a fine testo, a margine destro o sinistro) da inserire nel testo nel punto esatto di riferimento; può contenere altri elementi e se contiene testo in latino si dichiara con @@ xml:lang="lat" </p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Note.png">
+                    </div>
+
+
+                    <h5><i>Rinvii e riferimenti </i> @Html.Raw(HttpUtility.HtmlEncode("<ref>"))</h5>
+                    <p>Nei <i>Manoscritti </i> i rinvii sono generalmente riferiti a luoghi e/o date; il marcatore <b>@Html.Raw(HttpUtility.HtmlEncode("<ref>"))</b> deve essere inserito nella trascrizione nel punto esatto del riferimento con @@ type="rinvio".</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Ref.png">
+                    </div>
+
+
+                    <h5><i>Segnalazioni di omissioni </i> @Html.Raw(HttpUtility.HtmlEncode("<gap>"))</h5>
+                    <p><b>@Html.Raw(HttpUtility.HtmlEncode("<gap>"))</b> è un elemento senza contenuto testuale e indica il punto dove si omette la trascrizione per cancellature o interventi di correzione. </p>
+                    <p>Nei <i>Manoscritti</i> si possono trovare parti di pagine, o pagine intere, barrate come nell’esempio che segue; il tratto, coevo al manoscritto, è usato per indicare che quel testo è stato riportato in bella copia, copie che generalmente si trovano sfogliando in avanti. L’esempio qui riportato è il facsimile BibliotecaTommasi.Antinori.Monumenti.XLVII-1_0015_2 la cui bella copia è nel facsimile BibliotecaTommasi.Antinori. Monumenti.XLVII-1_0023_7 di cui tratto negli esempi.</p>
+                    <p>La marcatura della pagina di cui si omette la trascrizione sarà</p>
+                    <pre>
+                        @Html.Raw(HttpUtility.HtmlEncode("<p>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<lb n=\"p. 2\"> </lb>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<gap></gap>"))
+                        @Html.Raw(HttpUtility.HtmlEncode("</p>"))
+
+                    </pre>
+                    <p>marcatura scritta su un nuovo foglio del modello XML-TEI utilizzato, che avrà nell’elemento <b>@Html.Raw(HttpUtility.HtmlEncode("<facsimile>"))</b> la propria nomenclatura (si rimanda alla codifica del tag <b>@Html.Raw(HttpUtility.HtmlEncode("<facsimile>"))</b>).</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Gap.png">
+                    </div>
+
+
+                    <h5><i>Testo illeggibile </i> @Html.Raw(HttpUtility.HtmlEncode("<gap><!--desc>"))</h5>
+                    <p>Se il testo risulta illeggibile, incomprensibile al trascrittore, si segnala con una breve descrizione</p>
+                    <pre>
+                         @Html.Raw(HttpUtility.HtmlEncode("<p>")) ...                            
+                         @Html.Raw(HttpUtility.HtmlEncode("<gap><!--desc>Seguono tre parole illegibili</desc--></gap></p>"))
+
+                     </pre>
+
+
+                    <h5><i>Rinvio ad altra parte del testo con simboli </i> @Html.Raw(HttpUtility.HtmlEncode("<ref>"))</h5>
+                    <p><b>@Html.Raw(HttpUtility.HtmlEncode("<ref>"))</b> con @@type="simbolo" si usa per marcare un testo che rimanda ad altro testo per mezzo di un simbolo: la trascrizione deve essere preceduta dal segno *</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Ref2.png">
+                    </div>
+
+                    <p>Alla digressione in esempio si riferisce la seconda nota del margine destro (gli inchiostri sono anche dello stesso tipo) e quindi il tag di chiusura <b>@Html.Raw(HttpUtility.HtmlEncode("</ref>"))</b> deve trovarsi dopo la trascrizione completa della nota che contiene anche una figura marcata con <b>@Html.Raw(HttpUtility.HtmlEncode("<figure>"))</b> e due citazioni marcate con <b>@Html.Raw(HttpUtility.HtmlEncode("<bibl>"))</b>.</p>
+
+
+
+                    <h5><i>Figure e disegni </i> @Html.Raw(HttpUtility.HtmlEncode("<figure>"))</h5>
+                    <p>Le figure, i disegni in genere, sono marcati con <b>@Html.Raw(HttpUtility.HtmlEncode("<figure>"))</b> che contiene <b>@Html.Raw(HttpUtility.HtmlEncode("<head>"))</b> per un eventuale titolo, <b>@Html.Raw(HttpUtility.HtmlEncode("<p>"))</b> per trascrivere un testo e <b>@Html.Raw(HttpUtility.HtmlEncode("<desc>"))</b> per una libera e concisa descrizione.</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Figure.png">
+                    </div>
+
+
+                    <h5><i>Citazioni bibliografiche </i> @Html.Raw(HttpUtility.HtmlEncode("<bibl>"))</h5>
+                    <p>Le citazioni <b>@Html.Raw(HttpUtility.HtmlEncode("<bibl>"))</b> vanno inserite nel testo nel punto esatto di riferimento; sono contenuti i tag <b>@Html.Raw(HttpUtility.HtmlEncode("<author>"))</b> per il nome dell’autore, <b>@Html.Raw(HttpUtility.HtmlEncode("<title>"))</b> per il titolo dell’opera e <b>@Html.Raw(HttpUtility.HtmlEncode("<biblScope>"))</b> per i numeri di partizioni e delle pagine.</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Bibl.png">
+                    </div>
+                    <p>Segue la trascrizione con la marcatura essenziale del particolare del facsimile <i>BibliotecaTommasi.Antinori.Annali.VI_0075_45</i>; per snellire l’esempio non sono stati marcati i luoghi, i nomi propri e le date </p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Example.png">
+                    </div>
+                    <br />
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Example_Result.png">
+                    </div>
+
+
+
+                    <h5><i>Citazioni, brani testuali </i> @Html.Raw(HttpUtility.HtmlEncode("<quote>"))</h5>
+                    <p>Per marcare una frase o un brano attribuito dall'autore o dal narratore a soggetti esterni al testo si usa <b>@Html.Raw(HttpUtility.HtmlEncode("<quote>"))</b>.</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Quote.png">
+                    </div>
+                    <p>
+                        Come esempio riepilogativo si fornisce la trascrizione e marcatura del facsimile <i>BibliotecaTommasi.Antinori. Monumenti.XLVII-1_0023_7</i>
+                    </p>
+                    <br />
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Full_Example.png">
+                    </div>
+
+                    <br />
+                    <br />
+                    <br />
+
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Full_Example_Result_1.png">
+                        <img src="~/Content/img/TEI/Full_Example_Result_2.png">
+                        <img src="~/Content/img/TEI/Full_Example_Result_3.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

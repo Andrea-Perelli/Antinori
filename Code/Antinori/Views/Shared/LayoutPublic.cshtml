@@ -259,12 +259,20 @@
                                     </ul>
                                 </li>
                                 <li class="menu-has-children">
-                                    <a href="@Url.Action("#","Home")">Trascrizione</a>
+                                    <a href="#">Trascrizione</a>
                                     <ul>
                                         <li><a href="@Url.Action("trascrizione/presentazione","Home")">Presentazione</a></li>
                                         <li><a href="@Url.Action("trascrizione/criteri","Home")">Criteri di trascrizione</a></li>
                                         <li><a href="@Url.Action("trascrizione/edizioni","Home")">Edizioni di trascrizioni dei manoscritti</a></li>
-                                        <li><a href="@Url.Action("","Home")">Codifica e marcatura dei testi</a></li>
+                                        <li class="menu-has-children">
+                                            <a href="#">Codifica e marcatura dei testi</a>
+                                            <ul>
+                                                <li><a href="@Url.Action("trascrizione/codifica/introduzione","Home")">Introduzione</a></li>
+                                                <li><a href="@Url.Action("trascrizione/codifica/modello-codifica","Home")">Modello di codifica XML-TEI</a></li>
+                                                <li><a href="@Url.Action("trascrizione/codifica/marcatori","Home")">Marcatori per la codifica testuale</a></li>
+
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="menu-has-children">

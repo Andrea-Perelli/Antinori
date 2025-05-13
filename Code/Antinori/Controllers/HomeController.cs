@@ -105,6 +105,30 @@ namespace Antinori.Controllers {
         }
 
         [AllowAnonymous]
+        [Route("home/trascrizione/codifica/introduzione")]
+        public ActionResult TrascrizioneCodificaIntroduzione() {
+            // set the view. 
+
+            return View("trascrizione/codifica/introduzione");
+        }
+
+        [AllowAnonymous]
+        [Route("home/trascrizione/codifica/modello-codifica")]
+        public ActionResult TrascrizioneCodificaModello() {
+            // set the view. 
+
+            return View("trascrizione/codifica/modello");
+        }
+
+        [AllowAnonymous]
+        [Route("home/trascrizione/codifica/marcatori")]
+        public ActionResult TrascrizioneCodificaMarcatori() {
+            // set the view. 
+
+            return View("trascrizione/codifica/marcatori");
+        }
+
+        [AllowAnonymous]
         [Route("home/informazioni/biografia")]
         public ActionResult InformazioniBiografia() {
             // set the view. 

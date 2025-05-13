@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "Modello di codifica XML-TEI";
+    Layout = "~/Views/Shared/LayoutPublic.cshtml";
+}
+
+<section class="banner-area">
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start" style="max-height: 100px!important;">
+        </div>
+    </div>
+</section>
+<section class="testomial-area section-gap" style="padding-bottom: 20px!important;">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-8">
+                <div class="title text-center">
+                    <h1 class="mb-10">@ViewBag.Title</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="single-defination">
+                    <h5><i>Modello di codifica XML-TEI</i></h5>
+                    <p>Le presenti note indicano le convenzioni di marcatura scelte per permettere anche a chi si accosta per la prima volta a tale sistema di codifica, di orientarsi nella lettura del file in formato XML e comprendere il valore dei marcatori utilizzati (foglio di stile).</p>
+                    <p>
+                        I nomi degli elementi sono indicati tra parentesi uncinate e quello degli attributi, premettendo una @@ al nome.
+                    </p>
+                    <p>Il file XML-TEI è diviso, come da modello, in due macro-elementi: <b>@Html.Raw(HttpUtility.HtmlEncode("<teiHeader>"))</b> per l’intestazione descrittiva generale dell’intero progetto e <b>@Html.Raw(HttpUtility.HtmlEncode("<text>"))</b> per la rappresentazione e trascrizione dei testi; è stato aggiunto l’elemento opzionale <b>@Html.Raw(HttpUtility.HtmlEncode("<facsimile>"))</b> che permette di marcare le riproduzioni digitali dei <i>Manoscritti</i> stabilendo i collegamenti con il testo trascritto</p>
+                    <pre>
+                        @Html.Raw(HttpUtility.HtmlEncode("<TEI")) …
+
+                            @Html.Raw(HttpUtility.HtmlEncode("<teiHeader>")) …
+
+                            @Html.Raw(HttpUtility.HtmlEncode("</teiHeader>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<facsimile>")) ….
+
+                            @Html.Raw(HttpUtility.HtmlEncode("</facsimile>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<text>")) …
+
+                            @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+                        @Html.Raw(HttpUtility.HtmlEncode("</TEI"))
+
+                    </pre>
+
+                    <p>Segue un esempio descrittivo della codifica e trascrizione del facsimile <i>BibliotecaTommasi.Antinori.Monumenti.XLVII-1_0023_7</i>, nomenclatura del file che si ottiene eseguendo il download dell’immagine.</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Esempio_descrittivo_codifica.png">
+                    </div>
+                    <br />
+                    <p>In <b>@Html.Raw(HttpUtility.HtmlEncode("<facsimile>"))</b> sono annidati e preordinati alcuni tag, tra cui l’elemento <b>@Html.Raw(HttpUtility.HtmlEncode("<facsimile> <formula>"))</b> seguito da <b>@@corresp</b> (per le corrispondenze tra l’immagine e trascrizione) dove riportare il nome del file da trascrivere.</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Tag.png">
+                    </div>
+
+                    <p>La nomenclatura del facsimile è composta dal nome dell’ente conservatore dei <i>Manoscritti</i>, il nome dell’autore del <i>corpus</i> e dal titolo della partizione con il numero del volume; l’ultimo numero corrisponde alla pagina del manoscritto e il penultimo al numero del facsimile.</p>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Struttura_Manoscritto.png" />
+                    </div>
+                    
+                    <br />
+                    <p>In <b>@Html.Raw(HttpUtility.HtmlEncode("<text>"))</b> sono riportati tutti i tag della codifica testuale, definiti dall’analisi e interpretazione del corpus dei <i>Manoscritti</i> che rendono esplicite solo quelle caratteristiche testuali ritenute importanti per il codificatore.</p>
+
+                    <p>Il <i>corpus antinoriano</i> è stato considerato come un testo composito poichè formato da 106 volumi divisi in 5 parti (<i>Annali, Corografia, Iscrizioni Lapidarie, Monumenti e cose varie, Appendice</i>) divisione codificata all’interno di <b>@Html.Raw(HttpUtility.HtmlEncode("<group>"))</b> che rappresenta tutto il <i>corpus</i>; le partizioni possono essere marcate singolarmente, ognuna con un proprio elemento <b>@Html.Raw(HttpUtility.HtmlEncode("<text>"))</b>, il rispettivo titolo con <b>@Html.Raw(HttpUtility.HtmlEncode("<head>"))</b> riportato nel frontespizio <b>@Html.Raw(HttpUtility.HtmlEncode("<front>"))</b>.</p>
+                    <pre>
+                    @Html.Raw(HttpUtility.HtmlEncode("<TEI")) …
+
+                        @Html.Raw(HttpUtility.HtmlEncode("<group>"))
+                          @Html.Raw(HttpUtility.HtmlEncode("<text>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<front>"))
+                              @Html.Raw(HttpUtility.HtmlEncode("< <head>Anton Ludovico Antinori - Parte I - Annali degli Abruzzi</head>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("</front>"))
+                          @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+
+                          @Html.Raw(HttpUtility.HtmlEncode("<text>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<front>"))
+                              @Html.Raw(HttpUtility.HtmlEncode("<head>Antonio Ludovico Antinori - Parte II - Corografia</head>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("</front>"))
+                          @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+
+                          @Html.Raw(HttpUtility.HtmlEncode("<text>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<front>"))
+                              @Html.Raw(HttpUtility.HtmlEncode("<head>Antonio Ludovico Antinori - Parte III - Iscrizioni lapidarie</head>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("</front>"))
+                          @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+
+                          @Html.Raw(HttpUtility.HtmlEncode("<text>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<front>"))
+                              @Html.Raw(HttpUtility.HtmlEncode("<head>Antonio Ludovico Antinori - Parte IV - Monumenti e cose varie</head>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("</front>"))
+                          @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+
+                          @Html.Raw(HttpUtility.HtmlEncode("<text>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("<front>"))
+                             @Html.Raw(HttpUtility.HtmlEncode("<head>Appendice</head>"))
+                            @Html.Raw(HttpUtility.HtmlEncode("</front>"))
+                          @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+                        @Html.Raw(HttpUtility.HtmlEncode("</group>"))
+                    ...
+                    @Html.Raw(HttpUtility.HtmlEncode("</TEI>"))
+
+                </pre>
+                    <br />
+                    <p><b>@Html.Raw(HttpUtility.HtmlEncode("<body>"))</b> specifica ogni volume della partizione, rappresentabile dal marcatore di divisione <b>@Html.Raw(HttpUtility.HtmlEncode("<div>"))</b> che ne identifica il numero con @@n; segue <b>@Html.Raw(HttpUtility.HtmlEncode("<head>"))</b> per il titolo del volume con un successivo elemento <b>@Html.Raw(HttpUtility.HtmlEncode("<div>"))</b> con @@type="index dove inserire, nell’elemento <b>@Html.Raw(HttpUtility.HtmlEncode("<div><head>"))</b> che segue, il titolo dell’indice di Enrico Casti.</p>
+                    <pre>
+    @Html.Raw(HttpUtility.HtmlEncode("<TEI")) …
+
+        @Html.Raw(HttpUtility.HtmlEncode("<group>"))
+          @Html.Raw(HttpUtility.HtmlEncode("<text>"))
+            @Html.Raw(HttpUtility.HtmlEncode("<front>"))
+              @Html.Raw(HttpUtility.HtmlEncode("< <head>Anton Ludovico Antinori - Parte I - Annali degli Abruzzi</head>"))
+                        ...
+          
+              @Html.Raw(HttpUtility.HtmlEncode("<body>"))
+            @Html.Raw(HttpUtility.HtmlEncode("<text>"))
+
+              @Html.Raw(HttpUtility.HtmlEncode("<front>"))
+                @Html.Raw(HttpUtility.HtmlEncode("<head>Antonio Ludovico Antinori - Parte IV - Monumenti e cose varie</head>"))
+            @Html.Raw(HttpUtility.HtmlEncode("</front>"))
+
+          @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+              @Html.Raw(HttpUtility.HtmlEncode("<body>"))
+                @Html.Raw(HttpUtility.HtmlEncode("<div type=\"vol.\" n=\"\">"))
+                @Html.Raw(HttpUtility.HtmlEncode("<head></head>"))
+
+                @Html.Raw(HttpUtility.HtmlEncode("<div type=\"index\"><head></head>"))
+
+
+
+                .....
+                @Html.Raw(HttpUtility.HtmlEncode("</div></div>"))
+              @Html.Raw(HttpUtility.HtmlEncode("</body>"))
+          @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+        @Html.Raw(HttpUtility.HtmlEncode("</group>"))
+      @Html.Raw(HttpUtility.HtmlEncode("</text>"))
+    @Html.Raw(HttpUtility.HtmlEncode("</TEI>"))
+
+</pre>
+                    <p>Il trascrittore inserirà il numero e il titolo del manoscritto visualizzabile tenendo il puntatore del mouse sul numero del volume che contiene la pagina da trascrivere.</p>
+                    <pre>
+                        @Html.Raw(HttpUtility.HtmlEncode("<div type=\"ms.\" n=\"XLVII-1\">"))
+                          @Html.Raw(HttpUtility.HtmlEncode("<head> Ms. XLVII-1 Sant’Agnese-Sant’Eligio</head>"))
+
+                    </pre>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Ricerca.png">
+                    </div>
+                    <br />
+                    <p>Il trascrittore riporterà l’indice della pagina che vorrà descrivere, indici elencati all’inizio di ogni singolo volume, o nel primo tomo dei volumi ripartiti, elaborati da Enrico Casti. </p>
+
+                    <pre>
+                        @Html.Raw(HttpUtility.HtmlEncode("<div type=\"index\"><head>Sant'Agnese</head>"))
+                    </pre>
+                    <div style="text-align: center;">
+                        <img src="~/Content/img/TEI/Indice.png">
+
+                    </div>
+
+                </div>
+                </div>
+        </div>
+    </div>
+</section>
