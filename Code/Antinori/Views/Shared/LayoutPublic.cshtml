@@ -122,21 +122,25 @@
             background: #C0BEBE !important;
             border-color: #C0BEBE !important;
         }
-        .my-button-blue:hover {
-            color: #777777 !important;
-            background: white !important;
-            border-color: #777777 !important;
-        }
+
+            .my-button-blue:hover {
+                color: #777777 !important;
+                background: white !important;
+                border-color: #777777 !important;
+            }
+
         .myButton:hover {
             color: white !important;
             background: #08956c !important;
             border-color: #0abb87 !important;
         }
+
         .myButton2:hover {
             color: white !important;
             background: #54391d !important;
             border-color: #654321 !important;
         }
+
         .overlay {
             z-index: 50;
             background: rgba(255,255,255,0.7);
@@ -205,24 +209,68 @@
         }
 
         .zoom {
-            transition: transform .2s; /* Animation */           
+            transition: transform .2s; /* Animation */
             margin: 0 auto;
             z-index: 5;
         }
 
-        .zoom:hover {
-            transform: scale(1.4); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-        }
+            .zoom:hover {
+                transform: scale(1.4); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+
         .zoom-big {
             transition: transform .2s; /* Animation */
             margin: 0 auto;
             z-index: 5;
         }
 
-        .zoom-big:hover {
-            transform: scale(2.5); /* (250% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            .zoom-big:hover {
+                transform: scale(2.5); /* (250% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .cookie-banner p {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0;
+            padding: 0 10px;
+        }
+
+        .cookie-banner button {
+            margin: 0 5px;
+            padding: 6px 12px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .cookie-banner button:hover {
+                background-color: #0056b3;
+            }
+
+        .cookie-banner .link-policy {
+            margin-left: 10px;
+            color: #007bff;
+            text-decoration: underline;
         }
     </style>
+
 </head>
 <body>
 
@@ -270,6 +318,7 @@
                                                 <li><a href="@Url.Action("trascrizione/codifica/introduzione","Home")">Introduzione</a></li>
                                                 <li><a href="@Url.Action("trascrizione/codifica/modello-codifica","Home")">Modello di codifica XML-TEI</a></li>
                                                 <li><a href="@Url.Action("trascrizione/codifica/marcatori","Home")">Marcatori per la codifica testuale</a></li>
+                                                <li><a href="~/Content/Public/Resources/Vedemecum alla trascrizione.pdf">Guida pratica</a></li>
 
                                             </ul>
                                         </li>
@@ -288,8 +337,8 @@
                         </li>
                         <li><a href="@Url.Action("Progetto","Home")">Il Progetto</a></li>
                         <li><a href="@Url.Action("Supporto","Home")">Supporto</a></li>
-                    </ul>  
-                    
+                    </ul>
+
                 </nav>
                 <!-- #nav-menu-container -->
                 <nav id="nav-menu-container2" style="float: right!important; padding: 0;">
@@ -319,6 +368,17 @@
     </header><!-- #header -->
     <!-- BODY.   -->
     @RenderBody()
+
+    <div id="cookieBanner" class="cookie-banner">
+        <p>
+            Questo sito utilizza cookie per migliorare l'esperienza di navigazione.
+            Continuando la navigazione, accetti l'uso dei cookie secondo la nostra
+            <a href="@Url.Action("Cookie", "Home")" class="link-policy" target="_blank">Cookie Policy</a>.
+        </p>
+        <button id="acceptCookies" type="button">Accetta</button>
+        <button id="declineCookies" type="button">Rifiuta</button>
+    </div>
+
 
     <!-- MODALS -->
     <div id="successModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -385,14 +445,21 @@
                             <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         <p>Powered by <a href="https://www.linkedin.com/in/andrea-perelli" target="_blank">Andrea Perelli</a></p>
-                        </p>
+
                     </div>
                 </div>
                 <div class="col-lg-5  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <a href="@Url.Action("Privacy","Home")">
-                            <h6 onclick="">Note Legali e Privacy</h6>
+                        <a href="#" style="cursor: text;">
+                            <h6>Note Legali e Privacy</h6>
                         </a>
+                        <p class="footer-text">
+                            <a style="color:white!important;" href="@Url.Action("Privacy","Home")" target="_blank"> Privacy Policy</a>
+                        </p>
+                        <p>
+                            <a style="color:white!important;" href="@Url.Action("Cookie","Home")" target="_blank"> Cookie Policy</a>
+                        </p>
+
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-6 social-widget">
@@ -400,9 +467,9 @@
                         <h6>Seguici!</h6>
                         <div class="footer-social d-flex align-items-center">
                             <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
-                            <a href="#"><i class="fa fa-behance"></i></a>
+                            @*<a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-dribbble"></i></a>
+                                <a href="#"><i class="fa fa-behance"></i></a>*@
                         </div>
                     </div>
                 </div>
@@ -947,10 +1014,48 @@
 
     </script>
     @RenderSection("scripts", required: false)
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Funzione per leggere un cookie
+            function getCookie(name) {
+                let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                return match ? match[2] : null;
+            }
+
+            // Funzione per impostare un cookie
+            function setCookie(name, value, days) {
+                let expires = "";
+                if (days) {
+                    let date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+
+            // Se l'utente ha già espresso il consenso, nasconde il banner
+            if (getCookie("cookieConsent") === "true" || getCookie("cookieConsent") === "false") {
+                document.getElementById("cookieBanner").style.display = "none";
+            }
+
+            // Gestione del pulsante "Accetta"
+            document.getElementById("acceptCookies").addEventListener("click", function () {
+                setCookie("cookieConsent", "true", 365);
+                document.getElementById("cookieBanner").style.display = "none";
+            });
+
+            function deleteCookie(name) {
+                document.cookie = name + "=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+
+            // Gestione del pulsante "Rifiuta"
+            document.getElementById("declineCookies").addEventListener("click", function () {
+                setCookie("cookieConsent", "false", 365);
+                document.getElementById("cookieBanner").style.display = "none";
+                deleteCookie("__gsas");
+            });
+        });
+    </script>
 
 </body>
 </html>
-
-
-
-

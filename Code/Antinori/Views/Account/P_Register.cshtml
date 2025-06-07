@@ -15,7 +15,7 @@
     <div class="login-box-body" style="border-radius: 10px!important; padding-left: 30px; padding-right: 30px;">
 
         <p class="login-box-msg">Inserisci i tuoi dati per registrarti</p>
-        @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "CONTENT_Form" })) {
+        @using(Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "CONTENT_Form" })) {
             @Html.AntiForgeryToken()
             <div class="form-group has-feedback">
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", type = "email" })
@@ -37,11 +37,11 @@
                 @Html.DropDownList("Profession", new SelectList(Antinori.Static.BL_Utility.professions), "Seleziona Professione", new { @class = "form-control" })
             </div>
 
-                // set style.
-                string style = "";
-                if (Model.Profession == null || !Model.Profession.Equals("Altro") || Model.Profession.Equals("")) {
-                    style = "display: none;";
-                }
+            // set style.
+            string style = "";
+            if(Model.Profession == null || !Model.Profession.Equals("Altro") || Model.Profession.Equals("")) {
+                style = "display: none;";
+            }
 
             <div class="form-group has-feedback" id="OtherProfessionDiv" style="@style">
                 @Html.TextBoxFor(m => m.OtherProfession, new { @class = "form-control", placeholder = "Professione", type = "text" })
@@ -56,13 +56,17 @@
 
                 </p>
             </div>
-            <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                    </div>
+            <div class="form-group has-feedback">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.PrivacyAccepted) Ho letto e accetto la <a href="@Url.Action("Privacy","Home")" target="_blank">privacy policy</a>
+                    </label>
                 </div>
+            </div>
+            <div class="row">
+
                 <!-- /.col -->
-                <div class="col-xs-4">
+                <div class="col-xs-12">
                     <button type="button" onclick="Register()" class="btn btn-primary btn-block btn-flat" style="background-color: #C0BEBE!important; border-color: #C0BEBE!important; border-radius: 5px; border-width: 0px!important;">Registrati</button>
                 </div>
                 <!-- /.col -->

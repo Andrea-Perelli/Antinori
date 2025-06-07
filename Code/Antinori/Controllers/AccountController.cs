@@ -335,7 +335,7 @@ namespace Antinori.Controllers {
             // register function.
             OpEsitoModel op;
 
-            if(ModelState.IsValid) {
+            if(ModelState.IsValid && user.PrivacyAccepted) {
                 // create new user.
                 var newUser = new ApplicationUser { Email = user.Email, PhoneNumber = user.PhoneNumber, Cancellato = false, LockoutEnabled = true };
                 newUser.UserName = newUser.Email;

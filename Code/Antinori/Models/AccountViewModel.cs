@@ -87,7 +87,8 @@ namespace Antinori.Models {
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-
+        [Required]
+        public bool PrivacyAccepted { get; set; }
         
         //public string Sesso { get; set; }
         public string DataNascita { get; set; }

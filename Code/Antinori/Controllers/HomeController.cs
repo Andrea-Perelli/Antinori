@@ -19,7 +19,7 @@ namespace Antinori.Controllers {
             // return public home page.
             ViewBag.numberOfPages = this.Dc.Pages_Count();
             ViewBag.numberOfBooks = this.Dc.Books_Count();
-            ViewBag.numberOfNormalUsers = this.Dc.AspNetUsers_Get_ByRole("User").Count + 15;
+            ViewBag.numberOfNormalUsers = this.Dc.AspNetUsers_Get_ByRole("User").Count;
             ViewBag.numberOfTranscription = this.Dc.Transcriptions_Count() + 53;
 
             // retrieve homepage image.
@@ -171,6 +171,13 @@ namespace Antinori.Controllers {
         [AllowAnonymous]
         public ActionResult Privacy() {
             // set the privacy view. 
+
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Cookie() {
+            // set the Cookie view. 
 
             return View();
         }
